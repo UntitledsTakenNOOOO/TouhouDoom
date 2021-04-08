@@ -14,6 +14,8 @@ However, for archival purposes (and for purposes of having the code around somew
 
 Spriting is kind of crap because most of it's from the original Touhou Doom, and the rest of it's from Touhou Fighting Games, which were originally 2D.
 
+DOWNLOAD: https://forum.zdoom.org/viewtopic.php?f=19&t=57817
+
 IN THIS PROJECT, YOU WILL FIND:
 * Difficulty settings that actually affect the attacks bosses use!
 * Touhou Music, which is why this thing is 340+ MB. Sorry about that!
