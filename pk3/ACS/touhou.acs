@@ -1,0 +1,4433 @@
+#library "TOUHOU"
+#include "zcommon.acs"
+
+#define BHI_MSG_ID 163000
+
+int HELPSTR = 
+"Welcome to Touhou Doom! There are a few optional RCon commands you may want to consider.\n\
+Server Options:\n\
+	touhou_skipcutscenes 0/1: Exactly what it says on the tin.\n\
+	touhou_doomweapons 0/1: Once you get to Episode II, you'll know what this means.\n\
+	touhou_danmakuweapons 0/1: Similar deal to touhou_doomweapons. You'll figure it out.\n\
+	touhou_nospellcards 0/1: Don't like inventory management? Remove those spellcards. You'll get a few soulspheres as compensation.\n\
+	touhou_protips 0/1: Gives a few pointers that are helpful for newbies.\n\
+	touhou_bosslifebars 0/1: Allows you to see how much life a boss has on a given attack.\n\
+Client Options:\n\
+	touhou_cl_shmupmovement 0/1: Gives you more precise movement, but you take 1.1x damage\n\
+	touhou_cl_missilecolor [0-4]: Colour your missiles a single color. 0 is default, which is all of the colours.";
+
+Script 600 OPEN
+{
+    //HudMessage(s:HELPSTR;
+    //HUDMSG_PLAIN|HUDMSG_LOG, 92712, CR_WHITE, 1.5, 0.2, 2.5);
+    //HudMessage(s:"See the console for \cacvar information\c-.";
+    //HUDMSG_FADEOUT, 92712, CR_WHITE, 1.5, 0.2, 2.0, 0.5);
+}
+
+Script 601 ENTER
+{
+	GiveInventory("MegaMap",0x7FFFFFFF);
+	if(GameSkill() == 0) //Easy
+	GiveInventory("EasyMode",0x7FFFFFFF);
+	if(GameSkill() == 1) //Normal
+	GiveInventory("NormalMode",0x7FFFFFFF);
+	if(GameSkill() == 2) //Hard
+	GiveInventory("HardMode",0x7FFFFFFF);
+	if(GameSkill() == 3) //Lunatic
+	GiveInventory("LunaticMode",0x7FFFFFFF);
+	if(GameSkill() == 4) //Ultra, but uses Lunatic base difficulty
+	{
+	GiveInventory("LunaticMode",0x7FFFFFFF);
+	GiveInventory("UltraMode",0x7FFFFFFF);
+	GiveInventory("Megasphere",0x7FFFFFFF);
+	GiveInventory("Backpack",0x7FFFFFFF);
+	}
+}
+
+Script 602 (int card) //Spellcard Declarations
+{
+	switch(card)
+	{
+	case 0:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Moon Sign \"Moonlight Ray\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 1:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Night Sign \"Night Bird\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 2:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Darkness Sign \"Demarcation\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 3:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Ice Sign \"Icicle Fall\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Ice Sign \"Hailstorm\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 4:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Freeze Sign \"Perfect Freeze\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 5:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Snow Sign \"Diamond Blizzard\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 6:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Flower Sign \"Gorgeous Sweet Flower\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Flower Sign \"Selaginella 9\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 7:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Rainbow Sign \"Rainbow Wind Chime\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 8:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Illusion Sign \"Flower Dream Vine\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 9:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Colorful Sign \"Colorful Rain\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Colorful Sign \"Colorful Light Chaos Dance\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 10:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Colorful Sign \"Extreme Color Typhoon\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 11:
+		SetFont("BIGFONT");
+		if(GameSkill()==0)
+		{
+			HudMessageBold(s:"Fire Sign \"Agni Shine Low Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Fire Sign \"Agni Shine\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Fire Sign \"Agni Shine High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Fire Sign \"Agni Radiance\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Fire Sign \"Agni Radiance High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 12:
+		SetFont("BIGFONT");
+		if(GameSkill()==0)
+		{
+			HudMessageBold(s:"Water Sign \"Princess Undine Low Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Water Sign \"Princess Undine\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Water Sign \"Princess Undine High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Water Sign \"Lake Burial\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Water Sign \"Lake Burial High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 13:
+		SetFont("BIGFONT");
+		if(GameSkill()==0)
+		{
+			HudMessageBold(s:"Wood Sign \"Sylphae Horn Low Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Wood Sign \"Sylphae Horn\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Wood Sign \"Sylphae Horn High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Wood Sign \"Green Storm\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Wood Sign \"Green Storm High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 14:
+		SetFont("BIGFONT");
+		if(GameSkill()==0)
+		{
+			HudMessageBold(s:"Earth Sign \"Rage Trilithon Low Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Earth Sign \"Rage Trilithon\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Earth Sign \"Rage Trilithon High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Earth Sign \"Trilithon Shake\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Earth Sign \"Trilithon Shake High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 15:
+		SetFont("BIGFONT");
+		if(GameSkill()==0)
+		{
+			HudMessageBold(s:"Metal Sign \"Metal Fatigue Low Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Metal Sign \"Metal Fatigue\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Metal Sign \"Metal Fatigue High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Metal Sign \"Silver Dragon\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Metal Sign \"Silver Dragon High Level\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 16:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Earth & Fire Sign \"Lava Cromlech\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 17:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Fire & Wood Sign \"Forest Blaze\""; //FOREST 420 BLAZE IT
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 18:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Wood & Water Sign \"Water Elf\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 19:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Water & Metal Sign \"Mercury Poison\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 20:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Metal & Earth Sign \"Emerald Megalith\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 21:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Conjuring \"Misdirection\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Conjuring \"Illusional Misdirection\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 22:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Illusion Existence \"Clock Corpse\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Illusion Ghost \"Jack the Ludo Bile\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 23:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Illusion Image \"Luna Clock\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Illusion World \"The World\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 24:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Maid Secret Skill \"Marionette\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Maid Secret Skill \"Killing Doll\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 25:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Conjuring \"Eternal Meek\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 26:
+		SetFont("BIGFONT");
+		if(GameSkill()<3)
+		{
+			HudMessageBold(s:"Certain Kill \"Heart Break\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=3)
+		{
+			HudMessageBold(s:"Divine Spear \"Spear the Gungnir\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 27:
+		SetFont("BIGFONT");
+		if(GameSkill()<3)
+		{
+			HudMessageBold(s:"Night Sign \"Demon King Cradle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=3)
+		{
+			HudMessageBold(s:"Night Lord \"Dracula Cradle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 28:
+		SetFont("BIGFONT");
+		if(GameSkill()<3)
+		{
+			HudMessageBold(s:"Curse \"Curse of Vlad Tepes\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=3)
+		{
+			HudMessageBold(s:"God Art \"Vampire Illusion\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 29:
+		SetFont("BIGFONT");
+		if(GameSkill()<3)
+		{
+			HudMessageBold(s:"Scarlet Sign \"Scarlet Shoot\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=3)
+		{
+			HudMessageBold(s:"Scarlet Sign \"Scarlet Meister\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 30:
+		SetFont("BIGFONT");
+		if(GameSkill()<3)
+		{
+			HudMessageBold(s:"\"Red Magic\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=3)
+		{
+			HudMessageBold(s:"\"Scarlet Gensokyo\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 31:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Moon Sign \"Silent Selene\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 32:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Sun Sign \"Royal Flare\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 33:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Five Elements \"Philosopher's Stone\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 34:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Taboo \"Cranberry Trap\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 35:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Taboo \"Laevateinn\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 36:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Taboo \"Four of a Kind\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 37:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Taboo \"Kagome, Kagome\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 38:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Taboo \"Maze of Love\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 39:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Forbidden Barrage \"Starbow Break\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 40:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Forbidden Barrage \"Catadioptric\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 41:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Forbidden Barrage \"Counter Clock\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 42:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Secret \"And Then There Will Be None?\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 43:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Q.E.D. \"Ripples of 495 Years\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 44:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Hell Realm Sword \"200 Yojana in 1 Slash\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 45:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Ghostly Sign \"Netherworld Mystery Spot\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Phantom Sign \"Enigma of the Underworld\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 46:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Ghost Sign \"As the Butterfly Flies\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Spirit Butterfly \"In the Moment When a Butterfly's Wings Flap\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 47:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Spirit Sign \"Ancient Earthbound Spirits Arise\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Spirit Sign \"Awakening of the Ancient Earthbound Spirits\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 48:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Death Sign \"Scythe of Final Judgment\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 49:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Death \"Higan Retour\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 50:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Oni Sign \"Missing Power\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Oni God \"Missing Power\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 51:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Qi of Oni \"Deep Mist Labyrinth\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 52:
+		SetFont("BIGFONT");
+		if(GameSkill()==0)
+		{
+			HudMessageBold(s:"\"Pandemonium\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"\"Pandemonium\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"\"Million Oni Carnival\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"\"Night Parade of One Million Oni\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"\"Night Parade of One Billion Oni\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 53:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Recollection \"Terrible Souvenir\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Recollection \"Terrifying Hypnotism\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 54:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Recollection \"Rainbow Wind Chime\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 55:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Recollection \"Luna Clock\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Recollection \"The World\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 56:
+		SetFont("BIGFONT");
+		if(GameSkill()<3)
+		{
+			HudMessageBold(s:"Recollection \"Curse of Vlad Tepes\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=3)
+		{
+			HudMessageBold(s:"Recollection \"Vampire Illusion\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 57:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Cursed Sprite \"Zombie Fairy\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Cursed Sprite \"Vengeful Spirit: Possessed Fairy\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 58:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Youkai \"Blazing Wheel\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 59:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Atonement \"Needle Mountain of a Former Hell\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Atonement \"The Needles of Yore and the Vengeful Spirits in Pain\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 60:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"\"Rekindling of Dead Ashes\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"\"Small Demon's Revival\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 61:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Atomic Fire \"Nuclear Fusion\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Atomic Fire \"Nuclear Excursion\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Atomic Fire \"Uncontainable Nuclear Reaction\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Nuclear Reaction \"Critical Mass\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 62:
+		SetFont("BIGFONT");
+		if(GameSkill()<=0)
+		{
+			HudMessageBold(s:"Explosion Sign \"Kilo Flare\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Explosion Sign \"Mega Flare\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Explosion Sign \"Giga Flare\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Explosion Sign \"Tera Flare\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Explosion Sign \"Exa Flare\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 63:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Blazing Star \"Fixed Star\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Blazing Star \"Planetary Revolution\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Blazing Star \"Ten Evil Stars\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Ten Evil Stars \"Star System Revolution\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 64:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"\"Heaven and Hell Meltdown\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"\"Hell's Tokamak\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 65:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"\"Hell's Artificial Sun\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"\"Subterranean Sun\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 66:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Squall \"Sarutahiko's Guidance\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 67:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Rotation Sign \"Youkai-killing Fan\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 68:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Whirlwind \"Torii Hurricane\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 69:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Symbol \"Danmaku Paranoia\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 70:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Instinct \"Release of the Id\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 71:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Rekindled \"The Embers of Love\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 72:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Depths \"Genetics of the Subconscious\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 73:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Shivers Sign \"Original Map Do Not Steal\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 74:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Dekw Sign \"This is why we can't have nice things\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 75:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Yholl Sign \"THEY HAD A_SETSCALE\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 76:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Untitled Sign \"I didn't playtest this at all\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 77:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Terminus Sign \"Philosophy of a Hated Candelabra\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 78:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"PRAISE BENELLUS!\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 79:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Agitation \"OH F***, SKELETONS!\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 80:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Esoterica \"Grey Thaumaturgy\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Esoterica \"Forgotten Ritual\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Esoterica \"Secretly Inherited Art of Danmaku\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Esoterica \"Obviously Hacked Art of Danmaku\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 81:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Sea Opening \"The Day the Sea Split\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Sea Opening \"Moses' Miracle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 82:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Preparation \"Star Ritual to Call the Godly Winds\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Preparation \"Summon Takeminakata\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 83:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Miracle \"God's Wind\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25); //Literally Kamikaze
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Great Miracle \"Yasaka's Divine Wind\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 84:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Grunts \"Suicide Squad\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25); //Figuratively Kamikaze
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Ashigaru \"Suicide Squad\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 85:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Doll \"Soulless Folk Dance\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 86:
+		SetFont("BIGFONT");
+		if(GameSkill()<=0)
+		{
+			HudMessageBold(s:"Space Sign \"Orreries Planet\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Ritual Sign \"Orreries Sun\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Ritualic Space \"Orreries Solar System\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Armillary \"Orreries Universe\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"All-Encompassing \"Orreries Multiverse\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 87:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Magic Sign \"Milky Way\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Magic Space \"Asteroid Belt\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 88:
+		SetFont("BIGFONT");
+		if(GameSkill()<=3)
+		{
+			HudMessageBold(s:"Love Sign \"Master Spark\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Love Sign \"Faster Spark\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 89:
+		SetFont("BIGFONT");
+		if(GameSkill()<3)
+		{
+			HudMessageBold(s:"Comet \"Blazing Star\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"\"Blazing Star\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"\"420 MLG No-Scope Star\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 90:
+		SetFont("BIGFONT");
+		if(GameSkill()<=0)
+		{
+			HudMessageBold(s:"\"B.F.S. 9000\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"\"Big Frickin' Spark 9000\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"\"Big Freakin' Spark 9000\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"\"Big Freaking Spark 9000\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"\"Big Fucking Spark 9000\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		delay(7);
+		restart;
+	case 91:
+		SetFont("BIGFONT");
+		if(GameSkill()<4)
+		{
+			HudMessageBold(s:"Treasure Sign \"Dancing Yin-Yang Orbs\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Hax Sign \"YIN YANG'D\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 92:
+		SetFont("BIGFONT");
+		if(GameSkill()<1)
+		{
+			HudMessageBold(s:"Spirit Sign \"Fantasy Orb -Spread-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Spirit Sign \"Fantasy Seal -Spread-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Scattered Spirit \"Fantasy Seal -Worn-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Scattered Spirit \"Fantasy Seal -Sabi-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Spirit Hax \"Fantasy Seal -Fall-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 93:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Dream Sign \"Evil-Sealing Circle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Divine Arts \"Omnidirectional Demon-Binding Circle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Divine Arts \"Omnidirectional Oni-Binding Circle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Hax Sign \"Omnidirectional Marine-Gibbing Circle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 94:
+		SetFont("BIGFONT");
+		if(GameSkill()<1)
+		{
+			HudMessageBold(s:"Spirit Sign \"Fantasy Orb -Concentrate-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Spirit Sign \"Fantasy Seal -Concentrate-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Migrating Spirit \"Fantasy Seal -Marred-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Migrating Spirit \"Fantasy Seal -Wabi-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Hacking Spirit \"Fantasy Seal -Die-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 95:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Dream Sign \"Duplex Barrier\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Dream Time \"Great Duplex Barrier\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Dream Land \"Super Duplex Barrier\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Dream Hax \"Ultra Duplex Barrier\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 96:
+		SetFont("BIGFONT");
+		if(GameSkill()<4)
+		{
+			HudMessageBold(s:"Divine Spirit \"Fantasy Seal -Blink-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Hax Sign \"Fantasy Seal -Don't Blink-\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 97:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"Flying Mysterious Shrine Maiden\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 98:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"Fantasy Nature\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 99:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Light Orb \"Dragon's Gleaming Eyes\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Light Orb \"Gleaming Eyes of the Dragon\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;		
+	case 100:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Thunder Sign \"Residence of the Thunder God\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Thunder Sign \"Abode of the Thunder God\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 101:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Cloud Realm \"Thunder Court in the Sea of Abstruse Clouds\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Cloud Realm \"Thunder from the Sea of Eternal Clouds\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 102:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Keystone \"Sky's Spiritual Stone\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Keystone \"Heaven's Rock\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 103:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Qian and Kun \"Violent Land that Mothers All\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Heaven and Earth \"Earth, Thy Violence Nurtures Us!\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 104:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Spirit Thought \"Stone that Calms the Lands\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Meditations \"Earth-calming Stone\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 105:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"\"Scarlet Weather Rhapsody\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==2)
+		{
+			HudMessageBold(s:"\"Scarlet Weather Rhapsody of All Humankind\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()==3)
+		{
+			HudMessageBold(s:"\"Scarlet Weather Rhapsody of All Humankind\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"\"Sky of Scarlet Perception of All Humankind\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 106:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Shikigami \"Protection of Zenki and Goki\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 107:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Shikigami's Radiance \"Princess Tenko -Illusion-\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 108:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Barrier \"Curse of Dreams and Reality\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 109:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Barrier \"Balance of Motion and Stillness\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 110:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Barrier \"Mesh of Light and Darkness\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 111:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Barrier \"Xanadu of Straight and Curve\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 112:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Border Sign \"Boundary Between Wave and Particle\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 113:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Evil Spirits \"Yukari's Spiriting Away\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 114:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Sinister Spirits \"Double Black Death Butterfly\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 115:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Shikigami \"Ran Yakumo\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 116:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"Boundary of Humans and Youkai\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 117:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Barrier \"Boundary of Life and Death\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 118:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"It, that Distorts Truth\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 119:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"It, that Sets Eternity Ablaze\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 120:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"They, The Endpoints of All Life\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 121:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Pestilence \"Black Plague\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Pestilence \"Black Death\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 122:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"War \"Army of the Damned\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"War \"Legion of the Damned\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 123:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Famine \"Death by Starvation\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Famine \"Starvation from a Hellish Blight\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 124:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Death \"Endpoint of All Life\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 125:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"\"Abomination of Desolation\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"\"Great Tribulation\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 126:
+		SetFont("BIGFONT");
+		if(GameSkill()<=0)
+		{
+			HudMessageBold(s:"Eschaton \"Final Days\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		if(GameSkill()==1)
+		{
+			HudMessageBold(s:"Eschaton \"Last Days\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		if(GameSkill()==2)
+		{
+			HudMessageBold(s:"Eschaton \"End of Days\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		if(GameSkill()==3)
+		{
+			HudMessageBold(s:"Eschaton \"End of Time\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		if(GameSkill()>=4)
+		{
+			HudMessageBold(s:"Eschaton \"End Times\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 127:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"Demonic Battle Above Gensokyo\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	}
+}
+script 603 (void) //Spellcard End
+{
+	SetFont("BIGFONT");
+	ACS_Terminate(602,0);
+	HudMessageBold(s:"Spell Break!";HUDMSG_FADEOUT,BHI_MSG_ID-100,CR_WHITE,0.5,0.15,2.0,1.0);
+	AmbientSound("touhou/cardget",127);
+}
+
+//DAMMIT PATCHY
+int patchouliFight;
+int patchyX,patchyY,patchyZ;
+int patchyAngle;
+int patchouliSpellcards = 0;
+script 604 (int which) //I'm never doing a spellcard switch fight again
+{
+	switch(which)
+	{
+	case 1:
+		patchouliFight = random(1,5); //Oh dear
+		patchyX = GetActorX(0);
+		patchyY = GetActorY(0);
+		patchyZ = GetActorZ(0);
+		patchyAngle = GetActorAngle(0) >> 8;
+		if(patchouliFight == 1){
+			SpawnForced("PatchouliAgniShine",patchyX,patchyY,patchyZ,0,patchyAngle);
+		} else if (patchouliFight == 2){
+			SpawnForced("PatchouliPrincessUndine",patchyX,patchyY,patchyZ,0,patchyAngle);
+		} else if (patchouliFight == 3){
+			SpawnForced("PatchouliSylphaeHorn",patchyX,patchyY,patchyZ,0,patchyAngle);
+		} else if (patchouliFight == 4){
+			SpawnForced("PatchouliRageTrilithon",patchyX,patchyY,patchyZ,0,patchyAngle);
+		} else if (patchouliFight == 5){
+			SpawnForced("PatchouliMetalFatigue",patchyX,patchyY,patchyZ,0,patchyAngle);
+		}
+		break;
+	case 2:
+		if(patchouliSpellcards>GameSkill()){
+			SetActorState(0,"DeathExplosion",1);
+			Delay(210);
+			ACS_Execute(104,0);
+		} else {
+		patchyX = GetActorX(0);
+		patchyY = GetActorY(0);
+		patchyZ = GetActorZ(0);
+		patchyAngle = GetActorAngle(0) >> 8;
+		SetFont("BIGFONT");
+		ACS_Terminate(602,0);
+		HudMessageBold(s:"Spell Break!";HUDMSG_PLAIN,0,CR_WHITE,0.5,0.15,2.00);
+			if(patchouliSpellcards == 1){
+				if(patchouliFight == 1){
+					SpawnForced("PatchouliLavaCromlech",patchyX,patchyY,patchyZ,0,patchyAngle);
+				} else if (patchouliFight == 2){
+					SpawnForced("PatchouliWaterElf",patchyX,patchyY,patchyZ,0,patchyAngle);
+				} else if (patchouliFight == 3){
+					SpawnForced("PatchouliForestBlaze",patchyX,patchyY,patchyZ,0,patchyAngle);
+				} else if (patchouliFight == 4){
+					SpawnForced("PatchouliEmeraldMegalith",patchyX,patchyY,patchyZ,0,patchyAngle);
+				} else if (patchouliFight == 5){
+					SpawnForced("PatchouliMercuryPoison",patchyX,patchyY,patchyZ,0,patchyAngle);
+				}
+			} else {
+					SpawnForced("PatchouliNS2",patchyX,patchyY,patchyZ,0,patchyAngle);
+			}
+			patchouliSpellcards++;
+		}
+		break;
+	case 3:
+		patchyX = GetActorX(0);
+		patchyY = GetActorY(0);
+		patchyZ = GetActorZ(0);
+		patchyAngle = GetActorAngle(0) >> 8;
+		if(patchouliFight == 3){
+			SpawnForced("PatchouliAgniShine",patchyX,patchyY,patchyZ,0,patchyAngle);
+		} else if (patchouliFight == 5){
+			SpawnForced("PatchouliPrincessUndine",patchyX,patchyY,patchyZ,0,patchyAngle);
+		} else if (patchouliFight == 2){
+			SpawnForced("PatchouliSylphaeHorn",patchyX,patchyY,patchyZ,0,patchyAngle);
+		} else if (patchouliFight == 1){
+			SpawnForced("PatchouliRageTrilithon",patchyX,patchyY,patchyZ,0,patchyAngle);
+		} else if (patchouliFight == 4){
+			SpawnForced("PatchouliMetalFatigue",patchyX,patchyY,patchyZ,0,patchyAngle);
+		}
+		break;
+	case 4:
+		if(patchouliSpellcards>GameSkill()){
+			SetActorState(0,"DeathExplosion",1);
+			Delay(210);
+			ACS_Execute(104,0);
+		}
+		else {
+			patchyX = GetActorX(0);
+			patchyY = GetActorY(0);
+			patchyZ = GetActorZ(0);
+			patchyAngle = GetActorAngle(0) >> 8;
+			SetFont("BIGFONT");
+			ACS_Terminate(602,0);
+			HudMessageBold(s:"Spell Break!";HUDMSG_PLAIN,0,CR_WHITE,0.5,0.15,2.00);
+
+		if(patchouliSpellcards == 2){
+			if(patchouliFight == 1){
+				SpawnForced("PatchouliForestBlaze",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 2){
+				SpawnForced("PatchouliMercuryPoison",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 3){
+				SpawnForced("PatchouliWaterElf",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 4){
+				SpawnForced("PatchouliLavaCromlech",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 5){
+				SpawnForced("PatchouliEmeraldMegalith",patchyX,patchyY,patchyZ,0,patchyAngle);
+			}
+			}
+
+		if(patchouliSpellcards == 3){
+			if(patchouliFight == 1){
+				SpawnForced("PatchouliEmeraldMegalith",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 2){
+				SpawnForced("PatchouliForestBlaze",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 3){
+				SpawnForced("PatchouliLavaCromlech",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 4){
+				SpawnForced("PatchouliMercuryPoison",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 5){
+				SpawnForced("PatchouliWaterElf",patchyX,patchyY,patchyZ,0,patchyAngle);
+			}
+			}
+
+		if(patchouliSpellcards == 4){
+			if(patchouliFight == 1){
+				SpawnForced("PatchouliWaterElf",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 2){
+				SpawnForced("PatchouliEmeraldMegalith",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 3){
+				SpawnForced("PatchouliMercuryPoison",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 4){
+				SpawnForced("PatchouliForestBlaze",patchyX,patchyY,patchyZ,0,patchyAngle);
+			} else if (patchouliFight == 5){
+				SpawnForced("PatchouliLavaCromlech",patchyX,patchyY,patchyZ,0,patchyAngle);
+			}
+			}
+			patchouliSpellcards++;
+		}
+		break;
+	}
+}
+
+Script 605 (void)
+{
+	SetHudSize(1000, 750, FALSE);
+    SetFont("CAUTION2");
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    SetFont("CAUTION1");
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    Delay(35);
+    SetFont("CAUTION2");
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    SetFont("CAUTION1");
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    Delay(35);
+    SetFont("CAUTION2");
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 375.0, 0.1, 0.45, 0.45, 1.0);
+    SetFont("CAUTION1");
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 0.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 250.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 500.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 750.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 250.0, 0.1, 0.45, 0.45, 1.0);
+    HudMessageBold(s:"A"; HUDMSG_FADEINOUT, 0, CR_UNTRANSLATED, 1000.0, 500.0, 0.1, 0.45, 0.45, 1.0);
+    Delay(35);
+}
+
+Script 606 (int card) //Timeout Script (Non extra bosses)
+{
+	switch(card)
+	{
+	case 1:
+		SetFont("BIGFONT");
+		if(GameSkill()<=2)
+		{
+			for(int i1=30; i1>=10; i1--)
+			{
+			HudMessageBold(d:i1;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		else if(GameSkill()>=3)
+		{
+			for(int i2=60; i2>=10; i2--)
+			{
+			HudMessageBold(d:i2;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		AmbientSound("touhou/timeout1",92);
+		AmbientSound("touhou/timeout1",92);
+		HudMessageBold(s:"9";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",96);
+		AmbientSound("touhou/timeout1",96);
+		HudMessageBold(s:"8";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",100);
+		AmbientSound("touhou/timeout1",100);
+		HudMessageBold(s:"7";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",104);
+		AmbientSound("touhou/timeout1",104);
+		HudMessageBold(s:"6";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",108);
+		AmbientSound("touhou/timeout1",108);
+		HudMessageBold(s:"5";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",112);
+		AmbientSound("touhou/timeout2",112);
+		HudMessageBold(s:"4";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",116);
+		AmbientSound("touhou/timeout2",116);
+		HudMessageBold(s:"3";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",120);
+		AmbientSound("touhou/timeout2",120);
+		HudMessageBold(s:"2";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",124);
+		AmbientSound("touhou/timeout2",124);
+		HudMessageBold(s:"1";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",127);
+		AmbientSound("touhou/timeout2",127);
+		HudMessageBold(s:"0";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		DamageThing(0);
+		ACS_Terminate(602,0);
+		break;
+	case 2:
+		SetFont("BIGFONT");
+		if(GameSkill()<=1)
+		{
+			for(int i3=30; i3>=10; i3--)
+			{
+			HudMessageBold(d:i3;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		else if(GameSkill()==2)
+		{
+			for(int i4=45; i4>=10; i4--)
+			{
+			HudMessageBold(d:i4;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		else if(GameSkill()>=3)
+		{
+			for(int i5=60; i5>=10; i5--)
+			{
+			HudMessageBold(d:i5;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		AmbientSound("touhou/timeout1",92);
+		AmbientSound("touhou/timeout1",92);
+		HudMessageBold(s:"9";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",96);
+		AmbientSound("touhou/timeout1",96);
+		HudMessageBold(s:"8";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",100);
+		AmbientSound("touhou/timeout1",100);
+		HudMessageBold(s:"7";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",104);
+		AmbientSound("touhou/timeout1",104);
+		HudMessageBold(s:"6";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",108);
+		AmbientSound("touhou/timeout1",108);
+		HudMessageBold(s:"5";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",112);
+		AmbientSound("touhou/timeout2",112);
+		HudMessageBold(s:"4";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",116);
+		AmbientSound("touhou/timeout2",116);
+		HudMessageBold(s:"3";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",120);
+		AmbientSound("touhou/timeout2",120);
+		HudMessageBold(s:"2";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",124);
+		AmbientSound("touhou/timeout2",124);
+		HudMessageBold(s:"1";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",127);
+		AmbientSound("touhou/timeout2",127);
+		HudMessageBold(s:"0";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		ACS_Execute(603,0);
+		Thing_Destroy(45, 1);
+		Thing_Destroy(46, 1);
+		ACS_NamedTerminate("BHI_BossStartSurvivalAttack",0);
+		ACS_NamedExecute("BHI_BossStopAttack",0);
+		break;
+	case 3:
+		SetFont("BIGFONT");
+		if(GameSkill()<=0)
+		{
+			for(int i6=30; i6>=10; i6--)
+			{
+			HudMessageBold(d:i6;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		else if(GameSkill()==1)
+		{
+			for(int i7=40; i7>=10; i7--)
+			{
+			HudMessageBold(d:i7;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		else if(GameSkill()==2)
+		{
+			for(int i8=50; i8>=10; i8--)
+			{
+			HudMessageBold(d:i8;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		else if(GameSkill()>=3)
+		{
+			for(int i9=60; i9>=10; i9--)
+			{
+			HudMessageBold(d:i9;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+			}
+		}
+		AmbientSound("touhou/timeout1",92);
+		AmbientSound("touhou/timeout1",92);
+		HudMessageBold(s:"9";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",96);
+		AmbientSound("touhou/timeout1",96);
+		HudMessageBold(s:"8";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",100);
+		AmbientSound("touhou/timeout1",100);
+		HudMessageBold(s:"7";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",104);
+		AmbientSound("touhou/timeout1",104);
+		HudMessageBold(s:"6";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",108);
+		AmbientSound("touhou/timeout1",108);
+		HudMessageBold(s:"5";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",112);
+		AmbientSound("touhou/timeout2",112);
+		HudMessageBold(s:"4";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",116);
+		AmbientSound("touhou/timeout2",116);
+		HudMessageBold(s:"3";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",120);
+		AmbientSound("touhou/timeout2",120);
+		HudMessageBold(s:"2";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",124);
+		AmbientSound("touhou/timeout2",124);
+		HudMessageBold(s:"1";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",127);
+		AmbientSound("touhou/timeout2",127);
+		HudMessageBold(s:"0";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		ACS_Execute(603,0);
+		Thing_Destroy(6309, 1);
+		ACS_NamedTerminate("BHI_BossStartSurvivalAttack",0);
+		DamageThing(0);
+		ACS_Terminate(602,0);
+		break;
+	case 4:
+		SetFont("BIGFONT");
+		for(int i10=70; i10>=10; i10--)
+		{
+			HudMessageBold(d:i10;HUDMSG_PLAIN,0,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+		}
+		AmbientSound("touhou/timeout1",92);
+		AmbientSound("touhou/timeout1",92);
+		HudMessageBold(s:"9";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",96);
+		AmbientSound("touhou/timeout1",96);
+		HudMessageBold(s:"8";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",100);
+		AmbientSound("touhou/timeout1",100);
+		HudMessageBold(s:"7";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",104);
+		AmbientSound("touhou/timeout1",104);
+		HudMessageBold(s:"6";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",108);
+		AmbientSound("touhou/timeout1",108);
+		HudMessageBold(s:"5";HUDMSG_PLAIN,0,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",112);
+		AmbientSound("touhou/timeout2",112);
+		HudMessageBold(s:"4";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",116);
+		AmbientSound("touhou/timeout2",116);
+		HudMessageBold(s:"3";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",120);
+		AmbientSound("touhou/timeout2",120);
+		HudMessageBold(s:"2";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",124);
+		AmbientSound("touhou/timeout2",124);
+		HudMessageBold(s:"1";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",127);
+		AmbientSound("touhou/timeout2",127);
+		HudMessageBold(s:"0";HUDMSG_PLAIN,0,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		ACS_Execute(609,0);
+		Thing_Destroy(6666, 1);
+		ACS_NamedTerminate("BHI_BossStartSurvivalAttack",0);
+		DamageThing(0);
+		ACS_Terminate(607,0);
+		break;
+	}
+}
+
+//So it turns out ACS errors out if you have more than 128 cases
+//So I made another script to continue the spellcard declarations
+Script 607 (int card)
+{
+	switch(card)
+	{
+	case 131:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"First Circle \"Limbo\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 132:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Second Circle \"Lust\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 133:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Third Circle \"Gluttony\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 134:
+		SetFont("BIGFONT"); //Bad Japanese pun
+		HudMessageBold(s:"Death Circle \"Greed\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 135:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Fifth Circle \"Anger at the river Styx\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 136:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Sixth Circle \"Heresy within Dis\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 137:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Seventh Circle \"Violence against Neighbors, Self, and God\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 138:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Eighth Circle \"Malebolge, Hell of the Fraudulent\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 139:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Ninth Circle \"Cocytus, Circle of Traitors\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 140:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"INFERNO!\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 141:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"DOOM\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 142:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Deadly Dance \"Law of Mortality\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 143:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"Perfect Suzimone Cherry Blossom\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 144:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Silver Sign \"Silver Bound\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 145:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Illusion \"My Knife's Recursions\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 146:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Time Sign \"Silver Acute 360\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 147:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Esoterica \"Nine Syllable Stabs\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 148:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Miracle \"Miracle Fruit\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 149:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Divine Virtue \"Bumper Crop Rice Shower\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 150:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"First Sign \"Double Pain\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"First Card \"Double Wheel of Pain\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 151:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Hungry King Sword \"Ten Kings' Retribution\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Hungry King Sword \"Ten Kings' Retribution on the Preta\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 152:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Deva God Sword \"Components of Konpaku\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Heaven God Sword \"Three Kons, Seven Hakus\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 153:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Six Realms Sword \"Ageless Obessession\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Six Realms Sword \"A Single Thought and Infinite Kalpas\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 154:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Shikigami \"Chen and Ran Yakumo\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 155:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"Yakumo's Nest\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 156:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Magic Alteration \"Andromeda\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 157:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Magic Abomination \"Galactic Cannibalism\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 158:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Loving Heart \"Double Spark\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 159:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Rest of the backups \"Chaingun Spark\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 160:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"ALL OF THEM \"Super Shotgun Spark\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 161:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Spirit Sign \"Fantasy Seal\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 162:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Prayer \"Exorcism\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Prayer \"Disaster-Dispelling Prayer\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 163:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Jewel Sign \"Orbs of Light, Cast into Shade\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 164:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Spirit of Light \"Divine Orbs\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Light Spirit \"Divine Spirit Orbs\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 165:
+		SetFont("BIGFONT");
+		if(GameSkill()<2)
+		{
+			HudMessageBold(s:"Divine Arts \"Omnidirectional Demon-Binding Circle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		else if(GameSkill()>=2)
+		{
+			HudMessageBold(s:"Divine Arts \"Omnidirectional Demon-Slaying Circle\"";
+			HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		}
+		Delay(7);
+		restart;
+	case 166:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Spirit Sign \"Fantasy Seal -Circle-\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 167: //OH GOD IT'S BACK
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Divine Spirit \"Fantasy Seal -Blink-\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 168: //From Fangame Concealed the Conclusion
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"Hakurei Gravity Release Barrier\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 169: //Oh yeah, it's also back. Goodbye, it was nice knowing you.
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"Fantasy Nature\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 170: //Also from Fangame Concealed the Conclusion
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Dream Boundary \"The Universe\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	case 171:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"The Most Powerful and Fortuitous Shrine Maiden of Incident Resolution\"";
+		HUDMSG_PLAIN,0,CR_WHITE,0.9,0.12,0.25);
+		Delay(7);
+		restart;
+	}
+}
+script 608 (void) //Spellcard End
+{
+	SetFont("BIGFONT");
+	ACS_Terminate(607,0);
+	HudMessageBold(s:"Circle Defeated!";HUDMSG_FADEOUT,BHI_MSG_ID-100,CR_WHITE,0.5,0.15,2.0,1.0);
+	AmbientSound("touhou/cardget",127);
+}
+script 609 (void) //Spellcard End
+{
+	SetFont("BIGFONT");
+	ACS_Terminate(607,0);
+	HudMessageBold(s:"Spell Break!";HUDMSG_FADEOUT,BHI_MSG_ID-100,CR_WHITE,0.5,0.15,2.0,1.0);
+	AmbientSound("touhou/cardget",127);
+}
+
+bool beacon1Found = FALSE;
+bool beacon2Found = FALSE;
+bool beacon3Found = FALSE;
+bool beacon4Found = FALSE;
+bool beacon5Found = FALSE;
+
+Script 610 (int x) //Weapon script if I need it
+{
+	switch(x)
+	{
+	case 1:
+		SetResultValue(GetCVar("touhou_doomweapons"));
+		break;
+	case 2:
+		SetResultValue(GetCVar("touhou_nospellcards"));
+		break;
+	case 3:
+		Thing_Stop(0);
+		SetPlayerProperty(0,1,PROP_TOTALLYFROZEN);
+		Delay(70);
+		SetPlayerProperty(0,0,PROP_TOTALLYFROZEN);
+		break;
+	case 6:
+		beacon1Found = TRUE;
+		break;
+	case 7:
+		beacon2Found = TRUE;
+		break;
+	case 8:
+		beacon3Found = TRUE;
+		break;
+	case 9:
+		beacon4Found = TRUE;
+		break;
+	case 10:
+		beacon5Found = TRUE;
+		break;
+	case 11:
+		SetResultValue(beacon1Found);
+		break;
+	case 12:
+		SetResultValue(beacon2Found);
+		break;
+	case 13:
+		SetResultValue(beacon3Found);
+		break;
+	case 14:
+		SetResultValue(beacon4Found);
+		break;
+	case 15:
+		SetResultValue(beacon5Found);
+		break;
+	}
+}
+
+Script 611 DEATH
+{
+	AmbientSound("touhou/youdied",127);
+	ACS_NamedTerminate("BHI_BossStartTimer",0);
+	ACS_NamedTerminate("BHI_BossStartTimerAlternative",0);
+}
+
+Script 612 (int card) //Player Spellcard Script
+{
+	switch(card)
+	{
+	case -1:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Bomb \"Spirit Barrier\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.85,3.0,1.0);
+		break;
+	case -2:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Increase \"Spell Amplifier\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.85,3.0,1.0);
+		break;
+	case -3:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Recovery \"Life Regenerator\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.85,3.0,1.0);
+		break;
+	case 1:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Spirit Sign \"Fantasy Seal\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 2:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Divine Spirit \"Fantasy Seal -Blink-\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 3:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Love Sign \"Master Spark\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 4:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Magicannon \"Final Spark\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 5:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Time Sign \"Private Square\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 6:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"\"The World\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 7:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Death Sign \"Ghastly Dream\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 8:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Deadly Butterfly \"Eternal Sleep in Dreamland\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 9:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Scarlet Sign \"Red the Nightless Castle\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 10:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Scarlet Devil \"Scarlet Devil\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 11:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Dream Sign \"Evil Sealing Circle\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 12:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Divine Arts \"Omnidirectional Demon-Slaying Circle\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 13:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Magic Sign \"Stardust Reverie\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 14:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Black Magic \"Event Horizon\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 15:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Whirl Sign \"Maple Leaf Fan\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 16:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Tornado Sign \"Guidepost for the Advent of the Divine Grandson\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 17:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Esoterica \"Gray Thaumaturgy\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 18:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Esoterica \"Secretly Inherited Art of Danmaku\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 19:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Explosion Sign \"Mega Flare\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 20:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Explosion Sign \"Giga Flare\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 21:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Thunder Sign \"Thunder from the Sea of Eternal Clouds\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 22:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Thunder Sign \"Thunder Court in the Sea of Abstruse Clouds\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 23:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Spirit Sign \"State of Freedom from Worldly Thoughts\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	case 24:
+		SetFont("BIGFONT");
+		HudMessageBold(s:"Spirit Sign \"State of Freedom from Worldly Thoughts\"";
+		HUDMSG_FADEOUT,0,CR_WHITE,0.1,0.9,3.0,1.0);
+		break;
+	}
+}
+
+Script 613 (int card) //Hack
+{
+	switch(card)
+	{
+	case 1:
+		GiveInventory("GhastlyDreamSpawner2",1);
+		Delay(15);
+		GiveInventory("GhastlyDreamSpawner2",1);
+		Delay(15);
+		GiveInventory("GhastlyDreamSpawner2",1);
+		Delay(15);
+		GiveInventory("GhastlyDreamSpawner2",1);
+		Delay(15);
+		GiveInventory("GhastlyDreamSpawner2",1);
+		Delay(15);
+		GiveInventory("GhastlyDreamSpawner2",1);
+		Delay(15);
+		GiveInventory("GhastlyDreamSpawner2",1);
+		Delay(15);
+		GiveInventory("GhastlyDreamSpawner2",1);
+		break;
+	case 2:
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		break;
+	case 3:
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		Delay(5);
+		GiveInventory("RedTheNightlessCastleOrbSpawner",1);
+		break;
+	}
+}
+
+Script 614 (void)
+{
+	SetResultValue(GetCVar("touhou_cl_missilecolor"));
+}
+
+// All of the following movement-related code is Nash's work.
+// Please credit him for this particular thing.
+
+// check if player is on ground
+function int CheckPlayerOnGround(void)
+{
+	int onground;
+	if(GetActorZ (0) == GetActorFloorZ (0) || GetActorVelZ(0) == 0 && !Spawn("Nash_FloorCheck", GetActorX(0), GetActorY(0), GetActorZ(0) - (4 << 16), 0, GetActorAngle(0)))
+	{
+		onground = 1;
+		//SetFont("smallfont");
+		//Print(s: "on ground");
+	}
+	else
+	{
+		onground = 0;
+		//SetFont("smallfont");
+		//Print(s: "in air");
+	}
+	return onground;
+}
+
+// modified version of ScaleVelocity()
+// thanks to MeatyD for this piece of code
+function void ModifyPlayerFriction(int TID, int scale)
+{
+	SetActorVelocity(TID,	FixedMul(scale, GetActorVelX(TID)),
+							FixedMul(scale, GetActorVelY(TID)),
+							GetActorVelZ(TID),
+							false, true);
+}
+
+// smaller numbers = faster deceleration
+// 0.0 = instantly stop after releasing movement keys
+// 1.0 = default Doom movement (slippery)
+int FrictionFactor = 0.0;
+int FrictionSpeed = 10.0;
+
+Script "Script_NashPlayerLoop" Enter
+{
+	while(1)
+	{
+		while(GetCVar("touhou_cl_shmupmovement"))
+		{
+			SetActorProperty(0, APROP_DamageFactor, 1.11);
+			// reduce slippery Doom movement
+			// Note: does not take into account flight mode
+			if (CheckPlayerOnGround())
+			{
+				SetActorProperty(0, APROP_Speed, FrictionSpeed);
+				ModifyPlayerFriction(0, FrictionFactor);
+				Delay(1);
+			}
+			else
+			{
+				SetActorProperty(0, APROP_Speed, 1.0);
+				Delay(1);
+			}
+		}
+		Delay(1);
+		SetActorProperty(0, APROP_DamageFactor, 1.0);
+		SetActorProperty(0, APROP_Speed, 1.0);
+	}
+}
+
+Script "Script_NashGiveFriction" (void)
+{
+	FrictionFactor = 0.5;
+	FrictionSpeed = 4.0;
+}
+Script "Script_NashFullFriction" (void)
+{
+	FrictionFactor = 1.0;
+	FrictionSpeed = 1.0;
+}
+Script "Script_NashResetFriction" (void)
+{
+	FrictionFactor = 0.0;
+	FrictionSpeed = 10.0;
+}
+
+// A bunch of functions that Ijon's built up
+// They come in handy :>
+
+#define PLAYERMAX 64
+#define TEAMCOUNT 8
+#define DEFAULTTID_SCRIPT 471
+
+#define SECOND_TICS 35.714285714285715
+#define UNIT_CM     2.73921568627451
+
+#define DAMAGE_NORANDOM     0x40000000
+
+int TeamNames[TEAMCOUNT] = 
+{
+    "Blue", "Red", "Green", "Gold", "Black", "White", "Orange", "Purple"
+};
+
+int TeamColors[TEAMCOUNT] = 
+{
+    CR_BLUE, CR_RED, CR_GREEN, CR_GOLD, CR_BLACK, CR_WHITE, CR_ORANGE, CR_PURPLE
+};
+
+int TeamColorCodes[TEAMCOUNT] = 
+{
+    "\ch", "\cg", "\cd", "\cf", "\cm", "\cj", "\ci", "\ct"
+};
+
+function int itof(int x) { return x << 16; }
+function int ftoi(int x) { return x >> 16; }
+
+function int abs(int x)
+{
+    if (x < 0) { return -x; }
+    return x;
+}
+
+function int sign(int x)
+{
+    if (x < 0) { return -1; }
+    return 1;
+}
+
+function int randSign(void)
+{
+    return (2*random(0,1))-1;
+}
+
+function int mod(int x, int y)
+{
+    int ret = x - ((x / y) * y);
+    if (ret < 0) { ret = y + ret; }
+    return ret;
+}
+
+function int pow(int x, int y)
+{
+    int n = 1;
+    while (y-- > 0) { n *= x; }
+    return n;
+}
+
+function int powFloat(int x, int y)
+{
+    int n = 1.0;
+    while (y-- > 0) { n = FixedMul(n, x); }
+    return n;
+}
+
+function int gcf(int a, int b)
+{
+    int c;
+    while (1)
+    {
+        if (b == 0) { return a; }
+        c = a % b;
+        a = b;
+        b = c;
+    }
+    
+    return -1;
+}
+
+function int min(int x, int y)
+{
+    if (x < y) { return x; }
+    return y;
+}
+
+function int max(int x, int y)
+{
+    if (x > y) { return x; }
+    return y;
+}
+
+function int middle(int x, int y, int z)
+{
+    if ((x < z) && (y < z)) { return max(x, y); }
+    return max(min(x, y), z);
+}
+
+function int percFloat(int intg, int frac)
+{
+    return itof(intg) + (itof(frac) / 100);
+}
+
+function int percFloat2(int intg, int frac1, int frac2)
+{
+    return itof(intg) + (itof(frac1) / 100) + (itof(frac2) / 10000);
+}
+
+function int keyUp(int key)
+{
+    int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+    if ((~buttons & key) == key) { return 1; }
+    return 0;
+}
+
+function int keyUp_any(int key)
+{
+    int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+    if (~buttons & key) { return 1; }
+    return 0;
+}
+
+function int keyDown(int key)
+{
+    int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+    if ((buttons & key) == key) { return 1; }
+    return 0;
+}
+
+function int keyDown_any(int key)
+{
+    int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+
+    if (buttons & key) { return 1; }
+    return 0;
+}
+
+function int keysPressed(void)
+{
+    int buttons     = GetPlayerInput(-1, INPUT_BUTTONS);
+    int oldbuttons  = GetPlayerInput(-1, INPUT_OLDBUTTONS);
+    int newbuttons  = (buttons ^ oldbuttons) & buttons;
+
+    return newbuttons;
+}
+
+function int keyPressed(int key)
+{
+    if ((keysPressed() & key) == key) { return 1; }
+    return 0;
+}
+
+function int keyPressed_any(int key)
+{
+    if (keysPressed() & key) { return 1; }
+    return 0;
+}
+
+function int inputUp(int input)
+{
+    int buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+
+    if ((~buttons & input) == input) { return 1; }
+    return 0;
+}
+
+function int inputUp_any(int input)
+{
+    int buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+
+    if (~buttons & input) { return 1; }
+    return 0;
+}
+
+function int inputDown(int input)
+{
+    int buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+
+    if ((buttons & input) == input) { return 1; }
+    return 0;
+}
+
+function int inputDown_any(int input)
+{
+    int buttons = GetPlayerInput(-1, MODINPUT_BUTTONS);
+
+    if (buttons & input) { return 1; }
+    return 0;
+}
+
+function int inputsPressed(void)
+{
+    int buttons     = GetPlayerInput(-1, MODINPUT_BUTTONS);
+    int oldbuttons  = GetPlayerInput(-1, MODINPUT_OLDBUTTONS);
+    int newbuttons  = (buttons ^ oldbuttons) & buttons;
+
+    return newbuttons;
+}
+
+function int inputPressed(int input)
+{
+    if ((inputsPressed() & input) == input) { return 1; }
+    return 0;
+}
+
+function int inputPressed_any(int input)
+{
+    if (inputsPressed() & input) { return 1; }
+    return 0;
+}
+
+function int adjustBottom(int tmin, int tmax, int i)
+{
+    if (tmin > tmax)
+    {
+        tmax ^= tmin; tmin ^= tmax; tmax ^= tmin;  // XOR swap
+    }
+
+    if (i < tmin) { tmin = i; }
+    if (i > tmax) { tmin += (i - tmax); }
+
+    return tmin;
+}
+
+function int adjustTop(int tmin, int tmax, int i)
+{
+    if (tmin > tmax)
+    {
+        tmax ^= tmin; tmin ^= tmax; tmax ^= tmin;
+    }
+
+    if (i < tmin) { tmax -= (tmin - i); }
+    if (i > tmax) { tmax = i; }
+
+    return tmax;
+}
+
+function int adjustShort(int tmin, int tmax, int i)
+{
+    if (tmin > tmax)
+    {
+        tmax ^= tmin; tmin ^= tmax; tmax ^= tmin;
+    }
+
+    if (i < tmin)
+    {
+        tmax -= (tmin - i);
+        tmin = i;
+    }
+    if (i > tmax)
+    {
+        tmin += (i - tmax);
+        tmax = i;
+    }
+    
+    return packShorts(tmin, tmax);
+}
+
+
+// Taken from http://zdoom.org/wiki/sqrt
+
+function int sqrt_i(int number)
+{
+    if (number <= 3) { return number > 0; }
+
+    int oldAns = number >> 1,                     // initial guess
+        newAns = (oldAns + (number / oldAns)) >> 1; // first iteration
+
+    // main iterative method
+    while (newAns < oldAns)
+    {
+        oldAns = newAns;
+        newAns = (oldAns + number / oldAns) >> 1;
+    }
+
+    return oldAns;
+}
+
+function int sqrt(int number)
+{
+    if (number == 1.0) { return 1.0; }
+    if (number <= 0) { return 0; }
+    int val = 150.0;
+    for (int i=0; i<15; i++) { val = (val + FixedDiv(number, val)) >> 1; }
+
+    return val;
+}
+
+function int magnitudeTwo(int x, int y)
+{
+    return sqrt_i(x*x + y*y);
+}
+
+function int magnitudeTwo_f(int x, int y)
+{
+    int len, ang;
+
+    ang = VectorAngle(x, y);
+    if (((ang + 0.125) % 0.5) > 0.25) { len = FixedDiv(y, sin(ang)); }
+    else { len = FixedDiv(x, cos(ang)); }
+
+    return len;
+}
+
+function int magnitudeThree(int x, int y, int z)
+{
+    return sqrt_i(x*x + y*y + z*z);
+}
+
+function int magnitudeThree_f(int x, int y, int z)
+{
+    int len, ang;
+
+    ang = VectorAngle(x, y);
+    if (((ang + 0.125) % 0.5) > 0.25) { len = FixedDiv(y, sin(ang)); }
+    else { len = FixedDiv(x, cos(ang)); }
+
+    ang = VectorAngle(len, z);
+    if (((ang + 0.125) % 0.5) > 0.25) { len = FixedDiv(z, sin(ang)); }
+    else { len = FixedDiv(len, cos(ang)); }
+
+    return len;
+}
+
+
+function int quadPos(int a, int b, int c)
+{
+    int s1 = sqrt(FixedMul(b, b)-(4*FixedMul(a, c)));
+    int s2 = (2 * a);
+    int b1 = FixedDiv(-b + s1, s2);
+
+    return b1;
+}
+
+function int quadNeg(int a, int b, int c)
+{
+    int s1 = sqrt(FixedMul(b, b)-(4*FixedMul(a, c)));
+    int s2 = (2 * a);
+    int b1 = FixedDiv(-b - s1, s2);
+
+    return b1;
+}
+
+// All the arguments are to be fixed-point
+function int quad(int a, int b, int c, int y)
+{
+    return FixedMul(a, FixedMul(y, y)) + FixedMul(b, y) + c + y;
+}
+
+function int quadHigh(int a, int b, int c, int x)
+{
+    return quadPos(a, b, c-x);
+}
+
+function int quadLow(int a, int b, int c, int x)
+{
+    return quadNeg(a, b, c-x);
+}
+
+function int inRange(int low, int high, int x)
+{
+    return ((x >= low) && (x < high));
+}
+
+function void AddAmmoCapacity(int type, int add)
+{
+    SetAmmoCapacity(type, GetAmmoCapacity(type) + add);
+}
+
+function int packShorts(int left, int right)
+{
+    return ((left & 0xFFFF) << 16) + (right & 0xFFFF);
+}
+
+function int leftShort(int packed) { return packed >> 16; }
+function int rightShort(int packed) { return (packed << 16) >> 16; }
+
+
+// This stuff only works with StrParam
+
+function int cleanString(int string)
+{
+    int ret = "";
+    int strSize = StrLen(string);
+
+    int c, i, ignoreNext;
+    
+    for (i = 0; i < strSize; i++)
+    {
+        c = GetChar(string, i);
+
+        if ( ( ((c > 8) && (c < 14)) || ((c > 31) && (c < 127)) || ((c > 160) && (c < 173)) ) && !ignoreNext)
+        {
+            ret = StrParam(s:ret, c:c);
+        }
+        else if (c == 28 && !ignoreNext)
+        {
+            ignoreNext = 1;
+        }
+        else
+        {
+            ignoreNext = 0;
+        }
+    }
+
+    return ret;
+}
+
+function int cvarFromString(int prefix, int newname)
+{
+    int ret = "";
+    int i, c;
+    int prelen = strlen(prefix);
+    int namelen = strlen(newname);
+    int cap = prelen+namelen;
+
+    for (i = 0; i <= cap; i++)
+    {
+        c = cond(i >= prelen, GetChar(newname, i-prelen), GetChar(prefix, i));
+
+        if (
+            (c > 64 && c < 91)  // is uppercase letter
+         || (c > 90 && c < 123) // is lowercase letter
+         || (c > 47 && c < 58)  // is number
+         || c == 95             // _
+         )
+        {
+            ret = StrParam(s:ret, c:c);
+        }
+    }
+
+    return ret;
+}
+
+function int padStringR(int baseStr, int padChar, int len)
+{
+    int baseStrLen = StrLen(baseStr);
+    int pad = "";
+    int padLen; int i;
+
+    if (baseStrLen >= len)
+    {
+        return baseStr;
+    }
+    
+    padChar = GetChar(padChar, 0);
+    padLen = len - baseStrLen;
+
+    for (i = 0; i < padLen; i++)
+    {
+        pad = StrParam(s:pad, c:padChar);
+    }
+
+    return StrParam(s:baseStr, s:pad);
+}
+
+function int padStringL(int baseStr, int padChar, int len)
+{
+    int baseStrLen = StrLen(baseStr);
+    int pad = "";
+    int padLen; int i;
+
+    if (baseStrLen >= len)
+    {
+        return baseStr;
+    }
+    
+    padChar = GetChar(padChar, 0);
+    padLen = len - baseStrLen;
+
+    for (i = 0; i < padLen; i++)
+    {
+        pad = StrParam(s:pad, c:padChar);
+    }
+
+    return StrParam(s:pad, s:baseStr);
+}
+
+function int changeString(int string, int repl, int where)
+{
+    int i; int j; int k;
+    int ret = "";
+    int len = StrLen(string);
+    int rLen = StrLen(repl);
+
+    if ((where + rLen < 0) || (where >= len))
+    {
+        return string;
+    }
+    
+    for (i = 0; i < len; i++)
+    {
+        if (inRange(where, where+rLen, i))
+        {
+            ret = StrParam(s:ret, c:GetChar(repl, i-where));
+        }
+        else
+        {
+            ret = StrParam(s:ret, c:GetChar(string, i));
+        }
+    }
+
+    return ret;
+}
+
+function int sliceString(int string, int start, int end)
+{
+    int len = StrLen(string);
+    int ret = "";
+    int i;
+
+    if (start < 0)
+    {
+        start = len + start;
+    }
+
+    if (end <= 0)
+    {
+        end = len + end;
+    }
+
+    start = max(0, start);
+    end   = min(end, len-1);
+    
+    for (i = start; i < end; i++)
+    {
+        ret = StrParam(s:ret, c:GetChar(string, i));
+    }
+
+    return ret;
+}
+
+function int strcmp(int str1, int str2)
+{
+    int i,j,k,l;
+    int len1 = StrLen(str1);
+    int len2 = StrLen(str2);
+    j = max(len1, len2);
+
+    for (i = 0; i < j; i++)
+    {
+        if (i >= len1) { return -1; }
+        if (i >= len2) { return  1; }
+        
+        k = GetChar(str1, i); l = GetChar(str2, i);
+
+        if (k > j) { return  1; }
+        if (k < j) { return -1; }
+    }
+    return 0;
+}
+
+
+// End StrParam
+
+function int unusedTID(int start, int end)
+{
+    int ret = start - 1;
+    int tidNum;
+
+    if (start > end) { start ^= end; end ^= start; start ^= end; }  // good ol' XOR swap
+    
+    while (ret++ != end)
+    {
+        if (ThingCount(0, ret) == 0)
+        {
+            return ret;
+        }
+    }
+    
+    return -1;
+}
+
+function int getMaxHealth(void)
+{
+    int maxHP = GetActorProperty(0, APROP_SpawnHealth);
+
+    if ((maxHP == 0) && (PlayerNumber() != -1))
+    {
+        maxHP = 100;
+    }
+
+    return maxHP;
+}
+
+function int giveHealth(int amount)
+{
+    return giveHealthFactor(amount, 1.0);
+}
+
+function int giveHealthFactor(int amount, int maxFactor)
+{
+    return giveHealthMax(amount, FixedMul(getMaxHealth(), maxFactor));
+}
+
+function int giveHealthMax(int amount, int maxHP)
+{
+    int newHP;
+
+    int curHP = GetActorProperty(0, APROP_Health);
+
+    if (maxHP == 0) { newHP = max(curHP, curHP+amount); }
+    else
+    {
+        if (curHP > maxHP) { return 0; }
+        newHP = middle(curHP, curHP+amount, maxHP);
+    }
+
+    SetActorProperty(0, APROP_Health, newHP);
+
+    return newHP - curHP;
+}
+
+function int isDead(int tid)
+{
+    return GetActorProperty(tid, APROP_Health) <= 0;
+}
+
+function int isSinglePlayer(void)
+{
+    return GameType() == GAME_SINGLE_PLAYER;
+}
+
+function int isLMS(void)
+{
+    return GetCVar("lastmanstanding") || GetCVar("teamlms");
+}
+
+function int isCoop(void)
+{
+    int check1 = GameType() == GAME_NET_COOPERATIVE;
+    int check2 = GetCVar("cooperative") || GetCVar("invasion") || GetCVar("survival");
+
+    return check1 || check2;
+}
+
+function int isInvasion(void)
+{
+    return GetCVar("invasion");
+}
+
+function int isFreeForAll(void)
+{
+    if (GetCVar("terminator") || GetCVar("duel"))
+    {
+        return 1;
+    }
+
+    int check1 = GetCVar("deathmatch") || GetCVar("possession") || GetCVar("lastmanstanding");
+    int check2 = check1 && !GetCVar("teamplay");
+
+    return check2;
+}
+
+function int isTeamGame(void)
+{
+    int ret = (GetCVar("teamplay") || GetCVar("teamgame") || GetCVar("teamlms"));
+    return ret;
+}
+
+function int spawnDistance(int item, int dist, int tid)
+{
+    int myX, myY, myZ, myAng, myPitch, spawnX, spawnY, spawnZ;
+
+    myX = GetActorX(0); myY = GetActorY(0); myZ = GetActorZ(0);
+    myAng = GetActorAngle(0); myPitch = GetActorPitch(0);
+
+    spawnX = FixedMul(cos(myAng) * dist, cos(myPitch));
+    spawnX += myX;
+    spawnY = FixedMul(sin(myAng) * dist, cos(myPitch));
+    spawnY += myY;
+    spawnZ = myZ + (-sin(myPitch) * dist);
+
+    return Spawn(item, spawnX, spawnY, spawnZ, tid, myAng >> 8);
+}
+
+function void SetInventory(int item, int amount)
+{
+    int count = CheckInventory(item);
+
+    if (count == amount) { return; }
+    
+    if (count > amount)
+    {
+        TakeInventory(item, count - amount);
+        return;
+    }
+
+    GiveAmmo(item, amount - count);
+    return;
+}
+function int ToggleInventory(int inv)
+{
+    if (CheckInventory(inv))
+    {
+        TakeInventory(inv, 0x7FFFFFFF);
+        return 0;
+    }
+
+    GiveInventory(inv, 1);
+    return 1;
+}
+
+function void GiveAmmo(int type, int amount)
+{
+    if (GetCVar("sv_doubleammo"))
+    {
+        int m = GetAmmoCapacity(type);
+        int expected = min(m, CheckInventory(type) + amount);
+
+        GiveInventory(type, amount);
+        TakeInventory(type, CheckInventory(type) - expected);
+    }
+    else
+    {  
+        GiveInventory(type, amount);
+    }
+}
+
+function void GiveActorAmmo(int tid, int type, int amount)
+{
+    if (GetCVar("sv_doubleammo"))
+    {
+        int m = GetAmmoCapacity(type);
+        int expected = min(m, CheckActorInventory(tid, type) + amount);
+
+        GiveActorInventory(tid, type, amount);
+        TakeActorInventory(tid, type, CheckActorInventory(tid, type) - expected);
+    }
+    else
+    {  
+        GiveActorInventory(tid, type, amount);
+    }
+}
+
+function int cond(int test, int trueRet, int falseRet)
+{
+    if (test) { return trueRet; }
+    return falseRet;
+}
+
+function int condTrue(int test, int trueRet)
+{
+    if (test) { return trueRet; }
+    return test;
+}
+
+function int condFalse(int test, int falseRet)
+{
+    if (test) { return test; }
+    return falseRet;
+}
+
+function void saveCVar(int cvar, int val)
+{
+    int setStr = StrParam(s:"set ", s:cvar, s:" ", d:val);
+    int arcStr = StrParam(s:"archivecvar ", s:cvar);
+    ConsoleCommand(setStr); ConsoleCommand(arcStr);
+}
+
+function int defaultCVar(int cvar, int defaultVal)
+{
+    int ret = GetCVar(cvar);
+    if (ret == 0) { saveCVar(cvar, defaultVal); return defaultVal; }
+
+    return ret;
+}
+
+
+function int onGround(int tid)
+{
+    return (GetActorZ(tid) - GetActorFloorZ(tid)) == 0;
+}
+
+function int ThingCounts(int start, int end)
+{
+    int i, ret = 0;
+
+    if (start > end) { start ^= end; end ^= start; start ^= end; }
+    for (i = start; i < end; i++) { ret += ThingCount(0, i); }
+
+    return ret;
+}
+
+function int PlaceOnFloor(int tid)
+{
+    if (ThingCount(0, tid) != 1) { return 1; }
+    
+    SetActorPosition(tid, GetActorX(tid), GetActorY(tid), GetActorFloorZ(tid), 0);
+    return 0;
+}
+
+#define DIR_E  1
+#define DIR_NE 2
+#define DIR_N  3
+#define DIR_NW 4
+#define DIR_W  5
+#define DIR_SW 6
+#define DIR_S  7
+#define DIR_SE 8
+
+function int getDirection(void)
+{
+    int sideMove = keyDown(BT_MOVERIGHT) - keyDown(BT_MOVELEFT);
+    int forwMove = keyDown(BT_FORWARD) - keyDown(BT_BACK);
+
+    if (sideMove || forwMove)
+    {
+        switch (sideMove)
+        {
+          case -1: 
+            switch (forwMove)
+            {
+                case -1: return DIR_SW;
+                case  0: return DIR_W;
+                case  1: return DIR_NW;
+            }
+            break;
+
+          case 0: 
+            switch (forwMove)
+            {
+                case -1: return DIR_S;
+                case  1: return DIR_N;
+            }
+            break;
+
+          case 1: 
+            switch (forwMove)
+            {
+                case -1: return DIR_SE;
+                case  0: return DIR_E;
+                case  1: return DIR_NE;
+            }
+            break;
+        }
+    }
+
+    return 0;
+}
+
+function int isInvulnerable(void)
+{
+    int check1 = GetActorProperty(0, APROP_Invulnerable);
+    int check2 = CheckInventory("PowerInvulnerable");
+
+    return check1 || check2;
+}
+
+function void saveStringCVar(int string, int cvarname)
+{
+    int slen = StrLen(string);
+    int i, c, cvarname2;
+
+    for (i = 0; i < slen; i++)
+    {
+        cvarname2 = StrParam(s:cvarname, s:"_char", d:i);
+        SaveCVar(cvarname2, GetChar(string, i));
+    }
+
+    while (1)
+    {
+        cvarname2 = StrParam(s:cvarname, s:"_char", d:i);
+        c = GetCVar(cvarname2);
+
+        if (c == 0) { break; }
+
+        ConsoleCommand(StrParam(s:"unset ", s:cvarname2));
+        i += 1;
+    }
+}
+
+function int loadStringCVar(int cvarname)
+{
+    int ret = "";
+    int i = 0, c, cvarname2;
+
+    while (1)
+    {
+        cvarname2 = StrParam(s:cvarname, s:"_char", d:i);
+        c = GetCVar(cvarname2);
+
+        if (c == 0) { break; }
+
+        ret = StrParam(s:ret, c:c);
+        i += 1;
+    }
+
+    return ret;
+}
+
+function int defaultTID(int def)
+{
+    return _defaulttid(def, 0);
+}
+
+function int _defaulttid(int def, int alwaysPropagate)
+{
+    if (ClassifyActor(0) & ACTOR_WORLD) { return 0; }
+
+    int tid = ActivatorTID();
+    int i, changed = 0;
+
+    if (ThingCount(0, tid) != 1)
+    {
+        tid = def;
+        changed = 1;
+        if (def <= 0)
+        {
+            i = random(12, 220);
+            tid = unusedTID(i*100, (i+100)*100);
+        }
+
+        Thing_ChangeTID(0, tid);
+    }
+
+    if ((changed || (alwaysPropagate == 1)) && (alwaysPropagate != 2))
+    {
+        ACS_ExecuteAlways(DEFAULTTID_SCRIPT, 0, tid,0,0);
+    }
+
+    return tid;
+}
+
+script DEFAULTTID_SCRIPT (int tid) clientside
+{
+    if (ConsolePlayerNumber() == -1) { terminate; }
+    Thing_ChangeTID(0, tid);
+}
+
+function int JumpZFromHeight(int height, int gravFactor)
+{
+    return sqrt(2 * height * gravFactor);
+}
+
+function int roundZero(int toround)
+{
+    int i = toround % 1.0;
+    return ftoi(toround - i);
+}
+
+function int roundAway(int toround)
+{
+    int i = toround % 1.0;
+
+    if (i == 0) { return ftoi(toround); }
+    return ftoi(toround + (1.0 - i));
+}
+
+function int round(int toround)
+{
+    return ftoi(toround + 0.5);
+}
+
+function int ceil(int toround)
+{
+    return ftoi(toround + (1.0-1));
+}
+
+function int intFloat(int toround)
+{
+    return itof(ftoi(toround));
+}
+
+function int distance(int x1, int y1, int z1, int x2, int y2, int z2)
+{
+    return magnitudeThree_f(x2-x1, y2-y1, z2-z1);
+}
+
+function int distance_tid(int tid1, int tid2)
+{
+    int x1 = GetActorX(tid1);
+    int y1 = GetActorY(tid1);
+    int z1 = GetActorZ(tid1);
+
+    int x2 = GetActorX(tid2);
+    int y2 = GetActorY(tid2);
+    int z2 = GetActorZ(tid2);
+
+    return magnitudeThree_f(x2-x1, y2-y1, z2-z1);
+}
+
+function int distance_ftoi(int x1, int y1, int z1, int x2, int y2, int z2)
+{
+    return ftoi(distance(x1,y1,z1, x2,y2,z2));
+}
+
+function void printDebugInfo(void)
+{
+    int classify    = ClassifyActor(0);
+    int fead        = classify & ACTOR_DEAD;
+    int player      = classify & ACTOR_PLAYER;
+    int pln         = PlayerNumber();
+
+    Log(s:" -- DEBUG INFO -- ");
+
+    Log(s:"Executed on tic ", d:Timer(), s:" on map ", d:GetLevelInfo(LEVELINFO_LEVELNUM));
+
+    if (classify & (ACTOR_PLAYER | ACTOR_MONSTER))
+    {
+        Log(s:"Script activator has ", d:GetActorProperty(0, APROP_Health), s:"/", d:getMaxHealth(), s:" HP");
+    }
+
+    if (player)
+    {
+        Log(s:"Is player ", d:pln, s:" (", n:0, s:"\c-) with class number ", d:PlayerClass(pln));
+    }
+
+    Log(s:" -- END DEBUG -- ");
+}
+
+
+function int PlayerTeamCount(int teamNo)
+{
+    int i, ret;
+    for (i = 0; i < PLAYERMAX; i++)
+    {
+        if (GetPlayerInfo(i, PLAYERINFO_TEAM) == teamNO) { ret++; }
+    }
+    return ret;
+}
+
+function int lower(int chr)
+{
+    if (chr > 64 && chr < 91) { return chr+32; }
+    return chr;
+}
+
+function int upper(int chr)
+{
+    if (chr > 90 && chr < 123) { return chr-32; }
+    return chr;
+}
+
+function int AddActorProperty(int tid, int prop, int amount)
+{
+    int newAmount = GetActorProperty(tid, prop) + amount;
+    SetActorProperty(tid, prop, newAmount);
+    return newAmount;
+}
+
+function int ClientCount(void)
+{
+    int ret, i;
+
+    for (i = 0; i < PLAYERMAX; i++)
+    {
+        if (PlayerInGame(i) || PlayerIsSpectator(i)) { ret++; }
+    }
+
+    return ret;
+}
+
+function int HasRoom(int actorname, int x, int y, int z)
+{
+    int tid = unusedTID(40000, 50000);
+    int ret = Spawn(actorname, x, y, z, tid);
+
+    if (ret >= 1) { Thing_Remove(tid); }
+
+    return ret;
+}
+
+function int RealPlayerCount(void)
+{
+    int ret, i;
+
+    for (i = 0; i < PLAYERMAX; i++)
+    {
+        if (PlayerInGame(i) && !PlayerIsBot(i)) { ret++; }
+    }
+
+    return ret;
+}
+
+//BEEMS
+int isServer = 0;
+#define TRAILCOUNT 3
+
+int TrailItems[TRAILCOUNT]     = {"LasgunBurstItem", "LascannonBurstItem", "SuperNoclipBurstItem"};
+int TrailStarts[TRAILCOUNT]    = {32, 32, 32};
+int TrailDensities[TRAILCOUNT] = {32, 32, 32};
+int TrailModes[PLAYERMAX];
+
+script 454 (int scaleI, int scaleF, int speedF)
+{
+    int scale, x, y, z, mag;
+    x = GetActorVelX(0); y = GetActorVelY(0); z = GetActorVelZ(0);
+
+    if (speedF == 0) { scale = itof(scaleI) + (scaleF * 0.01); }
+    else
+    {
+        mag = magnitudeThree_f(x, y, z);
+
+        if (mag == 0)
+        {
+            x = random(-10.0, 10.0);
+            y = random(-10.0, 10.0);
+            z = random(-10.0, 10.0);
+            mag = magnitudeThree_f(x, y, z);
+        }
+
+        scale = FixedDiv(speedF * 1.0, mag);
+    }
+
+    SetActorVelocity(0, FixedMul(x, scale), FixedMul(y, scale), FixedMul(z, scale), 0, 0);
+    // PrintBold(s:"(", f:x, s:", ", f:y, s:", ", f:z, s:"): ", f:scale, s:" -> (", f:GetActorVelX(0), s:", ", f:GetActorVelY(0), s:", ", f:GetActorVelZ(0), s:")");
+    // printf("(%f, %f, %f): %f -> (%f, %f, %f)\n", x, y, z, scale, GetActorVelX(0), GetActorVelY(0), GetActorVelZ(0));
+}
+
+script 458 (int count, int high, int low)
+{
+    int ret = 0;
+    int i;
+    if (!low) { low = -high; }
+
+    for (i = 0; i < count; i++) { ret += random(low, high); }
+    SetResultValue(ret);
+}
+
+script 455 (int which, int mode)
+{
+    int x, y, z;
+    x = GetActorX(0); y = GetActorY(0); z = GetActorZ(0);
+    SetActivatorToTarget(0);
+    int pln = PlayerNumber();
+
+    which = condFalse(which, 456);
+    TrailModes[pln] = middle(0, mode, TRAILCOUNT-1);
+
+    ACS_ExecuteAlways(which, 0, x,y,z);
+    ACS_ExecuteWithResult(469, x,y,z);
+}
+
+script 456 (int tx, int ty, int tz) //clientside
+{
+    if (ConsolePlayerNumber() == -1) { terminate; }
+
+    int i, k = 0, l;
+    int x, y, z;
+    int ii, p;
+    int vx, vy, vz, mag, magI;
+
+    x  = GetActorX(0); y =  GetActorY(0);  z = GetActorZ(0) + 24.0;
+
+    vx = tx-x; vy = ty-y; vz = tz-z; mag = magnitudeThree_f(vx, vy, vz);
+    vx = FixedDiv(vx, mag); vy = FixedDiv(vy, mag); vz = FixedDiv(vz, mag);
+    magI = ftoi(mag);
+
+    for (i = 48; i < magI; i += 16)
+    {
+        Spawn("TouhouLaserTrail1", x+(vx*i), y+(vy*i), z+(vz*i));
+    }
+}
+
+script 459 (int tx, int ty, int tz) //clientside
+{
+    if (ConsolePlayerNumber() == -1) { terminate; }
+
+    int i, k = 0, l;
+    int x, y, z;
+    int ii, p;
+    int vx, vy, vz, mag, magI;
+
+    x  = GetActorX(0); y =  GetActorY(0);  z = GetActorZ(0) + 24.0;
+
+    vx = tx-x; vy = ty-y; vz = tz-z; mag = magnitudeThree_f(vx, vy, vz);
+    vx = FixedDiv(vx, mag); vy = FixedDiv(vy, mag); vz = FixedDiv(vz, mag);
+    magI = ftoi(mag);
+
+    for (i = 48; i < magI; i += 16)
+    {
+        Spawn("TouhouLaserTrail2", x+(vx*i), y+(vy*i), z+(vz*i));
+    }
+}
+
+int TempCoords[PLAYERMAX][3];
+
+script 469 (int tx, int ty, int tz)
+{
+    if (!IsServer) { terminate; }
+
+    int pln = PlayerNumber();
+    int item    = TrailItems     [TrailModes[pln]];
+    int start   = TrailStarts    [TrailModes[pln]];
+    int density = TrailDensities [TrailModes[pln]];
+    int i, k = 0, l;
+    int ii;
+    int x, y, z;
+    int vx, vy, vz, mag, magI;
+
+    x  = GetActorX(0); y =  GetActorY(0);  z = GetActorZ(0) + 24.0;
+
+    vx = tx-x; vy = ty-y; vz = tz-z; mag = magnitudeThree_f(vx, vy, vz);
+    vx = FixedDiv(vx, mag); vy = FixedDiv(vy, mag); vz = FixedDiv(vz, mag);
+    magI = ftoi(mag);
+
+    for (i = start; i < magI; i += density)
+    {
+        TempCoords[pln][0] = (vx * i);
+        TempCoords[pln][1] = (vy * i);
+        TempCoords[pln][2] = (vz * i);
+        GiveInventory(item, 1);
+    }
+}
+
+script 468 (int which)
+{
+    int pln = PlayerNumber();
+    int ret = 0;
+
+    switch (which)
+    {
+        case 0: ret = TempCoords[pln][0]; break;
+        case 1: ret = TempCoords[pln][1]; break;
+        case 2: ret = TempCoords[pln][2]; break;
+    }
+
+    SetResultValue(ftoi(ret));
+}
+
+Script "BHI_BossStartTimer" (int BHI_BossThingId, int BHI_SpellcardTimer)
+{
+	SetFont("BIGFONT");
+	if(GetCVar("touhou_bosslifebars"))
+	{
+		for(int j=BHI_SpellcardTimer; j>=10; j--)
+		{
+			if(j > 99)
+			{
+				HudMessageBold(s:"99";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+				Delay(35);
+			}
+			else
+			{
+				HudMessageBold(d:j;HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+				Delay(35);
+			}
+		}
+		AmbientSound("touhou/timeout1",92);
+		AmbientSound("touhou/timeout1",92);
+		HudMessageBold(s:"9";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",96);
+		AmbientSound("touhou/timeout1",96);
+		HudMessageBold(s:"8";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",100);
+		AmbientSound("touhou/timeout1",100);
+		HudMessageBold(s:"7";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",104);
+		AmbientSound("touhou/timeout1",104);
+		HudMessageBold(s:"6";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",108);
+		AmbientSound("touhou/timeout1",108);
+		HudMessageBold(s:"5";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",112);
+		AmbientSound("touhou/timeout2",112);
+		HudMessageBold(s:"4";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",116);
+		AmbientSound("touhou/timeout2",116);
+		HudMessageBold(s:"3";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",120);
+		AmbientSound("touhou/timeout2",120);
+		HudMessageBold(s:"2";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",124);
+		AmbientSound("touhou/timeout2",124);
+		HudMessageBold(s:"1";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",127);
+		AmbientSound("touhou/timeout2",127);
+		HudMessageBold(s:"0";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		Thing_Destroy(BHI_BossThingId, 0);
+	} else {
+		for(int k=BHI_SpellcardTimer; k>=10; k--)
+		{
+			Delay(35);
+		}
+		AmbientSound("touhou/timeout1",48);
+		Delay(35);
+		AmbientSound("touhou/timeout1",56);
+		Delay(35);
+		AmbientSound("touhou/timeout1",64);
+		Delay(35);
+		AmbientSound("touhou/timeout1",72);
+		Delay(35);
+		AmbientSound("touhou/timeout1",80);
+		Delay(35);
+		AmbientSound("touhou/timeout2",88);
+		Delay(35);
+		AmbientSound("touhou/timeout2",96);
+		Delay(35);
+		AmbientSound("touhou/timeout2",112);
+		Delay(35);
+		AmbientSound("touhou/timeout2",120);
+		Delay(35);
+		AmbientSound("touhou/timeout2",127);
+		Delay(35);
+		Thing_Destroy(BHI_BossThingId, 0);
+	}
+}
+
+Script "BHI_BossStartTimerAlternative" (int BHI_BossThingId, int BHI_SpellcardTimer)
+{
+	if(GetCVar("touhou_bosslifebars"))
+	{
+		SetFont("BIGFONT");
+		for(int j2=BHI_SpellcardTimer; j2>=91; j2--)
+		{
+			if(j2 > 99)
+			{
+				HudMessageBold(s:"99";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+				Delay(35);
+			}
+			else
+			{
+				HudMessageBold(d:j2;HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+				Delay(35);
+			}
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck90", 1);
+		for(int j3=90; j3>=61; j3--)
+		{
+			HudMessageBold(d:j3;HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck60", 1);
+		for(int j4=60; j4>=31; j4--)
+		{
+			HudMessageBold(d:j4;HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck30", 1);
+		for(int j5=30; j5>=21; j5--)
+		{
+			HudMessageBold(d:j5;HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck20", 1);
+		for(int j6=20; j6>=11; j6--)
+		{
+			HudMessageBold(d:j6;HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck10", 1);
+		HudMessageBold(s:"10";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_WHITE,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",92);
+		AmbientSound("touhou/timeout1",92);
+		HudMessageBold(s:"9";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",96);
+		AmbientSound("touhou/timeout1",96);
+		HudMessageBold(s:"8";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",100);
+		AmbientSound("touhou/timeout1",100);
+		HudMessageBold(s:"7";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",104);
+		AmbientSound("touhou/timeout1",104);
+		HudMessageBold(s:"6";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout1",108);
+		AmbientSound("touhou/timeout1",108);
+		HudMessageBold(s:"5";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_BRICK,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",112);
+		AmbientSound("touhou/timeout2",112);
+		HudMessageBold(s:"4";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",116);
+		AmbientSound("touhou/timeout2",116);
+		HudMessageBold(s:"3";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",120);
+		AmbientSound("touhou/timeout2",120);
+		HudMessageBold(s:"2";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",124);
+		AmbientSound("touhou/timeout2",124);
+		HudMessageBold(s:"1";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		AmbientSound("touhou/timeout2",127);
+		AmbientSound("touhou/timeout2",127);
+		HudMessageBold(s:"0";HUDMSG_PLAIN,BHI_MSG_ID-100,CR_RED,0.5,0.08,1.00);
+		Delay(35);
+		Thing_Destroy(BHI_BossThingId, 0);
+	} else {
+		for(int k2=BHI_SpellcardTimer; k2>=91; k2--)
+		{
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck90", 1);
+		for(int k3=90; k3>=61; k3--)
+		{
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck60", 1);
+		for(int k4=60; k4>=31; k4--)
+		{
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck30", 1);
+		for(int k5=30; k5>=21; k5--)
+		{
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck20", 1);
+		for(int k6=20; k6>=11; k6--)
+		{
+			Delay(35);
+		}
+		GiveActorInventory(BHI_BossThingId, "BossTimerCheck10", 1);
+		Delay(35);
+		AmbientSound("touhou/timeout1",48);
+		Delay(35);
+		AmbientSound("touhou/timeout1",56);
+		Delay(35);
+		AmbientSound("touhou/timeout1",64);
+		Delay(35);
+		AmbientSound("touhou/timeout1",72);
+		Delay(35);
+		AmbientSound("touhou/timeout1",80);
+		Delay(35);
+		AmbientSound("touhou/timeout2",88);
+		Delay(35);
+		AmbientSound("touhou/timeout2",96);
+		Delay(35);
+		AmbientSound("touhou/timeout2",112);
+		Delay(35);
+		AmbientSound("touhou/timeout2",120);
+		Delay(35);
+		AmbientSound("touhou/timeout2",127);
+		Delay(35);
+		Thing_Destroy(BHI_BossThingId, 0);
+	}
+}
+
+Script "BHI_BossStartKoishiTimer" (int BHI_SpellcardTimer)
+{
+	Delay(35*BHI_SpellcardTimer);
+	PrintBold(s:"\c[S2]Were you waiting for the attack to time out?");
+	Delay(105);
+	PrintBold(s:"\c[S2]HA! The spellcard timers don't work here either!");
+}
+
+//THE FOLLOWING CODE IS NOT MINE
+//Credit goes to Muzzdiez for this, it's cool and it works for the most part
+/*****************************
+  BHI (BOSS HEALTH INDICATOR)
+ *****************************/
+
+bool BHI_BossIsAlive    = false;
+int  BHI_BossHealth     = 0;
+int  BHI_SpellStartAt   = 0;
+int  BHI_BossMaxHealth  = 1;
+int  BHI_NewMaxHealth   = 0;
+int  BHI_BossSpellCards = 0;
+bool BHI_BossIsSpellNow = false;
+bool BHI_IsSurvival     = true;
+str  BHI_BossName       = "No Boss";
+
+// This script is to be called when boss starts any attack, i.e. in the same place where script 602 is called, or in See state.
+Script "BHI_BossStartAttack" (int BHI_BossThingId, int BHI_SpellCardsRemaining, int BHI_IsSpellCardNow, int BHI_Timer)
+{
+	// Initialize parameters
+	BHI_BossName       = GetActorProperty (BHI_BossThingId, APROP_NAMETAG);
+    BHI_BossMaxHealth  = GetActorProperty (BHI_BossThingId, APROP_SPAWNHEALTH);
+	BHI_BossSpellCards = BHI_SpellCardsRemaining;
+	BHI_BossIsSpellNow = BHI_IsSpellCardNow;
+	BHI_BossIsAlive    = true;
+	BHI_IsSurvival     = false;
+	BHI_SpellStartAt   = Timer();
+
+	// Constantly update health
+	while(true)
+	{
+		BHI_BossHealth = GetActorProperty (BHI_BossThingId, APROP_HEALTH);
+		Delay (1);
+	}
+}
+
+// This script is to be called when boss starts survival spell card; boss thing may be inexistent now.
+Script "BHI_BossStartSurvivalAttack" (int BHI_SpellCardsRemaining)
+{
+	// BHI_BossName will be reused from previous spell cards
+	BHI_BossMaxHealth  = 100;
+	BHI_BossSpellCards = BHI_SpellCardsRemaining;
+	BHI_BossIsSpellNow = true;
+	BHI_BossIsAlive    = true;
+	BHI_IsSurvival     = true;
+	BHI_BossHealth     = 100;
+
+	while(true) // For some reason we should keep this script running until termination
+	{
+		Delay (1);
+	}
+}
+
+// This script is to be called when boss stops any attack, i.e. in her Death state.
+Script "BHI_BossStopAttack" (void)
+{
+	BHI_BossIsAlive = false;
+	ACS_NamedTerminate("BHI_BossStartTimer",0);
+	ACS_NamedTerminate("BHI_BossStartTimerAlternative",0);
+}
+
+// Return a number according to skill level. If BHI_LHNE == 5678 (decimal),
+// it returns 5 on Lunatic and higher, 6 on Hard, 7 on Normal, 8 on Easy.
+// Useful for determining number of spell cards, as this BHI_LHNE can consist of
+// digits indicating number of spell cards on Lunatic, Hard, Normal and Easy
+// correspondingly (LHNE stands for four-digit "Lunatic/Hard/Normal/Easy").
+Script "BHI_SpellCardsBySkillLevel" (int BHI_LHNE)
+{
+	switch(GameSkill())
+	{
+		case 0:  // Easy
+			SetResultValue(BHI_LHNE % 10);
+			break;
+		case 1:  // Normal
+			SetResultValue((BHI_LHNE / 10) % 10);
+			break;
+		case 2:  // Hard
+			SetResultValue((BHI_LHNE / 100) % 10);
+			break;
+		default: // Lunatic and harder
+			SetResultValue(BHI_LHNE / 1000);
+			break;
+	}
+}
+
+// For number of remaining spell cards of Patchouli, there is a bit different algorithm,
+// so we should have some specific scripts for it (we can't use patchouliSpellcards
+// variable from "TOUHOU" library).
+int BHI_PatchyLeft = 2;
+Script "BHI_PatchouliSpellCardsLeft" (void)
+{
+	SetResultValue(BHI_PatchyLeft);
+	BHI_PatchyLeft--;
+	if(GameSkill() == 0)
+	{
+		BHI_PatchyLeft--;
+	}
+}
+
+// Iku waiter script (called from corresponding See state)
+Script "BHI_StartIku" (void)
+{
+	ScriptWait(4);
+	ACS_NamedExecute("BHI_BossStartAttack",0,10,2,false);
+    ACS_NamedExecute("BHI_BossStartTimer",0,10,60);
+}
+
+// Tenshi waiter script (called from corresponding See state)
+Script "BHI_StartTenshi" (void)
+{
+	ScriptWait(2);
+	ACS_NamedExecute("BHI_BossStartAttack",0,14,3,false);
+    ACS_NamedExecute("BHI_BossStartTimer",0,14,70);
+}
+
+// Yukari survival spell terminator
+Script "BHI_YukariStartSurvival" (void)
+{
+	ACS_NamedExecute("BHI_BossStartSurvivalAttack",0,1);
+	Delay(75*35);
+	ACS_NamedTerminate("BHI_BossStartSurvivalAttack",0);
+	ACS_NamedExecute("BHI_BossStopAttack",0);
+	Delay(1);
+}
+
+// This is worker-script waiting for attack starts, and showing indicator then.
+Script "BHI_BossHealthIndicatorLoop" ENTER
+{
+	if (BHI_BossIsAlive && GetCVar("touhou_bosslifebars"))
+	{
+		int counter;
+
+		int MaxHealth  = BHI_BossMaxHealth;
+		int SpellCards = BHI_BossSpellCards;
+		int BossHealth = BHI_BossHealth;
+		
+		BHI_NewMaxHealth = 0;
+
+		if (MaxHealth < 1) MaxHealth = 1;
+		int hdisp = BossHealth * 100 / MaxHealth;
+		if (hdisp > 100) hdisp = 100;
+		if (hdisp < 0) hdisp = 0;
+		
+		// Note: digits after decimal point in HudMessage specify alignment, not actual position!
+
+		// Write boss name (in red, if it is spell card attack now, and in gold, if it is survival)
+		int namecolor = CR_WHITE;
+		SetFont ("SMALLFONT");
+		SetHudSize (640, 480, FALSE); // Health bar is 606 x 15 (inner 600 x 9)
+		if(BHI_BossIsSpellNow) namecolor = CR_RED;
+		if(BHI_IsSurvival) namecolor = CR_GOLD;
+		HudMessage (s:BHI_BossName; HUDMSG_PLAIN, BHI_MSG_ID + 108, namecolor, 20.1, 14.0, 0.1, 1.0);
+
+		// Write empty health bar
+		SetFont ("MONHPBAR");
+		HudMessage (s:"A"; HUDMSG_PLAIN, BHI_MSG_ID + 109, 0, 320.0, 27.0, 0.1, 1.0);
+
+		// Write spell cards count
+		SetFont ("STAR");
+		for (counter = 0; counter < SpellCards; counter++)
+		{
+			HudMessage (s:"A"; HUDMSG_PLAIN, BHI_MSG_ID + 110 + counter, 0, 620.2 - counter * 20.0, 10.0, 0.1, 1.0);
+		}
+		
+		// Write health bar items (up to 100 of 6 x 9 blocks)
+		for (counter = 0; counter < hdisp; counter++)
+		{
+			SetFont ("FILLNORM"); // By default, the bar shows as a green bar.
+
+			if (hdisp < 75) // If the hp is at a caution level (75%) Display a yellow bar.
+				SetFont ("FILLCAUT");
+
+			if (hdisp < 50) // If the hp is at a danger level (50%) Display an orange bar.
+				SetFont ("FILLDANG");
+
+			if (hdisp < 25) // If the hp is at a critical level (25%) Display a red bar.
+				SetFont ("FILLCRIT");
+
+			if(BHI_IsSurvival) // If it is survival attack, display a violet bar.
+				SetFont ("FILLSURV");
+
+			HudMessage (s:"A"; HUDMSG_PLAIN | HUDMSG_ALPHA, BHI_MSG_ID + 1 + counter, 0, 23.0 + counter * 6.0, 27.0, 0.1, 0.5);
+		}
+	}
+    Delay(1);
+    Restart;
+}

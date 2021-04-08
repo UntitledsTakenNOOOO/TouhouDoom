@@ -1,0 +1,468 @@
+ACTOR SuikaAlly 31461
+{
+//$Category "Touhou Allied Characters"
+  Tag "Suika Ibuki"
+  Speed 8
+  FastSpeed 12
+  MONSTER
+  Health 10000
+  Radius 24
+  Height 64
+  Scale 0.6
+  MinMissileChance 128
+  Mass 10000
+  MeleeThreshold 192
+  MeleeRange 64
+  DamageFactor "TouhouAllyDamage", 0
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +QUICKTORETALIATE
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTRIP
+  +NORADIUSDMG
+  +BOSS
+  +FRIENDLY
+  +NEVERRESPAWN
+  +DONTMORPH
+  +AMBUSH
+  +NOICEDEATH
+  Gravity 1.0
+  Painchance 3
+  Painsound "touhou/pain"
+  Seesound ""
+  Deathsound "touhou/defeat"
+  Obituary "%o wasn't strong enough for Suika."
+  HitObituary "%o foolishly got into a brawl with Suika."
+  States
+  {
+  Spawn:
+	SUIK ABCDEFGHIJKLMNOPQR 3 A_Look
+	Loop
+  See:
+	TNT1 A 0 NoiseAlert(0,0)
+	SUIK A 0 A_Jump(32,"FastSee")
+	SUIK ABCDEFGHI 3 A_Chase
+	SUIK A 0 A_Jump(32,"FastSee")
+	SUIK JKLMNOPQR 3 A_Chase
+	Loop
+  FastSee:
+	SUIK A 0 A_Jump(32,"See")
+	SUIK STUVWXYZ 2 A_Chase
+	Loop
+  NapTime:
+	SUI1 HGFEDCBA 4 A_FaceTarget
+	SUI1 A 16 A_FaceTarget
+	SUI1 ABCDEFGH 4 A_FaceTarget
+	Goto See
+  Pain:
+	SUI4 A 0 A_Pain
+    SUI4 LMNML 3
+	Goto See
+  Melee:
+	SUI1 A 0 A_Jump(128,"Missile","Puncher","FireBreath")
+	SUI1 QRS 4 A_FaceTarget
+	SUI1 TTTT 1 A_CustomMeleeAttack(450, "touhou/suika/hit", "none", "TouhouAllyDamage")
+	SUI1 UVWX 4 A_FaceTarget
+	Goto See
+  Missile:
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher","FireBreath")
+	Goto MainShot
+  FloorSlam:
+	SUI3 NOPQRST 3 A_FaceTarget
+	SUI3 A 0 A_PlaySound("touhou/fire")
+	SUI3 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 0 A_CustomMissile("SuikaAllyFloorSlamBullet2",0,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+	SUI3 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 0 A_CustomMissile("SuikaAllyFloorSlamBullet",0,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+	SUI3 U 12 A_FaceTarget
+	SUI3 VWXYZ 3 A_FaceTarget
+	SUI3 "[]" 3 A_FaceTarget
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher","FireBreath","Missile","NapTime")
+	Goto See
+  Bombs:
+	SUI3 AB 3 A_FaceTarget
+	SUI3 A 0 A_PlaySound("touhou/fire")	
+	SUI3 A 0 A_CustomMissile("SuikaAllyBubbleBomb",30,0,0,CMF_OFFSETPITCH,10)
+	SUI3 CDEFGHI 2
+	SUI3 A 0 A_CustomMissile("SuikaAllyBubbleBomb",30,0,0,CMF_OFFSETPITCH,10)
+	SUI3 CDEFGHI 2
+	SUI3 A 0 A_CustomMissile("SuikaAllyBubbleBomb",30,0,0,CMF_OFFSETPITCH,10)
+	SUI3 CDEFGHI 2
+	SUI3 A 0 A_CustomMissile("SuikaAllyBubbleBomb",30,0,0,CMF_OFFSETPITCH,10)
+	SUI3 CDEFGHIJK 2
+	SUI3 A 0 A_CustomMissile("SuikaAllyBubbleBomb",30,0,-30,CMF_OFFSETPITCH,10)
+	SUI3 A 0 A_CustomMissile("SuikaAllyBubbleBomb",30,0,30,CMF_OFFSETPITCH,10)
+	SUI3 A 0 A_CustomMissile("SuikaAllyBubbleBomb",30,0,0,CMF_OFFSETPITCH,10)
+	SUI3 JKLMLMLMLKJ 3 Fast A_FaceTarget
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher","FireBreath","Missile","NapTime")
+	Goto See
+  Puncher:
+	SUI1 QRST 4 A_FaceTarget
+	SUI1 A 0 A_PlaySound("touhou/komachi/scythe")
+	SUI1 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 0 A_CustomMissile("SuikaAllyPunchSpirit",frandom(20,40),frandom(-10,10),frandom(-60,60),CMF_OFFSETPITCH,frandom(-36,36))
+	SUI1 UUVWX 8 A_FaceTarget
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher","FireBreath","Missile","NapTime")
+	Goto See
+  FireBreath:
+	SUI4 ABCBCDDEF 3 A_FaceTarget
+	SUI4 A 0 A_ChangeFlag("NOPAIN",1)
+  FireBreathLunaticLoop:
+	SUI4 G 0 A_JumpIfInventory("EnemyCounter1",35,"EndFireBreathLoop")
+	SUI4 G 0 A_GiveInventory("EnemyCounter1",1)
+	SUI4 G 0 A_CustomMissile("SuikaAllyFireBreath",20,0,frandom(-3,3),CMF_AIMDIRECTION,frandom(-2,2))
+	SUI4 G 0 A_CustomMissile("SuikaAllyFireBreath",20,0,frandom(-3,3),CMF_AIMDIRECTION,frandom(-2,2))
+	SUI4 G 0 A_CustomMissile("SuikaAllyFireBreath",20,0,frandom(-3,3),CMF_AIMDIRECTION,frandom(-2,2))
+	SUI4 G 1 A_CustomMissile("SuikaAllyFireBreath",20,0,frandom(-3,3),CMF_AIMDIRECTION,frandom(-2,2))
+	Loop
+  EndFireBreathLoop:
+	SUI4 A 0 A_ChangeFlag("NOPAIN",0)
+	SUI4 A 0 A_TakeInventory("EnemyCounter1",200)
+	SUI4 HIJK 4 A_FaceTarget
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher","FireBreath","Missile","NapTime")
+	Goto See
+  MainShot:
+	SUI2 ABCD 4 A_FaceTarget
+	SUI2 E 0 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotRed",30,0,frandom(-3,3)-90,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotRed",30,0,frandom(-3,3)-60,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotRed",30,0,frandom(-3,3)-30,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotRed",30,0,frandom(-3,3),CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotRed",30,0,frandom(-3,3)+30,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotRed",30,0,frandom(-3,3)+60,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 EFG 6 A_FaceTarget
+	SUI2 ABCD 4 A_FaceTarget
+	SUI2 E 0 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotViolet",30,0,frandom(-3,3)+90,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotViolet",30,0,frandom(-3,3)+60,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotViolet",30,0,frandom(-3,3)+30,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotViolet",30,0,frandom(-3,3),CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotViolet",30,0,frandom(-3,3)-30,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaAllyMainShotViolet",30,0,frandom(-3,3)-60,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 EFG 12 A_FaceTarget
+	SUIK A 0 A_Jump(32,"NapTime")
+	Goto See
+  Death:
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("TouhouFireWhite",0,0,0,Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+	TNT1 A 0 A_SpawnItemEx("TeleportFog",0,0,0,0,0,0,0,0,0)
+	TNT1 A 0 A_GiveInventory("BulletDeathTrigger",1)
+    TNT1 A 0 A_NoBlocking
+	TNT1 A 0 A_PlaySound("touhou/nuefire",0,1.0,0,ATTN_NONE)
+	TNT1 A 2000
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAA 4 A_SpawnItemEx("TeleportFog",0,0,0,Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+	TNT1 A 0 A_SpawnItemEx("TeleportFog",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+	TNT1 A 0 A_SpawnItemEx("SuikaAlly",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TELEFRAG,0,311)
+	Stop
+  }
+}
+
+ACTOR SuikaAllyFloorSlamBullet
+{
+  Radius 4
+  Speed 25
+  FastSpeed 35
+  Height 8
+  damage (30)
+  Projectile
+  +FORCEXYBILLBOARD
+  -NOGRAVITY
+  BounceType "Doom"
+  BounceCount 5
+  DamageType "TouhouAllyDamage"
+  RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+	YBL2 A 0
+	YBL2 A 0 Bright A_ScaleVelocity(frandom(0.4,1.0))
+  LoopState:
+    YBL2 A 1 Bright //A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    YBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR SuikaAllyFloorSlamBullet2 : SuikaAllyFloorSlamBullet
+{
+  DamageType "TouhouAllyDamage"
+  BounceCount 4
+  States
+  {
+  Spawn:
+	OBL2 A 0
+	OBL2 A 0 Bright A_ScaleVelocity(frandom(0.6,1.0))
+  LoopState:
+    OBL2 A 1 Bright //A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    OBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR SuikaAllyPunchSpirit
+{
+  Radius 4
+  Speed 20
+  FastSpeed 30
+  Height 8
+  damage (30)
+  DamageType "TouhouAllyDamage"
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	VBL4 A 0
+	VBL4 A 0 Bright A_ScaleVelocity(frandom(0.5,1.0))
+  LoopState:
+    VBL4 A 1 Bright //A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	VBL4 A 0 Bright A_Jump(2,"Death")
+    Loop
+  Death:
+    VBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR SuikaAllyBubbleBomb
+{
+  Radius 12
+  Speed 20
+  FastSpeed 30
+  Height 24
+  damage (60)
+  DamageType "TouhouAllyDamage"
+  Projectile
+  +FORCEXYBILLBOARD
+  -NOGRAVITY
+  RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    RBUB A 1 Bright //A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,0,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,18,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,36,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,54,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,72,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,90,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,108,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,126,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,144,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,162,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,180,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,198,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,216,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,234,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,252,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,270,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,288,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,306,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,324,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB A 0 Bright A_CustomMissile("SuikaAllyBubbleBombBullet",25,0,342,CMF_TRACKOWNER|CMF_AIMDIRECTION)
+    RBUB AAAAAAAAAA 3 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR SuikaAllyBubbleBombBullet
+{
+  Radius 4
+  Speed 15
+  FastSpeed 25
+  Height 8
+  damage (30)
+  DamageType "TouhouAllyDamage"
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    RBL4 A 1 Bright //A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR SuikaAllyFireBreath
+{
+  Speed 40
+  Radius 6
+  Height 64
+  damage (2)
+  Scale 0.5
+  Projectile
+  Renderstyle Add
+  DamageType "TouhouAllyDamage"
+  +RIPPER
+  +PAINLESS
+  +BLOODLESSIMPACT
+  +FORCERADIUSDMG
+  +THRUSPECIES
+  Species "Player"
+  Alpha 0.25
+  DeathSound ""
+  States
+  {
+/*
+  Spawn:
+	FIRE A 0
+	Goto Death
+  Death:
+    FIRE A 0 Bright A_PlaySound("vile/firestrt",0,1.0,0)
+    FIRE ABAB 1 Bright A_ScaleVelocity(0.96) //4
+    FIRE C 0 Bright A_PlaySound("vile/firecrkl",0,1.0,0)
+    FIRE CBCBCDCDCDEDED 1 Bright A_ScaleVelocity(0.96) //18
+    FIRE E 0 Bright A_PlaySound("vile/firecrkl",0,1.0,0)
+    FIRE EFEFEFGHGHGH 1 Bright A_ScaleVelocity(0.96) //30
+    Stop
+*/
+  Spawn:
+	TNT1 A 0 Bright
+    TNT1 A 0 Bright A_PlaySound("vile/firestrt",0,1.0,0)
+    TNT1 A 7 Bright A_SetTics(random(1,13))
+    TNT1 A 0 Bright A_ScaleVelocity(0.75)
+    TNT1 A 0 Bright A_PlaySound("vile/firecrkl",0,1.0,0)
+    TNT1 A 0 Bright A_SpawnItemEx("TouhouFireSFX", 0, 0)
+    TNT1 A 7 Bright A_SetTics(random(1,13))
+    TNT1 A 0 Bright A_ScaleVelocity(0.75)
+    TNT1 A 0 Bright A_SpawnItemEx("TouhouFireSFX", 0, 0)
+    TNT1 A 7 Bright A_SetTics(random(1,13))
+    TNT1 A 0 Bright A_ScaleVelocity(0.75)
+    TNT1 A 0 Bright A_SpawnItemEx("TouhouFireSFX", 0, 0)
+    TNT1 A 7 Bright A_SetTics(random(1,13))
+    TNT1 A 0 Bright A_ScaleVelocity(0.75)
+    TNT1 A 0 Bright A_SpawnItemEx("TouhouFireSFX", 0, 0)
+    TNT1 A 7 Bright A_SetTics(random(1,13))
+    TNT1 A 0 Bright A_ScaleVelocity(0.75)
+    TNT1 A 0 Bright A_SpawnItemEx("TouhouFireSFX", 0, 0)
+	Stop
+  Death:
+	TNT1 A 0 A_Explode(6,16,0)
+    TNT1 A 0 Bright A_PlaySound("vile/firecrkl",0,1.0,0)
+    TNT1 A 0 Bright A_SpawnItemEx("TouhouFireSFX", 0, 0)
+    TNT1 A 6 Bright A_SetTics(random(1,11))
+    TNT1 A 0 Bright A_SpawnItemEx("TouhouFireSFX", 0, 0)
+    Stop
+  }
+}
+
+ACTOR SuikaAllyMainShotRed
+{
+  Radius 4
+  Speed 20
+  FastSpeed 30
+  Height 8
+  damage (20)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/hit"
+  DamageType "TouhouAllyDamage"
+  States
+  {
+  Spawn:
+	RBL4 A 0
+	RBL4 A 0 Bright A_ScaleVelocity(frandom(0.8,1.0))
+    RBL4 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_ScaleVelocity(0.95)
+    RBL4 A 0 Bright A_Stop
+	RBL4 A 0 Bright A_SetAngle(frandom(0,360))
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+	RBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    RBL4 AAAAAAA 1 Bright
+  LoopState:
+    RBL4 A 1 Bright
+	Loop
+  Death:
+    RBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR SuikaAllyMainShotViolet
+{
+  Radius 4
+  Speed 20
+  FastSpeed 30
+  Height 8
+  damage (20)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/hit2"
+  DamageType "TouhouAllyDamage"
+  States
+  {
+  Spawn:
+	VBL4 A 0
+	VBL4 A 0 Bright A_ScaleVelocity(frandom(0.8,1.0))
+	VBL4 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_ScaleVelocity(0.95)
+    VBL4 A 0 Bright A_Stop
+	VBL4 A 0 Bright A_SetAngle(frandom(0,360))
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+	VBL4 A 0 Bright ThrustThing(angle*256/360,2,0,0)
+    VBL4 AAAAAAA 1 Bright
+  LoopState:
+    VBL4 A 1 Bright
+	Loop
+  Death:
+    VBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}

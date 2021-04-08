@@ -1,0 +1,147 @@
+ACTOR StardustReverie : CustomInventory 28114
+{
+//$Category "Touhou Spellcards"
+  +COUNTITEM
+  +INVENTORY.INVBAR
+  +FLOATBOB
+  Inventory.MaxAmount 1
+  Inventory.Icon "SDRVA0"
+  Inventory.PickupMessage "Magic Sign \"Stardust Reverie\""
+  Tag "Magic Sign \"Stardust Reverie\""
+  Inventory.PickupSound "touhou/bonus1"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(610,2),"Bye")
+	SDRV B -1
+	Stop
+  Bye:
+	TNT1 A 0 A_ChangeFlag("COUNTITEM", FALSE)
+	TNT1 A 0 A_SpawnItemEx("SoulSphere",0,0,0,0,0,0,0,0,0)
+    Stop
+  Use:
+	TNT1 A 0 A_JumpIfInventory("SpellAmplifierPowerup",1,"Use2Continue")
+	TNT1 A 0 A_JumpIfHealthLower(25,"Use2")
+  Use1:
+    TNT1 A 0 ACS_ExecuteAlways(612,0,13)
+	TNT1 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/youmu/slash",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("BeaconInvuln",1)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarB",0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarG",45)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarY",90)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarV",135)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarB",180)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarG",225)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarY",270)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarV",315)
+    Stop
+  Use2:
+	TNT1 A 0 A_JumpIfInventory("Power",400,"Use2Continue")
+	Goto Use1
+  Use2Continue:
+    TNT1 A 0 ACS_ExecuteAlways(612,0,14)
+	TNT1 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/youmu/slash",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("BeaconInvuln",1)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarB",0.0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarG",22.5)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarY",45.0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarV",67.5)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarB",90.0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarG",112.5)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarY",135.0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarV",157.5)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarB",180.0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarG",202.5)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarY",225.0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarV",247.5)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarB",270.0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarG",292.5)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarY",315.0)
+	TNT1 A 0 A_FireCustomMissile("StardustReverieStarV",337.5)
+    Stop
+  }
+}
+ACTOR StardustReverieStarB
+{
+  Radius 64
+  Height 64
+  Health 0x7FFFFFFF
+  Scale 4.0
+  DamageFactor 0.0
+  RadiusDamageFactor 0.0
+  Species "Player"
+  Speed 10
+  Damage (0)
+  Projectile
+  -SOLID
+  +THRUSPECIES
+  +SHOOTABLE
+  +NOBLOOD
+  +DONTSPLASH
+  +NOCLIP
+  -NOBLOCKMAP
+  +FORCEXYBILLBOARD
+  +SEEKERMISSILE
+  +FORCERADIUSDMG
+  +PAINLESS
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  DamageType "PlayerSpellcard"
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",18,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+	STA1 AABBCCDD 1 Bright A_Explode(12,256,0,0,256)
+	Loop
+  Death:
+    STA1 AABBCCDD 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StardustReverieStarG : StardustReverieStarB
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",18,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+	STA3 AABBCCDD 1 Bright A_Explode(12,256,0,0,256)
+	Loop
+  Death:
+    STA3 AABBCCDD 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StardustReverieStarY : StardustReverieStarB
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",18,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+	STA7 AABBCCDD 1 Bright A_Explode(12,256,0,0,256)
+	Loop
+  Death:
+    STA7 AABBCCDD 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StardustReverieStarV : StardustReverieStarB
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",18,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+	STA5 AABBCCDD 1 Bright A_Explode(12,256,0,0,256)
+	Loop
+  Death:
+    STA5 AABBCCDD 1 Bright A_FadeOut
+    Stop
+  }
+}

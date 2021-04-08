@@ -1,0 +1,99 @@
+ACTOR DanmakuBrain 30088
+{
+//$Category "Danmaku Demons"
+  Health 20000
+  Mass 10000000
+  PainChance 255
+  Height 128
+  Radius 64
+  +SOLID
+  +SHOOTABLE
+  +NOICEDEATH
+  +NORADIUSDMG
+  PainSound "brain/pain"
+  DeathSound "brain/death"
+  Tag "Demon Core"
+  DamageFactor "PlayerSpellcard", 0.5
+  States
+  {
+  Spawn:
+    BBRN AB 9
+    Loop
+  Pain:
+    BBRN A 0 A_PlaySound("brain/pain",0,1.0,0,ATTN_IDLE)
+	BBRN AB 2 //4
+	BBRN AB 3 //10
+	BBRN AB 4 //18
+	BBRN AB 5 //28
+	BBRN AB 6 //40
+	BBRN AB 7 //54
+	BBRN AB 8 //70
+    Goto Spawn
+  Death:
+	BBRN A 0 A_SpawnItemEx("DanmakuBrainExploder",0,0,0,0,0,0,0,0,0)
+	BBRN A 0 ACS_Execute(126,0)
+    BBRN A 0 A_BrainScream
+	BBRN AB 10 A_SetTranslucent(1.0) //20
+	BBRN AB 9 A_SetTranslucent(0.9) //38
+	BBRN AB 8 A_SetTranslucent(0.8) //54
+	BBRN AB 7 A_SetTranslucent(0.7) //68
+	BBRN AB 6 A_SetTranslucent(0.6) //80
+	BBRN AB 5 A_SetTranslucent(0.5) //90
+	BBRN AB 4 A_SetTranslucent(0.4) //98
+	BBRN AB 3 A_SetTranslucent(0.3) //104
+	BBRN AB 2 A_SetTranslucent(0.2) //108
+	BBRN AB 1 A_SetTranslucent(0.1) //110
+	Stop
+  }
+}
+ACTOR DanmakuBrainExploder
+{
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	TNT1 AAAAAA 5 A_SpawnItemEx("DanmakuBrainExplode",random(-96,96),random(-96,96),random(0,256),0,0,0,0,0,0)
+	TNT1 AAAAAAAA 4 A_SpawnItemEx("DanmakuBrainExplode",random(-96,96),random(-96,96),random(0,256),0,0,0,0,0,0)
+	TNT1 AAAAAAAA 3 A_SpawnItemEx("DanmakuBrainExplode",random(-96,96),random(-96,96),random(0,256),0,0,0,0,0,0)
+	TNT1 AAAAAAAA 2 A_SpawnItemEx("DanmakuBrainExplode",random(-96,96),random(-96,96),random(0,256),0,0,0,0,0,0)
+	TNT1 AAAAAAAA 1 A_SpawnItemEx("DanmakuBrainExplode",random(-96,96),random(-96,96),random(0,256),0,0,0,0,0,0)
+    Stop
+  }
+}
+ACTOR DanmakuBrainExplode
+{
+  +NOINTERACTION
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    MISL A 0
+	MISL A 0 A_PlaySound("weapons/rocklx",0,1.0,0,ATTN_IDLE)
+	MISL B 8 Bright
+	MISL C 6 Bright
+	MISL D 4 Bright
+    Stop
+  }
+}
+ACTOR DanmakuBossEye : BossEye 30089
+{
+//$Category "Danmaku Demons"
+  DropItem "DanmakuImp" 			255 30
+  DropItem "DanmakuDarkImp" 		255 20
+  DropItem "DanmakuDemon"			255 30
+  DropItem "DanmakuSpectre"			255 20
+  DropItem "DanmakuBomber"			255 20
+  DropItem "DanmakuPainElemental"	255  8
+  DropItem "DanmakuCacodemon"		255 16
+  DropItem "DanmakuGuardian"		255 16
+  DropItem "DanmakuArchvile"		255  2
+  DropItem "DanmakuRevenant"		255 12
+  DropItem "DanmakuArachnotron"		255 20
+  DropItem "DanmakuFatso"			255 20
+  DropItem "DanmakuDaedabus"		255 10
+  DropItem "DanmakuHellKnight"		255 20
+  DropItem "DanmakuBaronOfHell"		255 10
+  DropItem "DanmakuBruiserDemon"	255  1
+  DropItem "DanmakuCybruiser"		255  1
+}

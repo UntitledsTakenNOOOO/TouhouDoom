@@ -1,0 +1,2002 @@
+ACTOR Youmu 31210
+{
+//$Category "Touhou Characters"
+  Tag "Youmu Konpaku"
+  Speed 24 //Oh heh
+  FastSpeed 32
+  MONSTER
+  Health 2500
+  Radius 24
+  Height 64
+  Scale 0.7
+  MinMissileChance 128
+  Mass 100000
+  Species Spirit
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +BOSS
+  +DONTFALL
+  +LOWGRAVITY
+  +NEVERRESPAWN
+  +NORADIUSDMG
+  +DONTMORPH
+  +DONTRIP
+  +AMBUSH
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +NOICEDEATH
+  MeleeThreshold 256
+  MeleeRange 64
+  Painchance 3
+  Painsound "touhou/pain"
+  Seesound ""
+  Deathsound "touhou/defeat"
+  Obituary "%o was cut down by Youmu."
+  States
+  {
+  Spawn:
+    YOUM A 0
+    YOUM A 1 ACS_NamedExecute("BHI_BossStartAttack",0,13,0,false)
+    YOUM A 1 ACS_NamedExecute("BHI_BossStartTimer",0,13,50)
+	YOUM A 1 A_Look
+  Idle:
+    YOUM BCDEFGHA 3 A_Look
+    Loop
+  See:
+    YOUM ABCDEFGH 3 A_Chase
+	YOUM A 0 A_Jump(32,"FastSee")
+    Loop
+  FastSee:
+	YOM3 ABCDEFGH 2 A_FastChase
+	YOUM A 0 A_Jump(32,"See")
+	Loop
+  Pain:
+    YOUM V 0 A_Pain
+    YOUM VWXWV 4
+    Goto See
+  Melee:
+	YOUM A 0 A_Jump(170,"Melee2","Melee3")
+	Goto Melee1
+  Melee1:
+    YOUM A 0 A_JumpIfInTargetInventory("EasyMode",1,"Melee1Easy")
+    YOUM A 0 A_JumpIfInTargetInventory("NormalMode",1,"Melee1Normal")
+    YOUM A 0 A_JumpIfInTargetInventory("HardMode",1,"Melee1Hard")
+    YOUM A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Melee1Lunatic")
+	Goto Melee1Lunatic
+  Melee1Easy:
+	YOUM LMNO 4 A_FaceTarget
+	YOUM PQ 4 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOUM RSTU 4 A_FaceTarget
+	Goto See
+  Melee1Normal:
+	YOUM LMNO 3 A_FaceTarget
+	YOUM PQ 3 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOUM RSTU 3 A_FaceTarget
+	Goto See
+  Melee1Hard:
+	YOUM LMNO 2 A_FaceTarget
+	YOUM PQ 2 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOUM RSTU 2 A_FaceTarget
+	Goto See
+  Melee1Lunatic:
+	YOUM A 0 A_JumpIfInventory("UltraMode",1,"Melee1Ultra")
+	YOUM LMNO 2 A_FaceTarget
+	YOUM PQ 2 A_CustomMeleeAttack(50,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOUM RSTU 2 A_FaceTarget
+	Goto See
+  Melee1Ultra:
+	YOUM LMNO 1 A_FaceTarget
+	YOUM PQ 1 A_CustomMeleeAttack(50,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOUM RSTU 1 A_FaceTarget
+	Goto See
+  Melee2:
+    YOUM A 0 A_JumpIfInTargetInventory("EasyMode",1,"Melee2Easy")
+    YOUM A 0 A_JumpIfInTargetInventory("NormalMode",1,"Melee2Normal")
+    YOUM A 0 A_JumpIfInTargetInventory("HardMode",1,"Melee2Hard")
+    YOUM A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Melee2Lunatic")
+	Goto Melee2Lunatic
+  Melee2Easy:
+	YOM3 MNOP 4 A_FaceTarget
+	YOM3 QR 4 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM3 STUVW 4 A_FaceTarget
+	Goto See
+  Melee2Normal:
+	YOM3 MNOP 3 A_FaceTarget
+	YOM3 QR 3 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM3 STUVW 3 A_FaceTarget
+	Goto See
+  Melee2Hard:
+	YOM3 MNOP 2 A_FaceTarget
+	YOM3 QR 2 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM3 STUVW 2 A_FaceTarget
+	Goto See
+  Melee2Lunatic:
+	YOUM A 0 A_JumpIfInventory("UltraMode",1,"Melee2Ultra")
+	YOM3 MNOP 2 A_FaceTarget
+	YOM3 QR 2 A_CustomMeleeAttack(50,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM3 STUVW 2 A_FaceTarget
+	Goto See
+  Melee2Ultra:
+	YOM3 MNOP 1 A_FaceTarget
+	YOM3 QR 1 A_CustomMeleeAttack(50,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM3 STUVW 1 A_FaceTarget
+	Goto See
+  Melee3:
+    YOUM A 0 A_JumpIfInTargetInventory("EasyMode",1,"Melee3Easy")
+    YOUM A 0 A_JumpIfInTargetInventory("NormalMode",1,"Melee3Normal")
+    YOUM A 0 A_JumpIfInTargetInventory("HardMode",1,"Melee3Hard")
+    YOUM A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Melee3Lunatic")
+	Goto Melee3Lunatic
+  Melee3Easy:
+	YOM4 ABCD 4 A_FaceTarget
+	YOM4 EF 4 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM4 GHIJK 4 A_FaceTarget
+	Goto See
+  Melee3Normal:
+	YOM4 ABCD 3 A_FaceTarget
+	YOM4 EF 3 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM4 GHIJK 3 A_FaceTarget
+	Goto See
+  Melee3Hard:
+	YOM4 ABCD 2 A_FaceTarget
+	YOM4 EF 2 A_CustomMeleeAttack(40,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM4 GHIJK 2 A_FaceTarget
+	Goto See
+  Melee3Lunatic:
+	YOUM A 0 A_JumpIfInventory("UltraMode",1,"Melee3Ultra")
+	YOM4 ABCD 2 A_FaceTarget
+	YOM4 EF 2 A_CustomMeleeAttack(50,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM4 GHIJK 2 A_FaceTarget
+	Goto See
+  Melee3Ultra:
+	YOM4 ABCD 1 A_FaceTarget
+	YOM4 EF 1 A_CustomMeleeAttack(50,"touhou/youmu/slash","touhou/remi/dash","none")
+	YOM4 GHIJK 1 A_FaceTarget
+	Goto See
+  Charge:
+	YOUM A 0 A_Jump(128,"Charge2")
+	Goto Charge1
+  Charge1:
+    YOUM A 0 A_JumpIfInTargetInventory("EasyMode",1,"Charge1Easy")
+    YOUM A 0 A_JumpIfInTargetInventory("NormalMode",1,"Charge1Normal")
+    YOUM A 0 A_JumpIfInTargetInventory("HardMode",1,"Charge1Hard")
+    YOUM A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Charge1Lunatic")
+	Goto Charge1Lunatic
+  Charge1Easy:
+	YOUM I 6 A_FaceTarget
+	YOUM I 0 A_PlaySound("touhou/remi/dash",0,1.0,0,ATTN_NORM)
+	YOUM I 6 A_SkullAttack(20)
+	YOUM JKJKJKJKJKJKJKJKJKJKJKJK 3 A_JumpIfCloser(200,"Melee")
+	Goto See
+  Charge1Normal:
+	YOUM I 6 A_FaceTarget
+	YOUM I 0 A_PlaySound("touhou/remi/dash",0,1.0,0,ATTN_NORM)
+	YOUM I 6 A_SkullAttack(30)
+	YOUM JKJKJKJKJKJKJKJKJKJKJKJK 3 A_JumpIfCloser(300,"Melee")
+	Goto See
+  Charge1Hard:
+	YOUM I 6 A_FaceTarget
+	YOUM I 0 A_PlaySound("touhou/remi/dash",0,1.0,0,ATTN_NORM)
+	YOUM I 6 A_SkullAttack(40)
+	YOUM JKJKJKJKJKJKJKJKJKJKJKJK 3 A_JumpIfCloser(400,"Melee")
+	Goto See
+  Charge1Lunatic:
+	YOUM I 6 A_FaceTarget
+	YOUM I 0 A_PlaySound("touhou/remi/dash",0,1.0,0,ATTN_NORM)
+	YOUM I 6 A_SkullAttack(50)
+	YOUM JKJKJKJKJKJKJKJKJKJKJKJK 3 A_JumpIfCloser(500,"Melee")
+	Goto See
+  Charge2:
+    YOUM A 0 A_JumpIfInTargetInventory("EasyMode",1,"Charge2Easy")
+    YOUM A 0 A_JumpIfInTargetInventory("NormalMode",1,"Charge2Normal")
+    YOUM A 0 A_JumpIfInTargetInventory("HardMode",1,"Charge2Hard")
+    YOUM A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Charge2Lunatic")
+	Goto Charge2Lunatic
+  Charge2Easy:
+	YOM3 I 6 A_FaceTarget
+	YOU3 I 0 A_PlaySound("touhou/remi/dash",0,1.0,0,ATTN_NORM)
+	YOM3 J 6 A_SkullAttack(20)
+	YOM3 KLKLKLKLKLKLKLKLKLKLKLKL 3 A_JumpIfCloser(200,"Melee")
+	Goto See
+  Charge2Normal:
+	YOM3 I 6 A_FaceTarget
+	YOU3 I 0 A_PlaySound("touhou/remi/dash",0,1.0,0,ATTN_NORM)
+	YOM3 J 6 A_SkullAttack(30)
+	YOM3 KLKLKLKLKLKLKLKLKLKLKLKL 3 A_JumpIfCloser(300,"Melee")
+	Goto See
+  Charge2Hard:
+	YOM3 I 6 A_FaceTarget
+	YOU3 I 0 A_PlaySound("touhou/remi/dash",0,1.0,0,ATTN_NORM)
+	YOM3 J 6 A_SkullAttack(40)
+	YOM3 KLKLKLKLKLKLKLKLKLKLKLKL 3 A_JumpIfCloser(400,"Melee")
+	Goto See
+  Charge2Lunatic:
+	YOM3 I 6 A_FaceTarget
+	YOU3 I 0 A_PlaySound("touhou/remi/dash",0,1.0,0,ATTN_NORM)
+	YOM3 J 6 A_SkullAttack(50)
+	YOM3 KLKLKLKLKLKLKLKLKLKLKLKL 3 A_JumpIfCloser(500,"Melee")
+	Goto See
+  Missile:
+	TNT1 A 0 A_Jump(170,"Charge")
+    YOUM A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    YOUM A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    YOUM A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    YOUM A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+	YOUM A 0 A_Jump(170,"MissileEasy2","MissileEasy3")
+	YOUM LMNOP 4 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,0,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,96,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,0,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-96,15)
+	YOUM QRSTU 4 A_FaceTarget
+  MissileEasy2:
+	YOM3 MNOPQ 4 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,0)
+	YOM3 RSTUVW 4 A_FaceTarget
+	Goto See
+  MissileEasy3:
+	YOM4 ABCDE 4 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,0)
+	YOM4 FGIHJK 4 A_FaceTarget
+	Goto See
+  MissileNormal:
+	YOUM A 0 A_Jump(170,"MissileNormal2","MissileNormal3")
+	YOUM LMNOP 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,0,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,96,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,0,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-96,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,0,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,96,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,0,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-96,15)
+	YOUM QRSTU 3 A_FaceTarget
+  MissileNormal2:
+	YOM3 MNOPQ 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,0)
+	YOM3 RSTUVW 3 A_FaceTarget
+	Goto See
+  MissileNormal3:
+	YOM4 ABCDE 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,-30)
+	YOM4 FGIHJK 3 A_FaceTarget
+	Goto See
+  MissileHard:
+	YOUM A 0 A_Jump(170,"MissileHard2","MissileHard3")
+	YOUM LMNOP 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,96,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,88,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,80,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,72,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,64,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,56,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,48,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,40,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,32,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,24,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,16,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,8,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,0,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-8,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-16,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-24,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-32,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-40,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-48,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-56,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-64,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-72,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-80,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-88,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-96,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,96,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,88,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,80,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,72,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,64,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,56,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,48,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,40,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,32,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,24,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,16,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,8,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,0,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-8,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-16,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-24,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-32,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-40,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-48,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-56,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-64,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-72,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-80,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-88,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-96,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,0,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,96,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,0,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-96,15)
+	YOUM QRSTU 3 A_FaceTarget
+  MissileHard2:
+	YOM3 MNOPQ 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,-30)
+	YOM3 RSTUVW 3 A_FaceTarget
+	Goto See
+  MissileHard3:
+	YOM4 ABCDE 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,-30)
+	YOM4 FGIHJK 3 A_FaceTarget
+	Goto See
+  MissileLunatic:
+	YOUM A 0 A_Jump(170,"MissileLunatic2","MissileLunatic3")
+	YOUM LMNOP 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,96,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,88,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,80,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,72,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,64,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,56,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,48,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,40,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,32,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,24,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,16,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,8,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,0,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-8,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-16,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-24,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-32,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-40,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-48,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-56,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-64,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-72,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-80,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-88,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-96,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,96,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,88,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,80,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,72,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,64,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,56,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,48,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,40,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,32,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,24,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,16,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,8,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,0,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-8,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-16,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-24,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-32,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-40,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-48,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-56,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-64,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-72,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-80,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-88,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue",32,-96,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,0,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-8,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-16,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-24,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-32,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-40,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-48,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-56,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-64,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-72,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-80,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-88,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-96,-15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,96,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,0,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-8,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-16,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-24,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-32,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-40,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-48,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-56,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-64,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-72,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-80,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-88,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-96,15)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,96,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,88,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,80,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,72,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,64,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,56,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,48,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,40,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,32,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,24,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,16,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,8,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,0,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-8,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-16,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-24,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-32,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-40,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-48,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-56,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-64,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-72,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-80,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-88,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-96,-45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,96,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,88,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,80,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,72,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,64,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,56,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,48,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,40,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,32,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,24,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,16,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,8,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,0,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-8,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-16,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-24,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-32,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-40,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-48,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-56,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-64,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-72,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-80,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-88,45)
+	YOUM P 0 A_CustomMissile("YoumuBulletBlue2",32,-96,45)
+	YOUM QRSTU 3 A_FaceTarget
+	Goto See
+  MissileLunatic2:
+	YOM3 MNOPQ 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,96,-30)
+	YOM3 RSTUVW 3 A_FaceTarget
+	Goto See
+  MissileLunatic3:
+	YOM4 ABCDE 3 A_FaceTarget
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed",32,96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed2",32,96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,0,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,8,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,16,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,24,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,32,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,40,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,48,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,56,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,64,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,72,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,80,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,88,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,96,0)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,0,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,8,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,16,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,24,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,32,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,40,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,48,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,56,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,64,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,72,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,80,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,88,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,96,30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-96,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,-8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,0,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,8,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,16,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,24,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,32,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,40,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,48,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,56,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,64,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,72,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,80,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,88,-30)
+	YOUM P 0 A_CustomMissile("YoumuBulletRed3",32,96,-30)
+	YOM4 FGIHJK 3 A_FaceTarget
+	Goto See
+  Death:
+	YOUM V 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	YOUM V 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	YOUM V 1
+	YOUM A 0 A_GiveInventory("BulletDeathTrigger",1)
+	YOUM A 0 A_JumpIfInTargetInventory("EasyMode",1,"EndFight") //No Hell Realm Slash on Easy Mode
+    YOUM A 0 A_JumpIfInTargetInventory("NormalMode",1,"EndFight") //Or on Normal Mode
+    YOUM V 1 A_NoBlocking
+    YOUM V 1 A_PlaySound("touhou/nuefire")
+    YOUM V 1 A_SetTranslucent(0.90)
+    YOUM V 1 A_SetTranslucent(0.80)
+    YOUM V 1 A_SetTranslucent(0.70)
+    YOUM V 1 A_SetTranslucent(0.60)
+    YOUM V 1 A_SetTranslucent(0.50)
+    YOUM V 1 A_SetTranslucent(0.40)
+    YOUM V 1 A_SetTranslucent(0.30)
+    YOUM V 1 A_SetTranslucent(0.20)
+    YOUM V 1 A_SetTranslucent(0.10)
+	YOUM V 1 A_SetTranslucent(0)
+	YOUM V 0 A_SpawnItemEx("YoumuHellRealmSword",0,0,0,0,0,0,0,0)
+    Stop
+  EndFight:
+    YOUM VWX 15
+	YOUM X 0 A_NoBlocking
+    YOUM X 0 A_scream
+	TNT1 A 0 A_SpawnItemEx("SystemCardBomb",0,0,0,frandom(0,1),frandom(0,1),frandom(6,9),frandom(0,360),0,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("PowerPickup2",0,0,0,frandom(0,6),frandom(0,6),frandom(3,12),frandom(0,360),0,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 BRIGHT A_SpawnItemEx("TouhouFireWhite",Random(4,-4),Random(4,-4),Random(4,-4),Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+	TNT1 A 175 ACS_Execute(3,0)
+    Stop
+  }
+}
+
+ACTOR YoumuBulletBlue
+{
+  Radius 2
+  Speed 20
+  fastspeed 30
+  Height 4
+  damage (4)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR YoumuBulletBlue2 : YoumuBulletBlue
+{
+	Speed 30
+	FastSpeed 40
+}
+ACTOR YoumuBulletRed
+{
+  Radius 2
+  Speed 20
+  fastspeed 30
+  Height 4
+  damage (4)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    RRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR YoumuBulletRed2 : YoumuBulletRed
+{
+	Speed 30
+	FastSpeed 40
+}
+ACTOR YoumuBulletRed3 : YoumuBulletRed
+{
+	Speed 10
+	FastSpeed 20
+}
+
+ACTOR YoumuHellRealmSword : Youmu
+{
+  Tag "Youmu Konpaku"
+  DropItem "SystemCardBomb"
+  Health 1500
+  Speed 12
+  FastSpeed 16
+  +INVULNERABLE
+  +NOPAIN
+  States
+  {
+  Spawn:
+	YOUM A 0
+	YOUM A 0 A_SetTranslucent(0.2,0)
+    YOUM ABCDEFGH 3 A_FadeIn(0.1)
+    Goto Idle
+  Idle:
+    YOUM ABCDEFGH 3 A_Look
+	Loop
+  See:
+	YOM2 A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	YOM2 ABCDE 7 A_FaceTarget
+	YOM2 A 0 Thing_ChangeTID(0,6100)
+	YOM2 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6100,0,true)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6100,35)
+	YOM2 A 0 ACS_Execute(602,0,44)
+	YOM2 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	YOM2 A 0 A_GiveInventory("SpellcardActive",1)
+	YOM2 FGFGFGFGHIJK 3 A_FaceTarget
+	YOM2 A 0 A_UnSetInvulnerable
+	Goto Missile
+  ChaseState:
+	YOM2 A 0 A_TakeInventory("EnemyCounter1",1)
+    YOUM ABCDEFGH 3 A_Chase
+	YOUM A 0 A_Jump(32,"FastChase")
+    Loop
+  FastChase:
+	YOM3 ABCDEFGH 2 A_FastChase
+	YOUM A 0 A_Jump(32,"ChaseState")
+	Loop
+  Missile:
+	YOM2 A 0 A_TakeInventory("EnemyCounter1",1)
+	YOM4 LMNOPQ 3 A_FaceTarget
+    YOUM A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    YOUM A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileHard
+  MissileHard:
+	YOM4 R 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,-90)
+	YOM4 S 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,-75)
+	YOM4 R 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,-60)
+	YOM4 S 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,-45)
+	YOM4 R 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,-30)
+	YOM4 S 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,-15)
+	YOM4 R 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,0)
+	YOM4 S 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,15)
+	YOM4 R 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,30)
+	YOM4 S 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,45)
+	YOM4 R 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,60)
+	YOM4 S 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,75)
+	YOM4 R 3 A_CustomMissile("HellRealmSwordBubbleHard",32,0,90)
+	Goto CutBubbles
+  MissileLunatic:
+	YOM4 R 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,-90)
+	YOM4 S 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,-75)
+	YOM4 R 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,-60)
+	YOM4 S 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,-45)
+	YOM4 R 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,-30)
+	YOM4 S 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,-15)
+	YOM4 R 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,0)
+	YOM4 S 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,15)
+	YOM4 R 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,30)
+	YOM4 S 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,45)
+	YOM4 R 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,60)
+	YOM4 S 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,75)
+	YOM4 R 3 Fast A_CustomMissile("HellRealmSwordBubbleLunatic",32,0,90)
+	Goto CutBubbles
+  CutBubbles:
+	YOM2 L 0 A_PlaySound("touhou/charge2",0,1.0,0,ATTN_NONE)
+	YOM2 LMNOP 7 Fast A_FaceTarget
+	YOM2 Q 0 A_PlaySound("touhou/youmu/slash",0,1.0,0,ATTN_NONE)
+	YOM2 Q 6 Fast A_GiveInventory("EnemyCounter1",1)
+	YOM2 RSTUVWX 5 Fast A_FaceTarget
+	YOM2 A 0 A_TakeInventory("EnemyCounter1",1)
+	Goto See
+  Death:
+	YOUM V 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	YOUM V 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	YOUM V 1 ACS_Execute(603,0)
+	YOUM V 0 A_GiveInventory("BulletDeathTrigger",1)
+    YOUM VWX 15
+	YOUM X 0 A_NoBlocking
+    YOUM X 0 A_scream
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("PowerPickup2",0,0,0,frandom(0,6),frandom(0,6),frandom(3,12),frandom(0,360),0,0)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 BRIGHT A_SpawnItemEx("TouhouFireWhite",Random(4,-4),Random(4,-4),Random(4,-4),Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+	TNT1 A 175 ACS_Execute(3,0)
+    Stop
+  }
+}
+ACTOR HellRealmSwordBubbleHard
+{
+  Radius 10
+  Speed 10
+  fastspeed 20
+  Height 20
+  damage (30)
+  Scale 1.2
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    VBUB A 1 Bright A_JumpIfInTargetInventory("EnemyCounter1",1,"ExplodeBySword")
+    VBUB A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    VBUB AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  ExplodeBySword:
+	TNT1 A 0 A_Jump(85,"ExplodeRed")
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletViolet1",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletViolet2",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletViolet3",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	Stop
+  ExplodeRed:
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletRed1",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletRed2",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletRed3",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	Stop
+  }
+}
+ACTOR HellRealmSwordBubbleLunatic
+{
+  Radius 10
+  Speed 10
+  fastspeed 10
+  Height 20
+  damage (30)
+  Scale 1.2
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    VBUB A 1 Bright A_JumpIfInTargetInventory("EnemyCounter1",1,"ExplodeBySword")
+    VBUB A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    VBUB AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  ExplodeBySword:
+	TNT1 A 0 A_Jump(85,"ExplodeRed")
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletViolet1",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletViolet2",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletViolet3",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	Stop
+  ExplodeRed:
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletRed1",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletRed2",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("HellRealmSwordBulletRed3",frandom(-32,32),0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER,frandom(-15,30))
+	Stop
+  }
+}
+ACTOR HellRealmSwordBulletViolet1
+{
+  Radius 6
+  Speed 20
+  FastSpeed 30
+  Height 12
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    VBL3 A 0 Bright
+    VBL3 A 0 Bright A_ScaleVelocity(frandom(0.7,0.9))
+  LoopState:
+    VBL3 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+	VBL3 AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR HellRealmSwordBulletViolet2
+{
+  Radius 4
+  Speed 20
+  FastSpeed 30
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    VBL1 A 0 Bright
+    VBL1 A 0 Bright A_ScaleVelocity(frandom(0.4,0.8))
+  LoopState:
+    VBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    VBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR HellRealmSwordBulletViolet3
+{
+  Radius 2
+  Speed 20
+  FastSpeed 30
+  Height 4
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    RPEL A 0 Bright
+    RPEL A 0 Bright A_ScaleVelocity(frandom(0.1,0.7))
+  LoopState:
+    RPEL A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RPEL AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR HellRealmSwordBulletRed1
+{
+  Radius 6
+  Speed 20
+  FastSpeed 30
+  Height 12
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    RBL3 A 0 Bright
+    RBL3 A 0 Bright A_ScaleVelocity(frandom(0.7,0.9))
+  LoopState:
+    RBL3 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL3 AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR HellRealmSwordBulletRed2
+{
+  Radius 4
+  Speed 20
+  FastSpeed 30
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    RBL1 A 0 Bright
+    RBL1 A 0 Bright A_ScaleVelocity(frandom(0.4,0.8))
+  LoopState:
+    RBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR HellRealmSwordBulletRed3
+{
+  Radius 2
+  Speed 20
+  FastSpeed 30
+  Height 4
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    RPEL A 0 Bright
+    RPEL A 0 Bright A_ScaleVelocity(frandom(0.1,0.7))
+  LoopState:
+    RPEL A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RPEL AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}

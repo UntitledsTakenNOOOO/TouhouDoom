@@ -1,0 +1,3769 @@
+ACTOR MeilingMidBoss 31155
+{
+//$Category "Touhou Characters"
+  Tag "   "
+  floatspeed 8
+  Speed 8
+  fastspeed 12
+  MONSTER
+  Health 1200
+  damage 20
+  Radius 24
+  Height 64
+  Scale 0.7
+  Mass 10000
+  MinMissileChance 160
+  //MinMissileChance 3000 //I'm going to run out of ways to make fun of the original developer
+  //MeleeThreshold 35 //Long before I comment all of these out
+  MeleeRange 64 //Wait MeleeRange what?
+  Species Fairy //used to prevent infighting among meiling and fairies
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  //+nogravity //while canonically everyone can fly because lel
+  //+float //I think it'll be cool to have one or two not airbourne enemies
+  +BOSS
+  +AMBUSH
+  +NEVERRESPAWN
+  +NOICEDEATH
+  Painchance 5
+  Painsound "touhou/pain"
+  Obituary "%o tried to pass gatekeeper Meiling."
+  HitObituary "%o was kicked in the face by gatekeeper Meiling."
+  DropItem "MeilingMidbossSpellcard"
+  var int user_angle;
+  States
+  {
+  Spawn:
+    MEIL AABB 2 A_Look
+    Loop
+  See:
+    MEIL A 0 Thing_ChangeTID(0,6013)
+    MEIL A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6013,0,false)
+	MEIL A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6013,25)
+    MEIL AABB 2 A_Chase
+    Loop
+  Melee: //Because Meiling's badass
+    MEIL L 6
+	MEIL MN 6 A_CustomMeleeAttack(40,"touhou/meiling/hit","none") //get kicked in the face
+	MEIL OPQ 6
+	Goto See
+  Pain:
+    MEIL K 10 A_Pain
+    Goto See
+  Missile:
+    MEIL STUVWX 5 A_FaceTarget
+	MEIL Y 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,0)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,20)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,40)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,60)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,80)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,100)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,120)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,140)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,160)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,180)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,200)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,220)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,240)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,260)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,280)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,300)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,320)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,340)
+	MEIL ABAB 5 A_Facetarget
+	MEIL C 0 A_SkullAttack(20)
+	MEIL C 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,0)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,30)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,60)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,90)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,120)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,150)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,180)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,210)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,240)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,270)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,300)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,330)
+	MEIL C 6 A_CustomMissile("WeakMeiOrbBlue",32,0,360)
+    MEIL D 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,0)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,30)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,60)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,90)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,120)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,150)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,180)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,210)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,240)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,270)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,300)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,330)
+	MEIL D 6 A_CustomMissile("WeakMeiOrbBlue",32,0,360)
+	MEIL C 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,0)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,30)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,60)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,90)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,120)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,150)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,180)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,210)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,240)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,270)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,300)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,330)
+	MEIL C 6 A_CustomMissile("WeakMeiOrbBlue",32,0,360)
+    MEIL D 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,0)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,30)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,60)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,90)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,120)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,150)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,180)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,210)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,240)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,270)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,300)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,330)
+	MEIL D 6 A_CustomMissile("WeakMeiOrbBlue",32,0,360)
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+	MEIL C 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,0)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,30)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,60)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,90)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,120)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,150)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,180)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,210)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,240)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,270)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,300)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,330)
+	MEIL C 6 A_CustomMissile("WeakMeiOrbBlue",32,0,360)
+    MEIL D 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,0)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,30)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,60)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,90)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,120)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,150)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,180)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,210)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,240)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,270)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,300)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,330)
+	MEIL D 6 A_CustomMissile("WeakMeiOrbBlue",32,0,360)
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"See")
+	MEIL C 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,0)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,30)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,60)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,90)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,120)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,150)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,180)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,210)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,240)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,270)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,300)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbBlue",32,0,330)
+	MEIL C 6 A_CustomMissile("WeakMeiOrbBlue",32,0,360)
+    MEIL D 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,0)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,30)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,60)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,90)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,120)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,150)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,180)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,210)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,240)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,270)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,300)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbBlue",32,0,330)
+	MEIL D 6 A_CustomMissile("WeakMeiOrbBlue",32,0,360)
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"See")
+    MEIL A 0 A_Stop
+    MEIL C 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,0)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,30)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,60)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,90)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,120)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,150)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,180)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,210)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,240)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,270)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,300)
+	MEIL C 0 A_CustomMissile("WeakMeiOrbRed",32,0,330)
+	MEIL C 6 A_CustomMissile("WeakMeiOrbRed",32,0,360)
+    MEIL D 0 A_Playsound("touhou/fire",0,0.7)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,0)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,30)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,60)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,90)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,120)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,150)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,180)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,210)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,240)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,270)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,300)
+	MEIL D 0 A_CustomMissile("WeakMeiOrbRed",32,0,330)
+	MEIL D 6 A_CustomMissile("WeakMeiOrbRed",32,0,360)
+    Goto See
+  Spellcard:
+    MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"SpellcardAttack")
+	MEIL EFG 6
+    TNT1 A 0 Thing_ChangeTID(0,6013)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6013,0,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6013,25)
+   	MEIL A 0 ACS_Execute(602,0,6)
+	MEIL A 0 A_PlaySound("touhou/spellcard",0,1,0,ATTN_NONE)
+	MEIL A 0 A_GiveInventory("SpellcardActive",1)
+	MEIL HIHI 6
+	MEIL A 0 A_UnSetInvulnerable
+	MEIL A 0 A_ChangeFlag("NOPAIN",0)
+  SpellcardAttack:
+	MEIL STUVWX 6
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"SpellcardNormal")
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"SpellcardNormal")
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"SpellcardHard")
+    MEIL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"SpellcardHard")
+	Goto SpellcardHard
+  SpellcardNormal:
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+	
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+	
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+	
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+	
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+	
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+	
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,72-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,144-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,216-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,288-user_angle)
+	MEIL Y 2 A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_JumpIfInTargetInventory("EasyMode",1,"SpellcardAttackEndNormal")
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,0)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,20)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,40)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,60)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,80)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,100)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,120)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,140)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,160)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,180)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,200)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,220)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,240)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,260)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,280)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,300)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,320)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,340)
+  SpellcardAttackEndNormal:
+    MEIL Y 0 A_SpidRefire
+    Goto SpellcardNormal
+  SpellcardHard:
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300+user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,0-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,60-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,120-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,180-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,240-user_angle)
+    MEIL Y 0 A_CustomMissile("MeiYellowFlowerOrb",32,0,300-user_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_angle", user_angle + 7)
+
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,0)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,20)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,40)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,60)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,80)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,100)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,120)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,140)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,160)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,180)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,200)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,220)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,240)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,260)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,280)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,300)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,320)
+    MEIL Y 0 A_CustomMissile("MeiRedFlowerOrb",32,0,340)
+    MEIL Y 0 A_SpidRefire
+    Goto SpellcardHard
+  Death:
+	MEIL S 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	MEIL S 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	MEIL S 0 A_GiveInventory("BulletDeathTrigger",1)
+    MEIL S 0 A_NoBlocking
+    MEIL S 1 A_PlaySound("touhou/nuefire")
+    MEIL S 1 A_SetTranslucent(0.90)
+    MEIL S 1 A_SetTranslucent(0.80)
+    MEIL S 1 A_SetTranslucent(0.70)
+    MEIL S 1 A_SetTranslucent(0.60)
+    MEIL S 1 A_SetTranslucent(0.50)
+    MEIL S 1 A_SetTranslucent(0.40)
+    MEIL S 1 A_SetTranslucent(0.30)
+    MEIL S 1 A_SetTranslucent(0.20)
+    MEIL S 1 A_SetTranslucent(0.10)
+	MEIL S 1 A_SetTranslucent(0)
+    Stop
+  }
+}
+
+ACTOR MeilingMidbossSpellcard : MeilingMidboss
+{
+  Tag "   "
+  DropItem "None"
+  +INVULNERABLE
+  +NOPAIN
+  Health 1300
+  States
+  {
+  Spawn:
+    MEIL A 0
+	MEIL B 15 A_SetTranslucent(0.1)
+    MEIL ABABABABAB 2 A_FadeIn(0.1)
+  Idle:
+    MEIL AB 2 A_Look
+    Loop
+  See:
+	MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	Goto Spellcard
+  ChaseState:
+    MEIL AABB 2 A_Chase
+    Loop
+  Missile:
+	Goto Spellcard
+  Death:
+	MEIL S 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	MEIL S 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	MEIL S 0 A_GiveInventory("BulletDeathTrigger",1)
+	MEIL S 0 ACS_Execute(4,0)
+    MEIL S 3 ACS_Execute(603,0)
+    MEIL S 0 A_UnSetShootable
+    MEIL S 1 A_PlaySound("touhou/nuefire")
+    MEIL S 1 A_SetTranslucent(0.90)
+    MEIL S 1 A_SetTranslucent(0.80)
+    MEIL S 1 A_SetTranslucent(0.70)
+    MEIL S 1 A_SetTranslucent(0.60)
+    MEIL S 1 A_SetTranslucent(0.50)
+    MEIL S 1 A_SetTranslucent(0.40)
+    MEIL S 1 A_SetTranslucent(0.30)
+    MEIL S 1 A_SetTranslucent(0.20)
+    MEIL S 1 A_SetTranslucent(0.10)
+	MEIL S 1 A_SetTranslucent(0)
+    Stop
+  }
+}
+ACTOR WeakMeiOrb
+{
+  Radius 4
+  Speed 20
+  fastspeed 30
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //+strifedamage //I don't know what to say anymore
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	WRIC A 0
+	WRIC A 0 A_Jump(255,"Red","Orange","Yellow","Green","Cyan","Blue","Violet")
+  Red:
+    RRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Orange:
+    ORIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Yellow:
+    YRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Green:
+    GRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Cyan:
+    CRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Blue:
+    BRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Violet:
+    VRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Death:
+    WRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR MeiYellowFlowerOrb : WeakMeiOrb
+{
+  Radius 2
+  Height 4
+  Speed 10
+  FastSpeed 20
+  States
+  {
+  Spawn:
+    YRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    YRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR MeiRedFlowerOrb : MeiYellowFlowerOrb
+{
+  Speed 12
+  FastSpeed 25
+  States
+  {
+  Spawn:
+    RRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR WeakMeiOrbBlue : WeakMeiOrb
+{
+  States
+  {
+  Spawn:
+    BRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR WeakMeiOrbRed : WeakMeiOrb
+{
+  States
+  {
+  Spawn:
+    RRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR WeakMeiOrbYellow : WeakMeiOrb
+{
+  States
+  {
+  Spawn:
+    YRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    YRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StrongMeiOrb
+{
+  Radius 8
+  Speed 20
+  fastspeed 40
+  Height 16
+  damage (14)
+  Scale 1
+  Projectile
+  +FORCEXYBILLBOARD
+  //+strifedamage //Again, what the heck is this doing here
+  RenderStyle Add
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+	WBL1 A 0
+    WBL1 A 0 A_Jump(255,"Red","Orange","Yellow","Green","Cyan","Blue","Violet")
+  Red:
+	RBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+    Loop
+  Orange:
+	OBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+    Loop
+  Yellow:
+	YBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+    Loop
+  Green:
+	GBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+    Loop
+  Cyan:
+	CBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+    Loop
+  Blue:
+	BBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+    Loop
+  Violet:
+	VBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+    Loop
+  Death:
+    WBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StrongMeiOrbBlue : StrongMeiOrb
+{
+  States
+  {
+  Spawn:
+    BBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StrongMeiOrbRed : StrongMeiOrb
+{
+  States
+  {
+  Spawn:
+    RBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR Meiling 31156
+{
+//$Category "Touhou Characters"
+  Tag "Hong Meiling"
+  floatspeed 12
+  Speed 12
+  fastspeed 16
+  MONSTER
+  Health 1500
+  Radius 24
+  Height 64
+  Scale 0.7
+  Mass 10000
+  MinMissileChance 160
+  //MinMissileChance 3000
+  //MeleeThreshold 35
+  //MeleeRange 65
+  Species Fairy //used to prevent infighting among meiling and fairies
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +BOSS
+  +NORADIUSDMG
+  +DONTMORPH
+  +DONTRIP
+  +AMBUSH
+  +NEVERRESPAWN
+  +NOICEDEATH
+  Painchance 5
+  Seesound ""
+  Painsound "touhou/pain"
+  Deathsound "touhou/nuefire"
+  DropItem "MeilingRainbowWindChime"
+  Obituary "%o tried to pass gatekeeper Meiling."
+  HitObituary "%o was kicked in the face by gatekeeper Meiling."
+  var int user_spiral_angle;
+  States
+  {
+  Spawn:
+	MEIL A 0
+	MEIL A 1
+    MEIL A 0 ACS_NamedExecute("BHI_BossStartAttack",0,10,2,false)
+	MEIL A 1 ACS_NamedExecute("BHI_BossStartTimer",0,10,30)
+  Idle:
+    MEIL ABBA 2 A_Look
+    Loop
+  See:
+    MEIL AABB 2 A_Chase
+    Loop
+  ChaseState:
+    MEIL AABB 2 A_Chase
+    Loop
+  Pain:
+    MEIL K 10 A_Pain
+    Goto See
+  Melee: //Because Meiling's badass
+    MEIL L 6
+	MEIL MN 6 A_CustomMeleeAttack(40,"touhou/meiling/hit","none") //get kicked in the face
+	MEIL OPQ 6
+	Goto See
+  Missile:
+    Goto Nonspell
+  Nonspell2:
+    MEIL A 0 A_JumpIfInventory("MeilingNS2Token",1,"NonspellAlternative")
+    MEIL A 0 A_GiveInventory("MeilingNS2Token")
+	Goto FairySpawn
+  Nonspell3:
+    MEIL A 0 A_JumpIfInventory("MeilingNS3Token",1,"NonspellAlternative")
+    MEIL A 0 A_GiveInventory("MeilingNS3Token")
+	Goto FairySpawn
+  Nonspell:
+    MEIL A 0 A_Jump(256, "Charge", "Spiral1", "Spiral2", "Spiral3", "Spiral4", "Spiral3", "Spiral4", "Spam", "Spam")
+    Goto See
+  NonspellAlternative:
+    MEIL A 0 A_Jump(256, "Charge", "Spiral1", "Spiral2", "Circles", "Circles", "Spam")
+    Goto See
+  Charge:
+	MEIL C 3 A_Facetarget
+    MEIL D 3 A_SkullAttack(20)
+	MEIL CDCDC 3
+	MEIL D 3 A_Stop
+	Goto See
+  Spiral1:
+	MEIL STUVWX 5 Fast A_FaceTarget
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"Spiral1Easy")
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"Spiral1Normal")
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"Spiral1Hard")
+    MEIL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Spiral1Lunatic")
+	Goto Spiral1Normal
+  Spiral1Easy:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,0+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,180+user_spiral_angle)
+	MEIL Y 0 A_SetUserVar("user_spiral_angle",user_spiral_angle+11)
+	MEIL Y 2 Fast A_GiveInventory("EnemyCounter1", 1)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 40, "SpiralEndEasy")
+	Loop
+  Spiral1Normal:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,0+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,90+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,180+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,270+user_spiral_angle)
+	MEIL Y 0 A_SetUserVar("user_spiral_angle",user_spiral_angle+11)
+	MEIL Y 2 Fast A_GiveInventory("EnemyCounter1", 1)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 40, "SpiralEndNormal")
+	Loop
+  Spiral1Hard:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,0+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,60+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,120+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,180+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,240+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,300+user_spiral_angle)
+	MEIL Y 0 A_SetUserVar("user_spiral_angle",user_spiral_angle+11)
+	MEIL Y 2 Fast A_GiveInventory("EnemyCounter1", 1)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 35, "SpiralEndHard")
+	Loop
+  Spiral1Lunatic:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,0+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,45+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,90+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,135+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,180+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,225+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,270+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,315+user_spiral_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_spiral_angle",user_spiral_angle+11)
+	MEIL Y 0 A_GiveInventory("EnemyCounter1", 1)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 35, "SpiralEndLunatic")
+	Loop
+  SpiralEndEasy:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YY 0 A_CustomMissile("WeakMeiOrbRed",32,0,random(0,360))
+	MEIL Y 2 Fast A_TakeInventory("EnemyCounter1", 4)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 1, "SpiralEndEasy")
+	Goto See
+  SpiralEndNormal:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYY 0 A_CustomMissile("WeakMeiOrbRed",32,0,random(0,360))
+	MEIL Y 2 Fast A_TakeInventory("EnemyCounter1", 4)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 1, "SpiralEndNormal")
+	Goto See
+  SpiralEndHard:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYYY 0 A_CustomMissile("WeakMeiOrbRed",32,0,random(0,360))
+	MEIL Y 2 Fast A_TakeInventory("EnemyCounter1", 4)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 1, "SpiralEndHard")
+	Goto See
+  SpiralEndLunatic:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYYYYY 0 A_CustomMissile("WeakMeiOrbRed",32,0,random(0,360))
+	MEIL Y 2 Fast A_TakeInventory("EnemyCounter1", 4)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 1, "SpiralEndLunatic")
+	Goto See
+  Spiral2:
+	MEIL STUVWX 5 Fast A_FaceTarget
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"Spiral2Easy")
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"Spiral2Normal")
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"Spiral2Hard")
+    MEIL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Spiral2Lunatic")
+	Goto Spiral2Normal
+  Spiral2Easy:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,0+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,180+user_spiral_angle)
+	MEIL Y 0 A_SetUserVar("user_spiral_angle",user_spiral_angle-11)
+	MEIL Y 2 Fast A_GiveInventory("EnemyCounter1", 1)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 40, "SpiralEndEasy")
+	Loop
+  Spiral2Normal:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,0+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,90+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,180+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,270+user_spiral_angle)
+	MEIL Y 0 A_SetUserVar("user_spiral_angle",user_spiral_angle-11)
+	MEIL Y 2 Fast A_GiveInventory("EnemyCounter1", 1)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 40, "SpiralEndNormal")
+	Loop
+  Spiral2Hard:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,0+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,60+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,120+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,180+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,240+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,300+user_spiral_angle)
+	MEIL Y 0 A_SetUserVar("user_spiral_angle",user_spiral_angle-11)
+	MEIL Y 2 Fast A_GiveInventory("EnemyCounter1", 1)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 35, "SpiralEndHard")
+	Loop
+  Spiral2Lunatic:
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,0+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,45+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,90+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,135+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,180+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,225+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,270+user_spiral_angle)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,315+user_spiral_angle)
+	MEIL Y 2 Fast A_SetUserVar("user_spiral_angle",user_spiral_angle-11)
+	MEIL Y 0 A_GiveInventory("EnemyCounter1", 1)
+	MEIL Y 0 A_JumpIfInventory("EnemyCounter1", 35, "SpiralEndLunatic")
+	Loop
+  Circles:
+	MEIL STUVWX 5 Fast A_FaceTarget
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,0)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,90)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,180)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,270)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,10)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,100)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,190)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,280)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,20)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,110)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,200)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,290)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,30)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,120)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,210)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,300)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,40)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,130)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,220)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,310)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,50)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,140)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,230)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,320)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,60)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,150)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,240)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,330)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,70)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,160)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,250)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,340)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,80)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,170)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,260)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,350)
+	MEIL YZYZYZ 5 Fast A_FaceTarget
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,0)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,90)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,180)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,270)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,10)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,100)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,190)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,280)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,20)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,110)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,200)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,290)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,30)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,120)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,210)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,300)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,40)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,130)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,220)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,310)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,50)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,140)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,230)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,320)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,60)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,150)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,240)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,330)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,70)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,160)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,250)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,340)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,80)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,170)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,260)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,350)
+	MEIL YZYZYZ 5 Fast A_FaceTarget
+	Goto See
+  FairySpawn:
+	MEIL EFGHI 6 Fast A_FaceTarget
+	MEIL I 0 A_CustomMissile("FairySpawnOrb1",32,0,180)
+	MEIL I 0 A_JumpIfInTargetInventory("EasyMode",1,"FairySpawn2")
+	MEIL I 0 A_CustomMissile("FairySpawnOrb2",32,0,90)
+	MEIL I 0 A_CustomMissile("FairySpawnOrb2",32,0,-90)
+	MEIL I 0 A_JumpIfInTargetInventory("NormalMode",1,"FairySpawn2")
+	MEIL I 0 A_CustomMissile("FairySpawnOrb2",32,0,135)
+	MEIL I 0 A_CustomMissile("FairySpawnOrb2",32,0,-135)
+	MEIL I 0 A_JumpIfInTargetInventory("HardMode",1,"FairySpawn2")
+	MEIL I 0 A_CustomMissile("FairySpawnOrb1",32,0,45)
+	MEIL I 0 A_CustomMissile("FairySpawnOrb1",32,0,-45)
+  FairySpawn2:
+	MEIL EFGHI 6 Fast A_FaceTarget
+	MEIL I 0 A_CustomMissile("FairySpawnOrb1",32,0,45)
+	MEIL I 0 A_CustomMissile("FairySpawnOrb1",32,0,-45)
+	MEIL I 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+	MEIL I 0 A_CustomMissile("FairySpawnOrb2",32,0,90)
+	MEIL I 0 A_CustomMissile("FairySpawnOrb2",32,0,-90)
+	MEIL I 0 A_JumpIfInTargetInventory("NormalMode",1,"See")
+	MEIL I 0 A_CustomMissile("FairySpawnOrb2",32,0,135)
+	MEIL I 0 A_CustomMissile("FairySpawnOrb2",32,0,-135)
+	MEIL I 0 A_JumpIfInTargetInventory("HardMode",1,"See")
+	MEIL I 0 A_CustomMissile("FairySpawnOrb1",32,0,180)
+	Goto See
+  Spiral3:
+	MEIL STUVWX 5 Fast A_FaceTarget
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,0,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,45,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,90,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,135,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,180,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,225,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,270,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,315,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,3,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,48,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,93,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,138,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,183,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,228,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,273,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,318,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,6,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,51,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,96,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,141,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,186,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,231,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,276,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,321,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,9,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,54,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,99,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,144,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,189,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,234,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,279,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,324,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,12,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,57,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,102,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,147,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,192,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,237,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,282,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,327,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,15,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,60,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,105,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,150,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,195,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,240,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,285,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,330,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,18,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,63,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,108,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,153,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,198,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,243,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,288,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,333,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,21,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,66,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,111,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,156,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,201,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,246,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,291,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,336,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,24,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,69,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,114,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,159,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,204,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,249,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,294,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,339,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,27,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,72,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,117,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,162,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,207,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,252,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,297,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,342,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,30,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,75,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,120,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,165,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,210,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,255,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,300,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,345,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,33,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,78,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,123,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,168,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,213,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,258,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,303,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,348,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,36,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,81,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,126,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,171,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,216,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,261,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,306,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,351,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,39,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,84,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,129,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,174,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,219,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,264,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,309,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,354,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,42,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,87,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,132,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,177,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,222,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,267,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,312,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,357,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,0,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,45,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,90,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,135,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,180,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,225,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,270,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,315,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,3,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,48,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,93,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,138,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,183,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,228,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,273,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,318,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,6,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,51,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,96,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,141,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,186,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,231,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,276,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,321,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,9,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,54,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,99,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,144,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,189,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,234,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,279,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,324,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,12,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,57,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,102,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,147,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,192,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,237,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,282,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,327,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,15,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,60,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,105,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,150,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,195,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,240,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,285,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,330,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_JumpIfInTargetInventory("NormalMode",1,"See")
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,18,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,63,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,108,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,153,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,198,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,243,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,288,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,333,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,21,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,66,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,111,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,156,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,201,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,246,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,291,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,336,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,24,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,69,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,114,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,159,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,204,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,249,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,294,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,339,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,27,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,72,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,117,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,162,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,207,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,252,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,297,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,342,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,30,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,75,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,120,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,165,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,210,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,255,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,300,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,345,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_JumpIfInTargetInventory("HardMode",1,"See")
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,33,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,78,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,123,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,168,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,213,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,258,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,303,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,348,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,36,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,81,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,126,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,171,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,216,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,261,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,306,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,351,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,39,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,84,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,129,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,174,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,219,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,264,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,309,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,354,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,42,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,87,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,132,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,177,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,222,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,267,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,312,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,357,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,0,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,45,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,90,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,135,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,180,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,225,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,270,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbRed",32,0,315,2)
+	MEIL Y 2 Fast
+	Goto See
+  Spiral4:
+	MEIL STUVWX 5 Fast A_FaceTarget
+	MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-0,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-45,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-90,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-135,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-180,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-225,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-270,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-315,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-3,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-48,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-93,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-138,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-183,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-228,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-273,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-318,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-6,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-51,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-96,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-141,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-186,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-231,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-276,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-321,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-9,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-54,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-99,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-144,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-189,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-234,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-279,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-324,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-12,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-57,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-102,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-147,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-192,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-237,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-282,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-327,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-15,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-60,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-105,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-150,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-195,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-240,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-285,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-330,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-18,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-63,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-108,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-153,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-198,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-243,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-288,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-333,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-21,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-66,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-111,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-156,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-201,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-246,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-291,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-336,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-24,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-69,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-114,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-159,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-204,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-249,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-294,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-339,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-27,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-72,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-117,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-162,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-207,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-252,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-297,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-342,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-30,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-75,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-120,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-165,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-210,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-255,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-300,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-345,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-33,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-78,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-123,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-168,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-213,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-258,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-303,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-348,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-36,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-81,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-126,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-171,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-216,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-261,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-306,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-351,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-39,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-84,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-129,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-174,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-219,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-264,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-309,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-354,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-42,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-87,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-132,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-177,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-222,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-267,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-312,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-357,2)
+	MEIL Y 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL YY 1
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-0,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-45,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-90,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-135,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-180,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-225,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-270,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-315,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-3,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-48,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-93,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-138,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-183,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-228,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-273,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-318,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-6,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-51,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-96,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-141,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-186,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-231,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-276,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-321,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-9,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-54,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-99,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-144,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-189,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-234,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-279,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-324,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-12,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-57,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-102,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-147,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-192,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-237,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-282,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-327,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-15,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-60,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-105,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-150,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-195,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-240,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-285,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-330,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_JumpIfInTargetInventory("NormalMode",1,"See")
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-18,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-63,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-108,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-153,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-198,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-243,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-288,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-333,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-21,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-66,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-111,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-156,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-201,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-246,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-291,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-336,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-24,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-69,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-114,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-159,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-204,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-249,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-294,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-339,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-27,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-72,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-117,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-162,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-207,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-252,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-297,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-342,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-30,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-75,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-120,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-165,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-210,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-255,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-300,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-345,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_JumpIfInTargetInventory("HardMode",1,"See")
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-33,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-78,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-123,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-168,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-213,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-258,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-303,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-348,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-36,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-81,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-126,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-171,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-216,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-261,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-306,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-351,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-39,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-84,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-129,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-174,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-219,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-264,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-309,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-354,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-42,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-87,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-132,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-177,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-222,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-267,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-312,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-357,2)
+	MEIL Y 2 Fast
+
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-0,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-45,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-90,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-135,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-180,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-225,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-270,2)
+	MEIL Y 0 A_CustomMissile("StrongMeiOrbBlue",32,0,-315,2)
+	MEIL Y 2 Fast
+	Goto See
+  Spam:
+	MEIL STUVWX 5 Fast A_FaceTarget
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"SpamNormal")
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"SpamNormal")
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"SpamHard")
+    MEIL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"SpamHard")
+	Goto SpamHard
+  SpamNormal:
+	MEIL STUVWX 5 Fast A_FaceTarget
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYYZZZZZYYYYYZZZZZ 1 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYYZZZZZYYYYYZZZZZ 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYYZZZZZYYYYYZZZZZ 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-75,75),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYYZZZZZYYYYYZZZZZ 1 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-75,75),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYYZZZZZYYYYYZZZZZ 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-60,60),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYYZZZZZYYYYYZZZZZ 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-60,60),CMF_OFFSETPITCH,frandom(10,-10))
+	Goto See
+  SpamHard:
+	MEIL STUVWX 5 Fast A_FaceTarget
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYZZZZYYYYZZZZ 1 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL YYYYZZZZYYYYZZZZ 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YYYY 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZZZ 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YYYY 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZZZ 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YYYY 1 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZZZ 1 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YYYY 1 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZZZ 1 A_CustomMissile("WeakMeiOrbBlue",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YY 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YY 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZ 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZ 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YY 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YY 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZ 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZ 1 A_CustomMissile("WeakMeiOrbRed",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YY 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YY 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZ 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZ 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YY 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL YY 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZ 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 0 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL ZZ 1 A_CustomMissile("WeakMeiOrbYellow",30,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 0 A_JumpIfInTargetInventory("HardMode",1,"See")
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_PlaySound("touhou/fire",0,0.7)
+	MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Y 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Y 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    MEIL Z 0 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+	MEIL Z 1 A_CustomMissile("WeakMeiOrb",32,0,frandom(-90,90),CMF_OFFSETPITCH,frandom(10,-10))
+    Goto See
+  RainbowWindChime:
+    MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"RainbowWindChimeAttack")
+	MEIL A 0 A_SetInvulnerable
+	MEIL EFG 6
+	MEIL A 0 ACS_Execute(602,0,7)
+	MEIL A 0 A_PlaySound("touhou/spellcard",0,1,0,ATTN_NONE)
+	MEIL A 0 A_GiveInventory("SpellcardActive",1)
+	MEIL HIHIHI 4
+	MEIL A 0 A_UnSetInvulnerable
+	MEIL A 0 A_ChangeFlag("NOPAIN",0)
+  RainbowWindChimeAttack:
+	MEIL STUVWX 6 Fast A_FaceTarget
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"RainbowWindChimeAttackNormal")
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"RainbowWindChimeAttackNormal")
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"RainbowWindChimeAttackHard")
+    MEIL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"RainbowWindChimeAttackHard")
+	Goto RainbowWindChimeAttackHard
+  RainbowWindChimeAttackNormal:
+    MEIL Y 0 A_Jump(256,"RWCNormal1","RWCNormal2","RWCNormal3","RWCNormal4")
+  RWCNormal1:
+	MEIL A 0 A_JumpIfCloser(64,"Melee")
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,-30,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,-20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,-10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,-0,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,30,2)
+	MEIL Z 0 A_JumpIfInTargetInventory("EasyMode",1,5)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,160,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,170,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,180,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,190,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,200,2)
+	MEIL Y 4 A_SetAngle(angle+12)
+	MEIL Y 0 A_CheckSight("See")
+	MEIL A 0 A_Jump(6,"RWCNormal1","RWCNormal2","RWCNormal3","RWCNormal4")
+	Goto RWCNormal1
+  RWCNormal2:
+	MEIL A 0 A_JumpIfCloser(64,"Melee")
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,-30,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,-20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,-10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,-0,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,30,2)
+	MEIL Z 0 A_JumpIfInTargetInventory("EasyMode",1,5)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,160,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,170,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,180,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,190,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,200,2)
+	MEIL Z 4 A_SetAngle(angle-12)
+	MEIL Z 0 A_CheckSight("See")
+	MEIL A 0 A_Jump(6,"RWCNormal1","RWCNormal2","RWCNormal3","RWCNormal4")
+	Goto RWCNormal2
+  RWCNormal3:
+	MEIL A 0 A_JumpIfCloser(64,"Melee")
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,-30,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,-20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,-10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,-0,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,30,2)
+	MEIL Z 0 A_JumpIfInTargetInventory("EasyMode",1,5)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,160,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,170,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,180,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,190,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,200,2)
+	MEIL Y 4 A_SetAngle(angle+8)
+	MEIL Y 0 A_CheckSight("See")
+	MEIL A 0 A_Jump(6,"RWCNormal1","RWCNormal2","RWCNormal3","RWCNormal4")
+	Goto RWCNormal3
+  RWCNormal4:
+	MEIL A 0 A_JumpIfCloser(64,"Melee")
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,-30,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,-20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,-10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,-0,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,30,2)
+	MEIL Z 0 A_JumpIfInTargetInventory("EasyMode",1,5)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,160,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,170,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,180,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,190,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,200,2)
+	MEIL Z 4 A_SetAngle(angle-8)
+	MEIL Z 0 A_CheckSight("See")
+	MEIL A 0 A_Jump(6,"RWCNormal1","RWCNormal2","RWCNormal3","RWCNormal4")
+	Goto RWCNormal4
+  RainbowWindChimeAttackHard:
+    MEIL Y 0 A_Jump(256,"RWCHard1","RWCHard2","RWCHard3","RWCHard4")
+  RWCHard1:
+	MEIL A 0 A_JumpIfCloser(64,"Melee")
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,-30,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,-20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,-10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,-0,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,30,2)
+	MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,160,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,170,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,180,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,190,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,200,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,45,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,135,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,225,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,315,2)
+	MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,6)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,80,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,90,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,100,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,260,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,270,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,280,2)
+	MEIL Y 4 Fast
+	MEIL Y 0 A_SetAngle(angle+12)
+	MEIL Y 0 A_CheckSight("See")
+	MEIL A 0 A_Jump(7,"RWCHard1","RWCHard2","RWCHard3","RWCHard4")
+	Goto RWCHard1
+  RWCHard2:
+	MEIL A 0 A_JumpIfCloser(64,"Melee")
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,-30,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,-20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,-10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,-0,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,30,2)
+	MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,160,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,170,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,180,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,190,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,200,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,45,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,135,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,225,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,315,2)
+	MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,6)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,80,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,90,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,100,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,260,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,270,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,280,2)
+	MEIL Z 4 Fast
+	MEIL Z 0 A_SetAngle(angle-12)
+	MEIL Z 0 A_CheckSight("See")
+	MEIL A 0 A_Jump(7,"RWCHard1","RWCHard2","RWCHard3","RWCHard4")
+	Goto RWCHard2
+  RWCHard3:
+	MEIL A 0 A_JumpIfCloser(64,"Melee")
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,-30,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,-20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,-10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,-0,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,30,2)
+	MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,160,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,170,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,180,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,190,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,200,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,45,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,135,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,225,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,315,2)
+	MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,6)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,80,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,90,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,100,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,260,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,270,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,280,2)
+	MEIL Y 4 Fast
+	MEIL Y 0 A_SetAngle(angle+8)
+	MEIL Y 0 A_CheckSight("See")
+	MEIL A 0 A_Jump(7,"RWCHard1","RWCHard2","RWCHard3","RWCHard4")
+	Goto RWCHard3
+  RWCHard4:
+	MEIL A 0 A_JumpIfCloser(64,"Melee")
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,-30,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbO",32,0,-20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,-10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,-0,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,10,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,20,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,30,2)
+	MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,160,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,170,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,180,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,190,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,200,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,45,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,135,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,225,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,315,2)
+	MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,6)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbR",32,0,80,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbY",32,0,90,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbG",32,0,100,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbC",32,0,260,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbB",32,0,270,2)
+    MEIL A 0 A_CustomMissile("MeiWindChimeOrbV",32,0,280,2)
+	MEIL Z 4 Fast
+	MEIL Z 0 A_SetAngle(angle-8)
+	MEIL Z 0 A_CheckSight("See")
+	MEIL A 0 A_Jump(7,"RWCHard1","RWCHard2","RWCHard3","RWCHard4")
+	Goto RWCHard4
+  FlowerDreamVine:
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"Nonspell") //Doesn't use this on Easy or Normal
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"Nonspell")
+    MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"FlowerDreamVineAttack")
+	MEIL A 0 A_SetInvulnerable
+	MEIL EFG 6
+	MEIL A 0 ACS_Execute(602,0,8)
+	MEIL A 0 A_PlaySound("touhou/spellcard",0,1,0,ATTN_NONE)
+	MEIL A 0 A_GiveInventory("SpellcardActive",1)
+	MEIL HIHIHI 4
+	MEIL A 0 A_UnSetInvulnerable
+	MEIL A 0 A_ChangeFlag("NOPAIN",0)
+  FlowerDreamVineAttack:
+	MEIL STUVWX 6 Fast A_FaceTarget
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,0)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,72)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,144)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,216)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,288)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,0)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,72)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,144)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,216)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,288)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,0)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,72)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,144)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,216)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,288)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,0)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,72)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,144)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,216)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,288)
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,10)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,0)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,72)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,144)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,216)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,288)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,0)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,72)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,144)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,216)
+	MEIL Y 0 A_CustomMissile("FlowerDreamVineAttack",30,0,288)
+	MEIL YZYZ 6 Fast
+	Goto See
+  ColorfulRain:
+    MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"ColorfulRainStart")
+	MEIL A 0 A_SetInvulnerable
+	MEIL EFG 6
+	MEIL A 0 ACS_Execute(602,0,9)
+	MEIL A 0 A_PlaySound("touhou/spellcard",0,1,0,ATTN_NONE)
+	MEIL A 0 A_GiveInventory("SpellcardActive",1)
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,2)
+	MEIL HIHIHI 4
+	MEIL A 0 A_UnSetInvulnerable
+	MEIL A 0 A_ChangeFlag("NOPAIN",0)
+  ColorfulRainStart:
+	MEIL A 0 A_JumpIfCloser(256,"ColorfulRainWindup")
+	MEIL C 3 A_Facetarget
+    MEIL D 3 ThrustThing(angle*256/360,45,0,0)
+	MEIL C 3 A_Facetarget
+    MEIL D 3 ThrustThing(angle*256/360,45,0,0)
+	MEIL C 3 A_Facetarget
+    MEIL D 3 ThrustThing(angle*256/360,45,0,0)
+	MEIL C 3 A_Facetarget
+	MEIL D 3 ThrustThing(angle*256/360,45,0,0)
+  ColorfulRainWindup:
+	MEIL STUVWX 3 A_FaceTarget
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"ColorfulRainAttack")
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"ColorfulRainAttack")
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"ColorfulLightChaosDance")
+    MEIL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"ColorfulLightChaosDance")
+	Goto ColorfulLightChaosDance
+  ColorfulRainAttack:
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-90,90),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	Goto See
+  ColorfulLightChaosDance:
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-45,135),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-135,45),2,frandom(0,90))
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,20)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,40)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,60)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,80)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,100)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,120)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,140)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,160)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,180)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,200)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,220)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,240)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,260)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,280)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,300)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,320)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,340)
+	MEIL Y 4 A_CustomMissile("StrongMeiOrb",32,0,360)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,20)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,40)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,60)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,80)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,100)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,120)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,140)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,160)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,180)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,200)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,220)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,240)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,260)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,280)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,300)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,320)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,340)
+	MEIL Z 4 A_CustomMissile("WeakMeiOrb",32,0,360)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,20)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,40)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,60)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,80)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,100)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,120)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,140)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,160)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,180)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,200)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,220)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,240)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,260)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,280)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,300)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,320)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,340)
+	MEIL Y 4 A_CustomMissile("StrongMeiOrb",32,0,360)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,20)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,40)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,60)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,80)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,100)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,120)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,140)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,160)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,180)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,200)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,220)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,240)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,260)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,280)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,300)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,320)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,340)
+	MEIL Z 4 A_CustomMissile("WeakMeiOrb",32,0,360)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,20)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,40)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,60)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,80)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,100)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,120)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,140)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,160)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,180)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,200)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,220)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,240)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,260)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,280)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,300)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,320)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,340)
+	MEIL Y 4 A_CustomMissile("StrongMeiOrb",32,0,360)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,20)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,40)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,60)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,80)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,100)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,120)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,140)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,160)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,180)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,200)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,220)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,240)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,260)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,280)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,300)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,320)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,340)
+	MEIL Z 4 A_CustomMissile("WeakMeiOrb",32,0,360)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,20)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,40)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,60)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,80)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,100)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,120)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,140)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,160)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,180)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,200)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,220)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,240)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,260)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,280)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,300)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,320)
+	MEIL A 0 A_CustomMissile("StrongMeiOrb",32,0,340)
+	MEIL Y 4 A_CustomMissile("StrongMeiOrb",32,0,360)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,20)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,40)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,60)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,80)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,100)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,120)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,140)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,160)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,180)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,200)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,220)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,240)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,260)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,280)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,300)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,320)
+	MEIL A 0 A_CustomMissile("WeakMeiOrb",32,0,340)
+	MEIL Z 4 A_CustomMissile("WeakMeiOrb",32,0,360)
+	MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"See")
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Y 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL A 0 A_FaceTarget
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL AAAA 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	MEIL Z 1 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+	Goto See
+  ExtremeColorTyphoon:
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"EndFight")
+    MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"ExtremeColorTyphoonAttack")
+	MEIL EFG 6
+	MEIL A 0 ACS_Execute(602,0,10)
+	MEIL A 0 A_PlaySound("touhou/spellcard",0,1,0,ATTN_NONE)
+	MEIL A 0 A_GiveInventory("SpellcardActive",1)
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,2)
+	MEIL HIHIHI 4
+	MEIL A 0 A_UnSetInvulnerable
+	MEIL A 0 A_ChangeFlag("NOPAIN",0)
+  ExtremeColorTyphoonAttack:
+	MEIL STUVWX 6
+    MEIL A 0 A_JumpIfInTargetInventory("EasyMode",1,"ExtremeColorTyphoonAttackNormal")
+    MEIL A 0 A_JumpIfInTargetInventory("NormalMode",1,"ExtremeColorTyphoonAttackNormal")
+    MEIL A 0 A_JumpIfInTargetInventory("HardMode",1,"ExtremeColorTyphoonAttackHard")
+    MEIL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"ExtremeColorTyphoonAttackLunatic")
+	Goto ExtremeColorTyphoonAttackHard
+  EndFight:
+    MEIL A 0 A_Die
+	Goto See
+  ExtremeColorTyphoonAttackNormal:
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerNormal", 0, 384)
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Y 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerNormal", 0, 384)
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Y 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerNormal", 0, 384)
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Z 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerNormal", 0, 384)
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Z 2
+	MEIL A 0 A_CposRefire
+	Loop
+  ExtremeColorTyphoonAttackHard:
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerHard", 0, 384)
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Y 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerHard", 0, 384)
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Y 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerHard", 0, 384)
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Z 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerHard", 0, 384)
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Z 2
+	MEIL A 0 A_CposRefire
+	Loop
+  ExtremeColorTyphoonAttackLunatic:
+	MEIL A 0 A_JumpIfInTargetInventory("UltraMode",1,"ExtremeColorTyphoonAttackUltra")
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerLunatic", 0, 384)
+    MEIL AAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Y 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerLunatic", 0, 384)
+    MEIL AAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+	MEIL Y 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerLunatic", 0, 384)
+    MEIL AAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Z 2
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerLunatic", 0, 384)
+    MEIL AAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+    MEIL Z 2
+	MEIL A 0 A_CposRefire
+	Loop
+  ExtremeColorTyphoonAttackUltra:
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerLunatic", 0, 384)
+    MEIL AAAAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAAAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+	MEIL Y 1
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerLunatic", 0, 384)
+    MEIL AAAAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAAAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+	MEIL Y 1
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerLunatic", 0, 384)
+    MEIL AAAAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAAAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+	MEIL Z 1
+    MEIL A 0 A_CustomMissile("MeiColorfulRainOrb",32,0,frandom(-180,180),2,frandom(0,90))
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,frandom(-90,90))
+    MEIL AAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,frandom(-90,90))
+	MEIL A 0 A_SpawnItem("MeiExtremeColorTyphoonSpawnerLunatic", 0, 384)
+    MEIL AAAAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb1",32,0,frandom(-180,180),2,0)
+    MEIL AAAAAA 0 A_CustomMissile("MeiExtremeColorTyphoonOrb2",32,0,frandom(-180,180),2,0)
+	MEIL Z 1
+	MEIL A 0 A_CposRefire
+	Loop
+  Death:
+	MEIL K 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	MEIL K 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	MEIL K 0 A_GiveInventory("BulletDeathTrigger",1)
+	MEIL K 0 A_NoBlocking
+    MEIL K 0 A_Scream
+	MEIL KKKKKKKKKK 1 A_FadeOut(0.1)
+    Stop
+  DeathExplode:
+	MEIL K 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	MEIL K 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+    MEIL K 35 ACS_Execute(603)
+	MEIL K 0 A_NoBlocking
+    MEIL K 0 A_PlaySound("touhou/defeat",0,1.0,0,ATTN_NONE)
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 BRIGHT A_SpawnItemEx("TouhouFireWhite",frandom(4,-4),frandom(4,-4),frandom(4,-4),frandom(8,-8),frandom(8,-8),frandom(8,-8),frandom(0,360),0,0)
+    TNT1 A 175
+    TNT1 A 1 ACS_Execute(103,0)
+    Stop
+  }
+}
+
+ACTOR MeilingRainbowWindChime : Meiling
+{
+  Tag "Hong Meiling"
+  +INVULNERABLE
+  +NOPAIN
+  Health 1900
+  PainChance 2
+  DropItem "MeilingNS2"
+  States
+  {
+  Spawn:
+    MEIL A 0
+	MEIL B 15 A_SetTranslucent(0.1)
+    MEIL ABABABABAB 2 A_FadeIn(0.1)
+  Idle:
+    MEIL AB 2 A_Look
+    Loop
+  See:
+    TNT1 A 0 Thing_ChangeTID(0,6016)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6016,2,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6016,30)
+	MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	Goto RainbowWindChime
+  Missile:
+	Goto RainbowWindChime
+  Death:
+	MEIL K 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	MEIL K 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	MEIL K 0 A_GiveInventory("BulletDeathTrigger",1)
+	MEIL K 0 ACS_Execute(603,0)
+	MEIL K 0 A_NoBlocking
+    MEIL K 0 A_Scream
+	MEIL KKKKKKKKKK 1 A_FadeOut(0.1)
+    Stop
+  }
+}
+
+ACTOR MeilingNS2 : Meiling
+{
+  Tag "Hong Meiling"
+  +INVULNERABLE
+  +NOPAIN
+  Health 1400
+  DropItem "None"
+  States
+  {
+  Spawn:
+    MEIL A 0
+	MEIL B 15 A_SetTranslucent(0.1)
+    MEIL ABABABABAB 2 A_FadeIn(0.1)
+	MEIL A 0 A_UnSetInvulnerable
+	MEIL A 0 A_ChangeFlag("NOPAIN",0)
+  Idle:
+    MEIL AB 2 A_Look
+    Loop
+  See:
+    TNT1 A 0 Thing_ChangeTID(0,6017)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6017,1,false)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6017,40)
+    MEIL AABB 2 A_Chase
+    Loop
+  Missile:
+	Goto Nonspell2
+  Death:
+	MEIL K 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	MEIL K 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	MEIL K 0 A_GiveInventory("BulletDeathTrigger",1)
+	MEIL K 0 A_JumpIfInTargetInventory("EasyMode",1,"Death2")
+	MEIL K 0 A_JumpIfInTargetInventory("NormalMode",1,"Death2")
+	MEIL K 0 A_NoBlocking
+    MEIL K 0 A_Scream
+	MEIL K 0 A_SpawnItemEx("MeilingFlowerDreamVine")
+	MEIL KKKKKKKKKK 1 A_FadeOut(0.1)
+    Stop
+  Death2:
+	MEIL K 0 A_NoBlocking
+    MEIL K 0 A_Scream
+	MEIL K 0 A_SpawnItemEx("MeilingNS3")
+	MEIL KKKKKKKKKK 1 A_FadeOut(0.1)
+    Stop
+  }
+}
+
+ACTOR MeilingFlowerDreamVine : MeilingRainbowWindChime
+{
+  Tag "Hong Meiling"
+  DropItem "MeilingNS3"
+  PainChance 4
+  Health 1400
+  States
+  {
+  Spawn:
+    MEIL A 0
+	MEIL B 15 A_SetTranslucent(0.1)
+    MEIL ABABABABAB 2 A_FadeIn(0.1)
+  Idle:
+    MEIL AB 2 A_Look
+    Loop
+  See:
+    TNT1 A 0 Thing_ChangeTID(0,6018)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6018,1,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6018,40)
+	MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	Goto FlowerDreamVine
+  Missile:
+	Goto FlowerDreamVine
+  }
+}
+
+ACTOR MeilingNS3 : MeilingNS2
+{
+  Tag "Hong Meiling"
+  Health 1400
+  DropItem "MeilingColorfulRain"
+  States
+  {
+  See:
+    TNT1 A 0 Thing_ChangeTID(0,6019)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6019,0,false)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6019,40)
+    MEIL AABB 2 A_Chase
+    Loop
+  Missile:
+	Goto Nonspell3
+  Death:
+	MEIL K 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	MEIL K 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	MEIL K 0 A_GiveInventory("BulletDeathTrigger",1)
+	MEIL K 0 A_NoBlocking
+    MEIL K 0 A_Scream
+	MEIL KKKKKKKKKK 1 A_FadeOut(0.1)
+    Stop
+  }
+}
+
+ACTOR MeilingColorfulRain : MeilingFlowerDreamVine
+{
+  Tag "Hong Meiling"
+  PainChance 3
+  DropItem "None"
+  States
+  {
+  Spawn:
+    MEIL A 0
+	MEIL B 15 A_SetTranslucent(0.1)
+    MEIL ABABABABAB 2 A_FadeIn(0.1)
+  Idle:
+    MEIL AB 2 A_Look
+    Loop
+  See:
+    TNT1 A 0 Thing_ChangeTID(0,6020)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6020,0,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6020,36)
+	MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	Goto ColorfulRain
+  Missile:
+	Goto ColorfulRain
+  Death:
+	MEIL K 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	MEIL K 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	MEIL K 0 A_GiveInventory("BulletDeathTrigger",1)
+	MEIL K 0 ACS_Execute(603,0)
+	MEIL K 0 A_JumpIfInventory("EasyMode",1,"DeathExplode")
+	MEIL K 0 A_NoBlocking
+    MEIL K 0 A_Scream
+	MEIL K 0 A_SpawnItemEx("MeilingExtremeColorTyphoon")
+	MEIL KKKKKKKKKK 1 A_FadeOut(0.1)
+    Stop
+  }
+}
+
+ACTOR MeilingExtremeColorTyphoon : MeilingFlowerDreamVine
+{
+  Tag "Hong Meiling"
+  Health 2000
+  DropItem "None"
+  PainChance 1
+  States
+  {
+  Spawn:
+    MEIL A 0
+	MEIL B 15 A_SetTranslucent(0.1)
+    MEIL ABABABABAB 2 A_FadeIn(0.1)
+  Idle:
+    MEIL AB 2 A_Look
+    Loop
+  See:
+    TNT1 A 0 Thing_ChangeTID(0,6021)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6021,0,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6021,36)
+	MEIL A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	Goto ExtremeColorTyphoon
+  Missile:
+	Goto ExtremeColorTyphoon
+  Death:
+	MEIL K 0 A_GiveInventory("BulletDeathTrigger",1)
+    Goto DeathExplode
+  }
+}
+
+ACTOR MeilingNS2Token : Boolean {}
+ACTOR MeilingNS3Token : Boolean {}
+
+//Fairy Spawner
+ACTOR FairySpawnOrb1
+{
+  Game Doom
+  SpawnID 216
+  Radius 8
+  Height 16
+  Speed 24
+  Projectile
+  -NOGRAVITY
+  +FORCEXYBILLBOARD
+  DeathSound "touhou/hit2"
+  Gravity 0.5
+  Scale 1
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    BBUB AAAAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+  Death:
+    BBUB AAAAA 1 A_FadeOut
+    TNT1 A 0 A_CustomMissile("Fairy10",0,0,0,0)
+    BBUB AAAAA 1 A_FadeOut
+    Stop
+  }
+}
+ACTOR FairySpawnOrb2
+{
+  Game Doom
+  SpawnID 216
+  Radius 8
+  Height 16
+  Speed 24
+  Projectile
+  -NOGRAVITY
+  +FORCEXYBILLBOARD
+  DeathSound "touhou/hit2"
+  Gravity 0.5
+  Scale 1
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    BBUB AAAAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+  Death:
+    BBUB AAAAA 1 A_FadeOut
+    TNT1 A 0 A_CustomMissile("Fairy2",0,0,0,0)
+    BBUB AAAAA 1 A_FadeOut
+    Stop
+  }
+}
+
+//Rainbow Wind Chime
+ACTOR MeiWindChimeOrbW : WeakMeiOrb
+{
+	SeeSound "touhou/fire"
+	DeathSound "touhou/hit"
+	Radius 2
+	Height 4
+	Speed 10
+	FastSpeed 20
+	States
+	{
+	Spawn:
+		WRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	Death:
+		"####" AAAAAAAAAA 1 Bright A_FadeOut
+		Stop
+	}
+}
+ACTOR MeiWindChimeOrbR : MeiWindChimeOrbW
+{
+	States
+	{
+	Spawn:
+		RRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	}
+}
+ACTOR MeiWindChimeOrbO : MeiWindChimeOrbW
+{
+	States
+	{
+	Spawn:
+		ORIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	}
+}
+ACTOR MeiWindChimeOrbY : MeiWindChimeOrbW
+{
+	States
+	{
+	Spawn:
+		YRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	}
+}
+ACTOR MeiWindChimeOrbG : MeiWindChimeOrbW
+{
+	States
+	{
+	Spawn:
+		GRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	}
+}
+ACTOR MeiWindChimeOrbC : MeiWindChimeOrbW
+{
+	States
+	{
+	Spawn:
+		CRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	}
+}
+ACTOR MeiWindChimeOrbB : MeiWindChimeOrbW
+{
+	States
+	{
+	Spawn:
+		BRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	}
+}
+ACTOR MeiWindChimeOrbV : MeiWindChimeOrbW
+{
+	States
+	{
+	Spawn:
+		VRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	}
+}
+
+//Flower Dream Vine
+ACTOR FlowerDreamVineAttack
+{
+  Radius 4
+  Speed 20
+  FastSpeed 15
+  Height 4
+  damage 0
+  Projectile
+  RenderStyle Add
+  +THRUACTORS
+  +FLOORHUGGER
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    TNT1 A 1 A_CustomMissile("StrongMeiOrb",frandom(0,56),frandom(-16,16),frandom(0,360),CMF_AIMDIRECTION,frandom(90,-90))
+    Stop
+  Death:
+    TNT1 A 0
+    Stop
+  }
+}
+//Colorful Rain
+ACTOR MeiColorfulRainOrb
+{
+   Radius 4
+   Height 8
+   Speed 25
+   FastSpeed 35
+   Damage (10)
+   PROJECTILE
+   BounceType "Hexen"
+   BounceCount 6
+   BounceFactor 0.75
+   WallBounceFactor 0.75
+   -NOGRAVITY
+   +SKYEXPLODE
+   +FORCEXYBILLBOARD
+   Gravity 1.0
+   RenderStyle Add
+   SeeSound "touhou/fire"
+   DeathSound "touhou/hit"
+   States
+   {
+   Spawn:
+      WBL1 A 0 Bright
+	  WBL1 A 0 Bright A_ScaleVelocity(frandom(40,160)/100.0)
+	  WBL1 A 0 Bright A_SetGravity(frandom(40,160)/100.0)
+	  WBL1 A 0
+	  WBL1 A 0 A_Jump(255,"Red","Orange","Yellow","Green","Cyan","Blue","Violet")
+   Red:
+	  RBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+      Loop
+   Orange:
+	  OBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+      Loop
+   Yellow:
+	  YBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+      Loop
+   Green:
+	  GBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+      Loop
+   Cyan:
+	  CBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+      Loop
+   Blue:
+	  BBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+      Loop
+   Violet:
+	  VBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+      Loop
+   Death:
+   Crash:
+   XDeath:
+     WBL1 AAAAAAAAAA 1 Bright A_FadeOut
+     Stop
+   }
+}
+//Extreme Color Typhoon
+ACTOR MeiExtremeColorTyphoonOrb1
+{
+  Radius 4
+  Speed 20
+  fastspeed 40
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //+strifedamage //I don't know what to say anymore
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	WRIC A 0
+	WRIC A 0 A_Jump(255,"Red","Orange","Yellow","Green","Cyan","Blue","Violet")
+  Red:
+	RRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Orange:
+	ORIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Yellow:
+	YRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Green:
+	GRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Cyan:
+	CRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Blue:
+	BRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Violet:
+	VRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  DoTheThing:
+	"####" A 0 Bright ThrustThingZ(0, frandom(0,25), random(0,1), 1)
+	"####" A 4 Bright A_ScaleVelocity(0.5)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle-5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+  LoopState:
+    "####" A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    "####" AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR MeiExtremeColorTyphoonOrb2
+{
+  Radius 4
+  Speed 20
+  fastspeed 40
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //+strifedamage //I don't know what to say anymore
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	WRIC A 0
+	WRIC A 0 A_Jump(255,"Red","Orange","Yellow","Green","Cyan","Blue","Violet")
+  Red:
+	RRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Orange:
+	ORIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Yellow:
+	YRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Green:
+	GRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Cyan:
+	CRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Blue:
+	BRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  Violet:
+	VRIC A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")	
+	Goto DoTheThing
+  DoTheThing:
+	"####" A 0 Bright ThrustThingZ(0, frandom(0,25), random(0,1), 1)
+	"####" A 4 Bright A_ScaleVelocity(0.5)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+	"####" A 0 Bright A_Jump(128,1)
+	"####" A 0 Bright A_SetAngle(angle+5)
+	"####" A 4 Bright ThrustThing(angle*256/360, 1, 0, 0)
+  LoopState:
+    "####" A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    "####" AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+actor MeiExtremeColorTyphoonShooter
+{
+-SOLID
++NOGRAVITY
++LOOKALLAROUND
+States
+{
+  Spawn:
+    TNT1 A 1
+    TNT1 A 1 A_look
+    Goto Spawn+1
+  See:
+	TNT1 A 0 A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    TNT1 A 1 A_Jump(32,"Missile")
+    loop
+  Missile:
+    TNT1 A 1 A_CustomMissile("MeiExtremeColorTyphoonOrb1", 0, 0, frandom(-180,180), /* CMF_OFFSETPITCH */ CMF_TRACKOWNER, frandom(15,-15)) //DAMN YOU ZANDRONUM
+    TNT1 A 1 A_CustomMissile("MeiExtremeColorTyphoonOrb2", 0, 0, frandom(-180,180), /* CMF_OFFSETPITCH */ CMF_TRACKOWNER, frandom(15,-15)) //FOR NOT HAVING
+    TNT1 A 1 A_CustomMissile("WeakMeiOrb", 0, 0, frandom(-135,135), /* CMF_OFFSETPITCH */ CMF_TRACKOWNER, frandom(15,-15))                 //CMF_OFFSETPITCH
+    TNT1 A 0 A_Die
+  Death:
+    TNT1 A 0
+    Stop
+  }
+}
+Actor MeiExtremeColorTyphoonSpawnerNormal
+{
+radius 4
+Height 4
+-SOLID
++NODAMAGE
++NOBLOOD
++NOGRAVITY
+renderstyle translucent
+alpha 0.0
+States
+{
+  Spawn:
+    TNT1 A 1
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+  Death:
+    TNT1 A 1
+    Stop
+  }
+}
+Actor MeiExtremeColorTyphoonSpawnerHard
+{
+radius 4
+Height 4
+-SOLID
++NODAMAGE
++NOBLOOD
++NOGRAVITY
+renderstyle translucent
+alpha 0.0
+States
+{
+  Spawn:
+    TNT1 A 1
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+  Death:
+    TNT1 A 1
+    Stop
+  }
+}
+Actor MeiExtremeColorTyphoonSpawnerLunatic
+{
+radius 4
+Height 4
+-SOLID
++NODAMAGE
++NOBLOOD
++NOGRAVITY
+renderstyle translucent
+alpha 0.0
+States
+{
+  Spawn:
+    TNT1 A 1
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+    TNT1 A 1 A_SpawnItem("MeiExtremeColorTyphoonShooter")
+  Death:
+    TNT1 A 1
+    Stop
+  }
+}

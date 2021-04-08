@@ -1,0 +1,82 @@
+Actor Power : Ammo
+{
+  Inventory.Icon "POW2A0"
+  Inventory.Amount 1
+  Inventory.MaxAmount 400
+  Ammo.BackpackAmount 1
+  Ammo.BackpackMaxAmount 400
+}
+
+ACTOR PowerPickup
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(610,1),"AmmoSpawn")
+	Goto PowerSpawn
+  PowerSpawn:
+	TNT1 A 0 A_SpawnItemEx("PowerCube",0,0,0,frandom(0,2),frandom(0,2),frandom(2,4),frandom(0,360),0,0)
+	Stop
+  AmmoSpawn:
+	TNT1 AAAAAA 0 A_SpawnItemEx("TouhouAmmoSpawner",0,0,0,frandom(0,2),frandom(0,2),frandom(2,4),frandom(0,360),0,0)
+	Stop
+  }
+}
+ACTOR PowerPickup2
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(610,1),"AmmoSpawn")
+	Goto PowerSpawn
+  PowerSpawn:
+	TNT1 A 0 A_SpawnItemEx("PowerCube",0,0,0,frandom(0,6),frandom(0,6),frandom(3,12),frandom(0,360),0,0)
+	Stop
+  AmmoSpawn:
+	TNT1 AAAAAA 0 A_SpawnItemEx("TouhouAmmoSpawner",0,0,0,frandom(0,6),frandom(0,6),frandom(3,12),frandom(0,360),0,0)
+	Stop
+  }
+}
+ACTOR PowerCube : Power 28102
+{
+//$Category "Touhou Weapon Pack"
+  +FLOATBOB
+  +INVENTORY.ALWAYSPICKUP
+  Radius 64
+  Height 64
+  Inventory.PickupMessage "Power +1"
+  Inventory.PickupSound "power/pickup"
+  States
+  {
+  Spawn:
+    POW1 A 2100
+	POW1 AAAAAAAAAA 3 A_FadeOut
+    Stop
+  }
+}
+Actor PowerBig : PowerCube 28103
+{
+//$Category "Touhou Weapon Pack"
+  +FLOATBOB
+  +INVENTORY.ALWAYSPICKUP
+  Radius 32
+  Height 32
+  Inventory.PickupMessage "Power +100"
+  Inventory.PickupSound "power/pickup2"
+  Inventory.Amount 100
+  States
+  {
+  Spawn:
+    POW2 A -1
+    Stop
+  }
+}
+ACTOR TouhouAmmoSpawner : RandomSpawner
+{
+	DropItem "Clip" 64 1
+	DropItem "Shell" 64 1
+	DropItem "RocketAmmo" 128 1
+	DropItem "Cell" 64 1
+}

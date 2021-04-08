@@ -1,0 +1,556 @@
+ACTOR DanmakuCybruiser : DanmakuBaronOfHell 25128
+{
+//$Category "Danmaku Demons"
+Health 2000 
+Radius 24 
+Height 64 
+Mass 1000 
+Speed 8 
+PainChance 20 
+MONSTER
+MeleeDamage 10
+Obituary "%o was blown away by a Cybruiser."
+HitObituary "%o was smashed by a Cybruiser."
++FLOORCLIP 
++MISSILEMORE
++BOSS
++DONTHURTSPECIES
+SeeSound "monster/brusit" 
+PainSound "baron/pain" 
+DeathSound "monster/brudth"
+MeleeSound "baron/melee"
+States 
+    { 
+    Spawn: 
+        BRU9 AB 10 A_Look 
+        Loop 
+    See:
+        BRU9 A 1 A_Playsound("monster/bruwlk")
+        BRU9 A 2 A_Chase
+        BRU9 A 3 A_Chase
+        BRU9 BB 3 A_Chase
+        BRU9 C 1 A_Playsound("monster/bruwlk")
+        BRU9 C 2 A_Chase
+        BRU9 C 3 A_Chase 
+        BRU9 DD 3 A_Chase
+        Loop
+    Melee:
+    Missile:
+		BRU9 A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		BRU9 A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		BRU9 A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		BRU9 A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileHard
+	MissileEasy:
+		BRU9 E 0 A_Jump(192,"MissileEasy2","MissileEasy3","MissileEasy4")
+	MissileEasy1:
+        BRU9 E 6 A_FaceTarget 
+        BRU9 FFF 0 A_CustomMissile("CybruiserBall",38,15,random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+        BRU9 F 6 Bright A_CustomMissile("CybruiserBall",38,15,random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		BRU9 A 0 A_Jump(64,"See")
+		BRU9 A 0 A_SpidRefire
+        Loop
+    MissileEasy2:
+        BRU9 GH 8 A_FaceTarget
+		BRU9 I 0 A_CustomMissile("DanmakuBaronBall",32,0,-12)
+		BRU9 I 0 A_CustomMissile("DanmakuBaronBall",32,0,12)
+		BRU9 I 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BRU9 A 0 A_Jump(85,"Missile")
+        Goto See
+    MissileEasy3:
+        BRU9 GH 8 A_FaceTarget
+        BRU9 I 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+        BRU9 GH 8 A_FaceTarget
+        BRU9 I 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		BRU9 A 0 A_Jump(85,"Missile")
+        Goto See
+	MissileEasy4:
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("BruiserMissile",38,15,0,0)
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("BruiserMissile",38,15,0,0)
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("BruiserMissile",38,15,0,0)
+		BRU9 A 0 A_Jump(85,"Missile")
+        Goto See
+	MissileNormal:
+		BRU9 E 0 A_Jump(192,"MissileNormal2","MissileNormal3","MissileNormal4")
+	MissileNorma11:
+        BRU9 E 6 A_FaceTarget
+        BRU9 FFFFFF 0 A_CustomMissile("CybruiserBall",38,15,random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+        BRU9 F 6 Bright A_CustomMissile("CybruiserBall",38,15,random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		BRU9 A 0 A_Jump(64,"Missile")
+		BRU9 A 0 A_SpidRefire
+        Loop
+    MissileNormal2:
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+		BRU9 A 0 A_Jump(85,"Missile")
+        Goto See
+    MissileNormal3:
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+		BRU9 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileNormal4:
+		BRU9 E 24 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",38,15,0,0)
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",38,15,0,0)
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 8 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",38,15,0,0)
+		BRU9 A 0 A_Jump(85,"Missile")
+        Goto See
+	MissileHard:
+		BRU9 E 0 A_Jump(170,"MissileHard2","MissileHard3","MissileHard4","MissileHard5")
+		BRU9 E 0 A_Jump(128,"MissileHard6","MissileHard7","MissileHard8")
+	MissileHard1:
+        BRU9 E 6 A_FaceTarget 
+        BRU9 FFFFFFFFF 0 A_CustomMissile("CybruiserBall",38,15,random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+        BRU9 F 6 Bright A_CustomMissile("CybruiserBall",38,15,random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		BRU9 A 0 A_Jump(64,"Missile")
+		BRU9 A 0 A_SpidRefire
+        Loop
+    MissileHard2:
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+    MissileHard3:
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+		BRU9 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileHard4:
+        BRU9 E 24 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+	MissileHard5:
+        BRU9 E 24 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",38,15,0,0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",38,15,0,0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",38,15,0,0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",38,15,0,0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",38,15,0,0)
+        BRU9 E 6 A_FaceTarget
+        BRU9 F 6 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",38,15,0,0)
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+	MissileHard6:
+        BRU9 E 24 A_FaceTarget
+        BRU9 F 12 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",38,15,0,0)
+        BRU9 E 12 A_FaceTarget
+        BRU9 F 12 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",38,15,0,0)
+        BRU9 E 12 A_FaceTarget
+        BRU9 F 12 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",38,15,0,0)
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+	MissileHard7:
+		BRU9 E 0 A_FaceTarget
+		BRU9 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,8.0,0,"HarmlessLaserTrail")
+		BRU9 F 0 A_Playsound("touhou/laser",0,0.7)
+		BRU9 F 35 A_CustomRailgun(40,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail")
+		BRU9 E 0 A_FaceTarget
+		BRU9 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileHard8:
+		BRU9 E 35 A_FaceTarget
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 E 3 A_SetAngle(frandom(0,360))
+		BRU9 F 0 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+		BRU9 F 3 Bright A_CustomMissile("DanmakuCyberGrenade",38,15,0,CMF_AIMDIRECTION,frandom(-90,90))
+        Goto See
+	MissileLunatic:
+		BRU9 E 0 A_Jump(170,"MissileLunatic2","MissileLunatic3","MissileLunatic4","MissileLunatic5")
+		BRU9 E 0 A_Jump(128,"MissileLunatic6","MissileLunatic7","MissileLunatic8","MissileLunatic9")
+	MissileLunatic1:
+        BRU9 E 6 A_FaceTarget 
+        BRU9 FFFFFFFFFFFF 0 A_CustomMissile("CybruiserBall",38,15,random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+        BRU9 F 6 Bright A_CustomMissile("CybruiserBall",38,15,random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		BRU9 A 0 A_Jump(64,"Missile")
+		BRU9 A 0 A_SpidRefire
+        Loop
+    MissileLunatic2:
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+    MissileLunatic3:
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+		BRU9 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic4:
+        BRU9 E 15 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuRevenantTracer",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+	MissileLunatic5:
+        BRU9 E 8 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+        BRU9 E 2 A_FaceTarget
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",38,15,random(-30,30),0)
+        BRU9 F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",38,15,random(-30,30),0)
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",38,15,random(-30,30),0)
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+	MissileLunatic6:
+        BRU9 E 15 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("BruiserMissile",38,15,random(15,-15),0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 2 Bright A_CustomMissile("DanmakuCyberRocket",38,15,0,0)
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+	MissileLunatic7:
+		BRU9 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,8.0,0,"HarmlessLaserTrail")
+		BRU9 F 0 A_Playsound("touhou/laser",0,0.7)
+		BRU9 F 35 A_CustomRailgun(60,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail")
+		BRU9 E 0 A_FaceTarget
+		BRU9 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic8:
+        BRU9 E 35 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",38,15,0,0)
+        BRU9 E 3 A_FaceTarget
+        BRU9 F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",38,15,0,0)
+		BRU9 A 0 A_Jump(128,"Missile")
+        Goto See
+	MissileLunatic9:
+		BRU9 E 35 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",38,15,0,0)
+        BRU9 E 4 A_FaceTarget
+        BRU9 F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",38,15,0,0)
+        Goto See
+    Pain:
+        BRU9 J 2
+        BRU9 J 2 A_Pain
+		BRU9 A 0 A_Jump(85,"Missile")
+        Goto See
+    Death:
+        BRU9 K 6 Bright A_Scream
+        BRU9 LMN 6 Bright
+        BRU9 O 6 Bright A_NoBlocking
+        BRU9 QRS 6 Bright
+        BRU9 T -1 A_BossDeath
+        Stop
+    } 
+}
+ACTOR CybruiserBall
+{
+  Radius 6
+  Height 8
+  Speed 20
+  FastSpeed 30
+  Damage 6
+  Projectile
+  +RANDOMIZE
+  +STRIFEDAMAGE
+  RenderStyle Add
+  Alpha 1
+  SeeSound "monster/brufir"
+  DeathSound "weapons/hellex"
+  States
+  {
+  Spawn:
+    BAL3 AB 4 Bright
+    Loop
+  Death:
+    BAL3 CDE 6 Bright
+    Stop
+  }
+}
+ACTOR BruiserMissile
+{
+    Radius 8
+    Height 12
+    Speed 20
+    Damage 10
+    Scale 1.0
+    SpawnID 251
+    PROJECTILE
+    RENDERSTYLE Normal
+    +STRIFEDAMAGE
+    SeeSound "monster/brufir"
+    DeathSound "weapons/hellex"
+    States
+    {
+    Spawn: 
+        FBRS A 1 Bright
+        FBRS A 1 Bright A_SpawnItem("BruiserTrail",0,0)
+        loop
+    Death:
+        BAL3 C 0 Bright A_SetTranslucent (0.67,1)
+        BAL3 C 6 Bright
+        BAL3 D 6 Bright A_Explode(32,64,0)
+        BAL3 E 6 Bright
+        stop
+    }
+}
+
+ACTOR BruiserTrail
+{    
+    Radius 3
+    Height 3
+    RENDERSTYLE Translucent
+    Alpha 0.67
+    PROJECTILE
+    States
+    {
+    Spawn:
+        NULL A 3 Bright
+        PUFF ABCD 4 BRIGHT
+        Stop 
+    }
+}

@@ -1,0 +1,3720 @@
+ACTOR DanmakuZombieman : Zombieman 23004 //replaces Zombieman
+{
+DropItem "None"
+//$Category "Danmaku Demons"
+	States
+	{
+	Missile:
+		POSS E 10 A_FaceTarget
+		POSS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		POSS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		POSS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		POSS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		POSS F 6 A_CustomMissile("DanmakuZombiemanBullet",32,0,frandom(2,-2),CMF_OFFSETPITCH,frandom(1,-1))
+		POSS E 6 A_FaceTarget
+		POSS E 0 A_Jump(128,"MissileEasy")
+		Goto See
+	MissileNormal:
+		POSS F 5 A_CustomMissile("DanmakuZombiemanBullet",32,0,frandom(4,-4),CMF_OFFSETPITCH,frandom(2,-2))
+		POSS E 5 A_FaceTarget
+		POSS E 0 A_Jump(160,"MissileNormal")
+		Goto See
+	MissileHard:
+		POSS F 4 A_CustomMissile("DanmakuZombiemanBullet",32,0,frandom(6,-6),CMF_OFFSETPITCH,frandom(3,-3))
+		POSS E 4 A_FaceTarget
+		POSS E 0 A_Jump(192,"MissileHard")
+		Goto See
+	MissileLunatic:
+		POSS F 3 A_CustomMissile("DanmakuZombiemanBullet",32,0,frandom(8,-8),CMF_OFFSETPITCH,frandom(4,-4))
+		POSS E 3 A_FaceTarget
+		POSS E 0 A_Jump(224,"MissileLunatic")
+		Goto See
+	}
+}
+
+ACTOR DanmakuZombiemanBullet
+{
+  Radius 4
+  Height 8
+  Speed 20
+  fastspeed 25
+  damage (random(1,3)*3)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BPEL A 1 Bright
+    Loop
+  Death:
+    BPEL AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR DanmakuShotgunguy : Shotgunguy 20009 //replaces Shotgunguy
+{
+DropItem "None"
+//$Category "Danmaku Demons"
+	States
+	{
+	Missile:
+		SPOS E 10 A_FaceTarget
+		SPOS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		SPOS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		SPOS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		SPOS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		SPOS FF 0 A_CustomMissile("DanmakuShotgunguyBullet",32,0,frandom(15.0,-15.0),CMF_OFFSETPITCH,frandom(-3.0,3.0))
+		SPOS F 10 A_CustomMissile("DanmakuShotgunguyBullet",0,0,0)
+		SPOS E 10 A_FaceTarget
+		Goto See
+	MissileNormal:
+		SPOS FFF 0 A_CustomMissile("DanmakuShotgunguyBullet",32,0,frandom(17.5,-17.5),CMF_OFFSETPITCH,frandom(-3.5,3.5))
+		SPOS F 10 A_CustomMissile("DanmakuShotgunguyBullet",0,0,0)
+		SPOS E 10 A_FaceTarget
+		Goto See
+	MissileHard:
+		SPOS FFFFF 0 A_CustomMissile("DanmakuShotgunguyBullet",32,0,frandom(20.0,-20.0),CMF_OFFSETPITCH,frandom(-4.0,4.0))
+		SPOS F 10 A_CustomMissile("DanmakuShotgunguyBullet",0,0,0)
+		SPOS E 10 A_FaceTarget
+		Goto See
+	MissileLunatic:
+		SPOS FFFFFFF 0 A_CustomMissile("DanmakuShotgunguyBullet",32,0,frandom(22.5,-22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		SPOS F 10 A_CustomMissile("DanmakuShotgunguyBullet",0,0,0)
+		SPOS E 10 A_FaceTarget
+		Goto See
+	}
+}
+
+ACTOR DanmakuShotgunguyBullet
+{
+  Radius 4
+  Height 8
+  Speed 16
+  FastSpeed 20
+  damage (random(1,3)*3)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	RBL1 A 0 Bright
+	RBL1 A 0 Bright A_ScaleVelocity(frandom(0.4,1.6))
+  LoopState:
+    RBL1 A 1 Bright
+    Loop
+  Death:
+    RBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR DanmakuChaingunguy : Chaingunguy 20065 //replaces Chaingunguy
+{
+DropItem "None"
+//$Category "Danmaku Demons"
+	States
+	{
+	Missile:
+		CPOS E 10 A_FaceTarget
+		CPOS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		CPOS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		CPOS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		CPOS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		CPOS FE 5 Bright A_CustomMissile("DanmakuChaingunguyBullet",32,0,frandom(22.5,-22.5),CMF_OFFSETPITCH,frandom(7.5,-7.5))
+		CPOS F 1 A_CPosRefire
+		Goto MissileEasy
+	MissileNormal:
+		CPOS FE 4 Bright A_CustomMissile("DanmakuChaingunguyBullet",32,0,frandom(30.0,-30.0),CMF_OFFSETPITCH,frandom(10.0,-10.0))
+		CPOS F 1 A_CPosRefire
+		Goto MissileNormal
+	MissileHard:
+		CPOS FE 3 Bright A_CustomMissile("DanmakuChaingunguyBullet",32,0,frandom(37.5,-37.5),CMF_OFFSETPITCH,frandom(12.5,-12.5))
+		CPOS F 1 A_CPosRefire
+		Goto MissileHard
+	MissileLunatic:
+		CPOS FE 2 Bright A_CustomMissile("DanmakuChaingunguyBullet",32,0,frandom(45.0,-45.0),CMF_OFFSETPITCH,frandom(15.0,-15.0))
+		CPOS F 1 A_CPosRefire
+		Goto MissileLunatic
+	}
+}
+
+ACTOR DanmakuChaingunguyBullet
+{
+  Radius 4
+  Height 8
+  Speed 16
+  FastSpeed 20
+  damage (random(1,3)*3)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    RBL2 A 1 Bright
+    Loop
+  Death:
+    RBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR DanmakuImp : DoomImp 23001 //replaces DoomImp
+{
+//$Category "Danmaku Demons"
+	DamageFactor "DanmakuImp", 0
+	States
+	{
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		TROO A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		TROO A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		TROO A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		TROO A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileRepeatFire:
+		TROO EF 4 A_FaceTarget
+		TROO G 4 A_CustomMissile("DanmakuImpBall2",32,0,0)
+		TROO A 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+		TROO EF 4 A_FaceTarget
+		TROO G 4 A_CustomMissile("DanmakuImpBall2",32,0,0)
+		TROO A 0 A_JumpIfInTargetInventory("NormalMode",1,"See")
+		TROO EF 4 A_FaceTarget
+		TROO G 4 A_CustomMissile("DanmakuImpBall2",32,0,0)
+		TROO A 0 A_JumpIfInTargetInventory("HardMode",1,"See")
+		TROO EF 4 A_FaceTarget
+		TROO G 4 A_CustomMissile("DanmakuImpBall2",32,0,0)
+		Goto See
+	MissileEasy:
+		TROO A 0 A_Jump(128,"MissileRepeatFire")
+		TROO EF 6 A_FaceTarget
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,8,0,CMF_AIMOFFSET)
+		TROO G 6 A_CustomMissile("DanmakuImpBall",32,-8,0,CMF_AIMOFFSET)
+		Goto See
+	MissileNormal:
+		TROO A 0 A_Jump(128,"MissileRepeatFire")
+		TROO EF 6 A_FaceTarget
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,0,-20)
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,0,20)
+		TROO G 6 A_CustomMissile("DanmakuImpBall",32,0,0)
+		Goto See
+	MissileHard:
+		TROO A 0 A_Jump(128,"MissileRepeatFire")
+		TROO EF 6 A_FaceTarget
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,8,0,CMF_AIMOFFSET)
+		TROO G 6 A_CustomMissile("DanmakuImpBall",32,-8,0,CMF_AIMOFFSET)
+		TROO EF 6 A_FaceTarget
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,0,-20)
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,0,20)
+		TROO G 6 A_CustomMissile("DanmakuImpBall",32,0,0)
+		Goto See
+	MissileLunatic:
+		TROO A 0 A_Jump(128,"MissileRepeatFire")
+		TROO EF 6 A_FaceTarget
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,0,-30)
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,0,30)
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,0,-15)
+		TROO G 0 A_CustomMissile("DanmakuImpBall",32,0,15)
+		TROO G 6 A_CustomMissile("DanmakuImpBall",32,0,0)
+		Goto See
+	}
+}
+
+ACTOR DanmakuImpBall : DoomImpBall
+{
+	+STRIFEDAMAGE
+}
+actor DanmakuImpBall2
+{
+    Radius 8
+    Height 6
+    Speed 15
+    Damage 3
+	+STRIFEDAMAGE
+    PROJECTILE
+    RENDERSTYLE ADD
+    ALPHA 0.67
+    SeeSound "imp/attack"
+    DeathSound "imp/shotx"
+    MISSILEHEIGHT 0
+    Decal DoomImpScorch
+    States
+    {
+    Spawn:
+        DKB1 AB 4 Bright
+        Loop
+    Death:
+        DKB1 CDE 4 Bright
+        Stop
+    }
+}
+
+ACTOR DanmakuDemon : Demon 20032 //replaces Demon
+{
+//$Category "Danmaku Demons"
+	MeleeThreshold 256
+	States
+	{
+	Missile:
+		SARG A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		SARG A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto See
+	MissileHard:
+		SARG A 0 A_Jump(128,"See")
+		SARG EF 8 A_FaceTarget
+		SARG G 8 A_CustomMissile("DanmakuChaingunguyBullet",32,0,0)
+		Goto See
+	MissileLunatic:
+		SARG A 0 A_Jump(128,"See")
+		SARG EF 4 A_FaceTarget
+		SARG G 4 A_CustomMissile("DanmakuChaingunguyBullet",32,0,0)
+		SARG A 0 A_Jump(64,"See")
+		SARG A 0 A_SpidRefire
+		Goto MissileLunatic+1
+	}
+}
+
+ACTOR DanmakuSpectre : Spectre 20058 //replaces Spectre
+{
+//$Category "Danmaku Demons"
+	MeleeThreshold 256
+	States
+	{
+	Missile:
+		SARG A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		SARG A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto See
+	MissileHard:
+		SARG A 0 A_Jump(128,"See")
+		SARG EF 8 A_FaceTarget
+		SARG G 8 A_CustomMissile("DanmakuZombiemanBullet",32,0,0)
+		Goto See
+	MissileLunatic:
+		SARG A 0 A_Jump(128,"See")
+		SARG EF 4 A_FaceTarget
+		SARG G 4 A_CustomMissile("DanmakuZombiemanBullet",32,0,0)
+		SARG A 0 A_Jump(64,"See")
+		SARG A 0 A_SpidRefire
+		Goto MissileLunatic+1
+	}
+}
+
+ACTOR DanmakuSoul : LostSoul 23006 //replaces LostSoul
+{
+//$Category "Danmaku Demons"
+	Damage 2
+	+MISSILEMORE
+	+MISSILEEVENMORE
+	Health 20
+	States
+	{
+	Missile:
+		SKUL A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		SKUL A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		SKUL A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		SKUL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		SKUL C 10 Bright A_FaceTarget
+		SKUL D 4 Bright A_SkullAttack
+		SKUL CD 4 Bright
+		Goto MissileEasy+2
+	MissileNormal:
+		SKUL C 0 Bright A_Jump(128,"MissileEasy")
+		SKUL C 10 Bright A_FaceTarget
+		SKUL D 4 Bright A_CustomMissile("DanmakuImpBall",12,0,0)
+		SKUL CD 4 Bright A_FaceTarget
+		Goto See
+	MissileHard:
+		SKUL C 0 Bright A_Jump(128,"MissileNormal")
+		SKUL C 10 Bright A_FaceTarget
+		SKUL D 4 Bright A_SkullAttack
+		SKUL C 4 Bright A_CustomMissile("DanmakuImpBall",12,0,0)
+		SKUL DC 4 Bright
+		Goto MissileHard+4
+	MissileLunatic:
+		SKUL C 10 Bright A_FaceTarget
+		SKUL D 4 Bright A_SkullAttack
+		SKUL C 4 Bright A_CustomMissile("DanmakuImpBall",12,0,0)
+		SKUL DC 4 Bright
+		Goto MissileHard+3
+	}
+}
+
+ACTOR DanmakuPainElemental : PainElemental 20071 //replaces PainElemental
+{
+//$Category "Danmaku Demons"
+	States
+	{
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		PAIN A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		PAIN A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		PAIN A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		PAIN A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		PAIN D 5 A_FaceTarget
+		PAIN E 5 A_FaceTarget
+		PAIN F 5 Bright A_FaceTarget
+		PAIN F 0 Bright A_PainAttack("DanmakuSoul")
+		Goto See
+	MissileNormal:
+		PAIN A 0 A_Jump(128,"MissileEasy")
+		PAIN D 5 A_FaceTarget
+		PAIN E 5 A_FaceTarget
+		PAIN F 5 Bright A_FaceTarget
+		PAIN F 0 Bright A_DualPainAttack("DanmakuSoul")
+		Goto See		
+	MissileHard:
+		PAIN A 0 A_Jump(128,"MissileNormal")
+		PAIN A 0 A_Jump(128,"MissileHard2")
+		PAIN D 5 A_FaceTarget
+		PAIN E 5 A_FaceTarget
+		PAIN F 5 Bright A_CustomMissile("DanmakuPainElementalBall1",32,0,0)
+		Goto See
+	MissileHard2:
+		PAIN D 5 A_FaceTarget
+		PAIN E 5 A_FaceTarget
+		PAIN FFFFF 1 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-5,5))
+		Goto See
+	MissileLunatic:
+		PAIN A 0 A_Jump(128,"MissileNormal")
+		PAIN A 0 A_Jump(128,"MissileLunatic2")
+		PAIN D 5 A_FaceTarget
+		PAIN E 5 A_FaceTarget
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,-16)
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,-8)
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,16)
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,8)
+		PAIN F 5 Bright A_CustomMissile("DanmakuPainElementalBall1",32,0,0)
+		Goto See
+	MissileLunatic2:
+		PAIN D 5 A_FaceTarget
+		PAIN E 5 A_FaceTarget
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-30,30),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 1 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-30,30),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 1 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-30,30),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 1 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-30,30),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 1 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-30,30),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 1 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 0 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-30,30),CMF_OFFSETPITCH,frandom(-10,10))
+		PAIN F 1 Bright A_CustomMissile("DanmakuPainElementalBall2",32,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-10,10))
+		Goto See
+	Death:
+		PAIN H 8 Bright
+		PAIN I 8 Bright A_Scream
+		PAIN JK 8 Bright
+		PAIN LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL 0 Bright A_CustomMissile("DanmakuPainElementalDeathBall",32,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+		PAIN L 8 Bright A_PainDie("DanmakuSoul")
+		PAIN M 8 Bright
+		Stop
+	}
+}
+
+ACTOR DanmakuPainElementalBall1 : FatShot
+{
+	Speed 18
+	FastSpeed 24
+	Damage 6
+	+STRIFEDAMAGE
+}
+
+ACTOR DanmakuPainElementalBall2 : CacodemonBall
+{
+	Speed 16
+	FastSpeed 24
+	Damage 4
+	+STRIFEDAMAGE
+}
+
+ACTOR DanmakuPainElementalDeathBall : CacodemonBall
+{
+	+STRIFEDAMAGE
+	States
+	{
+	Spawn:
+		BAL2 A 0
+		BAL2 B 0 A_ScaleVelocity(frandom(0.5,2.0))
+	LoopState:
+		BAL2 AB 4 Bright
+		Loop
+	Death:
+		BAL2 CDE 6 Bright
+		Stop
+	}
+}
+
+ACTOR DanmakuCacodemon : Cacodemon 23005 //replaces Cacodemon
+{
+//$Category "Danmaku Demons"
+	DamageFactor "DanmakuCaco", 0
+	States
+	{
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		HEAD A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		HEAD A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		HEAD A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		HEAD A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		HEAD BC 5 A_FaceTarget
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-12)
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,12)
+		HEAD D 5 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,0)
+		Goto See
+	MissileNormal:
+		HEAD A 0 A_Jump(128,"MissileNormal2")
+		HEAD BC 5 A_FaceTarget
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacolanternBall1",32,0,0)
+		HEAD D 5 Bright A_CustomMissile("DanmakuCacolanternBall2",32,0,0)
+		Goto See
+	MissileNormal2:
+		HEAD BC 5 A_FaceTarget
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-12)
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,12)
+		HEAD D 5 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,0)
+		Goto See
+	MissileHard:
+		HEAD A 0 A_Jump(128,"MissileHard3")
+		HEAD BC 5 A_FaceTarget
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-12)
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,12)
+		HEAD D 5 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,0)
+		HEAD BC 5 A_FaceTarget
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-12)
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,12)
+		HEAD D 5 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,0)
+		Goto See
+	MissileHard3:
+		HEAD BC 5 A_FaceTarget
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacolanternBall1",32,0,0)
+		HEAD D 5 Bright A_CustomMissile("DanmakuCacolanternBall2",32,0,0)
+		HEAD BC 5 A_FaceTarget
+		HEAD D 0 Bright A_CustomMissile("DanmakuCacolanternBall1",32,0,0)
+		HEAD D 5 Bright A_CustomMissile("DanmakuCacolanternBall2",32,0,0)
+		Goto See
+	MissileLunatic:
+		HEAD A 0 A_Jump(192,"MissileLunatic2","MissileLunatic3")
+	LunaticAimShot:
+		HEAD BC 4 A_FaceTarget
+		HEAD D 4 Bright A_CustomMissile("DanmakuCacolanternBall1",32,0,0)
+		HEAD D 0 A_Jump(224,"LunaticAimShot")
+		HEAD D 0 A_Jump(64,"MissileLunatic2","MissileLunatic3")
+		Goto See
+	MissileLunatic2:
+		HEAD BC 5 A_FaceTarget
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-30)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-20)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-10)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,0)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,10)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,20)
+		HEAD D 4 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,30)
+		Goto See
+	MissileLunatic3:
+		HEAD BC 5 A_FaceTarget
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,30)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,20)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,10)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,0)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-10)
+		HEAD D 1 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-20)
+		HEAD D 4 Bright A_CustomMissile("DanmakuCacodemonBall",32,0,-30)
+		Goto See
+	}
+}
+ACTOR DanmakuCacodemonBall : CacodemonBall
+{
+	+STRIFEDAMAGE
+}
+ACTOR DanmakuCacolanternBall1
+{
+  Radius 6
+  Height 8
+  Speed 20
+  Damage 5
+  Projectile
+  +RANDOMIZE
+  +STRIFEDAMAGE
+  RenderStyle Add
+  SeeSound "caco/attack"
+  DeathSound "caco/shotx"
+  States
+  {
+  Spawn:
+    BAL8 AB 4 Bright
+    Loop
+  Death:
+    BAL8 CDE 6 Bright
+    Stop
+  }
+}
+ACTOR DanmakuCacolanternBall2 : DanmakuCacolanternBall1
+{
+  Speed 15
+}
+
+ACTOR DanmakuRevenant : Revenant 20066 //replaces Revenant //AAAAAAAAAA
+{
+//$Category "Danmaku Demons"
+	States
+	{
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		SKEL A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		SKEL A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		SKEL A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		SKEL A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		SKEL J 10 Bright A_FaceTarget
+		SKEL K 0 A_CustomMissile("DanmakuRevenantTracer",56,-10,0)
+		SKEL K 10 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,0)
+		SKEL K 10 BRIGHT A_FaceTarget
+		Goto See
+	MissileNormal:
+		SKEL J 10 BRIGHT A_FaceTarget
+		SKEL K 0 A_CustomMissile("DanmakuRevenantTracer",56,-10,-10)
+		SKEL K 0 A_CustomMissile("DanmakuRevenantTracer",56,10,10)
+		SKEL K 0 A_CustomMissile("DanmakuRevenantTracer",56,-10,0)
+		SKEL K 10 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,0)
+		SKEL K 10 BRIGHT A_FaceTarget
+		Goto See
+	MissileHard:
+		SKEL J 10 BRIGHT A_FaceTarget
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,-5)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,-5)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,5)
+		SKEL K 10 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,5)
+		SKEL K 10 BRIGHT A_FaceTarget
+		SKEL J 10 BRIGHT A_FaceTarget
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,-10)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,10)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,0)
+		SKEL K 10 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,0)
+		SKEL K 10 BRIGHT A_FaceTarget
+		Goto See
+	MissileLunatic:
+		SKEL J 10 BRIGHT A_FaceTarget
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,-5)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,-5)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,5)
+		SKEL K 10 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,5)
+		SKEL K 5 BRIGHT A_FaceTarget
+	MissileLunatic2:
+		SKEL J 10 BRIGHT A_FaceTarget
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,-10)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,10)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,0)
+		SKEL K 10 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,0)
+		SKEL K 5 BRIGHT A_FaceTarget
+		SKEL A 0 A_Jump(128,"See")
+		SKEL J 10 BRIGHT A_FaceTarget
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,0)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,0)
+		SKEL K 0 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,-10,10)
+		SKEL K 10 BRIGHT A_CustomMissile("DanmakuRevenantTracer",56,10,-10)
+		SKEL K 5 BRIGHT A_FaceTarget
+		SKEL A 0 A_Jump(128,"See")
+		Goto MissileLunatic2
+	}
+}
+
+ACTOR DanmakuRevenantTracer : RevenantTracer
+{
+	Damage 8 //Yeah there's enough of these flying around
+	+STRIFEDAMAGE //that I'm willing to be merciful
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Jump(128,"Homing","Homing","VeerLeft","VeerLeft","VeerLeft","VeerRight","VeerRight","VeerRight")
+	Normal:
+		FATB AB 2 Bright
+		Loop
+	Homing:
+		TNT1 A 0 Bright	A_SeekerMissile(1,5)
+		FATB A 2 Bright A_CustomMissile("BulletPuff",Random(2,4),Random(-2,2)) 
+		FATB B 2 Bright A_CustomMissile("BulletPuff",Random(2,4),Random(-2,2))
+		Loop
+	VeerLeft:
+		TNT1 A 0 Bright	A_SetAngle(angle-3)
+		TNT1 A 0 Bright	ThrustThing(angle*256/360, 1, 0, 0)
+		TNT1 A 0 Bright	A_ScaleVelocity(0.98)
+		FATB A 2 Bright A_CustomMissile("BulletPuff",Random(2,4),Random(-2,2)) 
+		FATB B 2 Bright A_CustomMissile("BulletPuff",Random(2,4),Random(-2,2))
+		Loop
+	VeerRight:
+		TNT1 A 0 Bright	A_SetAngle(angle+3)
+		TNT1 A 0 Bright	ThrustThing(angle*256/360, 1, 0, 0)
+		TNT1 A 0 Bright	A_ScaleVelocity(0.98)
+		FATB A 2 Bright A_CustomMissile("BulletPuff",Random(2,4),Random(-2,2)) 
+		FATB B 2 Bright A_CustomMissile("BulletPuff",Random(2,4),Random(-2,2))
+		Loop
+	}
+}
+
+ACTOR DanmakuFatso : Fatso 20067 //replaces Fatso
+{
+//$Category "Danmaku Demons"
+	DamageFactor "DanmakuFatso", 0
+	States
+	{
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		FATT A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		FATT A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		FATT A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		FATT A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		FATT A 0 A_Jump(85,"MissileEasy2")
+		FATT G 20 A_FatRaise
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-12,12))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-12,12))
+		FATT IG 5 A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-12,12))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-12,12))
+		FATT IG 5 A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(0,12))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(0,12))
+		FATT IG 5 A_FaceTarget
+		Goto See
+	MissileEasy2:
+		FATT G 20 A_FatRaise
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 8 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 8 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 8 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 8 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		Goto See
+	MissileNormal:
+		FATT A 0 A_Jump(85,"MissileNormal2")
+		FATT G 20 A_FatRaise
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(0,12))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(0,12))
+		FATT IG 5 A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(0,12))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(0,12))
+		FATT IG 5 A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(0,12))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(0,12))
+		FATT IG 5 A_FaceTarget
+		Goto See
+	MissileNormal2:
+		FATT G 20 A_FatRaise
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 6 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 6 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 6 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 6 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 6 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 6 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 6 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 6 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		Goto See
+	MissileHard:
+		FATT A 0 A_Jump(85,"MissileHard2")
+		FATT G 20 A_FatRaise
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(0,12))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(0,12))
+		FATT IG 5 A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-12,0))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(0,12))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(0,12))
+		FATT IG 5 A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-15,-5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-15,-5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(5,15))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(5,15))
+		FATT IG 5 A_FaceTarget
+		Goto See
+	MissileHard2:
+		FATT G 20 A_FatRaise
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT H 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT I 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		FATT G 4 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-12,12),CMF_OFFSETPITCH,frandom(-4,4))
+		Goto See
+	MissileLunatic:
+		FATT A 0 A_Jump(85,"MissileLunatic2")
+		FATT G 20 A_FatRaise
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-15,-5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-15,-5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(5,15))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(5,15))
+		FATT IG 5 A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-15,-5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-15,-5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(5,15))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(5,15))
+		FATT IG 5 A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-15,-5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-15,-5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuFatShot",24,24,frandom(5,15))
+		FATT H 10 Bright A_CustomMissile("DanmakuFatShot",24,-24,frandom(5,15))
+		FATT IG 5 A_FaceTarget
+		Goto See
+	MissileLunatic2:
+		FATT G 20 A_FatRaise
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT I 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT G 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT I 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT G 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT I 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT G 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT A 0 Bright A_FaceTarget
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT H 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT I 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT I 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT G 0 Bright A_CustomMissile("DanmakuImpBall",24,24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		FATT G 2 Bright A_CustomMissile("DanmakuImpBall",24,-24,frandom(-15,15),CMF_OFFSETPITCH,frandom(-5,5))
+		Goto See
+	}
+}
+
+ACTOR DanmakuFatShot : FatShot
+{
+	Scale 0.8
+	+STRIFEDAMAGE
+}
+
+ACTOR DanmakuArachnotron : Arachnotron 20068 //replaces Arachnotron
+{
+//$Category "Danmaku Demons"
+	States
+	{
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		BSPI A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		BSPI A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		BSPI A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		BSPI A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		BSPI A 20 Bright A_FaceTarget
+		BSPI G 5 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,0,CMF_AIMOFFSET)
+		BSPI H 5 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,0,CMF_AIMOFFSET)
+		BSPI H 1 Bright A_SpidRefire
+		Goto MissileEasy+1
+	MissileNormal:
+		BSPI A 0 A_Jump(128,"MissileNormal2")
+		BSPI A 20 Bright A_FaceTarget
+		BSPI G 4 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,0,CMF_AIMOFFSET)
+		BSPI H 4 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,0,CMF_AIMOFFSET)
+		BSPI H 1 Bright A_SpidRefire
+		Goto MissileNormal+2
+	MissileNormal2:
+		BSPI A 20 Bright A_FaceTarget
+		BSPI G 4 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,frandom(-20,20),CMF_AIMOFFSET|CMF_OFFSETPITCH,frandom(5,-5))
+		BSPI H 4 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,frandom(-20,20),CMF_AIMOFFSET|CMF_OFFSETPITCH,frandom(5,-5))
+		BSPI H 1 Bright A_SpidRefire
+		Goto MissileNormal2+1
+	MissileHard:
+		BSPI A 0 A_Jump(128,"MissileHard2")
+		BSPI A 20 Bright A_FaceTarget
+		BSPI G 3 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,frandom(-20,20),CMF_AIMOFFSET|CMF_OFFSETPITCH,frandom(5,-5))
+		BSPI H 3 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,frandom(-20,20),CMF_AIMOFFSET|CMF_OFFSETPITCH,frandom(5,-5))
+		BSPI H 1 Bright A_SpidRefire
+		Goto MissileHard+2
+	MissileHard2:
+		BSPI A 20 Bright A_FaceTarget
+		BSPI G 3 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,0,CMF_AIMOFFSET)
+		BSPI H 3 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,0,CMF_AIMOFFSET)
+		BSPI H 1 Bright A_SpidRefire
+		Goto MissileHard2+1
+	MissileLunatic:
+		BSPI A 0 A_Jump(128,"MissileLunatic2")
+		BSPI A 20 Bright A_FaceTarget
+		BSPI G 2 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,frandom(-20,20),CMF_AIMOFFSET|CMF_OFFSETPITCH,frandom(5,-5))
+		BSPI H 2 Bright A_CustomMissile("DanmakuArachnotronPlasma",20,0,frandom(-20,20),CMF_AIMOFFSET|CMF_OFFSETPITCH,frandom(5,-5))
+		BSPI H 1 Bright A_SpidRefire
+		Goto MissileLunatic+2
+	MissileLunatic2:
+		BSPI A 0 Bright A_PlaySound("weapons/bfgf")
+		BSPI A 30 Bright A_FaceTarget
+		BSPI G 4 Bright A_CustomMissile("DanmakuArachnotronPlasmaExploder",20,0,0,CMF_AIMOFFSET)
+		BSPI H 4 Bright A_FaceTarget
+		BSPI G 4 Bright A_CustomMissile("DanmakuArachnotronPlasmaExploder",20,0,0,CMF_AIMOFFSET)
+		BSPI H 4 Bright A_FaceTarget
+		BSPI G 4 Bright A_CustomMissile("DanmakuArachnotronPlasmaExploder",20,0,0,CMF_AIMOFFSET)
+		BSPI H 4 Bright A_FaceTarget
+		BSPI G 4 Bright A_CustomMissile("DanmakuArachnotronPlasmaExploder",20,0,0,CMF_AIMOFFSET)
+		BSPI H 4 Bright A_FaceTarget
+		BSPI G 4 Bright A_CustomMissile("DanmakuArachnotronPlasmaExploder",20,0,0,CMF_AIMOFFSET)
+		BSPI H 4 Bright A_FaceTarget
+		Goto See
+	}
+}
+
+ACTOR DanmakuArachnotronPlasma : ArachnotronPlasma
+{
+	Damage 3 //Don't want this to get
+	+STRIFEDAMAGE //TOO hard
+	Speed 15
+	FastSpeed 20
+}
+
+ACTOR DanmakuArachnotronPlasmaExploder : BFGBall
+{
+	Obituary "$OB_BABY"
+	Damage 0 //Doesn't need damage, the plasma bolts do enough on their own
+	Scale 0.5
+	Speed 20
+	FastSpeed 30
+	States
+	{
+	Death:
+		BFE1 AB 4 Bright
+		BFE1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("DanmakuArachnotronPlasma",0,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+		BFE1 CDEF 4 Bright
+		Stop
+	}
+}
+
+ACTOR DanmakuHellKnight : HellKnight 20069 //replaces HellKnight
+{
+//$Category "Danmaku Demons"
+	DamageFactor "DanmakuNoble", 0
+	States
+	{
+	Melee:
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		BOS2 A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		BOS2 A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		BOS2 A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		BOS2 A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		BOS2 A 0 A_Jump(128,"MissileEasy1","MissileEasy2")
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 8 A_CustomComboAttack("DanmakuBaronBallFast", 32, 10 * random(1, 8), "baron/melee")
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 8 A_CustomComboAttack("DanmakuBaronBallFast", 32, 10 * random(1, 8), "baron/melee")
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileEasy1:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,-12)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,12)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileEasy2:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		Goto See
+	MissileNormal:
+		BOS2 A 0 A_Jump(128,"MissileNormal1","MissileNormal2","MissileNormal2")
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,-12)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,12)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,-12)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,12)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileNormal1:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		Goto See
+	MissileNormal2:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,0)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBallFast",32,0,12)
+		BOS2 G 0 A_Jump(85,"MissileNormal3")
+	MissileNormal3:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,0)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBallFast",32,0,-12)
+		BOS2 G 0 A_Jump(85,"MissileNormal2")
+		Goto See
+	MissileHard:
+		BOS2 A 0 A_Jump(128,"MissileHard1","MissileHard2")
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,-10)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,10)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,-10)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,10)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileHard1:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileHard2:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallSlow",32,0,0)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,0)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileLunatic:
+		BOS2 A 0 A_Jump(128,"MissileLunatic1","MissileLunatic2","MissileLunatic3")
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,-10)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,10)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,-10)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,10)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileLunatic1:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBallSpawner",32,0,0)
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBallSpawner",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileLunatic2:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallSlow",32,0,-15)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallSlow",32,0,15)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallSlow",32,0,0)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,-15)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,15)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,0)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,-15)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBall",32,0,15)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOS2 A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileLunatic3:
+		BOS2 EF 8 A_FaceTarget
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallExploder",32,0,-15)
+		BOS2 G 0 A_CustomMissile("DanmakuBaronBallExploder",32,0,15)
+		BOS2 G 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		Goto See
+	}
+}
+
+ACTOR DanmakuBaronBall : BaronBall
+{
+	DamageType "DanmakuNoble"
+	+STRIFEDAMAGE
+}
+
+ACTOR DanmakuBaronBallSlow : DanmakuBaronBall
+{
+	DamageType "DanmakuNoble"
+	Speed 12
+	FastSpeed 16
+	+STRIFEDAMAGE
+}
+
+ACTOR DanmakuBaronBallFast : BaronBall
+{
+	DamageType "DanmakuNoble"
+	Speed 18
+	FastSpeed 24
+	+STRIFEDAMAGE
+}
+
+ACTOR DanmakuBaronBallExploder
+{
+  DamageType "DanmakuNoble"
+  Radius 6
+  Height 16
+  Speed 15
+  FastSpeed 20
+  Damage 0
+  Projectile
+  +RANDOMIZE
+  RenderStyle Add
+  Alpha 1
+  SeeSound "baron/attack"
+  DeathSound "baron/shotx"
+  Decal "BaronScorch"
+  States
+  {
+  Spawn:
+    GBUB A 1 Bright
+    Loop
+  Death:
+    GBUB AAAAAAAAAAAAAAAA 0 A_CustomMissile("DanmakuBaronExploderBall",0,0,random(0,360),CMF_AIMDIRECTION,random(-90,90))
+    GBUB AAAAAAAAAA 4 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR DanmakuBaronExploderBall
+{
+  Radius 4
+  Height 8
+  Speed 16
+  FastSpeed 20
+  damage (random(1,4)*4)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	GBL2 A 0 Bright
+	GBL2 A 0 Bright A_ScaleVelocity(frandom(0.4,1.6))
+  LoopState:
+    GBL2 A 1 Bright
+    Loop
+  Death:
+    GBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR DanmakuBaronSmallBall
+{
+  Radius 4
+  Height 8
+  Speed 15
+  FastSpeed 20
+  damage (random(1,4)*6)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    GBL2 A 1 Bright
+    Loop
+  Death:
+    GBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR DanmakuBaronBallSpawner
+{
+  DamageType "DanmakuNoble"
+  Radius 6
+  Height 16
+  Speed 15
+  FastSpeed 20
+  Damage 0
+  Projectile
+  +RANDOMIZE
+  RenderStyle Add
+  Alpha 1
+  Scale 0.85
+  SeeSound "baron/attack"
+  DeathSound "baron/shotx"
+  Decal "BaronScorch"
+  States
+  {
+  Spawn: 
+    ARCB AABBCC 2 Bright A_SpawnItem("ArchonCometTrail",0,0)
+    loop
+  Death:
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,0,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,30,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,60,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,90,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,120,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,150,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,180,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,210,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,240,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,270,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,300,CMF_AIMDIRECTION)
+    ARCB A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,330,CMF_AIMDIRECTION)
+    ARCB JKLMN 4 Bright
+    Stop
+  }
+}
+ACTOR ArchonCometTrail
+{   
+  Radius 3
+  Height 3
+  Scale 0.75
+  Speed 0
+  PROJECTILE
+  RENDERSTYLE ADD
+  ALPHA 0.67
+  States
+  {
+  Spawn:
+    TNT1 A 3 Bright
+    ARCB DEFGHI 3 BRIGHT
+    Stop 
+  }
+}
+
+ACTOR DanmakuBaronOfHell : BaronOfHell 23003 //replaces BaronOfHell
+{
+//$Category "Danmaku Demons"
+	DamageFactor "DanmakuNoble", 0
+	States
+	{
+	Melee:
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		BOSS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		BOSS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		BOSS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		BOSS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+		BOSS A 0 A_Jump(128,"MissileEasy1","MissileEasy2")
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-24)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,24)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-12)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,12)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOSS A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileEasy1:
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomComboAttack("DanmakuBaronBallExploder", 32, 10 * random(1, 8), "baron/melee")
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomComboAttack("DanmakuBaronBallExploder", 32, 10 * random(1, 8), "baron/melee")
+		BOSS A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileEasy2:
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallSpawner",32,0,0)
+		Goto See
+	MissileNormal:
+		BOSS A 0 A_Jump(128,"MissileNormal1","MissileNormal2")
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-10)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,10)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-10)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,10)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOSS A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileNormal1:
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallSpawner",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallSpawner",32,0,0)
+		Goto See
+	MissileNormal2:
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallExploder",32,0,-15)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallExploder",32,0,15)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		Goto See
+	MissileHard:
+		BOSS A 0 A_Jump(128,"MissileHard1","MissileHard2","MissileHard3")
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-6)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,6)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-12)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,12)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-6)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,6)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOSS A 0 A_Jump(64,"Missile")
+		Goto See
+	MissileHard1:
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallFast",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,-16)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,16)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,-16)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,16)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallFast",32,0,0)
+		BOSS A 0 A_Jump(64,"Missile")
+		Goto See
+	MissileHard2:
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallExploder",32,0,0)
+		BOSS A 0 A_Jump(64,"Missile")
+		Goto See
+	MissileHard3:
+		BOSS EF 16 A_FaceTarget
+		BOSS G 16 A_CustomMissile("DanmakuBaronBallSpawner",32,0,0)
+		BOSS EF 16 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallSpawner",32,0,-15)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallSpawner",32,0,15)
+		BOSS G 16 A_CustomMissile("DanmakuBaronBallSpawner",32,0,0)
+		Goto See
+	MissileLunatic:
+		BOSS A 0 A_Jump(128,"MissileLunatic1","MissileLunatic2","MissileLunatic3","MissileLunatic4")
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,-13)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,13)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallFast",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,-13)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallFast",32,0,13)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBallFast",32,0,0)
+		BOSS A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileLunatic1:
+		BOSS EF 2 A_FaceTarget
+		BOSS G 2 A_CustomMissile("DanmakuBaronSmallBall",32,0,0)
+		BOSS EF 2 A_FaceTarget
+		BOSS G 2 A_CustomMissile("DanmakuBaronSmallBall",32,0,0)
+		BOSS EF 2 A_FaceTarget
+		BOSS G 2 A_CustomMissile("DanmakuBaronSmallBall",32,0,0)
+		BOSS EF 2 A_FaceTarget
+		BOSS G 2 A_CustomMissile("DanmakuBaronSmallBall",32,0,0)
+		BOSS EF 2 A_FaceTarget
+		BOSS G 2 A_CustomMissile("DanmakuBaronSmallBall",32,0,0)
+		BOSS EF 2 A_FaceTarget
+		BOSS G 2 A_CustomMissile("DanmakuBaronSmallBall",32,0,0)
+		BOSS EF 2 A_FaceTarget
+		BOSS G 2 A_CustomMissile("DanmakuBaronSmallBall",32,0,0)
+		BOSS EF 2 A_FaceTarget
+		BOSS G 2 A_CustomMissile("DanmakuBaronSmallBall",32,0,0)
+		BOSS A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileLunatic2:
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-16)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,16)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-8)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,8)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOSS EF 8 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-16)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,16)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,-8)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBall",32,0,8)
+		BOSS G 8 A_CustomMissile("DanmakuBaronBall",32,0,0)
+		BOSS A 0 A_Jump(85,"Missile")
+		Goto See
+	MissileLunatic3:
+		BOSS EF 16 A_FaceTarget
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallSpawner",32,0,-15)
+		BOSS G 0 A_CustomMissile("DanmakuBaronBallSpawner",32,0,15)
+		BOSS G 16 A_CustomMissile("DanmakuBaronBallSpawner",32,0,0)
+		Goto See
+	MissileLunatic4:
+		BOSS EF 16 A_FaceTarget
+		BOSS G 16 A_CustomMissile("DanmakuBaronBallSuperSpawner",32,0,0)
+		Goto See
+	}
+}
+
+ACTOR DanmakuBaronBallSuperSpawner
+{
+  DamageType "DanmakuNoble"
+  Radius 6
+  Height 16
+  Speed 10
+  FastSpeed 15
+  Damage 8
+  Projectile
+  +RANDOMIZE
+  RenderStyle Add
+  Alpha 1
+  Scale 1.0
+  SeeSound "baron/attack"
+  DeathSound "baron/shotx"
+  Decal "BaronScorch"
+  States
+  {
+  Spawn: 
+    ARCB AABBCC 2 Bright A_SpawnItem("ArchonCometTrail",0,0)
+    loop
+  Death:
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,0,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,20,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,40,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,60,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,80,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,100,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,120,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,140,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,160,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,180,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,200,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,220,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,240,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,260,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,280,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,300,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,320,CMF_AIMDIRECTION)
+    BAL7 A 0 A_CustomMissile("DanmakuBaronSmallBall",0,0,340,CMF_AIMDIRECTION)
+    ARCB JKLMN 6 Bright
+    Stop
+  }
+}
+
+actor DanmakuArchvile : Archvile 20064 //replaces Archvile
+{
+//$Category "Danmaku Demons"
+	DamageFactor "DanmakuVile", 0
+	States
+	{
+	Missile:
+		TNT1 A 0 A_FaceTarget
+		VILE A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		VILE A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		VILE A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		VILE A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileNormal
+	MissileEasy:
+    	VILE G 0 BRIGHT
+    	VILE G 5 BRIGHT A_FaceTarget
+    	VILE H 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerEasy",64,0,0,0,0,0,0,0)
+    	VILE I 4 BRIGHT
+    	VILE J 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerEasy",64,0,0,0,0,0,0,0)
+    	VILE K 4 BRIGHT
+    	VILE L 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerEasy",64,0,0,0,0,0,0,0)
+    	VILE M 4 BRIGHT
+    	VILE N 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerEasy",64,0,0,0,0,0,0,0)
+    	VILE OO 6 BRIGHT A_CustomMissile("VileFireSpawner",frandom(-20,20),0,0,CMF_AIMDIRECTION)
+    	VILE P 10 BRIGHT
+    	Goto See
+	MissileNormal:
+    	VILE G 0 BRIGHT
+    	VILE G 5 BRIGHT A_FaceTarget
+    	VILE H 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerNormal",64,0,0,0,0,0,0,0)
+    	VILE I 4 BRIGHT
+    	VILE J 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerNormal",64,0,0,0,0,0,0,0)
+    	VILE K 4 BRIGHT
+    	VILE L 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerNormal",64,0,0,0,0,0,0,0)
+    	VILE M 4 BRIGHT
+    	VILE N 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerNormal",64,0,0,0,0,0,0,0)
+    	VILE OOO 4 BRIGHT A_CustomMissile("VileFireSpawner",0,0,frandom(-30,30),CMF_AIMDIRECTION)
+    	VILE P 10 BRIGHT
+    	Goto See
+	MissileHard:
+    	VILE G 0 BRIGHT
+    	VILE G 5 BRIGHT A_FaceTarget
+    	VILE H 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerHard",64,0,0,0,0,0,0,0)
+    	VILE I 4 BRIGHT
+    	VILE J 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerHard",64,0,0,0,0,0,0,0)
+    	VILE K 4 BRIGHT
+    	VILE L 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerHard",64,0,0,0,0,0,0,0)
+    	VILE M 4 BRIGHT
+    	VILE N 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerHard",64,0,0,0,0,0,0,0)
+    	VILE OOOO 3 BRIGHT A_CustomMissile("VileFireSpawner",0,0,frandom(-40,40),CMF_AIMDIRECTION)
+    	VILE P 10 BRIGHT
+    	Goto See
+	MissileLunatic:
+		VILE A 0 BRIGHT A_Jump(128,"MissileLunatic1","MissileLunatic2")
+    	VILE G 0 BRIGHT
+    	VILE G 5 BRIGHT A_FaceTarget
+    	VILE H 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE I 4 BRIGHT
+    	VILE J 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE K 4 BRIGHT
+    	VILE L 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE M 4 BRIGHT
+    	VILE N 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE OOOOOO 2 BRIGHT A_CustomMissile("VileFireSpawner",0,0,frandom(-60,60),CMF_AIMDIRECTION)
+    	VILE P 10 BRIGHT
+    	Goto See
+	MissileLunatic1:
+    	VILE G 0 BRIGHT
+    	VILE G 5 BRIGHT A_FaceTarget
+    	VILE H 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE I 4 BRIGHT
+    	VILE J 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE K 4 BRIGHT
+    	VILE L 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE M 4 BRIGHT
+    	VILE N 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE O 0 BRIGHT A_CustomMissile("VileFireSpawner",0,0,-45,CMF_AIMDIRECTION)
+    	VILE O 0 BRIGHT A_CustomMissile("VileFireSpawner",0,0,-22.5,CMF_AIMDIRECTION)
+    	VILE O 0 BRIGHT A_CustomMissile("VileFireSpawner",0,0,0,CMF_AIMDIRECTION)
+    	VILE O 0 BRIGHT A_CustomMissile("VileFireSpawner",0,0,22.5,CMF_AIMDIRECTION)
+    	VILE O 12 BRIGHT A_CustomMissile("VileFireSpawner",0,0,45,CMF_AIMDIRECTION)
+    	VILE P 10 BRIGHT
+    	Goto See
+	MissileLunatic2:
+    	VILE G 0 BRIGHT
+    	VILE G 5 BRIGHT A_FaceTarget
+    	VILE H 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE I 4 BRIGHT
+    	VILE J 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE K 4 BRIGHT
+    	VILE L 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE M 4 BRIGHT
+    	VILE N 4 BRIGHT A_SpawnItemEx("ArchvileFireballSpawnerLunatic",64,0,0,0,0,0,0,0)
+    	VILE O 4 BRIGHT A_CustomMissile("VileFireSpawner",0,0,0,CMF_AIMDIRECTION)
+    	VILE O 0 BRIGHT A_CustomMissile("VileFireSpawner",0,128,0,CMF_AIMDIRECTION)
+    	VILE O 4 BRIGHT A_CustomMissile("VileFireSpawner",0,-128,0,CMF_AIMDIRECTION)
+    	VILE O 0 BRIGHT A_CustomMissile("VileFireSpawner",0,256,0,CMF_AIMDIRECTION)
+    	VILE O 4 BRIGHT A_CustomMissile("VileFireSpawner",0,-256,0,CMF_AIMDIRECTION)
+    	VILE P 10 BRIGHT
+    	Goto See
+    	}
+}
+
+ACTOR ArchvileFireballSpawnerEasy : ArchvileFire
+{
+  DamageType "DanmakuVile"
+  Alpha 0.95
+  States
+  {
+  Spawn:
+	FIRE A 0 Bright
+    FIRE A 2 Bright A_StartFire
+    FIRE BAB 2 Bright
+    FIRE C 2 Bright A_FireCrackle
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",16,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE BCBC 2 Bright
+    FIRE A 0 Bright A_CustomMissile("ArchvileFireball",24,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE BCDC 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",28,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE DCDE 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",32,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE DED 2 Bright
+    FIRE E 2 Bright A_FireCrackle
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",36,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE FEFE 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",40,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE FGHG 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",48,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE HGH 2 Bright
+    Stop
+  }
+}
+
+ACTOR ArchvileFireballSpawnerNormal : ArchvileFire
+{
+  DamageType "DanmakuVile"
+  Alpha 0.95
+  States
+  {
+  Spawn:
+	FIRE A 0 Bright
+    FIRE A 2 Bright A_StartFire
+    FIRE BAB 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",16,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE C 2 Bright A_FireCrackle
+    FIRE BC 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",20,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE BCB 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",24,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE CDC 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",28,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE DCD 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",32,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE EDE 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",36,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE D 2 Bright
+    FIRE E 2 Bright A_FireCrackle
+    FIRE F 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",40,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE EFE 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",44,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE FGH 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",48,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE GHGH 2 Bright
+    Stop
+  }
+}
+
+ACTOR ArchvileFireballSpawnerHard : ArchvileFire
+{
+  DamageType "DanmakuVile"
+  Alpha 0.95
+  States
+  {
+  Spawn:
+	FIRE A 0 Bright
+    FIRE A 2 Bright A_StartFire
+    FIRE B 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",12,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE AB 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",15,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE C 2 Bright A_FireCrackle
+    FIRE B 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",18,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE CB 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",21,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE CD 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",24,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE CD 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",27,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE CD 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",30,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE ED 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",33,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE ED 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",36,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE E 2 Bright A_FireCrackle
+    FIRE F 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",39,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE EF 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",42,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE EF 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",45,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE GH 2 Bright
+	FIRE A 0 Bright A_CustomMissile("ArchvileFireball",48,frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE GHGH 2 Bright
+	FIRE GH 2 Bright
+    Stop
+  }
+}
+
+ACTOR ArchvileFireballSpawnerLunatic: ArchvileFire
+{
+  DamageType "DanmakuVile"
+  Alpha 0.95
+  States
+  {
+  Spawn:
+	FIRE A 0 Bright
+    FIRE A 2 Bright A_StartFire
+    FIRE BAB 2 Bright A_CustomMissile("ArchvileFireball",frandom(12,20),frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE C 2 Bright A_FireCrackle
+    FIRE BCBCDCDCDEDED 2 Bright A_CustomMissile("ArchvileFireball",frandom(16,40),frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    FIRE E 2 Bright A_FireCrackle
+    FIRE FEFEFGHGHGH 2 Bright A_CustomMissile("ArchvileFireball",frandom(36,48),frandom(-8,8),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,20))
+    Stop
+  }
+}
+
+actor ArchvileFireball : BaronBall
+{
+	DamageType "DanmakuVile"
+    Translation "112:127=160:167"
+    Radius 8
+    Height 10
+    Damage 4
+	+STRIFEDAMAGE
+}
+
+ACTOR VileFireSpawner
+{
+	DamageType "DanmakuVile"
+	Radius 8
+	Height 8
+	Speed 8
+	Damage 0
+	+RIPPER
+	+FLOORHUGGER
+	+BLOODLESSIMPACT
+	DONTHURTSHOOTER
+	Projectile
+	MissileType VileFireD3
+	Missileheight 0
+	States
+	{
+	Spawn: 
+		TNT1 A 0 A_PlaySound ("vile/firecrkl")
+		TNT1 A 0 Bright A_MissileAttack
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 0 Bright A_MissileAttack
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 0 Bright A_MissileAttack
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 0 Bright A_MissileAttack
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 0 Bright A_MissileAttack
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 0 Bright A_MissileAttack
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 0 Bright A_MissileAttack
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 0 Bright A_MissileAttack
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		TNT1 A 1 Bright A_Explode(8,32,0)
+		Loop
+	Death:	
+		TNT1 A 6
+		Stop
+	}
+}
+actor VileFireD3
+{
+  DamageType "DanmakuVile"
+  Radius 10
+  Height 64
+  Damage 0
+  RenderStyle Add
+  Alpha 0.95
+  +NOCLIP
+  +FLOORHUGGER
+  DONTHURTSHOOTER
+  States
+  {
+  Spawn:
+    FIRE ABCDEFGH 4 Bright
+    Stop
+  }
+}
+
+Actor DanmakuCyberdemon : Cyberdemon 20016 //replaces Cyberdemon
+{
+//$Category "Danmaku Demons"
+	States
+	{
+	Missile:
+		CYBR A 0 A_FaceTarget
+		CYBR A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		CYBR A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		CYBR A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		CYBR A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileHard
+	MissileEasy:
+        TNT1 A 0 A_Jump(128,"MissileEasy2","MissileEasy2","MissileEasy3")
+		CYBR E 6 A_FaceTarget
+		CYBR F 6 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 6 A_FaceTarget
+		CYBR F 6 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 6 A_FaceTarget
+		CYBR F 6 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileEasy2:
+		CYBR E 6 A_FaceTarget
+		CYBR F 6 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 6 A_FaceTarget
+		CYBR F 6 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 6 A_FaceTarget
+		CYBR F 6 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileEasy3:
+		CYBR E 35 A_FaceTarget
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		Goto See
+	MissileNormal:
+        TNT1 A 0 A_Jump(64,"MissileNormal3","MissileNormal4","MissileNormal5","MissileNormal6")
+        TNT1 A 0 A_Jump(85,"MissileNormal2")
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileNormal2:
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 5 A_FaceTarget
+		CYBR F 5 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileNormal3:
+		CYBR E 35 A_FaceTarget
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		Goto See
+	MissileNormal4:
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		Goto See
+	MissileNormal5:
+		CYBR E 36 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		Goto See
+	MissileNormal6:
+		CYBR E 0 A_FaceTarget
+		CYBR EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,8.0,0,"HarmlessLaserTrail")
+		CYBR F 0 A_Playsound("touhou/laser",0,0.7)
+		CYBR F 35 A_CustomRailgun(80,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail")
+		Goto See
+	MissileHard:
+		TNT1 A 0 A_Jump(64,"MissileHard5","MissileHard5","MissileHard6","MissileHard7","MissileHard7")
+		TNT1 A 0 A_Jump(128,"MissileHard2","MissileHard2","MissileHard2","MissileHard2","MissileHard3","MissileHard3","MissileHard4","MissileHard4","MissileHard4")
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileHard2:
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 4 A_FaceTarget
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileHard3:
+		CYBR E 35 A_FaceTarget
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileHard4:
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-10,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,10,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-10,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,10,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-10,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,10,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-10,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,10,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		CYBR E 8 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-10,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,10,CMF_AIMDIRECTION)
+		CYBR F 9 Bright A_FaceTarget
+		CYBR E 9 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(30,-30))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-10,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,10,CMF_AIMDIRECTION)
+		CYBR F 8 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileHard5:
+		CYBR E 36 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-5,5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-5,5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-5,5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-5,5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-5,5))
+		Goto See
+	MissileHard6:
+		CYBR E 36 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		CYBR FE 18 Bright A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		CYBR FE 18 Bright A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		CYBR FE 18 Bright A_FaceTarget
+		Goto See
+	MissileHard7:
+		CYBR E 0 A_FaceTarget
+		CYBR EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,8.0,0,"HarmlessLaserTrail")
+		CYBR F 0 A_Playsound("touhou/laser",0,0.7)
+		CYBR F 35 A_CustomRailgun(80,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail")
+		CYBR E 0 A_FaceTarget
+		CYBR EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 1 A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,8.0,0,"HarmlessLaserTrail")
+		CYBR F 0 A_Playsound("touhou/laser",0,0.7)
+		CYBR F 35 A_CustomRailgun(80,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail")
+		Goto See
+	MissileLunatic:
+		TNT1 A 0 A_Jump(153,"MissileLunatic1","MissileLunatic2","MissileLunatic3","MissileLunatic4","MissileLunatic5")
+		TNT1 A 0 A_Jump(192,"MissileLunatic6","MissileLunatic7","MissileLunatic8","MissileLunatic9")
+		TNT1 A 0 A_Jump(255,"MissileLunatic10","MissileLunatic11","MissileLunatic12")
+	MissileLunatic1:
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileLunatic2:
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileLunatic3:
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,0)
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		CYBR E 3 A_FaceTarget
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberRocket",40,0,frandom(15,-15))
+		TNT1 A 0 A_Jump(128,"Missile")
+    	Goto See
+	MissileLunatic4:
+		CYBR E 35 A_FaceTarget
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 4 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 3 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 2 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 1 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 1 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 1 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 1 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 1 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 1 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 1 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR E 1 A_SetAngle(frandom(0,360))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberGrenade",40,0,0,CMF_AIMDIRECTION,frandom(-90,90))
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic5:
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		CYBR E 4 A_FaceTarget
+		CYBR E 0 A_SetAngle(angle+frandom(45,-45))
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-8,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,-6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,-4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,-2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,0,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,2,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,4,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,6,CMF_AIMDIRECTION)
+		CYBR F 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,8,CMF_AIMDIRECTION)
+		CYBR F 4 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic6:
+		CYBR E 36 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 2 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 2 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 2 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberPlasmaExploder11",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 1 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberPlasmaExploder12",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 1 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 1 Bright A_CustomMissile("DanmakuCyberPlasmaExploder13",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 1 A_FaceTarget
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic7:
+		CYBR E 36 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 4 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 4 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 2 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 2 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",40,0,frandom(-5,5),CMF_OFFSETPITCH,frandom(-2,2))
+		CYBR E 2 A_FaceTarget
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic8:
+		CYBR E 36 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR F 3 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		CYBR E 3 A_FaceTarget
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic9:
+		CYBR E 0 A_FaceTarget
+		CYBR EEEEEEEEEEEEEEEEEEEEE 1 A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,8.0,0,"HarmlessLaserTrail")
+		CYBR F 0 A_Playsound("touhou/laser",0,0.7)
+		CYBR F 0 A_CustomRailgun(80,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail")
+		CYBR E 0 A_FaceTarget
+		CYBR FFFFFFFFFFFFFFEEEEEEEEEEEEEEEEEEEEE 1 A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,8.0,0,"HarmlessLaserTrail")
+		CYBR F 0 A_Playsound("touhou/laser",0,0.7)
+		CYBR F 0 A_CustomRailgun(80,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail")
+		CYBR E 0 A_FaceTarget
+		CYBR FFFFFFFFFFFFFFEEEEEEEEEEEEEEEEEEEEE 1 A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,8.0,0,"HarmlessLaserTrail")
+		CYBR F 0 A_Playsound("touhou/laser",0,0.7)
+		CYBR F 14 A_CustomRailgun(80,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail")
+		Goto See
+	MissileLunatic10:
+		CYBR E 36 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge1",40,0,0,CMF_AIMDIRECTION,0)
+		TNT1 AAAAAAAA 0 A_CustomMissile("CyberOrbMedium1",40,0,frandom(-10,10),CMF_AIMDIRECTION,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall1",40,0,frandom(-20,20),CMF_AIMDIRECTION,frandom(-20,20))
+		CYBR FE 12 Bright A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge2",40,0,CMF_AIMDIRECTION,0)
+		TNT1 AAAAAAAAA 0 A_CustomMissile("CyberOrbMedium2",40,0,frandom(-10,10),CMF_AIMDIRECTION,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall2",40,0,frandom(-20,20),CMF_AIMDIRECTION,frandom(-20,20))
+		CYBR FE 12 Bright A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge3",40,0,CMF_AIMDIRECTION,0)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium3",40,0,frandom(-10,10),CMF_AIMDIRECTION,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall3",40,0,frandom(-20,20),CMF_AIMDIRECTION,frandom(-20,20))
+		CYBR FE 12 Bright A_FaceTarget
+		Goto See
+	MissileLunatic11:
+		CYBR E 36 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		CYBR FE 18 Bright A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		CYBR FE 18 Bright A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		CYBR FE 18 Bright A_FaceTarget
+		Goto See
+	MissileLunatic12:
+		CYBR E 72 A_FaceTarget
+		CYBR E 0 A_PlaySound("cyber/sight",0,1.0,0,ATTN_NONE)
+		CYBR EEEEEEEEEEEE 6 A_FaceTarget
+		TNT1 A 0 A_PlaySound("touhou/fire",0,1.0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		CYBR FE 35 Bright A_FaceTarget
+		Goto See
+    }
+}
+
+ACTOR DanmakuCyberRocket : Rocket
+{
+	+STRIFEDAMAGE
+	ExplosionDamage 64
+	ExplosionRadius 96
+}
+
+ACTOR DanmakuCyberGrenade : Grenade
+{
+	BounceType "Hexen"
+	BounceCount 3
+	SeeSound "weapons/rocklf"
+	DeathSound "weapons/rocklx"
+	+STRIFEDAMAGE
+	Damage 10
+	ExplosionDamage 64
+	ExplosionRadius 64
+}
+
+ACTOR CyberOrbLarge1
+{
+  Radius 12
+  Speed 24
+  FastSpeed 30
+  Height 24
+  damage (30)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    RBUB A 1 Bright
+    Loop
+  Death:
+    RBUB AAAAAAAAAA 3 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR CyberOrbMedium1
+{
+  Radius 8
+  Speed 24
+  FastSpeed 30
+  Height 16
+  damage (20)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    RBL3 A 0 Bright
+    RBL3 A 0 Bright A_ScaleVelocity(frandom(0.7,0.9))
+  LoopState:
+    RBL3 A 1 Bright
+    Loop
+  Death:
+    RBL3 AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR CyberOrbSmall1
+{
+  Radius 4
+  Speed 24
+  FastSpeed 30
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    RBL2 A 0 Bright
+    RBL2 A 0 Bright A_ScaleVelocity(frandom(0.4,0.8))
+  LoopState:
+    RBL2 A 1 Bright
+    Loop
+  Death:
+    RBL2 AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR CyberOrbLarge2
+{
+  Radius 12
+  Speed 24
+  FastSpeed 30
+  Height 24
+  damage (30)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    GBUB A 1 Bright
+    Loop
+  Death:
+    GBUB AAAAAAAAAA 3 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR CyberOrbMedium2
+{
+  Radius 8
+  Speed 24
+  FastSpeed 30
+  Height 16
+  damage (20)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    GBL3 A 0 Bright
+    GBL3 A 0 Bright A_ScaleVelocity(frandom(0.7,0.9))
+  LoopState:
+    GBL3 A 1 Bright
+    Loop
+  Death:
+    GBL3 AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR CyberOrbSmall2
+{
+  Radius 4
+  Speed 24
+  FastSpeed 30
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    GBL2 A 0 Bright
+    GBL2 A 0 Bright A_ScaleVelocity(frandom(0.4,0.8))
+  LoopState:
+    GBL2 A 1 Bright
+    Loop
+  Death:
+    GBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR CyberOrbLarge3
+{
+  Radius 12
+  Speed 24
+  FastSpeed 30
+  Height 24
+  damage (30)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    BBUB A 1 Bright
+    Loop
+  Death:
+    BBUB AAAAAAAAAA 3 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR CyberOrbMedium3
+{
+  Radius 8
+  Speed 24
+  FastSpeed 30
+  Height 16
+  damage (20)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    BBL3 A 0 Bright
+    BBL3 A 0 Bright A_ScaleVelocity(frandom(0.7,0.9))
+  LoopState:
+    BBL3 A 1 Bright
+    Loop
+  Death:
+    BBL3 AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR CyberOrbSmall3
+{
+  Radius 4
+  Speed 24
+  FastSpeed 30
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    BBL2 A 0 Bright
+    BBL2 A 0 Bright A_ScaleVelocity(frandom(0.4,0.8))
+  LoopState:
+    BBL2 A 1 Bright
+    Loop
+  Death:
+    BBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR DanmakuCyberPlasmaExploder11
+{
+	SeeSound "touhou/fire"
+	Damage 20
+	Scale 1.0
+	Speed 20
+	FastSpeed 30
+	Projectile
+	+RANDOMIZE
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		RDBL AB 4 Bright
+		Loop
+	Death:
+		RDBL AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall1",0,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+		RDBL CDE 8 Bright
+		Stop
+	}
+}
+
+ACTOR DanmakuCyberPlasmaExploder12
+{
+	SeeSound "touhou/fire"
+	Damage 20
+	Scale 1.0
+	Speed 20
+	FastSpeed 30
+	Projectile
+	+RANDOMIZE
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		GBAL AB 4 Bright
+		Loop
+	Death:
+		GBAL AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall2",0,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+		GBAL CDE 8 Bright
+		Stop
+	}
+}
+
+ACTOR DanmakuCyberPlasmaExploder13
+{
+	SeeSound "touhou/fire"
+	Damage 20
+	Scale 1.0
+	Speed 20
+	FastSpeed 30
+	Projectile
+	+RANDOMIZE
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		BLBL AB 4 Bright
+		Loop
+	Death:
+		BLBL AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall3",0,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+		BLBL CDE 8 Bright
+		Stop
+	}
+}
+
+ACTOR DanmakuCyberPlasmaExploder21
+{
+	SeeSound "touhou/fire"
+	Radius 8
+	Speed 25
+	FastSpeed 30
+	Height 16
+	damage (40)
+	Projectile
+	+RANDOMIZE
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		RDBL AB 4 Bright
+		Loop
+	Death:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,0,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,20,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,40,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,60,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,80,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,100,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,120,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,140,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,160,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,180,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,200,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,220,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,240,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,260,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,280,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,300,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,320,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaRed",0,0,340,CMF_AIMDIRECTION)
+		RDBL CDE 8 Bright
+		Stop
+	}
+}
+ACTOR DanmakuCyberExpPlasmaRed : PlasmaBall2
+{
+	+STRIFEDAMAGE
+	BounceType "None"
+	Speed 15
+	FastSpeed 20
+}
+
+ACTOR DanmakuCyberPlasmaExploder22
+{
+	SeeSound "touhou/fire"
+	Radius 8
+	Speed 25
+	FastSpeed 30
+	Height 16
+	damage (40)
+	Projectile
+	+RANDOMIZE
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		GBAL AB 4 Bright
+		Loop
+	Death:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,0,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,20,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,40,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,60,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,80,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,100,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,120,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,140,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,160,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,180,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,200,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,220,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,240,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,260,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,280,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,300,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,320,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaGreen",0,0,340,CMF_AIMDIRECTION)
+		GBAL CDE 8 Bright
+		Stop
+	}
+}
+ACTOR DanmakuCyberExpPlasmaGreen : PlasmaBall1
+{
+	+STRIFEDAMAGE
+	BounceType "None"
+	Speed 15
+	FastSpeed 20
+}
+
+ACTOR DanmakuCyberPlasmaExploder23
+{
+	SeeSound "touhou/fire"
+	Radius 8
+	Speed 25
+	FastSpeed 30
+	Height 16
+	damage (40)
+	Projectile
+	+RANDOMIZE
+	RenderStyle Add
+	States
+	{
+	Spawn:
+		BLBL AB 4 Bright
+		Loop
+	Death:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,0,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,20,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,40,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,60,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,80,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,100,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,120,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,140,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,160,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,180,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,200,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,220,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,240,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,260,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,280,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,300,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,320,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberExpPlasmaBlue",0,0,340,CMF_AIMDIRECTION)
+		BLBL CDE 8 Bright
+		Stop
+	}
+}
+ACTOR DanmakuCyberExpPlasmaBlue : PlasmaBall
+{
+	+STRIFEDAMAGE
+	Speed 15
+	FastSpeed 20
+}
+
+ACTOR DanmakuCyberDeathBall1 : BFGBall
+{
+	SeeSound "touhou/fire"
+	Speed 15
+	FastSpeed 10
+	Translation "112:127=176:191"
+	States
+	{
+	Spawn:
+		BFS1 A 2 Bright A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 A 0 Bright A_SetAngle(angle-15)
+		BFS1 A 2 Bright A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 A 0 Bright A_SetAngle(angle-15)
+		BFS1 B 2 Bright A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 B 0 Bright A_SetAngle(angle-15)
+		BFS1 B 2 Bright A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 B 0 Bright A_SetAngle(angle-15)
+		Loop
+	Death:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,0,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,20,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,40,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,60,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,80,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,100,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,120,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,140,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,160,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,180,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,200,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,220,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,240,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,260,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,280,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,300,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,320,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1Plasma",0,0,340,CMF_AIMDIRECTION)
+		BFE1 ABCDEF 8 Bright
+		Stop
+	}
+}
+ACTOR DanmakuCyberDeathBall1Plasma : DanmakuCyberExpPlasmaRed
+{
+}
+ACTOR DanmakuCyberDeathBall2 : BFGBall
+{
+	SeeSound "touhou/fire"
+	Speed 15
+	FastSpeed 10
+	States
+	{
+	Spawn:
+		BFS1 A 2 Bright A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 A 0 Bright A_SetAngle(angle+15)
+		BFS1 A 2 Bright A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 A 0 Bright A_SetAngle(angle+15)
+		BFS1 B 2 Bright A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 B 0 Bright A_SetAngle(angle+15)
+		BFS1 B 2 Bright A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 B 0 Bright A_SetAngle(angle+15)
+		Loop
+	Death:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,0,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,20,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,40,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,60,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,80,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,100,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,120,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,140,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,160,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,180,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,200,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,220,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,240,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,260,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,280,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,300,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,320,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2Plasma",0,0,340,CMF_AIMDIRECTION)
+		BFE1 ABCDEF 8 Bright
+		Stop
+	}
+}
+ACTOR DanmakuCyberDeathBall2Plasma : DanmakuCyberExpPlasmaGreen
+{
+}
+ACTOR DanmakuCyberDeathBall3 : BFGBall
+{
+	SeeSound "touhou/fire"
+	Speed 15
+	FastSpeed 10
+	Translation "112:127=192:207"
+	States
+	{
+	Spawn:
+		BFS1 A 2 Bright A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 A 0 Bright A_SetAngle(frandom(0,360))
+		BFS1 A 2 Bright A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 A 0 Bright A_SetAngle(frandom(0,360))
+		BFS1 B 2 Bright A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 B 0 Bright A_SetAngle(frandom(0,360))
+		BFS1 B 2 Bright A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,0,CMF_AIMDIRECTION)
+		BFS1 B 0 Bright A_SetAngle(frandom(0,360))
+		Loop
+	Death:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,0,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,20,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,40,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,60,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,80,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,100,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,120,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,140,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,160,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,180,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,200,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,220,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,240,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,260,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,280,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,300,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,320,CMF_AIMDIRECTION)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3Plasma",0,0,340,CMF_AIMDIRECTION)
+		BFE1 ABCDEF 8 Bright
+		Stop
+	}
+}
+ACTOR DanmakuCyberDeathBall3Plasma : DanmakuCyberExpPlasmaBlue
+{
+}
+
+
+ACTOR DanmakuSpiderMastermind : SpiderMastermind 20007 //replaces SpiderMastermind
+{
+//$Category "Danmaku Demons"
+	States
+	{
+	Missile:
+		SPID A 20 Bright A_FaceTarget
+		SPID A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		SPID A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		SPID A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		SPID A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileHard
+	MissileEasy:
+		SPID A 0 A_Jump(128,"MissileEasy1","MissileEasy2")
+		SPID GGG 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		SPID G 4 Bright A_FaceTarget
+		SPID HHH 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-22.0,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		SPID H 4 Bright A_FaceTarget
+		SPID H 1 Bright A_SpidRefire
+		SPID A 0 A_Jump(16,"MissileEasy")
+		Goto MissileEasy+1
+	MissileEasy1:
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileEasy1")
+		TNT1 A 0 A_Jump(128,"MissileEasy")
+		Goto See
+	MissileEasy2:
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAA 0 A_CustomMissile("CyberOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileEasy2")
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileNormal:
+		SPID A 0 A_Jump(128,"MissileNormal1","MissileNormal2")
+		SPID GGGG 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-30.0,30.0),CMF_OFFSETPITCH,frandom(-6.0,6.0))
+		SPID G 4 Bright A_FaceTarget
+		SPID HHHH 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-30.0,30.0),CMF_OFFSETPITCH,frandom(-6.0,6.0))
+		SPID H 4 Bright A_FaceTarget
+		SPID H 1 Bright A_SpidRefire
+		SPID A 0 A_Jump(16,"MissileNormal")
+		Goto MissileNormal+1
+	MissileNormal1:
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileNormal1")
+		TNT1 A 0 A_Jump(128,"MissileNormal")
+		Goto See
+	MissileNormal2:
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileNormal2")
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileHard:
+		SPID A 0 A_Jump(128,"MissileHard1","MissileHard2","MissileHard3")
+		SPID GGGGG 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-37.5,37.5),CMF_OFFSETPITCH,frandom(-7.5,7.5))
+		SPID G 3 Bright A_FaceTarget
+		SPID HHHHH 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-37.5,37.5),CMF_OFFSETPITCH,frandom(-7.5,7.5))
+		SPID H 4 Bright A_FaceTarget
+		SPID H 1 Bright A_SpidRefire
+		TNT1 A 0 A_Jump(16,"MissileHard")
+		Goto MissileHard+1
+	MissileHard1:
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileHard1")
+		TNT1 A 0 A_Jump(128,"MissileHard")
+		Goto See
+	MissileHard2:
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(64,"MissileHard2")
+		TNT1 A 0 A_Jump(85,"MissileHard3")
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileHard3:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(64,"MissileHard3")
+		TNT1 A 0 A_Jump(85,"MissileHard2")
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic:
+		SPID A 0 A_Jump(128,"MissileLunatic5","MissileLunatic6","MissileLunatic7","MissileLunatic8","MissileLunatic9")
+		SPID A 0 A_Jump(255,"MissileLunatic0","MissileLunatic1","MissileLunatic2","MissileLunatic3","MissileLunatic4")
+	MissileLunatic0:
+		SPID GGGGGG 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),0,frandom(-45.0,45.0),CMF_OFFSETPITCH,frandom(-9.0,9.0))
+		SPID G 3 Bright A_FaceTarget
+		SPID HHHHHH 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),0,frandom(-45.0,45.0),CMF_OFFSETPITCH,frandom(-9.0,9.0))
+		SPID H 3 Bright A_FaceTarget
+		SPID H 0 Bright A_Jump(8,"MissileLunatic","Missile","See")
+		SPID H 0 Bright A_SpidRefire
+		Goto MissileLunatic0
+	MissileLunatic1:
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		SPID G 6 Bright A_FaceTarget
+		SPID G 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		SPID H 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		SPID H 6 Bright A_FaceTarget
+		SPID H 0 Bright A_Jump(16,"MissileLunatic","Missile","See")
+		SPID H 0 Bright A_SpidRefire
+		Goto MissileLunatic1
+	MissileLunatic2:
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		REMI AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID H 0 Bright A_Jump(32,"MissileLunatic","Missile","See")
+		SPID H 0 Bright A_SpidRefire
+		Goto MissileLunatic2
+	MissileLunatic3:
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		SPID H 0 Bright A_Jump(64,"MissileLunatic","Missile","See")
+		SPID H 0 Bright A_SpidRefire
+		Goto MissileLunatic3
+	MissileLunatic4:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		SPID H 0 Bright A_Jump(128,"MissileLunatic","Missile","See")
+		SPID H 0 Bright A_SpidRefire
+		Goto MissileLunatic4
+	MissileLunatic5:
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		REMI AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		SPID GH 6 Bright A_FaceTarget
+		Goto See
+	MissileLunatic6:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		SPID GH 6 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		Goto See
+	MissileLunatic7:
+		SPID A 0 A_PlaySound("spider/sight",0,1.0,0,ATTN_NONE)
+		SPID AAAAA 7 A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		SPID GH 5 Bright A_FaceTarget
+		SPID A 20 Bright A_FaceTarget
+		Goto See
+	MissileLunatic8:
+		SPID A 0 A_PlaySound("spider/sight",0,1.0,0,ATTN_NONE)
+		SPID AAAAA 7 A_FaceTarget
+		SPID G 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5))
+		SPID G 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-30.0,30.0))
+		SPID G 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5))
+		SPID G 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-30.0,30.0))
+		SPID G 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5))
+		SPID G 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-30.0,30.0))
+		SPID G 4 Bright A_SpidRefire
+		SPID H 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5))
+		SPID H 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-45.0,45.0))
+		SPID H 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5))
+		SPID H 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-45.0,45.0))
+		SPID H 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5))
+		SPID H 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-45.0,45.0))
+		SPID H 4 Bright A_SpidRefire
+		SPID H 0 Bright A_Jump(8,"MissileLunatic","Missile","See")
+		Goto MissileLunatic8+6
+	MissileLunatic9:
+		SPID A 0 A_PlaySound("spider/sight",0,1.0,0,ATTN_NONE)
+		SPID A 20 A_FaceTarget
+		SPID G 0 A_Playsound("touhou/laser",0,0.7)
+		SPID GGGGGGHHHHHH 1 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0,CMF_AIMDIRECTION)
+		SPID A 20 A_FaceTarget
+		SPID G 0 A_Playsound("touhou/laser",0,0.7)
+		SPID GGGGGGHHHHHH 1 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0,CMF_AIMDIRECTION)
+		SPID A 20 A_FaceTarget
+		SPID G 0 A_Playsound("touhou/laser",0,0.7)
+		SPID GGGGGGHHHHHH 1 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0,CMF_AIMDIRECTION)
+		Goto See
+	}
+}
+
+ACTOR DanmakuSpiderPlasma
+{
+  Radius 3
+  Height 6
+  Speed 25
+  fastspeed 35
+  damage (random(1,5)*3)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    YBL1 A 1 Bright
+    Loop
+  Death:
+    YBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR SpiderOrbLarge1 : CyberOrbLarge1
+{
+	+HEXENBOUNCE
+	BounceCount 5
+}
+ACTOR SpiderOrbMedium1 : CyberOrbMedium1
+{
+	+HEXENBOUNCE
+	BounceCount 4
+}
+ACTOR SpiderOrbSmall1 : CyberOrbSmall1
+{
+	+HEXENBOUNCE
+	BounceCount 3
+}
+
+ACTOR SpiderOrbLarge2 : CyberOrbLarge2
+{
+	+HEXENBOUNCE
+	BounceCount 5
+}
+ACTOR SpiderOrbMedium2 : CyberOrbMedium2
+{
+	+HEXENBOUNCE
+	BounceCount 4
+}
+ACTOR SpiderOrbSmall2 : CyberOrbSmall2
+{
+	+HEXENBOUNCE
+	BounceCount 3
+}
+
+ACTOR SpiderOrbLarge3 : CyberOrbLarge3
+{
+	+HEXENBOUNCE
+	BounceCount 5
+}
+ACTOR SpiderOrbMedium3 : CyberOrbMedium3
+{
+	+HEXENBOUNCE
+	BounceCount 4
+}
+ACTOR SpiderOrbSmall3 : CyberOrbSmall3
+{
+	+HEXENBOUNCE
+	BounceCount 3
+}
+
+#include "decorate/demons/dark_imp.txt"
+#include "decorate/demons/suicide_bomber.txt"
+#include "decorate/demons/guardian.txt"
+#include "decorate/demons/daedabus.txt"
+#include "decorate/demons/bruiser_demon.txt"
+#include "decorate/demons/cybruiser.txt"
+#include "decorate/demons/brain.txt"
+#include "decorate/demons/arachnophyte.txt"
+#include "decorate/demons/annihilator.txt"

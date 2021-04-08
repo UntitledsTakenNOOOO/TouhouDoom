@@ -1,0 +1,541 @@
+ACTOR DanmakuBruiserDemon 3333
+{
+//$Category "Danmaku Demons"
+	Health 1500
+	Radius 24
+	Height 64
+	Mass 2000
+	Speed 8
+	PainChance 15
+	Monster
+	+BOSS
+	+FLOORCLIP
+	+LOOKALLAROUND
+	+MISSILEEVENMORE
+	+NORADIUSDMG
+	MissileType BruiserBall1
+	MissileHeight 48
+	SeeSound "superbaron/scream"
+	PainSound "superbaron/pain"
+	DeathSound "superbaron/death"
+	ActiveSound "superbaron/act"
+	MeleeSound "baron/melee"
+	Obituary "%o was slaughtered by a Bruiser demon."
+	HitObituary "%o was cremated by a Bruiser demon."
+	MeleeDamage 20
+	Scale 1.25
+	States
+	{
+	Spawn:
+		BRUS AB 10 Bright A_Look 
+		Loop
+	See:
+		BRUS AABBCCDD 3 Bright A_Chase
+		Loop
+    Melee:
+    Missile:
+		BRUS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		BRUS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		BRUS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		BRUS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileHard
+	MissileEasy:
+		BRUS A 0 Bright A_Jump(153, "MissileEasy2")
+		BRUS A 0 Bright A_Jump(128, "MissileNormal1B")
+	MissileEasy1A:
+		BRUS EF 6 Bright A_FaceTarget
+		BRUS G 6 Bright A_ComboAttack
+		BRUS G 0 Bright A_Jump(96, "MissileEasy1B", "MissileEasy1B", "MissileEasy2A", "MissileEasy2B")
+		Goto See
+	MissileEasy1B:
+		BRUS HI 6 Bright A_FaceTarget
+		BRUS J 6 Bright A_ComboAttack
+		BRUS J 0 Bright A_Jump(96, "MissileEasy1A", "MissileEasy1A", "MissileEasy2A", "MissileEasy2B")
+		Goto See
+	MissileEasy2:
+		BRUS E 0 Bright A_Jump(85, "MissileEasy3")
+		BRUS E 0 Bright A_Jump(128, "MissileNormal2B")
+	MissileEasy2A:
+		BRUS E 6 Bright A_FaceTarget
+		BRUS F 4 Bright A_FaceTarget
+		BRUS F 2 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS G 2 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS G 0 Bright A_Jump(96, "MissileEasy2B", "MissileEasy2B", "MissileEasy1A", "MissileEasy1B")
+		Goto See
+	MissileEasy2B:
+		BRUS H 6 Bright A_FaceTarget
+		BRUS I 4 Bright A_FaceTarget
+		BRUS I 2 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS J 2 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS J 0 Bright A_Jump(96, "MissileEasy2A", "MissileEasy2A", "MissileEasy1A", "MissileEasy1B")
+		Goto See
+	MissileEasy3:
+		BRUS G 0 Bright A_JumpIfCloser(2048,"MissileEasy3A")
+		Goto MissileEasy1A
+	MissileEasy3A:
+		BRUS G 0 Bright A_Jump(128, "MissileEasy3B")
+		BRUS KL 6 Bright A_FaceTarget
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,-15,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,0,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,15,0)
+		Goto See
+	MissileEasy3B:
+		BRUS KL 6 Bright A_FaceTarget
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,15,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,0,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,-15,0)
+		Goto See
+	MissileNormal:
+		BRUS A 0 Bright A_Jump(153, "MissileNormal2")
+	MissileNormal1:
+		BRUS A 0 Bright A_Jump(128, "MissileNormal1B")
+	MissileNormal1A:
+		BRUS EF 6 Bright A_FaceTarget
+		BRUS G 6 Bright A_ComboAttack
+		BRUS G 0 Bright A_Jump(128, "MissileNormal1B", "MissileNormal2")
+		Goto See
+	MissileNormal1B:
+		BRUS HI 6 Bright A_FaceTarget
+		BRUS J 6 Bright A_ComboAttack
+		BRUS J 0 Bright A_Jump(128, "MissileNormal1A", "MissileNormal2")
+		Goto See
+	MissileNormal2:
+		BRUS E 0 Bright A_Jump(85, "MissileNormal3")
+		BRUS E 0 Bright A_Jump(128, "MissileNormal2B")
+	MissileNormal2A:
+		BRUS E 6 Bright A_FaceTarget
+		BRUS F 4 Bright A_FaceTarget
+		BRUS F 2 Bright A_CustomMissile("BruiserBall2",56,0,-40,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-30,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS G 0 Bright A_Jump(128, "MissileNormal2B", "MissileNormal1")
+		Goto See
+	MissileNormal2B:
+		BRUS H 6 Bright A_FaceTarget
+		BRUS I 4 Bright A_FaceTarget
+		BRUS I 2 Bright A_CustomMissile("BruiserBall2",56,0,40,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,30,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS J 0 Bright A_Jump(128, "MissileNormal2A", "MissileNormal1")
+		Goto See
+	MissileNormal3:
+		BRUS G 0 Bright A_Jump(128, "MissileNormal3B")
+		BRUS KL 6 Bright A_FaceTarget
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,-15,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,0,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,15,0)
+		Goto See
+	MissileNormal3B:
+		BRUS KL 6 Bright A_FaceTarget
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,15,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,0,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,-15,0)
+		Goto See
+	MissileHard:
+		BRUS A 0 Bright A_Jump(128, "MissileHard4", "MissileHard5", "MissileHard6", "MissileHard7")
+		BRUS A 0 Bright A_Jump(128, "MissileHard2", "MissileHard3")
+		Goto MissileHard1
+	MissileHard1:
+		BRUS E 6 Bright A_FaceTarget
+		BRUS F 4 Bright A_FaceTarget
+		BRUS F 2 Bright A_CustomMissile("BruiserBall2",56,0,-40,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-30,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS H 6 Bright A_FaceTarget
+		BRUS I 4 Bright A_FaceTarget
+		BRUS I 2 Bright A_CustomMissile("BruiserBall2",56,0,40,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,30,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS J 0 Bright A_Jump(85, "MissileHard")
+		Goto See
+	MissileHard2:
+		BRUS E 4 Bright A_FaceTarget
+		BRUS FG 4 Bright A_CustomComboAttack("BruiserBall2",48,10*random(1,8),"baron/melee")
+		BRUS G 4 Bright A_ComboAttack
+		BRUS H 4 Bright A_FaceTarget
+		BRUS IJ 4 Bright A_CustomComboAttack("BruiserBall2",48,10*random(1,8),"baron/melee")
+		BRUS J 4 Bright A_ComboAttack
+		BRUS J 0 Bright A_Jump(85, "MissileHard")
+		Goto See
+	MissileHard3:
+		BRUS KL 8 Bright A_FaceTarget
+		BRUS MMMM 4 Bright A_ComboAttack
+		BRUS M 0 Bright A_Jump(85, "MissileHard")
+		Goto See
+	MissileHard4:
+		BRUS K 8 Bright A_FaceTarget
+		BRUS L 8 Bright A_FaceTarget
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,30,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-30,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,40,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserBall2",56,0,-40,0)
+		BRUS M 0 Bright A_Jump(85, "MissileHard")
+		Goto See
+	MissileHard5:
+		BRUS EF 6 Bright A_FaceTarget
+		BRUS G 0 Bright A_CustomMissile("BruiserBall1",48,0,-15,0)
+		BRUS G 0 Bright A_CustomMissile("BruiserBall1",48,0,15,0)
+		BRUS G 8 Bright A_CustomMissile("BruiserBall1",48,0,0,0)
+		BRUS HI 6 Bright A_FaceTarget
+		BRUS J 0 Bright A_CustomMissile("BruiserBall1",48,0,-15,0)
+		BRUS J 0 Bright A_CustomMissile("BruiserBall1",48,0,15,0)
+		BRUS J 8 Bright A_CustomMissile("BruiserBall1",48,0,0,0)
+		BRUS J 0 Bright A_Jump(85, "MissileHard")
+		Goto See
+	MissileHard6:
+		BRUS EF 6 Bright A_FaceTarget
+		BRUS G 0 Bright A_CustomMissile("BruiserBallL",48,0,-5,0)
+		BRUS G 0 Bright A_CustomMissile("BruiserBallL",48,0,5,0)
+		BRUS G 8 Bright A_CustomMissile("BruiserBallL",48,0,0,0)
+		BRUS HI 6 Bright A_FaceTarget
+		BRUS J 0 Bright A_CustomMissile("BruiserBallL",48,0,-5,0)
+		BRUS J 0 Bright A_CustomMissile("BruiserBallL",48,0,5,0)
+		BRUS J 8 Bright A_CustomMissile("BruiserBallL",48,0,0,0)
+		Goto See
+	MissileHard7:
+		BRUS KL 8 Bright A_FaceTarget
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,0,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserFireSpawner",16,0,15,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawner",16,0,-15,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserFireSpawner",16,0,30,0)
+		BRUS M 4 Bright A_CustomMissile("BruiserFireSpawner",16,0,-30,0)
+		Goto See
+	MissileLunatic:
+		BRUS A 0 Bright A_Jump(128, "MissileLunatic4", "MissileLunatic5", "MissileLunatic6", "MissileLunatic7", "MissileLunatic8")
+		BRUS A 0 Bright A_Jump(128, "MissileLunatic2", "MissileLunatic3")
+		Goto MissileLunatic1
+	MissileLunatic1:
+		BRUS E 6 Bright A_FaceTarget
+		BRUS F 4 Bright A_FaceTarget
+		BRUS F 1 Bright A_CustomMissile("BruiserBall2",56,0,-40,0)
+		BRUS F 1 Bright A_CustomMissile("BruiserBall2",56,0,-30,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS G 1 Bright A_CustomMissile("BruiserBall2",56,0,30,0)
+		BRUS H 6 Bright A_FaceTarget
+		BRUS I 4 Bright A_FaceTarget
+		BRUS I 1 Bright A_CustomMissile("BruiserBall2",56,0,40,0)
+		BRUS I 1 Bright A_CustomMissile("BruiserBall2",56,0,30,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,0,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS J 1 Bright A_CustomMissile("BruiserBall2",56,0,-30,0)
+		BRUS J 0 Bright A_Jump(128, "MissileLunatic")
+		Goto See
+	MissileLunatic2:
+		BRUS E 4 Bright A_FaceTarget
+		BRUS F 0 Bright A_CustomMissile("BruiserBall2",48,0,-4,0)
+		BRUS F 0 Bright A_CustomMissile("BruiserBall2",48,0,4,0)
+		BRUS F 4 Bright A_CustomMissile("BruiserBall2",48,0,0,0)
+		BRUS G 0 Bright A_CustomMissile("BruiserBall2",48,0,-4,0)
+		BRUS G 0 Bright A_CustomMissile("BruiserBall2",48,0,4,0)
+		BRUS G 4 Bright A_CustomMissile("BruiserBall2",48,0,0,0)
+		BRUS G 0 Bright A_CustomMissile("BruiserBall1",48,0,-4,0)
+		BRUS G 0 Bright A_CustomMissile("BruiserBall1",48,0,4,0)
+		BRUS G 4 Bright A_CustomMissile("BruiserBall1",48,0,0,0)
+		BRUS H 4 Bright A_FaceTarget
+		BRUS I 0 Bright A_CustomMissile("BruiserBall2",48,0,-4,0)
+		BRUS I 0 Bright A_CustomMissile("BruiserBall2",48,0,4,0)
+		BRUS I 4 Bright A_CustomMissile("BruiserBall2",48,0,0,0)
+		BRUS J 0 Bright A_CustomMissile("BruiserBall2",48,0,-4,0)
+		BRUS J 0 Bright A_CustomMissile("BruiserBall2",48,0,4,0)
+		BRUS J 4 Bright A_CustomMissile("BruiserBall2",48,0,0,0)
+		BRUS J 0 Bright A_CustomMissile("BruiserBall1",48,0,-4,0)
+		BRUS J 0 Bright A_CustomMissile("BruiserBall1",48,0,4,0)
+		BRUS J 4 Bright A_CustomMissile("BruiserBallL",48,0,0,0)
+		BRUS J 0 Bright A_Jump(85, "MissileLunatic")
+		Goto See
+	MissileLunatic3:
+		BRUS KL 8 Bright A_FaceTarget
+		BRUS M 4 Bright A_CustomMissile("BruiserBallL",48,0,0,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall1",48,0,-2,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall1",48,0,2,0)
+		BRUS M 4 Bright A_CustomMissile("BruiserBall1",48,0,0,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall1",48,0,-4,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall1",48,0,4,0)
+		BRUS M 4 Bright A_CustomMissile("BruiserBall1",48,0,0,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall1",48,0,-6,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall1",48,0,6,0)
+		BRUS M 4 Bright A_CustomMissile("BruiserBall1",48,0,0,0)
+		BRUS M 0 Bright A_Jump(85, "MissileLunatic")
+		Goto See
+	MissileLunatic4:
+		BRUS K 8 Bright A_FaceTarget
+		BRUS L 8 Bright A_FaceTarget
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,30,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-30,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall1",56,0,0,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,10,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-10,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,20,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-20,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,30,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-30,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBall2",56,0,40,0)
+		BRUS M 1 Bright A_CustomMissile("BruiserBall2",56,0,-40,0)
+		BRUS M 0 Bright A_Jump(128, "MissileLunatic")
+		Goto See
+	MissileLunatic5:
+		BRUS KL 8 Bright A_FaceTarget
+		BRUS M 0 Bright A_CustomMissile("BruiserFireSpawnerL",16,0,30,0)
+		BRUS M 2 Bright A_CustomMissile("BruiserFireSpawnerL",16,0,-30,0)
+		Goto See
+	MissileLunatic6:
+		BRUS KL 8 Bright A_FaceTarget
+		BRUS MMMMMMMMMMMMMMMM 4 Bright A_CustomMissile("BruiserFireSpawner",16,0,random(-135,135),0)
+		Goto See
+	MissileLunatic7:
+		BRUS KL 8 Bright A_FaceTarget
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,0,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,30,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,60,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,90,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,120,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,150,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,180,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,210,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,240,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,270,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,300,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserBallL",48,0,330,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserFireSpawnerL2",16,0,0,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserFireSpawnerL2",16,0,90,0)
+		BRUS M 0 Bright A_CustomMissile("BruiserFireSpawnerL2",16,0,180,0)
+		BRUS M 8 Bright A_CustomMissile("BruiserFireSpawnerL2",16,0,270,0)
+		Goto See
+	MissileLunatic8:
+		BRUS KL 8 Bright A_FaceTarget
+		BRUS MMMMMMMM 2 Bright A_CustomMissile("BruiserBallL",16,0,0,0)
+		Goto See
+	Pain:
+		BRUS N 5 Bright A_Pain
+ 		Goto See
+	Death:
+		BRUD A 6 Bright A_Scream
+		BRUD BCD 4 Bright 
+		BRUD EFG 4 Bright
+		BRUD H 4 Bright A_Fall
+		BRUD IJKLMNOP 4 Bright
+		BRUD QRSTUV 4
+		BRUD W -1   
+		Stop
+	}
+}
+
+ACTOR BruiserBall1
+{
+	Radius 12
+	Height 12
+	Speed 16
+	Damage 16
+	Projectile
+	+RANDOMIZE
+	+STRIFEDAMAGE
+	RenderStyle "ADD"
+	Alpha 0.9
+	SeeSound "imp/attack"
+	DeathSound "imp/shotx"
+	Decal Scorch
+	States
+	{
+	Spawn: 
+		BRBA AABB 2 BRIGHT A_SpawnItemEx("BruiserBallTrail", 0, 0, 0, 0, 0, 0, 0, 128)
+		Loop
+	Death:
+		BRBA KLMNOPQRSTUVWX 3 Bright
+		Stop
+	}
+}
+ACTOR BruiserBallL : BruiserBall1
+{
+	Speed 24
+	Damage 32
+	Scale 1.5
+	States
+	{
+	Spawn: 
+		BRBA AAAABBBB 1 BRIGHT A_SpawnItemEx("BruiserBallTrail", 0, 0, 0, random(-3,3), random(-3,3), random(-3,3), random(0,360), 128)
+		Loop
+	Death:
+		BRBA KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK 0 Bright A_CustomMissile("BruiserBall2A",0,0,random(0,360),CMF_AIMDIRECTION,random(-90,90))	
+		BRBA KLMNOPQRSTUVWX 3 Bright
+		Stop
+	}
+}
+
+ACTOR BruiserBall2
+{
+	Radius 6
+	Height 6
+	Speed 8
+	Damage 8
+	Projectile
+	+RANDOMIZE
+	+STRIFEDAMAGE
+	RenderStyle "ADD"
+	Alpha 0.9
+	SeeSound "imp/attack"
+	DeathSound "imp/shotx"
+	Decal BaronScorch
+	States
+	{
+	Spawn: 
+		BRB2 AB 6 BRIGHT 
+		Loop
+	Death:
+		BRB2 CDEFGHI 3 Bright
+		Stop
+	}
+}
+ACTOR BruiserBall2A : BruiserBall2
+{
+	Damage 4
+}
+ACTOR BruiserFireSpawner
+{
+	Radius 8
+	Height 8
+	Speed 12
+	Damage 0
+	+RIPPER
+	+FLOORHUGGER
+	+BLOODLESSIMPACT
+	Projectile
+	MissileType BruiserFire
+	Missileheight 0
+	States
+	{
+	Spawn: 
+		TNT1 A 3 Bright A_MissileAttack
+  		TNT1 A 3
+  		TNT1 A 3
+		Loop
+	Death:	
+		TNT1 A 6
+		Stop
+	}
+}
+ACTOR BruiserFireSpawnerL
+{
+	Radius 8
+	Height 8
+	Speed 12
+	Damage 0
+	+RIPPER
+	+FLOORHUGGER
+	+BLOODLESSIMPACT
+	Projectile
+	MissileType BruiserFire
+	Missileheight 0
+	States
+	{
+	Spawn: 
+		TNT1 A 3 Bright A_MissileAttack
+		Loop
+	Death:	
+		TNT1 A 6
+		Stop
+	}
+}
+ACTOR BruiserFireSpawnerL2
+{
+	Radius 8
+	Height 8
+	Speed 12
+	Damage 0
+	+RIPPER
+	+FLOORHUGGER
+	+BLOODLESSIMPACT
+	Projectile
+	MissileType BruiserFire
+	Missileheight 0
+	States
+	{
+	Spawn: 
+		TNT1 A 3 Bright A_MissileAttack
+		TNT1 A 3 Bright
+		Loop
+	Death:	
+		TNT1 A 6
+		Stop
+	}
+}
+actor BruiserBallTrail
+{
+    Radius 1
+    Height 1
+    Speed 0
+    PROJECTILE
+    RENDERSTYLE ADD
+    ALPHA 0.70
+    +NOCLIP
+    States
+    {
+    Spawn:
+     	BRBA CDEFGHIJ 4 Bright
+     	Stop       
+    }
+}
+
+ACTOR BruiserFire
+{
+	Radius 1
+    Height 1
+    Speed 0
+    Damage 0
+    PROJECTILE
+    RENDERSTYLE ADD
+    ALPHA 0.9
+    +NOCLIP
+	+FLOORHUGGER
+	SeeSound "weapons/rocklx"
+	States
+    {
+	Spawn:
+		XXBF AB 3 Bright
+		XXBF CCCCCCCCCCCC 0 Bright A_CustomMissile("BruiserBall2A",0,0,random(0,360),CMF_AIMDIRECTION,random(0,90))
+		XXBF CDEFGHIJKLMNOPQRST 3 Bright
+		Stop       
+   	}
+}
+

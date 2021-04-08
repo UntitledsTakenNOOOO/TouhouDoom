@@ -1,0 +1,46 @@
+clearskills
+
+skill Easy
+{
+spawnfilter = 1
+textcolor = "green"
+name = "Easy"
+mustconfirm = "For people who don't play either Touhou or Doom much."
+acsreturn = 0
+}
+skill Normal
+{
+spawnfilter = 2
+name = "Normal"
+textcolor = "cyan"
+defaultskill
+mustconfirm = "For people who play Touhou or Doom."
+acsreturn = 1
+}
+skill Hard
+{
+name = "Hard"
+mustconfirm = "For people who play both Touhou and Doom."
+textcolor = "blue"
+spawnfilter = 3
+acsreturn = 2
+}
+skill Lunatic
+{
+name = "Lunatic"
+textcolor = "purple"
+mustconfirm = "For crazy people."
+spawnfilter = 4
+acsreturn = 3
+}
+skill Ultra
+{
+name = "Ultra"
+textcolor = "red"
+mustconfirm = "For people who don't realize this is impossible." 
+spawnfilter = 5
+acsreturn = 4
+fastmonsters //Yeah, this makes things go completely nuts
+ammofactor = 1.5
+damagefactor = 0.5 //It helps surprisingly little
+}

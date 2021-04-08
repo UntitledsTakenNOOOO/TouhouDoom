@@ -1,0 +1,52 @@
+#include "decorate/items/power.txt"
+#include "decorate/items/beacon.txt"
+#include "decorate/items/hakurei_amulet_rifle.txt"
+#include "decorate/items/hakkero_star_cannon.txt"
+#include "decorate/items/system_card_bomb.txt"
+#include "decorate/items/system_card_amplify.txt"
+#include "decorate/items/system_card_regenerate.txt"
+#include "decorate/items/fantasy_seal.txt"
+#include "decorate/items/evil_sealing_circle.txt"
+#include "decorate/items/master_spark.txt"
+#include "decorate/items/stardust_reverie.txt"
+#include "decorate/items/private_square.txt"
+#include "decorate/items/red_the_nightless_castle.txt"
+#include "decorate/items/ghastly_dream.txt"
+#include "decorate/items/mega_flare.txt"
+#include "decorate/items/maple_leaf_fan.txt"
+#include "decorate/items/grey_thaumaturgy.txt"
+#include "decorate/items/thunder_from_sea.txt"
+#include "decorate/items/state_of_freedom.txt"
+
+actor MegaMap : CustomInventory 12765
+{
+  +COUNTITEM
+  +INVENTORY.FANCYPICKUPSOUND
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.MaxAmount 0
+  Inventory.PickupSound "misc/p_pkup"
+  Inventory.PickupMessage "Mega Map!"
+  states
+  {
+  Spawn:
+    MMAP ABCDCB 6 Bright
+    Loop
+  Pickup:
+    TNT1 A 1 A_GiveInventory("Allmap")
+    TNT1 A 0 A_GiveInventory("DoomScanner")
+    stop
+  }
+}
+
+actor DoomScanner : PowerupGiver
+{
+  Powerup.type "Scanner"
+  Powerup.Duration 0x7FFFFFFF
+  +INVENTORY.AUTOACTIVATE
+  states
+  {
+  Spawn:
+    TNT1 A 1
+    stop
+  }
+}

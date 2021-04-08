@@ -1,0 +1,267 @@
+ACTOR GhastlyDream : CustomInventory 28116
+{
+//$Category "Touhou Spellcards"
+  +COUNTITEM
+  +INVENTORY.INVBAR
+  +FLOATBOB
+  Inventory.MaxAmount 1
+  Inventory.Icon "GHDRA0"
+  Inventory.PickupMessage "Death Sign \"Ghastly Dream\""
+  Tag "Death Sign \"Ghastly Dream\""
+  Inventory.PickupSound "touhou/bonus1"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(610,2),"Bye")
+	GHDR B -1
+	Stop
+  Bye:
+	TNT1 A 0 A_ChangeFlag("COUNTITEM", FALSE)
+	TNT1 A 0 A_SpawnItemEx("SoulSphere",0,0,0,0,0,0,0,0,0)
+    Stop
+  Use:
+	TNT1 A 0 A_JumpIfInventory("SpellAmplifierPowerup",1,"Use2Continue")
+	TNT1 A 0 A_JumpIfHealthLower(25,"Use2")
+  Use1:
+    TNT1 A 0 ACS_ExecuteAlways(612,0,7)
+	TNT1 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/yuyu/weakspin",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("BeaconInvuln",1)
+	TNT1 A 0 A_GiveInventory("GhastlyDreamSpawner",1)
+    Stop
+  Use2:
+	TNT1 A 0 A_JumpIfInventory("Power",400,"Use2Continue")
+	Goto Use1
+  Use2Continue:
+    TNT1 A 0 ACS_ExecuteAlways(612,0,8)
+    TNT1 A 0 ACS_ExecuteAlways(613,0,1)
+	TNT1 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/yuyu/strongspin",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("BeaconInvuln",1)
+	TNT1 A 0 A_SpawnItemEx("GhastlyDreamSpawner",1)
+    Stop
+  }
+}
+actor GhastlyDreamSpawner : CustomInventory
+{
+  Inventory.PickupMessage ""
+  Inventory.PickupSound ""
+  Inventory.MaxAmount 99999
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.AUTOACTIVATE
+  States
+  {
+  Spawn:
+    TNT1 A 0
+	Stop
+  Pickup:
+	TNT1 A 0
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",0)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",15)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",30)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",45)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",60)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",75)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",90)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",105)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",120)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",135)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",150)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",165)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",180)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",195)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",210)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",225)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",240)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",255)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",270)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",285)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",300)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",315)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",330)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue",345)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",0)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",15)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",30)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",45)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",60)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",75)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",90)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",105)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",120)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",135)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",150)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",165)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",180)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",195)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",210)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",225)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",240)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",255)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",270)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",285)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",300)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",315)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",330)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet",345)
+	Stop
+  }
+}
+actor GhastlyDreamSpawner2 : CustomInventory
+{
+  Inventory.PickupMessage ""
+  Inventory.PickupSound ""
+  Inventory.MaxAmount 99999
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.AUTOACTIVATE
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	Stop
+  Pickup:
+    TNT1 A 0
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",0)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",15)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",30)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",45)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",60)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",75)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",90)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",105)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",120)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",135)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",150)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",165)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",180)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",195)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",210)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",225)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",240)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",255)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",270)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",285)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",300)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",315)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",330)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyBlue2",345)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",0)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",15)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",30)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",45)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",60)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",75)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",90)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",105)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",120)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",135)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",150)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",165)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",180)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",195)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",210)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",225)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",240)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",255)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",270)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",285)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",300)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",315)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",330)
+	TNT1 A 0 A_FireCustomMissile("GhastlyDreamButterflyViolet2",345)
+	Stop
+  }
+}
+ACTOR GhastlyDreamButterflyBlue
+{
+  Radius 64
+  Height 64
+  Health 0x7FFFFFFF
+  Scale 2.0
+  DamageFactor 0.0
+  RadiusDamageFactor 0.0
+  Species "Player"
+  Speed 10
+  Damage (0)
+  Projectile
+  -SOLID
+  +THRUSPECIES
+  +SHOOTABLE
+  +NOBLOOD
+  +DONTSPLASH
+  +NOCLIP
+  -NOBLOCKMAP
+  +FORCEXYBILLBOARD
+  +SEEKERMISSILE
+  +FORCERADIUSDMG
+  +PAINLESS
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  DamageType "PlayerSpellcard"
+  WeaveIndexXY 0
+  WeaveIndexZ 0
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",140,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+	TNT1 A 0 Bright A_Weave(3, 0, 1.0, 0.0)
+	BBFL A 1 Bright A_Explode(4,256,0,0,256)
+	Loop
+  Death:
+    BBFL AAAAAAAAAA 3 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR GhastlyDreamButterflyBlue2 : GhastlyDreamButterflyBlue
+{
+	Speed 40
+}
+ACTOR GhastlyDreamButterflyViolet
+{
+  Radius 32
+  Height 64
+  Health 0x7FFFFFFF
+  Scale 2.0
+  DamageFactor 0.0
+  RadiusDamageFactor 0.0
+  Species "Player"
+  Speed 10
+  Damage (0)
+  Projectile
+  -SOLID
+  +THRUSPECIES
+  +SHOOTABLE
+  +NOBLOOD
+  +DONTSPLASH
+  +NOCLIP
+  -NOBLOCKMAP
+  +FORCEXYBILLBOARD
+  +SEEKERMISSILE
+  +FORCERADIUSDMG
+  +PAINLESS
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  DamageType "PlayerSpellcard"
+  WeaveIndexXY 32
+  WeaveIndexZ 32
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",140,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+	TNT1 A 0 Bright A_Weave(3, 0, 1.0, 0.0)
+	VBFL A 1 Bright A_Explode(4,128,0,0,128)
+	Loop
+  Death:
+    VBFL AAAAAAAAAA 3 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR GhastlyDreamButterflyViolet2 : GhastlyDreamButterflyViolet
+{
+	Speed 40
+}

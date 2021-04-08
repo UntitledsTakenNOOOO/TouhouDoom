@@ -1,0 +1,122 @@
+ACTOR EvilSealingCircle : CustomInventory 28112
+{
+//$Category "Touhou Spellcards"
+  +COUNTITEM
+  +INVENTORY.INVBAR
+  +FLOATBOB
+  Inventory.MaxAmount 1
+  Inventory.Icon "ESCCA0"
+  Inventory.PickupMessage "Dream Sign \"Evil Sealing Circle\""
+  Tag "Dream Sign \"Evil Sealing Circle\""
+  Inventory.PickupSound "touhou/bonus1"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(610,2),"Bye")
+	ESCC B -1
+	Stop
+  Bye:
+	TNT1 A 0 A_ChangeFlag("COUNTITEM", FALSE)
+	TNT1 A 0 A_SpawnItemEx("SoulSphere",0,0,0,0,0,0,0,0,0)
+    Stop
+  Use:
+	TNT1 A 0 A_JumpIfInventory("SpellAmplifierPowerup",1,"Use2Continue")
+	TNT1 A 0 A_JumpIfHealthLower(25,"Use2")
+  Use1:
+    TNT1 A 0 ACS_ExecuteAlways(612,0,11)
+	TNT1 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/charge3",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/charge2",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/charge",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("BeaconInvuln",1)
+	TNT1 A 0 A_FireCustomMissile("PlayerEvilSealingCircleAttack",0,0,0)
+    Stop
+  Use2:
+	TNT1 A 0 A_JumpIfInventory("Power",400,"Use2Continue")
+	Goto Use1
+  Use2Continue:
+    TNT1 A 0 ACS_ExecuteAlways(612,0,12)
+	TNT1 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/charge3",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/charge2",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/charge",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("BeaconInvuln",1)
+	TNT1 A 0 A_SpawnItemEx("MissileBlockerSpawnerSpawner",0,0,0,0,0,0,frandom(0,360),SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_FireCustomMissile("PlayerEvilSealingCircleAttack2",0,0,0)
+    Stop
+  }
+}
+ACTOR PlayerEvilSealingCircleAttack
+{
+  +NOINTERACTION
+  +NOGRAVITY
+  +OLDRADIUSDMG
+  +FORCERADIUSDMG
+  RenderStyle Add
+  DamageType "PlayerSpellcard"
+  var int user_count;
+  var int user_dist;
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_SetAngle(0)
+	TNT1 A 0 A_SetUserVar("user_dist",384)
+	Goto SpawnCircle
+  SpawnCircle:
+	TNT1 A 1 A_JumpIf(user_count > 70, "PrepareToDie")
+	TNT1 A 0 A_SetUserVar("user_count",user_count+1)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",-user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",random(-user_dist,user_dist),user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",random(-user_dist,user_dist),-user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",-user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",random(-user_dist,user_dist),user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",random(-user_dist,user_dist),-user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",-user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",random(-user_dist,user_dist),user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",random(-user_dist,user_dist),-user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",-user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",random(-user_dist,user_dist),user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",random(-user_dist,user_dist),-user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",-user_dist,random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",random(-user_dist,user_dist),user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",random(-user_dist,user_dist),-user_dist,random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	Loop
+  PrepareToDie:
+	TNT1 A 0 A_PlaySound("touhou/reimu/seal",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_Explode(1024,user_dist*2,0,0,user_dist)
+	TNT1 A 0 A_SpawnItemEx("MissileBlockerSpawnerSpawner2",0,0,0,0,0,0,frandom(0,360),SXF_ABSOLUTEANGLE)
+	Goto DeathLoop
+  DeathLoop:
+	TNT1 A 0 A_JumpIf(user_count > 1070, "Death")
+	TNT1 A 0 A_SetUserVar("user_count", user_count+1)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailRed",random(-user_dist,user_dist),random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	TNT1 A 0 A_SpawnItemEx("ReimuFantasySealOrbTrailBlue",random(-user_dist,user_dist),random(-user_dist,user_dist),random(-z-floorz,ceilingz-z),0,0,4,0,0,0)
+	Loop
+  Death:
+	TNT1 A 0
+	Stop
+  }
+}
+ACTOR PlayerEvilSealingCircleAttack2 : PlayerEvilSealingCircleAttack
+{
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_SetAngle(0)
+	TNT1 A 0 A_SetUserVar("user_dist",512)
+	Goto SpawnCircle
+  PrepareToDie:
+	TNT1 A 0 A_PlaySound("touhou/reimu/seal",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_Explode(1792,user_dist*2,0,0,user_dist)
+	TNT1 A 0 A_SpawnItemEx("MissileBlockerSpawnerSpawner",0,0,0,0,0,0,frandom(0,360),SXF_ABSOLUTEANGLE)
+	Goto DeathLoop
+  }
+}

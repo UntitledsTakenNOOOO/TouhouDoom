@@ -1,0 +1,544 @@
+ACTOR Koakuma 31169
+{
+//$Category "Touhou Characters"
+  Tag "   "
+  Speed 8
+  FastSpeed 10
+  MONSTER
+  Health 3000
+  //damage 0
+  Radius 24
+  Height 64
+  Scale 0.7
+  Mass 10000
+  MinMissileChance 160
+  //MinMissileChance 3000 //I'M HERE TO WRITE CODE AND INSULT TOUHOU DOOM
+  //MeleeThreshold 35 //AND I'M ALL OUT OF INSULTS
+  //MeleeRange 65 //IT'S LIKE THIS ALL THE WAY THROUGH
+  Species SDM
+  DamageFactor "SDM", 0
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +LOWGRAVITY
+  +DONTMORPH
+  +AMBUSH
+  +DONTMORPH
+  +NOICEDEATH
+  Painchance 6
+  Seesound ""
+  Painsound "touhou/pain"
+  Deathsound "touhou/defeat"
+  Obituary "%o was killed by Koakuma's devil magic."
+  States
+  {
+  Spawn:
+    KOAK AB 2 A_Look
+    Loop
+  See:
+    TNT1 A 0 Thing_ChangeTID(0,6022)
+    TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6022,0,false)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6022,40)
+	KOAK A 0 A_ChangeFlag("NOPAIN",0)
+    KOAK AB 2 A_Chase
+    Loop
+  Pain:
+    KOAK Q 10 A_Pain
+    Goto See
+  Melee:
+  Missile:
+	KOAK N 0 A_ChangeFlag("NOPAIN",1)
+    KOAK N 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasyNormal")
+    KOAK N 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileEasyNormal")
+    KOAK N 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    KOAK N 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+  MissileEasyNormal:
+    KOAK IJKLM 5 A_Facetarget
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK N 14
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,11.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,56.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,101.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,146.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,191.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,236.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,281.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,326.25)
+    KOAK N 14
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,22.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,67.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,112.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,157.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,202.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,247.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,292.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,337.5)
+    KOAK N 14
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,33.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,78.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,123.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,168.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,213.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,258.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,303.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,348.75)
+    KOAK N 14
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK NNMMLLKKJJII 2 A_Wander
+    KOAK CD 5 A_FaceTarget
+    KOAK EEEEEEFFF 2 A_SpawnItemEx("KoakumaShooterNormal",Random(-64,64),Random(64,-64),Random(0,64),0,0,0,0,0)
+    KOAK F 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+    KOAK FFFGGGGGG 2 A_SpawnItemEx("KoakumaShooterNormal",Random(-64,64),Random(64,-64),Random(0,64),0,0,0,0,0)
+    KOAK H 5 A_FaceTarget
+    Goto See
+  MissileHard:
+    KOAK IJKLM 5 A_Facetarget
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK N 13
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,11.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,56.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,101.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,146.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,191.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,236.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,281.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,326.25)
+    KOAK N 13
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,22.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,67.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,112.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,157.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,202.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,247.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,292.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,337.5)
+    KOAK N 13
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,33.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,78.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,123.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,168.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,213.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,258.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,303.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,348.75)
+    KOAK N 13
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK N 13
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,11.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,56.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,101.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,146.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,191.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,236.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,281.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,326.25)
+    KOAK N 13
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,22.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,67.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,112.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,157.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,202.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,247.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,292.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,337.5)
+    KOAK N 13
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,33.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,78.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,123.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,168.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,213.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,258.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,303.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,348.75)
+    KOAK N 13
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK NNMMLLKKJJII 2 A_Wander
+    KOAK CD 5 A_FaceTarget
+    KOAK CD 5 A_FaceTarget
+    KOAK EEEEEEFFFFFFGGGGGG 2 A_SpawnItemEx("KoakumaShooterHard",Random(-64,64),Random(64,-64),Random(0,64),0,0,0,0,0)
+    KOAK H 5 A_FaceTarget
+    Goto See
+  MissileLunatic:
+    KOAK IJKLM 5 Fast A_Facetarget
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,11.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,56.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,101.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,146.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,191.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,236.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,281.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,326.25)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,22.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,67.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,112.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,157.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,202.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,247.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,292.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,337.5)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,33.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,78.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,123.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,168.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,213.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,258.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,303.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,348.75)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,11.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,56.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,101.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,146.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,191.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,236.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,281.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,326.25)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,22.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,67.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,112.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,157.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,202.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,247.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,292.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,337.5)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,33.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,78.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,123.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,168.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,213.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,258.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,303.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,348.75)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,11.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,56.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,101.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,146.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,191.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,236.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,281.25)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,326.25)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,22.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,67.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,112.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,157.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,202.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,247.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,292.5)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,337.5)
+    KOAK N 12 Fast
+    KOAK N 0 A_Playsound("touhou/fire",0,0.7)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,33.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,78.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,123.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,168.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,213.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,258.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,303.75)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,348.75)
+    KOAK N 12 Fast
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,0)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,45)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,90)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,135)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,180)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,225)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,270)
+    KOAK N 0 A_CustomMissile("StrongKoaOrb",32,0,315)
+    KOAK N 5 A_JumpIfInTargetInventory("UltraMode",1,12)
+    KOAK NNMMLLKKJJII 2 A_Wander
+    KOAK CD 5 A_FaceTarget
+    KOAK F 0 A_JumpIfInTargetInventory("UltraMode",1,"UltraMissileEnd")
+    KOAK CD 5 A_FaceTarget
+    KOAK EEEEEEFFFFFFGGGGGG 2 A_SpawnItemEx("KoakumaShooterLunatic",Random(-64,64),Random(64,-64),Random(0,64),0,0,0,0,0)
+    KOAK H 5 A_FaceTarget
+    Goto See
+  UltraMissileEnd:
+    KOAK CD 5 A_FaceTarget
+    KOAK EEEEEEEEEEEEFFFFFFFFFFFFGGGGGGGGGGGG 1 A_SpawnItemEx("KoakumaShooterLunatic",Random(-64,64),Random(64,-64),Random(0,64),0,0,0,0,0)
+    KOAK H 5 A_FaceTarget
+    Goto See
+  Death:
+	TNT1 A 0 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+	KOAK Q 0 A_GiveInventory("BulletDeathTrigger",1)
+    KOAK Q 35
+    KOAK Q 0 A_NoBlocking
+    KOAK Q 0 A_scream
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 BRIGHT A_SpawnItemEx("TouhouFireWhite",Random(4,-4),Random(4,-4),Random(4,-4),Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+    Stop
+  }
+}
+
+ACTOR WeakKoaOrb
+{
+  Radius 4
+  Speed 6
+  fastspeed 20
+  Height 8
+  damage (10)
+  XScale 2.5
+  YScale 1.5
+  Projectile
+  +FORCEXYBILLBOARD
+  +THRUSPECIES
+  DeathSound "touhou/hit"
+  DamageType "Koakuma"
+  Species SDM
+  States
+  {
+  Spawn:
+    BKUN A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BKUN AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR StrongKoaOrb
+{
+  Radius 15
+  Speed 16
+  fastspeed 24
+  Height 30
+  damage (30)
+  Scale 1.25
+  Projectile
+  +FORCEXYBILLBOARD
+  +THRUSPECIES
+  //+strifedamage
+  RenderStyle Add
+  DeathSound "touhou/hit2"
+  DamageType "SDM"
+  Species SDM
+  States
+  {
+  Spawn:
+    VBUB A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    VBUB AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR KoakumaShooterNormal
+{
+-SOLID
++NOGRAVITY
++LOOKALLAROUND
+States
+{
+  Spawn:
+    TNT1 A 1
+    TNT1 A 1 A_look
+    Goto Spawn+1
+  See:
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Jump(32,"Missile")
+    stop
+  Missile:
+    TNT1 A 0 A_SetAngle(Random(0,360))
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+45)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+45)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+45)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+45)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+45)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+45)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+45)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+	TNT1 A 0 A_Jump(128,"See")
+    TNT1 A 0 A_Die
+  Death:
+    TNT1 A 0
+    Stop
+    }
+}
+ACTOR KoakumaShooterHard
+{
+-SOLID
++NOGRAVITY
++LOOKALLAROUND
+States
+{
+  Spawn:
+    TNT1 A 1
+    TNT1 A 1 A_look
+    Goto Spawn+1
+  See:
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Jump(32,"Missile")
+    loop
+  Missile:
+    TNT1 A 0 A_SetAngle(Random(0,360))
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+36)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+	TNT1 A 0 A_Jump(128,"See")
+    TNT1 A 0 A_Die
+  Death:
+    TNT1 A 0
+    Stop
+    }
+}
+ACTOR KoakumaShooterLunatic
+{
+-SOLID
++NOGRAVITY
++LOOKALLAROUND
+States
+{
+  Spawn:
+    TNT1 A 1
+    TNT1 A 1 A_look
+    Goto Spawn+1
+  See:
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Jump(32,"Missile")
+    loop
+  Missile:
+    TNT1 A 0 A_SetAngle(Random(0,360))
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+    TNT1 A 0 A_SetAngle(angle+30)
+    TNT1 A 0 A_CustomMissile("WeakKoaOrb",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+	TNT1 A 0 A_Jump(128,"See")
+    TNT1 A 0 A_Die
+  Death:
+    TNT1 A 0
+    Stop
+    }
+}

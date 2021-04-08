@@ -1,0 +1,212 @@
+ACTOR GrayThaumaturgy : CustomInventory 28119
+{
+//$Category "Touhou Spellcards"
+  +COUNTITEM
+  +INVENTORY.INVBAR
+  +FLOATBOB
+  Inventory.MaxAmount 1
+  Inventory.Icon "GRTHA0"
+  Inventory.PickupMessage "Esoterica \"Gray Thaumaturgy\""
+  Tag "Esoterica \"Gray Thaumaturgy\""
+  Inventory.PickupSound "touhou/bonus1"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(610,2),"Bye")
+	GRTH B -1
+	Stop
+  Bye:
+	TNT1 A 0 A_ChangeFlag("COUNTITEM", FALSE)
+	TNT1 A 0 A_SpawnItemEx("SoulSphere",0,0,0,0,0,0,0,0,0)
+    Stop
+  Use:
+	TNT1 A 0 A_JumpIfInventory("SpellAmplifierPowerup",1,"Use2Continue")
+	TNT1 A 0 A_JumpIfHealthLower(25,"Use2")
+  Use1:
+    TNT1 A 0 ACS_ExecuteAlways(612,0,17)
+	TNT1 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/masterspark",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("BeaconInvuln",1)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack1",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack2",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack3",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack4",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack5",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack6",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack7",0,0,0)
+    Stop
+  Use2:
+	TNT1 A 0 A_JumpIfInventory("Power",400,"Use2Continue")
+	Goto Use1
+  Use2Continue:
+    TNT1 A 0 ACS_ExecuteAlways(612,0,18)
+	TNT1 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_PlaySound("touhou/masterspark",0,1.0,0,ATTN_NONE)
+	TNT1 A 0 A_GiveInventory("BeaconInvuln",1)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack",72,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack",144,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack",216,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack",288,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack1",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack1",72,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack1",144,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack1",216,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack1",288,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack2",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack2",72,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack2",144,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack2",216,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack2",288,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack3",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack3",72,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack3",144,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack3",216,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack3",288,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack4",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack4",72,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack4",144,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack4",216,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack4",288,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack5",0,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack5",72,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack5",144,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack5",216,0,0)
+	TNT1 A 0 A_FireCustomMissile("GrayThaumaturgyAttack5",288,0,0)
+    Stop
+  }
+}
+ACTOR GrayThaumaturgyAttack
+{
+  Radius 192
+  Height 256
+  Health 0x7FFFFFFF
+  DamageFactor 0.0
+  RadiusDamageFactor 0.0
+  Species "Player"
+  DamageType "PlayerSpellcard"
+  Speed 7
+  Damage (0)
+  Scale 2.0
+  Projectile
+  -SOLID
+  +THRUSPECIES
+  +SHOOTABLE
+  +NOBLOOD
+  +DONTSPLASH
+  +NOCLIP
+  -NOBLOCKMAP
+  +FORCEXYBILLBOARD
+  +SEEKERMISSILE
+  +FORCERADIUSDMG
+  +PAINLESS
+  +FLOORHUGGER
+  +RANDOMIZE
+  RenderStyle Add
+  SeeSound ""
+  DeathSound ""
+  States
+  {
+  Spawn:
+	SNST A 0
+	SNST ABCDEFABC 4 Bright A_Explode(2,512,0,0,512)
+	SNST DEFABCDEFABC 3 Bright A_Explode(2,512,0,0,512)
+	SNST DEFABCDEFABCDEF 2 Bright A_Explode(2,512,0,0,512)
+	SNST A 1 Bright A_Explode(2,512,0,0,512)
+	SNST B 2 Bright A_Explode(2,512,0,0,512)
+	SNST C 1 Bright A_Explode(2,512,0,0,512)
+	SNST D 2 Bright A_Explode(2,512,0,0,512)
+	SNST E 1 Bright A_Explode(2,512,0,0,512)
+	SNST F 2 Bright A_Explode(2,512,0,0,512)
+	SNST A 1 Bright A_Explode(2,512,0,0,512)
+	SNST B 2 Bright A_Explode(2,512,0,0,512)
+	SNST C 1 Bright A_Explode(2,512,0,0,512)
+	SNST D 2 Bright A_Explode(2,512,0,0,512)
+	SNST E 1 Bright A_Explode(2,512,0,0,512)
+	SNST F 2 Bright A_Explode(2,512,0,0,512)
+	SNST A 1 Bright A_Explode(2,512,0,0,512)
+	SNST B 2 Bright A_Explode(2,512,0,0,512)
+	SNST C 1 Bright A_Explode(2,512,0,0,512)
+	SNST D 2 Bright A_Explode(2,512,0,0,512)
+	SNST E 1 Bright A_Explode(2,512,0,0,512)
+	SNST F 2 Bright A_Explode(2,512,0,0,512)
+	SNST ABCDEFABCDEFABCDEFABCDEFABCDEFABCDEF 1 Bright A_Explode(2,512,0,0,512)
+  Crash:
+  Death:
+  XDeath:
+	SNST ABCDEFABCDEF 1 Bright A_FadeOut
+	Stop
+  }
+}
+ACTOR GrayThaumaturgyAttack1 : GrayThaumaturgyAttack
+{
+  States
+  {
+  Spawn:
+    SNST A 0
+	SNST A 1
+	Goto "Super::Spawn"
+  }
+}
+ACTOR GrayThaumaturgyAttack2 : GrayThaumaturgyAttack
+{
+  States
+  {
+  Spawn:
+    SNST A 0
+	SNST A 2
+	Goto "Super::Spawn"
+  }
+}
+ACTOR GrayThaumaturgyAttack3 : GrayThaumaturgyAttack
+{
+  States
+  {
+  Spawn:
+    SNST A 0
+	SNST A 3
+	Goto "Super::Spawn"
+  }
+}
+ACTOR GrayThaumaturgyAttack4 : GrayThaumaturgyAttack
+{
+  States
+  {
+  Spawn:
+    SNST A 0
+	SNST A 4
+	Goto "Super::Spawn"
+  }
+}
+ACTOR GrayThaumaturgyAttack5 : GrayThaumaturgyAttack
+{
+  States
+  {
+  Spawn:
+    SNST A 0
+	SNST A 5
+	Goto "Super::Spawn"
+  }
+}
+ACTOR GrayThaumaturgyAttack6 : GrayThaumaturgyAttack
+{
+  States
+  {
+  Spawn:
+    SNST A 0
+	SNST A 6
+	Goto "Super::Spawn"
+  }
+}
+ACTOR GrayThaumaturgyAttack7 : GrayThaumaturgyAttack
+{
+  States
+  {
+  Spawn:
+    SNST A 0
+	SNST A 7
+	Goto "Super::Spawn"
+  }
+}

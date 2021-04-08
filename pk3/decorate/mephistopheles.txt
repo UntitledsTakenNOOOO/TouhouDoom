@@ -1,0 +1,2451 @@
+ACTOR Mephistopheles 31414
+{
+//$Category "Danmaku Demons"
+	Tag "Mephistopheles"
+	Health 2500
+	Radius 32
+	Height 96
+	Speed 6
+	PainChance 1
+    BloodColor "Yellow"
+	Mass 100000
+	Scale 1.5
+	MONSTER
+	Obituary "%o failed to evade the wrath of Mephistopheles."
+	SeeSound "LordOfHeresy/sight"
+	PainSound "demon/pain"
+	DeathSound "touhou/defeat"
+	ActiveSound "LordOfHeresy/act"
+	MinMissileChance 160
+	MaxDropOffHeight 512
+	+BRIGHT
+	+FLOORCLIP
+	//A couple boss flags
+	+BOSSDEATH
+	+NORADIUSDMG
+	+BOSS
+	+NOICEDEATH
+	+DONTRIP
+	+DONTMORPH
+	//Extremely aggressive
+	+MISSILEMORE
+	+MISSILEEVENMORE
+	+LOOKALLAROUND
+	//Very Persistent
+	+NOTIMEFREEZE
+	+NOBLOCKMONST
+	//Exempt from Infighting
+	+NOTARGET
+	var int user_angle;
+	var int user_count;
+	var int user_x;
+	var int user_y;
+	DropItem "MephistophelesPestilence"
+	States
+	{
+	Spawn:
+		LOHS A 1
+		LOHS A 1 Thing_ChangeTID(0,6301)
+		LOHS A 1 ACS_NamedExecute("BHI_BossStartAttack",0,6301,5,false)
+		LOHS A 1 ACS_NamedExecute("BHI_BossStartTimer",0,6301,45)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	See:
+		LOHS A 0 A_Jump(5,"OtherMissile")
+		LOHS A 0 A_Jump(32,"Teleport")
+		LOHS AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase
+		Loop
+	Teleport:
+		LOHS A 0 A_FaceTarget
+   		LOHS A 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 1 A_PlaySound("pyro/tele")
+    	LOHS A 1 A_SetTranslucent(0.90)
+    	LOHS A 1 A_SetTranslucent(0.80)
+    	LOHS A 1 A_SetTranslucent(0.70)
+    	LOHS A 1 A_SetTranslucent(0.60)
+    	LOHS A 1 A_SetTranslucent(0.50)
+    	LOHS A 1 A_SetTranslucent(0.40)
+    	LOHS A 1 A_SetTranslucent(0.30)
+    	LOHS A 1 A_SetTranslucent(0.20)
+    	LOHS A 1 A_SetTranslucent(0.10)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_ExtChase(0,0,1,1)
+    	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    	LOHS A 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 1 A_PlaySound("pyro/tele")
+    	LOHS A 1 A_SetTranslucent(0.10)
+    	LOHS A 1 A_SetTranslucent(0.20)
+    	LOHS A 1 A_SetTranslucent(0.30)
+    	LOHS A 1 A_SetTranslucent(0.40)
+    	LOHS A 1 A_SetTranslucent(0.50)
+    	LOHS A 1 A_SetTranslucent(0.60)
+    	LOHS A 1 A_SetTranslucent(0.70)
+    	LOHS A 1 A_SetTranslucent(0.80)
+    	LOHS A 1 A_SetTranslucent(0.90)
+    	LOHS A 1 A_SetTranslucent(1.0)
+		LOHS A 0 A_Jump(32,"FireMissile")
+		LOHS A 0 A_JumpIfCloser(1024, "See")
+		Loop
+	Missile:
+		LOHS A 0 A_Jump(56,"CircleAttack")
+		LOHS A 0 A_Jump(48,"FireballAttack")
+		LOHS A 0 A_Jump(40,"VolleyAttack")
+		LOHS A 0 A_Jump(32,"SpikesAttack")
+		LOHS A 0 A_Jump(24,"SpiritAttack")
+		LOHS A 0 A_Jump(16,"Haunting")
+		LOHS A 0 A_Jump(8,"RaiseArmy")
+		LOHS A 1 A_Chase
+		Loop
+	FireMissile:
+		LOHS E 0 A_Jump(32,"CircleAttack")
+		LOHS E 0 A_Jump(32,"FireballAttack")
+		LOHS E 0 A_Jump(32,"VolleyAttack")
+		LOHS E 1 A_Jump(32,"SpikesAttack")
+		Loop
+	OtherMissile:
+		LOHS H 0 A_Jump(45,"SpiritAttack")
+		LOHS H 0 A_Jump(15,"Haunting")
+		LOHS H 1 A_Jump(5,"RaiseArmy")
+		Loop
+	CircleAttack:
+		LOHS EF 8 A_FaceTarget
+		LOHS G 0 A_SetUserVar("user_angle", 0)
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"CircleAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"CircleAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"CircleAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"CircleAttackLunatic")
+		Goto CircleAttackHard
+	CircleAttackEasy:
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,0)
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,10)
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,-10)
+		LOHS G 0 A_SetUserVar("user_angle", user_angle+18)
+		LOHS G 0 A_JumpIf(user_angle >= 360, "See")
+		Loop
+	CircleAttackNormal:
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,0)
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,10)
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,-10)
+		LOHS G 0 A_SetUserVar("user_angle", user_angle+15)
+		LOHS G 0 A_JumpIf(user_angle >= 360, "See")
+		Loop
+	CircleAttackHard:
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,0)
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,10)
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,-10)
+		LOHS G 0 A_SetUserVar("user_angle", user_angle+12)
+		LOHS G 0 A_JumpIf(user_angle >= 360, "See")
+		Loop
+	CircleAttackLunatic:
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,0)
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,10)
+		LOHS G 0 A_CustomMissile("MephistophelesCircleBall",40,0,user_angle,CMF_AIMDIRECTION,-10)
+		LOHS G 0 A_SetUserVar("user_angle", user_angle+9)
+		LOHS G 0 A_JumpIf(user_angle >= 360, "See")
+		Loop
+	VolleyAttack:
+		LOHS EF 8 A_FaceTarget
+		LOHS G 0 A_SetUserVar("user_count", 0)
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"VolleyAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"VolleyAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"VolleyAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"VolleyAttackLunatic")
+		Goto VolleyAttackHard
+	VolleyAttackEasy:
+		LOHS G 0 A_CustomMissile("DanmakuImpBall",random(16,64),random(-16,16),random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuImpBall",random(16,64),random(-16,16),random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuCacodemonBall",random(16,64),random(-16,16),random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuCacodemonBall",random(16,64),random(-16,16),random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuFatShot",random(16,64),random(-16,16),random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuFatShot",random(16,64),random(-16,16),random(-24,24),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_SetUserVar("user_count", user_count+1)
+		LOHS G 6 A_JumpIf(user_count >= 12, "See")
+		Loop
+	VolleyAttackNormal:
+		LOHS G 0 A_CustomMissile("DanmakuImpBall",random(16,64),random(-16,16),random(-32,32),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuImpBall",random(16,64),random(-16,16),random(-32,32),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuCacodemonBall",random(16,64),random(-16,16),random(-32,32),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuCacodemonBall",random(16,64),random(-16,16),random(-32,32),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuFatShot",random(16,64),random(-16,16),random(-32,32),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuFatShot",random(16,64),random(-16,16),random(-32,32),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_SetUserVar("user_count", user_count+1)
+		LOHS G 3 A_JumpIf(user_count >= 24, "See")
+		Loop
+	VolleyAttackHard:
+		LOHS G 0 A_CustomMissile("DanmakuImpBall",random(16,64),random(-16,16),random(-48,48),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuImpBall",random(16,64),random(-16,16),random(-48,48),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuCacodemonBall",random(16,64),random(-16,16),random(-48,48),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuCacodemonBall",random(16,64),random(-16,16),random(-48,48),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuFatShot",random(16,64),random(-16,16),random(-48,48),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuFatShot",random(16,64),random(-16,16),random(-48,48),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_SetUserVar("user_count", user_count+1)
+		LOHS G 2 A_JumpIf(user_count >= 36, "See")
+		Loop
+	VolleyAttackLunatic:
+		LOHS G 0 A_CustomMissile("DanmakuImpBall",random(16,64),random(-16,16),random(-64,64),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuImpBall",random(16,64),random(-16,16),random(-64,64),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuCacodemonBall",random(16,64),random(-16,16),random(-64,64),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuCacodemonBall",random(16,64),random(-16,16),random(-64,64),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuFatShot",random(16,64),random(-16,16),random(-64,64),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_CustomMissile("DanmakuFatShot",random(16,64),random(-16,16),random(-64,64),CMF_OFFSETPITCH,random(-8,8))
+		LOHS G 0 A_SetUserVar("user_count", user_count+1)
+		LOHS G 1 A_JumpIf(user_count >= 48, "See")
+		Loop
+	FireballAttack:
+		LOHS EF 8 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"FireballAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"FireballAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"FireballAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"FireballAttackLunatic")
+		Goto FireballAttackHard
+	FireballAttackEasy:
+		LOHS G 8 A_CustomMissile("MephistophelesFireballProjectileEasy",48,0,0)
+		Goto See
+	FireballAttackNormal:
+		LOHS G 8 A_CustomMissile("MephistophelesFireballProjectileNormal",48,0,0)
+		Goto See
+	FireballAttackHard:
+		LOHS G 8 A_CustomMissile("MephistophelesFireballProjectileHard",48,0,0)
+		Goto See
+	FireballAttackLunatic:
+		LOHS G 8 A_CustomMissile("MephistophelesFireballProjectileLunatic",48,0,0)
+		Goto See
+	SpikesAttack:
+		LOHS EF 8 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"SpikesAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"SpikesAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"SpikesAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"SpikesAttackLunatic")
+		Goto SpikesAttackLunatic
+	SpikesAttackEasy:
+		LOHS G 0 A_SetUserVar("user_angle",random(1,30))
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,-user_angle)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,user_angle)
+		LOHS G 16 A_CustomMissile("BruiserFireSpawner",16,0,0)
+		Goto See
+	SpikesAttackNormal:
+		LOHS G 0 A_SetUserVar("user_angle",random(1,30))
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,-user_angle*2)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,user_angle*2)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,-user_angle)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,user_angle)
+		LOHS G 16 A_CustomMissile("BruiserFireSpawnerL2",16,0,0)
+		Goto See
+	SpikesAttackHard:
+		LOHS G 0 A_SetUserVar("user_angle",random(1,30))
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,-user_angle*3)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,user_angle*3)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,-user_angle*2)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,user_angle*2)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawnerL2",16,0,-user_angle)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawnerL2",16,0,user_angle)
+		LOHS G 16 A_CustomMissile("BruiserFireSpawnerL2",16,0,0)
+		Goto See
+	SpikesAttackLunatic:
+		LOHS G 0 A_SetUserVar("user_angle",random(1,30))
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,-user_angle*4)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,user_angle*4)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,-user_angle*3)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,user_angle*3)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,-user_angle*2)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawner",16,0,user_angle*2)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawnerL2",16,0,-user_angle)
+		LOHS G 0 A_CustomMissile("BruiserFireSpawnerL2",16,0,user_angle)
+		LOHS G 16 A_CustomMissile("BruiserFireSpawnerL",16,0,0)
+		Goto See
+	SpiritAttack:
+		LOHS H 0 A_FaceTarget
+		LOHS H 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"SpiritAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"SpiritAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"SpiritAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"SpiritAttackLunatic")
+		Goto SpiritAttackLunatic
+	SpiritAttackEasy:
+		LOHS HHHH 3 A_CustomMissile("MephistophelesSpiritProjectile",48,0,random(45,315))
+		Goto See
+	SpiritAttackNormal:
+		LOHS HHHHHHHH 2 A_CustomMissile("MephistophelesSpiritProjectile",48,0,random(45,315))
+		Goto See
+	SpiritAttackHard:
+		LOHS HHHHHHHHHHHH 1 A_CustomMissile("MephistophelesSpiritProjectile",48,0,random(45,315))
+		Goto See
+	SpiritAttackLunatic:
+		LOHS HHHHHHHHHHHHHHHH 1 A_CustomMissile("MephistophelesSpiritProjectile",48,0,random(45,315))
+		Goto See
+	Haunting:
+		LOHS H 0 A_FaceTarget
+		LOHS H 0 A_SetUserVar("user_count", 0)
+		LOHS H 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"HauntingEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"HauntingNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"HauntingHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"HauntingLunatic")
+		Goto HauntingLunatic
+	HauntingEasy:
+		LOHS H 12 A_CustomMissile("MephistophelesHauntingProjectile",48,0,0)
+		Goto See
+	HauntingNormal:
+		LOHS H 6 A_CustomMissile("MephistophelesHauntingProjectile",48,0,0)
+		LOHS H 6 A_CustomMissile("MephistophelesHauntingProjectile",48,0,random(-45,45))
+		Goto See
+	HauntingHard:
+		LOHS H 4 A_CustomMissile("MephistophelesHauntingProjectile",48,0,0)
+		LOHS H 4 A_CustomMissile("MephistophelesHauntingProjectile",48,0,random(-60,15))
+		LOHS H 4 A_CustomMissile("MephistophelesHauntingProjectile",48,0,random(-15,60))
+		Goto See
+	HauntingLunatic:
+		LOHS H 3 A_CustomMissile("MephistophelesHauntingProjectile",48,0,0)
+		LOHS H 3 A_CustomMissile("MephistophelesHauntingProjectile",48,0,random(-60,15))
+		LOHS H 3 A_CustomMissile("MephistophelesHauntingProjectile",48,0,random(-15,60))
+		LOHS H 3 A_CustomMissile("MephistophelesHauntingProjectile",48,0,random(-45,45))
+		Goto See
+	RaiseArmy:
+		LOHS H 0 A_FaceTarget
+		LOHS H 0 A_SetUserVar("user_count", 0)
+		LOHS H 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"RaiseArmyEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"RaiseArmyNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"RaiseArmyHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"RaiseArmyLunatic")
+		Goto RaiseArmyLunatic
+	RaiseArmyEasy:
+		LOHS H 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS H 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS H 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS H 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS H 0 A_SetUserVar("user_count",user_count+1)
+		LOHS H 1 A_JumpIf(user_count >= 12, "See")
+		Loop
+	RaiseArmyNormal:
+		LOHS H 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS H 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS H 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS H 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS H 0 A_SetUserVar("user_count",user_count+1)
+		LOHS H 1 A_JumpIf(user_count >= 16, "See")
+		Loop
+	RaiseArmyHard:
+		LOHS H 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS H 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS H 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS H 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS H 0 A_SetUserVar("user_count",user_count+1)
+		LOHS H 1 A_JumpIf(user_count >= 20, "See")
+		Loop
+	RaiseArmyLunatic:
+		LOHS H 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS H 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS H 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS H 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS H 0 A_SetUserVar("user_count",user_count+1)
+		LOHS H 1 A_JumpIf(user_count >= 24, "See")
+		Loop
+	Pain:
+		LOHS H 6 A_SetTranslucent(1.0)
+		LOHS H 6 A_Pain
+		Goto See
+	Death:
+		LOHS I 0 ACS_Execute(67,0)
+		LOHS I 0 ACS_NamedTerminate("BHI_BossStartAttack",0)
+		LOHS I 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_NoBlocking
+		LOHS I 0 A_KillChildren //Doesn't work on RandomSpawners GODDAMNIT
+		LOHS I 0 Thing_Destroy(50, 1)
+		LOHS IIIIIIIIII 2 A_FadeOut(0.1)
+		Stop
+	} 
+}
+ACTOR MephistophelesCircleBall : BaronBall
+{
+	Damage 4
+	Translation "112:127=160:167"
+}
+ACTOR MephistophelesFireEffect
+{
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	Scale 3
+	RenderStyle Add
+	states
+	{
+	Spawn:
+		FIRE ABABCDCDEFEFGHGH 2 bright
+		stop
+	}
+}
+ACTOR MephistophelesFireballProjectileEasy
+{
+	Radius 6
+	Height 16
+	Speed 15
+	FastSpeed 20
+	Damage 0
+	Projectile
+	RenderStyle Add
+	Alpha 1
+	SeeSound "baron/attack"
+	DeathSound "baron/shotx"
+	Decal "BaronScorch"
+	var int user_angle;
+	States
+	{
+	Spawn:
+		YBUB A 1 Bright
+		Loop
+	Death:
+		YBUB A 0 A_CustomMissile("MephistophelesCircleBall",16,0,user_angle,CMF_AIMDIRECTION,0)
+		YBUB A 0 A_SetUserVar("user_angle", user_angle+18)
+		YBUB A 0 A_JumpIf(user_angle >= 360, "FadeOut")
+		Loop
+	FadeOut:
+		YBUB A 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		YBUB AAAAAAAAAA 4 Bright A_FadeOut
+		Stop
+	}
+}
+ACTOR MephistophelesFireballProjectileNormal : MephistophelesFireballProjectileEasy
+{
+	States
+	{
+	Death:
+		YBUB A 0 A_CustomMissile("MephistophelesCircleBall",16,0,user_angle,CMF_AIMDIRECTION,0)
+		YBUB A 0 A_SetUserVar("user_angle", user_angle+15)
+		YBUB A 0 A_JumpIf(user_angle >= 360, "FadeOut")
+		Loop
+	}
+}
+ACTOR MephistophelesFireballProjectileHard : MephistophelesFireballProjectileEasy
+{
+	States
+	{
+	Death:
+		YBUB A 0 A_CustomMissile("MephistophelesCircleBall",16,0,user_angle,CMF_AIMDIRECTION,0)
+		YBUB A 0 A_SetUserVar("user_angle", user_angle+12)
+		YBUB A 0 A_JumpIf(user_angle >= 360, "FadeOut")
+		Loop
+	}
+}
+ACTOR MephistophelesFireballProjectileLunatic : MephistophelesFireballProjectileEasy
+{
+	States
+	{
+	Death:
+		YBUB A 0 A_CustomMissile("MephistophelesCircleBall",16,0,user_angle,CMF_AIMDIRECTION,0)
+		YBUB A 0 A_SetUserVar("user_angle", user_angle+9)
+		YBUB A 0 A_JumpIf(user_angle >= 360, "FadeOut")
+		Loop
+	}
+}
+ACTOR MephistophelesSpiritProjectile
+{
+	Radius 8
+	Height 11
+	Speed 24
+	Damage 3
+	Projectile
+	+SEEKERMISSILE
+	+RANDOMIZE
+	SeeSound "skull/melee"
+	DeathSound "skull/death"
+	RenderStyle Add
+	Translation Ice
+	var int user_count;
+	States
+	{
+	Spawn:
+		SKUL C 0 Bright A_SeekerMissile(1,5,SMF_PRECISE)
+		SKUL CCCC 1 Bright A_SpawnItemEx("MephistophelesSpiritProjectileTrail",0,0,0,0,0,0,0,0,0)
+		SKUL A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		SKUL D 0 Bright A_SeekerMissile(1,5,SMF_PRECISE)
+		SKUL DDDD 1 Bright A_SpawnItemEx("MephistophelesSpiritProjectileTrail2",0,0,0,0,0,0,0,0,0)
+		SKUL A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		SKUL A 0 Bright A_SetUserVar("user_count",user_count+1)
+		SKUL A 0 Bright A_JumpIf(user_count >= 35, "Death")
+		Loop
+	Death:
+		SKUL F 4 Bright A_Stop
+		SKUL G 4 Bright A_Scream
+		SKUL H 4 Bright
+		SKUL I 4 Bright A_NoBlocking
+		SKUL J 4
+		SKUL K 4
+		Stop
+	}
+}
+ACTOR MephistophelesHauntingProjectile : MephistophelesSpiritProjectile
+{
+	Damage 1
+	Speed 12
+	FastSpeed 18
+	+RIPPER
+	BounceType "Hexen"
+	BounceCount 10
+}
+ACTOR MephistophelesSpiritProjectileTrail
+{
+	Radius 2
+	Height 4
+	Renderstyle Add
+	Translation Ice
+	+NOGRAVITY
+	+NOINTERACTION
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+		SKUL C 1 A_FadeOut(0.05)
+		Loop
+	}
+}
+ACTOR MephistophelesSpiritProjectileTrail2 : MephistophelesSpiritProjectileTrail
+{
+	States
+	{
+	Spawn:
+		SKUL D 1 A_FadeOut(0.05)
+		Loop
+	}
+}
+ACTOR MephistophelesRaiseArmySpawnerEasy : RandomSpawner
+{
+	DropItem "DanmakuZombieman", 255, 15
+	DropItem "DanmakuShotgunguy", 255, 12
+	DropItem "DanmakuChaingunguy", 255, 9
+	DropItem "DanmakuImp", 255, 28
+	DropItem "DanmakuSoul", 255, 28
+	DropItem "DanmakuGuardian", 255, 2
+	DropItem "DanmakuCacodemon", 255, 2
+	DropItem "DanmakuHellKnight", 255, 4
+}
+ACTOR MephistophelesRaiseArmySpawnerNormal : RandomSpawner
+{
+	DropItem "DanmakuZombieman", 255, 10
+	DropItem "DanmakuShotgunguy", 255, 8
+	DropItem "DanmakuChaingunguy", 255, 6
+	DropItem "DanmakuBomber", 255, 9
+	DropItem "DanmakuImp", 255, 14
+	DropItem "DanmakuDarkImp", 255, 7
+	DropItem "DanmakuSoul", 255, 12
+	DropItem "DanmakuGuardian", 255, 6
+	DropItem "DanmakuDemon", 255, 14
+	DropItem "DanmakuSpectre", 255, 7
+	DropItem "DanmakuCacodemon", 255, 2
+	DropItem "DanmakuHellKnight", 255, 5
+}
+ACTOR MephistophelesRaiseArmySpawnerHard : RandomSpawner
+{
+	DropItem "DanmakuZombieman", 255, 10
+	DropItem "DanmakuShotgunguy", 255, 8
+	DropItem "DanmakuChaingunguy", 255, 6
+	DropItem "DanmakuBomber", 255, 9
+	DropItem "DanmakuImp", 255, 16
+	DropItem "DanmakuDarkImp", 255, 8
+	DropItem "DanmakuSoul", 255, 10
+	DropItem "DanmakuGuardian", 255, 7
+	DropItem "DanmakuCacodemon", 255, 4
+	DropItem "DanmakuDemon", 255, 12
+	DropItem "DanmakuSpectre", 255, 6
+	DropItem "DanmakuHellKnight", 255, 4
+}
+ACTOR MephistophelesRaiseArmySpawnerLunatic : RandomSpawner
+{
+	DropItem "DanmakuZombieman", 255, 7
+	DropItem "DanmakuShotgunguy", 255, 7
+	DropItem "DanmakuChaingunguy", 255, 7
+	DropItem "DanmakuBomber", 255, 9
+	DropItem "DanmakuImp", 255, 12
+	DropItem "DanmakuDarkImp", 255, 6
+	DropItem "DanmakuSoul", 255, 12
+	DropItem "DanmakuGuardian", 255, 6
+	DropItem "DanmakuCacodemon", 255, 4
+	DropItem "DanmakuPainElemental", 255, 2
+	DropItem "DanmakuDemon", 255, 10
+	DropItem "DanmakuSpectre", 255, 5
+	DropItem "DanmakuRevenant", 255, 6
+	DropItem "DanmakuHellKnight", 255, 4
+	DropItem "DanmakuBaronOfHell", 255, 2
+	DropItem "DanmakuArchvile", 255, 1
+}
+ACTOR MephistophelesNS2 : Mephistopheles
+{
+	DropItem "MephistophelesWar"
+	+INVULNERABLE
+	+NOPAIN
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+		LOHS AAAAAAAAAABBBBBBBBBB 1 A_FadeIn(0.05)
+		LOHS A 1 Thing_ChangeTID(0,6303)
+		LOHS A 1 ACS_NamedExecute("BHI_BossStartAttack",0,6303,4,false)
+		LOHS A 1 ACS_NamedExecute("BHI_BossStartTimer",0,6303,45)
+		LOHS A 1 A_UnSetInvulnerable
+		LOHS A 1 A_ChangeFlag("NOPAIN",0)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	}
+}
+ACTOR MephistophelesNS3 : Mephistopheles
+{
+	DropItem "MephistophelesFamine"
+	+INVULNERABLE
+	+NOPAIN
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+		LOHS AAAAAAAAAABBBBBBBBBB 1 A_FadeIn(0.05)
+		LOHS A 1 Thing_ChangeTID(0,6305)
+		LOHS A 1 ACS_NamedExecute("BHI_BossStartAttack",0,6305,3,false)
+		LOHS A 1 ACS_NamedExecute("BHI_BossStartTimer",0,6305,45)
+		LOHS A 1 A_UnSetInvulnerable
+		LOHS A 1 A_ChangeFlag("NOPAIN",0)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	}
+}
+ACTOR MephistophelesNS4 : Mephistopheles
+{
+	DropItem "MephistophelesDeath"
+	+INVULNERABLE
+	+NOPAIN
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+		LOHS AAAAAAAAAABBBBBBBBBB 1 A_FadeIn(0.05)
+		LOHS A 1 Thing_ChangeTID(0,6307)
+		LOHS A 1 ACS_NamedExecute("BHI_BossStartAttack",0,6307,2,false)
+		LOHS A 1 ACS_NamedExecute("BHI_BossStartTimer",0,6307,45)
+		LOHS A 1 A_UnSetInvulnerable
+		LOHS A 1 A_ChangeFlag("NOPAIN",0)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	}
+}
+
+ACTOR MephistophelesPestilence : Mephistopheles //WE FOUR HORSEMEN NOW
+{
+	DropItem "MephistophelesNS2"
+	+INVULNERABLE
+	+NOPAIN
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	See:
+		LOHS A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+		LOHS E 0 A_FaceTarget
+		LOHS EEEEEEEEEEEEEEEEEEEEEEEE 1 A_FadeIn(0.05)
+		LOHS FFF 4 A_FaceTarget
+		LOHS G 0 Thing_ChangeTID(0,6302)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartAttack",0,6302,5,true)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartTimer",0,6302,55)
+		LOHS G 0 ACS_Execute(602,0,121)
+		LOHS G 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+		LOHS G 0 A_GiveInventory("SpellcardActive",1)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,-96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,-128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,-96,0,0,0,0,0,160)
+		LOHS G 35 A_FaceTarget
+		LOHS G 0 A_UnSetInvulnerable
+		LOHS G 0 A_ChangeFlag("NOPAIN",0)
+		Goto Missile
+	ChaseState:
+		LOHS AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase
+		Loop
+	Missile:
+		LOHS EF 3 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileHard
+	MissileEasy:
+		LOHS G 0 A_CustomMissile("MephistophelesPestilenceBulletSpawner",frandom(16,56),0,frandom(0,360))
+		LOHS G 0 A_Jump(2,"See")
+		LOHS G 6 A_SpidRefire
+		Loop
+	MissileNormal:
+		LOHS GG 0 A_CustomMissile("MephistophelesPestilenceBulletSpawner",frandom(16,56),0,frandom(0,360))
+		LOHS G 0 A_Jump(4,"See")
+		LOHS G 6 A_SpidRefire
+		Loop
+	MissileHard:
+		LOHS GGG 0 A_CustomMissile("MephistophelesPestilenceBulletSpawner",frandom(16,56),0,frandom(0,360))
+		LOHS G 0 A_Jump(6,"See")
+		LOHS G 6 A_SpidRefire
+		Loop
+	MissileLunatic:
+		LOHS GGGG 0 A_CustomMissile("MephistophelesPestilenceBulletSpawner",frandom(16,56),0,frandom(0,360))
+		LOHS G 0 A_Jump(8,"See")
+		LOHS G 6 Fast A_SpidRefire
+		Loop
+	Death:
+		LOHS I 0 ACS_Execute(68,0)
+		LOHS I 0 ACS_NamedTerminate("BHI_BossStartAttack",0)
+		LOHS I 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_NoBlocking
+		LOHS I 0 ACS_Execute(603,0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_KillChildren
+		LOHS I 0 Thing_Destroy(50, 1)
+		LOHS IIIIIIIIII 2 A_FadeOut(0.1)
+		Stop
+	}
+}
+ACTOR MephistophelesPestilenceBulletSpawner
+{
+  Radius 64
+  Height 128
+  Speed 32
+  FastSpeed 24
+  Damage (0)
+  Renderstyle Translucent
+  Alpha 0.0
+  DamageType "MephistophelesDamage"
+  DeathSound "touhou/hit"
+  Projectile
+  States
+  {
+  Spawn:
+    TNT1 A 4 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_CustomMissile("MephistophelesPestilenceBullet",0,0,random(0,360))
+	Loop
+  Death:
+	TNT1 A 1 Bright
+	Stop
+  }
+}
+ACTOR MephistophelesPestilenceBullet
+{
+  Radius 3
+  Height 6
+  Speed 2
+  FastSpeed 5
+  Damage (12)
+  Renderstyle Translucent
+  Alpha 0.6
+  DamageType "MephistophelesDamage"
+  Decal DoomImpScorch
+  DeathSound "touhou/hit"
+  Projectile
+  States
+  {
+  Spawn:
+    KBLD A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Death:
+	KBLD AAAAAAAAAA 1 Bright A_FadeOut
+	Stop
+  }
+}
+
+ACTOR MephistophelesWar : Mephistopheles
+{
+	DropItem "MephistophelesNS3"
+	+INVULNERABLE
+	+NOPAIN
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	See:
+		LOHS A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+		LOHS E 0 A_FaceTarget
+		LOHS EEEEEEEEEEEEEEEEEEEEEEEE 1 A_FadeIn(0.05)
+		LOHS FFF 4 A_FaceTarget
+		LOHS G 0 Thing_ChangeTID(0,6304)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartAttack",0,6304,4,true)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartTimer",0,6304,55)
+		LOHS G 0 ACS_Execute(602,0,122)
+		LOHS G 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+		LOHS G 0 A_GiveInventory("SpellcardActive",1)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,-96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,-128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,-96,0,0,0,0,0,160)
+		LOHS G 35 A_FaceTarget
+		LOHS G 0 A_UnSetInvulnerable
+		LOHS G 0 A_ChangeFlag("NOPAIN",0)
+		Goto Missile
+	ChaseState:
+		LOHS AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase
+		Loop
+	Missile:
+		LOHS E 0 A_SetUserVar("user_count",0)
+		LOHS EF 12 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileLunatic
+	MissileEasy:
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 2 A_JumpIf(user_count >= 24, "See")
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 2 A_JumpIf(user_count >= 24, "See")
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerHard",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 2 A_JumpIf(user_count >= 24, "See")
+		Loop
+	MissileNormal:
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 2 A_JumpIf(user_count >= 28, "See")
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerHard",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 2 A_JumpIf(user_count >= 28, "See")
+		Loop
+	MissileHard:
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerHard",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 2 A_JumpIf(user_count >= 32, "See")
+		Loop
+	MissileLunatic:
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerLunatic",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 2 Fast A_JumpIf(user_count >= 36, "See")
+		Loop
+	Death:
+		LOHS I 0 ACS_Execute(68,0)
+		LOHS I 0 ACS_NamedTerminate("BHI_BossStartAttack",0)
+		LOHS I 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_NoBlocking
+		LOHS I 0 ACS_Execute(603,0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_KillChildren
+		LOHS I 0 Thing_Destroy(50, 1)
+		LOHS IIIIIIIIII 2 A_FadeOut(0.1)
+		Stop
+	}
+}
+
+ACTOR MephistophelesFamine : Mephistopheles
+{
+	DropItem "MephistophelesNS4"
+	+INVULNERABLE
+	+NOPAIN
+	Speed 1
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	See:
+		LOHS A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+		LOHS E 0 A_FaceTarget
+		LOHS EEEEEEEEEEEEEEEEEEEEEEEE 1 A_FadeIn(0.05)
+		LOHS FFF 4 A_FaceTarget
+		LOHS G 0 Thing_ChangeTID(0,6306)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartAttack",0,6306,3,true)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartTimer",0,6306,55)
+		LOHS G 0 ACS_Execute(602,0,123)
+		LOHS G 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+		LOHS G 0 A_GiveInventory("SpellcardActive",1)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,-96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,-128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,-96,0,0,0,0,0,160)
+		LOHS G 35 A_FaceTarget
+		LOHS G 0 A_UnSetInvulnerable
+		LOHS G 0 A_ChangeFlag("NOPAIN",0)
+		Goto SpawnWalls
+	ChaseState:
+		LOHS AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase
+		Loop
+	Missile:
+		LOHS A 0 A_Jump(16,"SpawnWalls")
+		LOHS EF 6 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileHard
+	MissileEasy:
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-4,4))
+		LOHS G 8 A_FaceTarget
+		Goto See
+	MissileNormal:
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-3,3))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-6,6))
+		LOHS G 8 A_FaceTarget
+		Goto See
+	MissileHard:
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-2,2))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-5,5))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-8,8))
+		LOHS G 8 A_FaceTarget
+		Goto See
+	MissileLunatic:
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-4,4))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-7,7))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-10,10))
+		LOHS G 8 A_FaceTarget
+		Goto See
+	SpawnWalls:
+		LOHS A 0 A_GiveInventory("RemiliaActivationToken",1)
+		LOHS EF 12 A_FaceTarget
+		LOHS A 0 A_TakeInventory("RemiliaActivationToken",1)
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"SpawnWallsEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"SpawnWallsNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"SpawnWallsHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"SpawnWallsLunatic")
+		Goto SpawnWallsNormal
+	SpawnWallsEasy:
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,0,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,45,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,90,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,135,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,180,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,225,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,270,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,315,CMF_AIMDIRECTION)
+		LOHS G 16 A_FaceTarget
+		Goto See
+	SpawnWallsNormal:
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,0,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,30,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,60,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,90,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,120,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,150,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,180,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,210,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,240,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,270,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,300,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,330,CMF_AIMDIRECTION)
+		LOHS G 16 A_FaceTarget
+		Goto See
+	SpawnWallsHard:
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,0,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,20,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,40,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,60,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,80,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,100,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,120,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,140,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,160,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,180,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,200,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,220,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,240,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,260,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,280,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,300,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,320,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,340,CMF_AIMDIRECTION)
+		LOHS G 16 A_FaceTarget
+		Goto See
+	SpawnWallsLunatic:
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,0,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,15,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,30,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,45,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,60,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,75,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,90,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,105,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,120,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,135,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,150,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,165,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,180,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,195,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,210,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,225,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,240,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,255,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,270,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,285,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,300,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,315,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,330,CMF_AIMDIRECTION)
+		LOHS G 0 A_CustomMissile("MephistophelesFamineSpawnerOrb",32,0,345,CMF_AIMDIRECTION)
+		LOHS G 16 A_FaceTarget
+		Goto See
+	Death:
+		LOHS I 0 ACS_Execute(68,0)
+		LOHS I 0 ACS_NamedTerminate("BHI_BossStartAttack",0)
+		LOHS I 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_NoBlocking
+		LOHS I 0 ACS_Execute(603,0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_KillChildren
+		LOHS I 0 Thing_Destroy(50, 1)
+		LOHS IIIIIIIIII 2 A_FadeOut(0.1)
+		Stop
+	}
+}
+ACTOR MephistophelesFamineSpawnerOrb
+{
+	Speed 20
+	FastSpeed 20
+	Damage (8)
+	Radius 3
+	Height 6
+	Scale 1.2
+	Projectile
+	+FORCEXYBILLBOARD
+	+RIPPER
+	+SKYEXPLODE
+	+HEXENBOUNCE
+	BounceCount 2
+	SeeSound "touhou/fire"
+	DeathSound "touhou/hit2"
+	Renderstyle Add
+	Alpha 1.0
+	var int user_count;
+	States
+	{
+	Spawn:
+		OBL4 A 0 Bright A_SetUserVar("user_count",user_count+1)
+		OBL4 A 0 Bright A_JumpIf(user_count > 210, "StopState")
+		OBL4 A 1 Bright A_JumpIfInTargetInventory("RemiliaActivationToken",1,"GiveToken")
+		OBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		OBL4 A 0 A_CustomMissile("MephistophelesFamineOrb",0,0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		loop
+	GiveToken:
+		OBL4 A 8 Bright A_GiveInventory("RemiliaActivationToken",1)
+		OBL4 A 0 A_Die
+	StopState:
+		OBL4 A 1 Bright A_Stop
+	StoppedLoop:
+		OBL4 A 1 Bright A_JumpIfInTargetInventory("RemiliaActivationToken",1,"GiveToken")
+		OBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	Death:
+		OBL4 AAAAAAAAAA 2 Bright A_FadeOut
+		Stop
+	}
+}
+ACTOR MephistophelesFamineOrb
+{
+	Speed 0
+	FastSpeed 0
+	Damage (4)
+	Radius 3
+	Height 6
+	Scale 1.2
+	Projectile
+	+FORCEXYBILLBOARD
+	+RIPPER
+	SeeSound ""
+	DeathSound "touhou/hit"
+	Renderstyle Add
+	Alpha 1.0
+	States
+	{
+	Spawn:
+		OBL4 A 0 Bright A_JumpIfInTargetInventory("RemiliaActivationToken",1,"Death")
+		OBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	Death:
+		OBL4 AAAAAAAAAA 1 Bright A_FadeOut
+		Stop
+	}
+}
+ACTOR MephistophelesFamineAttack
+{
+	Speed 10
+	FastSpeed 20
+	Damage (16)
+	Radius 3
+	Height 6
+	Scale 1.2
+	Projectile
+	+FORCEXYBILLBOARD
+	SeeSound ""
+	DeathSound "touhou/hit"
+	Renderstyle Add
+	Alpha 1.0
+	States
+	{
+	Spawn:
+		RBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	Death:
+		RBL4 AAAAAAAAAA 1 Bright A_FadeOut
+		Stop
+	}
+}
+
+ACTOR MephistophelesDeath : Mephistopheles
+{
+	DropItem "MephistophelesTribulation"
+	DropItem "BlueArmor"
+	+INVULNERABLE
+	+NOPAIN
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	See:
+		LOHS A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+		LOHS E 0 A_FaceTarget
+		LOHS EEEEEEEEEEEEEEEEEEEEEEEE 1 A_FadeIn(0.05)
+		LOHS FFF 4 A_FaceTarget
+		LOHS G 0 Thing_ChangeTID(0,6308)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartAttack",0,6308,2,true)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartTimer",0,6308,55)
+		LOHS G 0 ACS_Execute(602,0,124)
+		LOHS G 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+		LOHS G 0 A_GiveInventory("SpellcardActive",1)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,-96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,-128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,-96,0,0,0,0,0,160)
+		LOHS G 35 A_FaceTarget
+		LOHS G 0 A_UnSetInvulnerable
+		LOHS G 0 A_ChangeFlag("NOPAIN",0)
+		Goto Missile
+	ChaseState:
+		LOHS A 0 A_Jump(32,"Teleport")
+		LOHS AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase
+		Loop
+	Teleport:
+		LOHS A 0 A_FaceTarget
+   		LOHS A 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 1 A_PlaySound("pyro/tele")
+    	LOHS A 1 A_SetTranslucent(0.90)
+    	LOHS A 1 A_SetTranslucent(0.80)
+    	LOHS A 1 A_SetTranslucent(0.70)
+    	LOHS A 1 A_SetTranslucent(0.60)
+    	LOHS A 1 A_SetTranslucent(0.50)
+    	LOHS A 1 A_SetTranslucent(0.40)
+    	LOHS A 1 A_SetTranslucent(0.30)
+    	LOHS A 1 A_SetTranslucent(0.20)
+    	LOHS A 1 A_SetTranslucent(0.10)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_ExtChase(0,0,1,1)
+    	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    	LOHS A 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 1 A_PlaySound("pyro/tele")
+    	LOHS A 1 A_SetTranslucent(0.10)
+    	LOHS A 1 A_SetTranslucent(0.20)
+    	LOHS A 1 A_SetTranslucent(0.30)
+    	LOHS A 1 A_SetTranslucent(0.40)
+    	LOHS A 1 A_SetTranslucent(0.50)
+    	LOHS A 1 A_SetTranslucent(0.60)
+    	LOHS A 1 A_SetTranslucent(0.70)
+    	LOHS A 1 A_SetTranslucent(0.80)
+    	LOHS A 1 A_SetTranslucent(0.90)
+    	LOHS A 1 A_SetTranslucent(1.0)
+		LOHS A 0 A_Jump(32,"Missile")
+		LOHS A 0 A_JumpIfCloser(1024, "See")
+		Loop
+	Missile:
+		LOHS EF 8 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileLunatic
+	MissileEasy:
+		LOHS GG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS G 0 A_Jump(1,"See")
+		LOHS G 2 A_FaceTarget
+		Loop
+	MissileNormal:
+		LOHS GGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS G 0 A_Jump(2,"See")
+		LOHS G 2 A_FaceTarget
+		Loop
+	MissileHard:
+		LOHS GGGGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS G 0 A_Jump(3,"See")
+		LOHS G 2 A_FaceTarget
+		Loop
+	MissileLunatic:
+		LOHS GGGGGGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS G 0 A_Jump(4,"See")
+		LOHS G 2 Fast A_FaceTarget
+		Loop
+	Death:
+		LOHS I 0 ACS_Execute(68,0)
+		LOHS I 0 ACS_NamedTerminate("BHI_BossStartAttack",0)
+		LOHS I 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_NoBlocking
+		LOHS I 0 ACS_Execute(603,0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_KillChildren
+		LOHS I 0 Thing_Destroy(50, 1)
+		LOHS IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,5),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS JJJJJJJJKKKKKKKKLLLLLLLLMMMMMMMMNNNNNNNNOOOOOOOO 1 A_FadeOut(0.01)
+		Stop
+	}
+}
+ACTOR MephistophelesDeathProjectile
+{
+	Radius 8
+	Height 11
+	Speed 5
+	FastSpeed 10
+	Damage 5
+	Projectile
+	+SEEKERMISSILE
+	SeeSound "skull/melee"
+	DeathSound "skull/death"
+	RenderStyle Translucent
+	Alpha 0.5
+	Translation Ice
+	var int user_count;
+	States
+	{
+	Spawn:
+		SKUL C 0
+		SKUL C 0 A_SetUserVar("user_count", random(1,4))
+		SKUL C 0 A_Jump(128, "VeerLeft", "VeerRight")
+		Goto GoStraight
+	GoStraight:
+		SKUL C 0 Bright A_ScaleVelocity(1.1)
+		SKUL CCC 1 Bright A_SpawnItemEx("MephistophelesSpiritProjectileTrail",0,0,0,0,0,0,0,0,0)
+		SKUL C 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		SKUL D 0 Bright A_ScaleVelocity(1.1)
+		SKUL DDD 1 Bright A_SpawnItemEx("MephistophelesSpiritProjectileTrail2",0,0,0,0,0,0,0,0,0)
+		SKUL D 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	VeerLeft:
+		TNT1 A 0 Bright	A_SetAngle(angle-user_count)
+		TNT1 A 0 Bright	ThrustThing(angle*256/360, 1, 0, 0)
+		TNT1 A 0 Bright	A_ScaleVelocity(0.98)
+		SKUL C 0 Bright A_ScaleVelocity(1.1)
+		SKUL CCC 1 Bright A_SpawnItemEx("MephistophelesSpiritProjectileTrail",0,0,0,0,0,0,0,0,0)
+		SKUL C 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		SKUL D 0 Bright A_ScaleVelocity(1.1)
+		SKUL DDD 1 Bright A_SpawnItemEx("MephistophelesSpiritProjectileTrail2",0,0,0,0,0,0,0,0,0)
+		SKUL D 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	VeerRight:
+		TNT1 A 0 Bright	A_SetAngle(angle+user_count)
+		TNT1 A 0 Bright	ThrustThing(angle*256/360, 1, 0, 0)
+		TNT1 A 0 Bright	A_ScaleVelocity(0.98)
+		SKUL C 0 Bright A_ScaleVelocity(1.1)
+		SKUL CCC 1 Bright A_SpawnItemEx("MephistophelesSpiritProjectileTrail",0,0,0,0,0,0,0,0,0)
+		SKUL C 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		SKUL D 0 Bright A_ScaleVelocity(1.1)
+		SKUL DDD 1 Bright A_SpawnItemEx("MephistophelesSpiritProjectileTrail2",0,0,0,0,0,0,0,0,0)
+		SKUL D 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	Death:
+		SKUL F 4 Bright A_Stop
+		SKUL G 4 Bright A_Scream
+		SKUL H 4 Bright
+		SKUL I 4 Bright A_NoBlocking
+		SKUL J 4
+		SKUL K 4
+		Stop
+	}
+}
+ACTOR MephistophelesTribulation : Mephistopheles
+{
+	DropItem "Soulsphere"
+	Translation "Ice"
+	Renderstyle Add
+	+INVULNERABLE
+	-SOLID
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS ABABABA 10 A_SetTranslucent(0.05)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	See:
+		LOHS A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+		LOHS E 0 A_FaceTarget
+		LOHS EEEEEEEEEEEEEEEEEEEEEEEE 1 A_FadeIn(0.05)
+		LOHS FFF 4 A_FaceTarget
+		LOHS G 0 Thing_ChangeTID(0,6309)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartSurvivalAttack",0,1)
+		LOHS G 0 ACS_Execute(606,0,3)
+		LOHS G 0 ACS_Execute(602,0,125)
+		LOHS G 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+		LOHS G 0 A_GiveInventory("SpellcardActive",1)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",0,128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",-96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",-128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",-96,-96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",0,-128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesIceEffect",96,-96,0,0,0,0,0,160)
+		LOHS GGGGGGGGGGGGGGGGGGGG 1 A_FadeIn(0.05)
+		LOHS G 0 A_FaceTarget
+		Goto Missile
+	ChaseState:
+		LOHS A 0 A_Jump(32,"Teleport")
+		LOHS AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase
+		Loop
+	Teleport:
+		LOHS A 0 A_FaceTarget
+   		LOHS A 0 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,0,0,0,0,160)
+		LOHS A 1 A_PlaySound("pyro/tele")
+    	LOHS A 1 A_SetTranslucent(0.90)
+    	LOHS A 1 A_SetTranslucent(0.80)
+    	LOHS A 1 A_SetTranslucent(0.70)
+    	LOHS A 1 A_SetTranslucent(0.60)
+    	LOHS A 1 A_SetTranslucent(0.50)
+    	LOHS A 1 A_SetTranslucent(0.40)
+    	LOHS A 1 A_SetTranslucent(0.30)
+    	LOHS A 1 A_SetTranslucent(0.20)
+    	LOHS A 1 A_SetTranslucent(0.10)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_ExtChase(0,0,1,1)
+    	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    	LOHS A 0 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,0,0,0,0,160)
+		LOHS A 1 A_PlaySound("pyro/tele")
+    	LOHS A 1 A_SetTranslucent(0.10)
+    	LOHS A 1 A_SetTranslucent(0.20)
+    	LOHS A 1 A_SetTranslucent(0.30)
+    	LOHS A 1 A_SetTranslucent(0.40)
+    	LOHS A 1 A_SetTranslucent(0.50)
+    	LOHS A 1 A_SetTranslucent(0.60)
+    	LOHS A 1 A_SetTranslucent(0.70)
+    	LOHS A 1 A_SetTranslucent(0.80)
+    	LOHS A 1 A_SetTranslucent(0.90)
+    	LOHS A 1 A_SetTranslucent(1.0)
+		LOHS A 0 A_Jump(32,"Missile")
+		LOHS A 0 A_JumpIfCloser(1024, "See")
+		Loop
+	Missile:
+		LOHS A 0 A_Jump(255,"PestilenceAttack","WarAttack","FamineAttack","DeathAttack")
+	PestilenceAttack:
+		LOHS EF 8 Fast A_FaceTarget
+		LOHS G 0 A_SetUserVar("user_angle", 0)
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"PestilenceAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"PestilenceAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"PestilenceAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"PestilenceAttackLunatic")
+		Goto PestilenceAttackHard
+	PestilenceAttackEasy:
+		LOHS G 0 A_SetUserVar("user_x",random(-256,256))
+		LOHS G 0 A_SetUserVar("user_y",random(16,96))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_Jump(96,"See")
+		LOHS G 6 A_SpidRefire
+		Loop
+	PestilenceAttackNormal:
+		LOHS G 0 A_SetUserVar("user_x",random(-256,256))
+		LOHS G 0 A_SetUserVar("user_y",random(16,96))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_Jump(80,"See")
+		LOHS G 6 A_SpidRefire
+		Loop
+	PestilenceAttackHard:
+		LOHS G 0 A_SetUserVar("user_x",random(-256,256))
+		LOHS G 0 A_SetUserVar("user_y",random(16,96))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_Jump(64,"See")
+		LOHS G 6 A_SpidRefire
+		Loop
+	PestilenceAttackLunatic:
+		LOHS G 0 A_SetUserVar("user_x",random(-256,256))
+		LOHS G 0 A_SetUserVar("user_y",random(16,96))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",user_y,user_x,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_Jump(48,"See")
+		LOHS G 6 Fast A_SpidRefire
+		Loop
+	WarAttack:
+		LOHS EF 8 Fast A_FaceTarget
+		LOHS A 0 A_FaceTarget
+		LOHS A 0 A_SetUserVar("user_count", 0)
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"WarAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"WarAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"WarAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"WarAttackLunatic")
+		Goto WarAttackLunatic
+	WarAttackEasy:
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 1 A_JumpIf(user_count >= 12, "See")
+		Loop
+	WarAttackNormal:
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 1 A_JumpIf(user_count >= 16, "See")
+		Loop
+	WarAttackHard:
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 1 A_JumpIf(user_count >= 20, "See")
+		Loop
+	WarAttackLunatic:
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_count",user_count+1)
+		LOHS G 1 A_JumpIf(user_count >= 24, "See")
+		Loop
+	FamineAttack:
+		LOHS EF 8 Fast A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"FamineAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"FamineAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"FamineAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"FamineAttackLunatic")
+		Goto FamineAttackHard
+	FamineAttackEasy:
+		LOHS G 0 A_SetUserVar("user_angle",random(1,30))
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle)
+		LOHS G 16 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,0)
+		Goto See
+	FamineAttackNormal:
+		LOHS G 0 A_SetUserVar("user_angle",random(1,30))
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle*2)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle*2)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle)
+		LOHS G 16 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,0)
+		Goto See
+	FamineAttackHard:
+		LOHS G 0 A_SetUserVar("user_angle",random(1,30))
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle*3)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle*3)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle*2)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle*2)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle)
+		LOHS G 16 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,0)
+		Goto See
+	FamineAttackLunatic:
+		LOHS G 0 A_SetUserVar("user_angle",random(1,30))
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle*4)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle*4)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle*3)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle*3)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle*2)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle*2)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,-user_angle)
+		LOHS G 0 A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,user_angle)
+		LOHS G 16 Fast A_CustomMissile("MephistophelesTribulationTrailSpawner",48,0,0)
+		Goto See
+	DeathAttack:
+		LOHS EF 8 Fast A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"DeathAttackEasy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"DeathAttackNormal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"DeathAttackHard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"DeathAttackLunatic")
+		Goto DeathAttackLunatic
+	DeathAttackEasy:
+		LOHS G 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS G 0 A_Jump(24,"See")
+		LOHS G 3 A_FaceTarget
+		Loop
+	DeathAttackNormal:
+		LOHS GG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS G 0 A_Jump(20,"See")
+		LOHS G 3 A_FaceTarget
+		Loop
+	DeathAttackHard:
+		LOHS GGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS G 0 A_Jump(16,"See")
+		LOHS G 3 A_FaceTarget
+		Loop
+	DeathAttackLunatic:
+		LOHS GGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS G 0 A_Jump(12,"See")
+		LOHS G 3 Fast A_FaceTarget
+		Loop
+	Death:
+		LOHS I 0 ACS_NamedTerminate("BHI_BossStartSurvivalAttack",0)
+		LOHS I 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_NoBlocking
+		LOHS I 0 ACS_Execute(603,0)
+		LOHS I 0 A_KillChildren
+		LOHS I 0 Thing_Destroy(50, 1)
+		LOHS IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII 1 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,5),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS I 0 ACS_Execute(69)
+		LOHS JJJJJJJJKKKKKKKKLLLLLLLLMMMMMMMMNNNNNNNNOOOOOOOO 2 A_FadeOut(0.01)
+		Stop
+	DeathFinal:
+		LOHS I 8
+		LOHS J 8 A_Scream
+		LOHS K 8 A_Fall
+		LOHS LMN 8
+		LOHS O -1
+		Stop
+	}
+}
+ACTOR MephistophelesIceEffect : MephistophelesFireEffect
+{
+	Translation "Ice"
+}
+ACTOR MephistophelesTribulationBullet
+{
+  Radius 3
+  Height 6
+  Speed 20
+  FastSpeed 30
+  Damage (10)
+  Renderstyle Add
+  Alpha 1.0
+  DamageType "MephistophelesDamage"
+  Decal DoomImpScorch
+  DeathSound "touhou/hit"
+  Projectile
+  States
+  {
+  Spawn:
+    WBL4 A 0 Bright
+    WBL4 A 1 Bright A_ScaleVelocity(frandom(0.1,1.5))
+  LoopState:
+    WBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Death:
+	WBL4 AAAAAAAAAA 1 Bright A_FadeOut
+	Stop
+  }
+}
+ACTOR MephistophelesTribulationTrailSpawner
+{
+	Speed 20
+	FastSpeed 20
+	Damage (10)
+	Radius 3
+	Height 6
+	Scale 1.2
+	Projectile
+	+FORCEXYBILLBOARD
+	+RIPPER
+	BounceCount 2
+	SeeSound "touhou/fire"
+	DeathSound "touhou/hit2"
+	Renderstyle Add
+	Alpha 1.0
+	var int user_count;
+	States
+	{
+	Spawn:
+		BBL4 A 0 Bright A_SetUserVar("user_count",user_count+1)
+		BBL4 A 0 Bright A_JumpIf(user_count > 210, "StopState")
+		BBL4 A 1 Bright A_JumpIfInTargetInventory("RemiliaActivationToken",1,"GiveToken")
+		BBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		BBL4 A 1 Bright A_CustomMissile("MephistophelesTribulationTrailBullet",0,0,frandom(0,360),CMF_AIMDIRECTION|CMF_TRACKOWNER)
+		loop
+	GiveToken:
+		BBL4 A 8 Bright A_GiveInventory("RemiliaActivationToken",1)
+		BBL4 A 0 A_Die
+	StopState:
+		BBL4 A 1 Bright A_Stop
+	StoppedLoop:
+		BBL4 A 1 Bright A_JumpIfInTargetInventory("RemiliaActivationToken",1,"GiveToken")
+		BBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	Death:
+		BBL4 AAAAAAAAAA 2 Bright A_FadeOut
+		Stop
+	}
+}
+ACTOR MephistophelesTribulationTrailBullet
+{
+	Speed 0
+	FastSpeed 0
+	Damage (10)
+	Radius 3
+	Height 6
+	Scale 1.2
+	Projectile
+	+FORCEXYBILLBOARD
+	SeeSound ""
+	DeathSound "touhou/hit"
+	Renderstyle Add
+	Alpha 1.0
+	var int user_count;
+	States
+	{
+	Spawn:
+		BBL4 A 0 Bright A_SetUserVar("user_count",user_count+1)
+		BBL4 A 0 Bright A_JumpIf(user_count > 140, "Death")
+		BBL4 A 0 Bright A_JumpIfInTargetInventory("RemiliaActivationToken",1,"Death")
+		BBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+		Loop
+	Death:
+		BBL4 AAAAAAAAAA 1 Bright A_FadeOut
+		Stop
+	}
+}
+ACTOR MephistophelesEschaton : Mephistopheles
+{
+	DropItem "Megasphere"
+	Health 10000
+	+NOPAIN
+	PainChance 0
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	See:
+		LOHS A 0 A_JumpIfInventory("SpellcardActive",1,"Missile")
+		LOHS E 0 A_FaceTarget
+		LOHS EEEEEEEEEEEEEEEEEEEEEEEE 1 A_FadeIn(0.05)
+		LOHS FFF 4 A_FaceTarget
+		LOHS G 0 Thing_ChangeTID(0,6310)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartAttack",0,6310,0,true)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartTimerAlternative",0,6310,120)
+		LOHS G 0 ACS_Execute(602,0,126)
+		LOHS G 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+		LOHS G 0 A_GiveInventory("SpellcardActive",1)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,-96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,-128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,-96,0,0,0,0,0,160)
+		LOHS G 35 A_FaceTarget
+		LOHS G 0 A_UnSetInvulnerable
+		Goto Missile
+	Missile:
+		LOHS E 0 A_JumpIfInventory("BossTimerCheck30",1,"Missile4")
+		LOHS E 0 A_JumpIfHealthLower(2500,"Missile4")
+		LOHS E 0 A_JumpIfInventory("BossTimerCheck60",1,"Missile3")
+		LOHS E 0 A_JumpIfHealthLower(5000,"Missile3")
+		LOHS E 0 A_JumpIfInventory("BossTimerCheck90",1,"Missile2")
+		LOHS E 0 A_JumpIfHealthLower(7500,"Missile2")
+		Goto Missile1
+	Missile1:
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"Missile1Easy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"Missile1Normal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"Missile1Hard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Missile1Lunatic")
+		Goto Missile1Easy
+	Missile1Easy:
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS E 24 A_FaceTarget
+		Goto Missile
+	Missile1Normal:
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS E 24 A_FaceTarget
+		Goto Missile
+	Missile1Hard:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS E 24 A_FaceTarget
+		Goto Missile
+	Missile1Lunatic:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS E 24 A_FaceTarget
+		Goto Missile
+	Missile2:
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"Missile2Easy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"Missile2Normal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"Missile2Hard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Missile2Lunatic")
+		Goto Missile2Normal
+	Missile2Easy:
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS F 24 A_FaceTarget
+		Goto Missile
+	Missile2Normal:
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS F 24 A_FaceTarget
+		Goto Missile
+	Missile2Hard:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS F 24 A_FaceTarget
+		Goto Missile
+	Missile2Lunatic:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS F 24 A_FaceTarget
+		Goto Missile
+	Missile3:
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"Missile3Easy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"Missile3Normal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"Missile3Hard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Missile3Lunatic")
+		Goto Missile3Hard
+	Missile3Easy:
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-4,4))
+		LOHS G 24 A_FaceTarget
+		Goto Missile
+	Missile3Normal:
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-3,3))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-6,6))
+		LOHS G 24 A_FaceTarget
+		Goto Missile
+	Missile3Hard:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerHard",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-2,2))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-5,5))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-8,8))
+		LOHS G 24 A_FaceTarget
+		Goto Missile
+	Missile3Lunatic:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerHard",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-4,4))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-7,7))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-10,10))
+		LOHS G 24 A_FaceTarget
+		Goto Missile
+	Missile4:
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"Missile4Easy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"Missile4Normal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"Missile4Hard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Missile4Lunatic")
+		Goto Missile4Lunatic
+	Missile4Easy:
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-4,4))
+		LOHS GG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS GG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS GG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		Goto Missile
+	Missile4Normal:
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-3,3))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-6,6))
+		LOHS GGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS GGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS GGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		Goto Missile
+	Missile4Hard:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerHard",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerHard",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-2,2))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-5,5))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-8,8))
+		LOHS GGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS GGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS GGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		Goto Missile
+	Missile4Lunatic:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-9,9))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-18,18))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-27,27))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-36,36))
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesTribulationBullet",32,0,frandom(0,360),CMF_OFFSETPITCH,frandom(-45,45))
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerEasy",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerNormal",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerHard",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS G 0 A_SetUserVar("user_x",random(-512,512))
+		LOHS G 0 A_SetUserVar("user_y",random(-512,512))
+		LOHS G 0 A_SpawnItemEx("TeleportFog",user_x,user_y,0,0,0,0,0,0,0)
+		LOHS G 0 A_SpawnItemEx("MephistophelesRaiseArmySpawnerLunatic",user_x,user_y,0,0,0,0,0,SXF_SETMASTER,0,50)
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-4,4))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-7,7))
+		LOHS GGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("MephistophelesFamineAttack",frandom(4,48),0,frandom(-90,90),CMF_OFFSETPITCH,frandom(-10,10))
+		LOHS GGGGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS GGGGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS GGGGGG 0 A_CustomMissile("MephistophelesDeathProjectile",40,0,frandom(-120,120),CMF_OFFSETPITCH,frandom(-1,1))
+		LOHS GG 4 A_FaceTarget
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		Goto Missile
+	Death:
+		LOHS I 0 ACS_NamedTerminate("BHI_BossStartAttack",0)
+		LOHS I 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 ACS_Execute(603,0)
+		LOHS I 0 A_SpawnItemEx("MissileBlockerSpawnerSpawner",0,0,0,0,0,0,frandom(0,360),SXF_ABSOLUTEANGLE)
+		LOHS I 0 A_KillChildren
+		LOHS I 0 Thing_Destroy(50, 1)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,2),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,4),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,6),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,8),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,10),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,12),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,14),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ 0 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,16),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,16),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS J 0 ACS_Execute(70,0)
+		LOHS J 8 A_Scream
+		LOHS K 8 A_Fall
+		LOHS LMN 8
+		LOHS O -1
+		Stop
+	}
+}
+
+ACTOR MephistophelesDemonicBattle : Mephistopheles
+{
+	Health 10000
+	+INVULNERABLE
+	DropItem "None"
+	DamageFactor "PlayerSpellcard", 0
+	States
+	{
+	Spawn:
+		LOHS A 0
+		LOHS A 1 A_SetTranslucent(0.05)
+	Idle:
+		LOHS AB 10 A_Look
+		Loop
+	See:
+		LOHS A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+		LOHS E 0 A_FaceTarget
+		LOHS EEEEEEEEEEEEEEEEEEEEEEEE 1 A_FadeIn(0.05)
+		LOHS FFF 4 A_FaceTarget
+		LOHS G 0 Thing_ChangeTID(0,6311)
+		LOHS G 0 ACS_NamedExecute("BHI_BossStartAttack",0,6311,0,true)
+		LOHS G 0 ACS_Execute(71,0)
+		LOHS G 0 ACS_Execute(602,0,127)
+		LOHS G 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+		LOHS G 0 A_GiveInventory("SpellcardActive",1)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-128,0,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",-96,-96,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",0,-128,0,0,0,0,0,160)
+		LOHS G 0 A_SpawnItemEx("MephistophelesFireEffect",96,-96,0,0,0,0,0,160)
+		LOHS G 35 A_FaceTarget
+		LOHS G 0 A_UnSetInvulnerable
+		Goto Missile
+	ChaseState:
+		LOHS A 0 A_Jump(64,"Teleport")
+		LOHS AAAAAABBBBBBCCCCCCDDDDDD 1 A_Chase
+		Loop
+	Teleport:
+		LOHS A 0 A_FaceTarget
+   		LOHS A 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 1 A_PlaySound("pyro/tele")
+    	LOHS A 1 A_SetTranslucent(0.90)
+    	LOHS A 1 A_SetTranslucent(0.80)
+    	LOHS A 1 A_SetTranslucent(0.70)
+    	LOHS A 1 A_SetTranslucent(0.60)
+    	LOHS A 1 A_SetTranslucent(0.50)
+    	LOHS A 1 A_SetTranslucent(0.40)
+    	LOHS A 1 A_SetTranslucent(0.30)
+    	LOHS A 1 A_SetTranslucent(0.20)
+    	LOHS A 1 A_SetTranslucent(0.10)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_ExtChase(0,0,1,1)
+    	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_Wander
+    	LOHS A 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,0,0,0,0,160)
+		LOHS A 1 A_PlaySound("pyro/tele")
+    	LOHS A 1 A_SetTranslucent(0.10)
+    	LOHS A 1 A_SetTranslucent(0.20)
+    	LOHS A 1 A_SetTranslucent(0.30)
+    	LOHS A 1 A_SetTranslucent(0.40)
+    	LOHS A 1 A_SetTranslucent(0.50)
+    	LOHS A 1 A_SetTranslucent(0.60)
+    	LOHS A 1 A_SetTranslucent(0.70)
+    	LOHS A 1 A_SetTranslucent(0.80)
+    	LOHS A 1 A_SetTranslucent(0.90)
+    	LOHS A 1 A_SetTranslucent(1.0)
+		LOHS A 0 A_Jump(128,"Missile")
+		LOHS A 0 A_JumpIfCloser(1024, "See")
+		Loop
+	Missile:
+		LOHS EF 6 A_FaceTarget //PHASE 3: Add Forward Focus Projectiles
+		LOHS G 0 A_JumpIfHealthLower(5000,"Missile3") //PHASE 3: Add Falling Comets
+		LOHS G 0 A_JumpIfHealthLower(7500,"Missile2") //PHASE 2: Additional bullets
+		Goto Missile1 //PHASE 1: Spread pattern projectiles
+	Missile1:
+		LOHS A 0 A_SetUserVar("user_angle", 180)
+	Missile1Attack:
+		LOHS A 0 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"Missile1Easy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"Missile1Normal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"Missile1Hard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Missile1Lunatic")
+		Goto Missile1Lunatic
+	Missile4A:
+		LOHS A 0 A_CustomMissile("MephistophelesBattleBullet4",48,0,random(-20,20),CMF_AIMOFFSET,random(-10,10))
+		Goto Missile1Attack
+	Missile1Easy:
+		LOHS G 0 A_CustomMissile("MephistophelesBattleBullet1",random(16,64),random(-16,16),user_angle+random(-20,20),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_CustomMissile("MephistophelesBattleBullet1",random(16,64),random(-16,16),-user_angle-random(-20,20),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_SetUserVar("user_angle", user_angle - 3)
+		LOHS G 1 A_JumpIf(user_angle < 0, "See")
+		LOHS G 0 A_JumpIfHealthLower(2500,"Missile4A")
+		Loop
+	Missile1Normal:
+		LOHS GG 0 A_CustomMissile("MephistophelesBattleBullet1",random(16,64),random(-16,16),user_angle+random(-20,20),CMF_AIMOFFSET,random(-20,20))
+		LOHS GG 0 A_CustomMissile("MephistophelesBattleBullet1",random(16,64),random(-16,16),-user_angle-random(-20,20),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_SetUserVar("user_angle", user_angle - 3)
+		LOHS G 1 A_JumpIf(user_angle < 0, "See")
+		LOHS G 0 A_JumpIfHealthLower(2500,"Missile4A")
+		Loop
+	Missile1Hard:
+		LOHS GGG 0 A_CustomMissile("MephistophelesBattleBullet1",random(16,64),random(-16,16),user_angle+random(-20,20),CMF_AIMOFFSET,random(-20,20))
+		LOHS GGG 0 A_CustomMissile("MephistophelesBattleBullet1",random(16,64),random(-16,16),-user_angle-random(-20,20),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_SetUserVar("user_angle", user_angle - 3)
+		LOHS G 1 A_JumpIf(user_angle < 0, "See")
+		LOHS G 0 A_JumpIfHealthLower(2500,"Missile4A")
+		Loop
+	Missile1Lunatic:
+		LOHS GGGG 0 A_CustomMissile("MephistophelesBattleBullet1",random(16,64),random(-16,16),user_angle+random(-20,20),CMF_AIMOFFSET,random(-20,20))
+		LOHS GGGG 0 A_CustomMissile("MephistophelesBattleBullet1",random(16,64),random(-16,16),-user_angle-random(-20,20),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_SetUserVar("user_angle", user_angle - 3)
+		LOHS G 1 A_JumpIf(user_angle < 0, "See")
+		LOHS G 0 A_JumpIfHealthLower(2500,"Missile4A")
+		Loop
+	Missile2:
+		LOHS A 0 A_SetUserVar("user_angle", 180)
+	Missile2Attack:
+		LOHS A 0 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"Missile2Easy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"Missile2Normal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"Missile2Hard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Missile2Lunatic")
+		Goto Missile2Lunatic
+	Missile4B:
+		LOHS A 0 A_CustomMissile("MephistophelesBattleBullet3",48,0,random(-20,20),CMF_AIMOFFSET,random(-10,10))
+		Goto Missile2Attack
+	Missile2Easy:
+		LOHS G 0 A_CustomMissile("MephistophelesBattleBullet2",random(16,64),random(-16,16),user_angle+random(-30,30),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_CustomMissile("MephistophelesBattleBullet2",random(16,64),random(-16,16),-user_angle-random(-30,30),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_SetUserVar("user_angle", user_angle - 6)
+		LOHS G 1 A_JumpIf(user_angle < -180, "Missile1")
+		LOHS G 0 A_JumpIfHealthLower(2500,"Missile4B")
+		Loop
+	Missile2Normal:
+		LOHS GG 0 A_CustomMissile("MephistophelesBattleBullet2",random(16,64),random(-16,16),user_angle+random(-30,30),CMF_AIMOFFSET,random(-20,20))
+		LOHS GG 0 A_CustomMissile("MephistophelesBattleBullet2",random(16,64),random(-16,16),-user_angle-random(-30,30),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_SetUserVar("user_angle", user_angle - 6)
+		LOHS G 1 A_JumpIf(user_angle < -180, "Missile1")
+		LOHS G 0 A_JumpIfHealthLower(2500,"Missile4B")
+		Loop
+	Missile2Hard:
+		LOHS GGG 0 A_CustomMissile("MephistophelesBattleBullet2",random(16,64),random(-16,16),user_angle+random(-30,30),CMF_AIMOFFSET,random(-20,20))
+		LOHS GGG 0 A_CustomMissile("MephistophelesBattleBullet2",random(16,64),random(-16,16),-user_angle-random(-30,30),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_SetUserVar("user_angle", user_angle - 6)
+		LOHS G 1 A_JumpIf(user_angle < -180, "Missile1")
+		LOHS G 0 A_JumpIfHealthLower(2500,"Missile4B")
+		Loop
+	Missile2Lunatic:
+		LOHS GGGG 0 A_CustomMissile("MephistophelesBattleBullet2",random(16,64),random(-16,16),user_angle+random(-30,30),CMF_AIMOFFSET,random(-20,20))
+		LOHS GGGG 0 A_CustomMissile("MephistophelesBattleBullet2",random(16,64),random(-16,16),-user_angle-random(-30,30),CMF_AIMOFFSET,random(-20,20))
+		LOHS G 0 A_SetUserVar("user_angle", user_angle - 6)
+		LOHS G 1 A_JumpIf(user_angle < -180, "Missile1")
+		LOHS G 0 A_JumpIfHealthLower(2500,"Missile4B")
+		Loop
+	Missile3:
+		LOHS A 0 A_FaceTarget
+		LOHS A 0 A_JumpIfInTargetInventory("EasyMode",1,"Missile3Easy")
+		LOHS A 0 A_JumpIfInTargetInventory("NormalMode",1,"Missile3Normal")
+		LOHS A 0 A_JumpIfInTargetInventory("HardMode",1,"Missile3Hard")
+		LOHS A 0 A_JumpIfInTargetInventory("LunaticMode",1,"Missile3Lunatic")
+		Goto Missile3Lunatic
+	Missile3Easy:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("RainCometNull",42,0,random(0,360))
+		Goto Missile2
+	Missile3Normal:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("RainCometNull",42,0,random(0,360))
+		Goto Missile2
+	Missile3Hard:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("RainCometNull",42,0,random(0,360))
+		Goto Missile2
+	Missile3Lunatic:
+		LOHS GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG 0 A_CustomMissile("RainCometNull",42,0,random(0,360))
+		Goto Missile2
+	Death:
+		LOHS I 0 ACS_NamedTerminate("BHI_BossStartAttack",0)
+		LOHS I 0 ACS_NamedExecute("BHI_BossStopAttack",0)
+		LOHS I 0 ACS_Terminate(71,0)
+		LOHS I 0 A_GiveInventory("BulletDeathTrigger",1)
+		LOHS I 0 A_NoBlocking
+		LOHS I 0 ACS_Execute(603,0)
+		LOHS I 0 A_SpawnItemEx("MissileBlockerSpawnerSpawner",0,0,0,0,0,0,frandom(0,360),SXF_ABSOLUTEANGLE)
+		LOHS I 0 A_KillChildren
+		LOHS I 0 Thing_Destroy(50, 1)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,2),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,4),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,6),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,8),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,10),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,12),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS IIIII 1 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,14),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ 0 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,16),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,18),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS J 8 A_Scream
+		LOHS K 8 A_Fall
+		LOHS LMN 8
+		LOHS OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,20),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 0 A_SpawnItemEx("MephistophelesIceEffect",0,0,0,frandom(0,22),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 0 A_SpawnItemEx("MephistophelesFireEffect",0,0,0,frandom(0,24),0,0,frandom(0,360),SXF_NOCHECKPOSITION,0)
+		LOHS O 0 A_Scream
+		LOHS O 105
+		LOHS O 0 ACS_Execute(128,0)
+		LOHS O -1
+		Stop
+	}
+}
+ACTOR MephistophelesBattleBullet1
+{
+  Radius 2
+  Height 4
+  Speed 20
+  FastSpeed 30
+  damage (12)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	RBL4 A 0
+	RBL4 A 0 A_ScaleVelocity(frandom(0.4,1.6))
+  LoopState:
+    RBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR MephistophelesBattleBullet2
+{
+  Radius 2
+  Height 4
+  Speed 10
+  FastSpeed 20
+  damage (12)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	VBL4 A 0
+	VBL4 A 0 A_ScaleVelocity(frandom(0.6,1.4))
+  LoopState:
+	VBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    VBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR MephistophelesBattleBullet3
+{
+  Radius 2
+  Height 4
+  Speed 15
+  FastSpeed 25
+  damage (12)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	BBL4 A 0
+	BBL4 A 0 A_ScaleVelocity(frandom(0.8,1.2))
+  LoopState:
+	BBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR MephistophelesBattleBullet4
+{
+  Radius 3
+  Height 6
+  Speed 25
+  FastSpeed 35
+  damage (16)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	WBL3 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    WBL3 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}

@@ -1,0 +1,496 @@
+ACTOR ExSuika 31502
+{
+//$Category "Touhou Extra Story"
+  Tag "Suika Ibuki"
+  Speed 8
+  FastSpeed 12
+  MONSTER
+  Health 4000
+  Radius 24
+  Height 64
+  Scale 0.6
+  MinMissileChance 160
+  Mass 10000
+  MeleeThreshold 192
+  MeleeRange 64
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +BOSS
+  +DONTFALL
+  +NEVERRESPAWN
+  +NORADIUSDMG
+  +DONTMORPH
+  +DONTRIP
+  +AMBUSH
+  +MISSILEMORE
+  +NOICEDEATH
+  Gravity 1.0
+  Painchance 3
+  Painsound "touhou/pain"
+  Seesound ""
+  Deathsound "touhou/defeat"
+  Obituary "%o wasn't strong enough for Suika."
+  HitObituary "%o foolishly got into a brawl with Suika."
+  DropItem "ExSuikaDeepFogLabyrinth"
+  DamageFactor "TouhouHakureiNeedle", 1.4
+  DamageFactor "PlayerSpellcard", 0.35
+  States
+  {
+  Spawn:
+	SUIK A 0
+	SUIK A 0 Thing_ChangeTID(0,6108)
+	SUIK A 1 ACS_NamedExecute("BHI_BossStartAttack",0,6108,1,false)
+	SUIK A 1 ACS_NamedExecute("BHI_BossStartTimer",0,6108,60)
+	SUIK A 1 A_Look
+  Idle:
+	SUIK BCDEFGHIJKLMNOPQRA 3 A_Look
+	Loop
+  See:
+	SUIK A 0 A_Jump(32,"FastSee")
+	SUIK ABCDEFGHI 3 A_Chase
+	SUIK A 0 A_Jump(32,"FastSee")
+	SUIK JKLMNOPQR 3 A_Chase
+	Loop
+  FastSee:
+	SUIK A 0 A_Jump(32,"See")
+	SUIK STUVWXYZ 2 A_Chase
+	Loop
+  NapTime:
+	SUI1 HGFEDCBA 4 A_FaceTarget
+	SUI1 A 16 A_FaceTarget
+	SUI1 ABCDEFGH 4 A_FaceTarget
+	Goto See
+  Pain:
+	SUI4 A 0 A_Pain
+    SUI4 LMNML 3
+	Goto See
+  Melee:
+	SUI1 QRS 4 A_FaceTarget
+	SUI1 T 4 A_CustomMeleeAttack(100, "touhou/suika/hit", "", "none")
+	SUI1 UVWX 4 A_FaceTarget
+	Goto See
+  Missile:
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher")
+	Goto MainShot
+  FloorSlam:
+	SUI3 NOPQRST 3 Fast A_FaceTarget
+	SUI3 A 0 A_PlaySound("touhou/fire")
+	SUI3 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 0 A_CustomMissile("SuikaFloorSlamBullet2",0,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+	SUI3 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 0 A_CustomMissile("SuikaFloorSlamBullet",0,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-90,90))
+	SUI3 U 12 Fast A_FaceTarget
+	SUI3 VWXYZ 3 Fast A_FaceTarget
+	SUI3 "[]" 3 Fast A_FaceTarget
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher","Missile","NapTime")
+	Goto See
+  Bombs:
+	SUI3 AB 3 Fast A_FaceTarget
+	SUI3 A 0 A_PlaySound("touhou/fire")	
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,-30,CMF_OFFSETPITCH,0)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,30,CMF_OFFSETPITCH,0)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,0,CMF_OFFSETPITCH,0)
+	SUI3 CDEFGHI 2 Fast
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,-30,CMF_OFFSETPITCH,5)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,30,CMF_OFFSETPITCH,5)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,0,CMF_OFFSETPITCH,6)
+	SUI3 CDEFGHI 2 Fast
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,-30,CMF_OFFSETPITCH,10)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,30,CMF_OFFSETPITCH,10)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,0,CMF_OFFSETPITCH,12)
+	SUI3 CDEFGHI 2 Fast
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,-30,CMF_OFFSETPITCH,15)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,30,CMF_OFFSETPITCH,15)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,0,CMF_OFFSETPITCH,18)
+	SUI3 CDEFGHIJK 2 Fast
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,-30,CMF_OFFSETPITCH,20)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,30,CMF_OFFSETPITCH,20)
+	SUI3 A 0 A_CustomMissile("SuikaBubbleBomb",32,0,0,CMF_OFFSETPITCH,24)
+	SUI3 JKLMLMLMLKJ 3 Fast A_FaceTarget
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher","Missile","NapTime")
+	Goto See
+  Puncher:
+	SUI1 QRST 4 Fast A_FaceTarget
+	SUI1 A 0 A_PlaySound("touhou/komachi/scythe")
+	SUI1 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 0 A_CustomMissile("SuikaPunchSpirit",frandom(20,40),frandom(-10,10),frandom(-60,60),CMF_OFFSETPITCH,frandom(-36,36))
+	SUI1 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 0 A_CustomMissile("SuikaPunchSpirit",frandom(20,40),frandom(-10,10),frandom(-90,90),CMF_OFFSETPITCH,frandom(-45,45))
+	SUI1 UUVWX 8 Fast A_FaceTarget
+	SUIK A 0 A_Jump(128,"FloorSlam","Bombs","Puncher","Missile","NapTime")
+	Goto See
+  MainShot:
+	SUI2 ABCD 4 Fast A_FaceTarget
+	SUI2 E 0 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotRed",32,0,frandom(-3,3)-90,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotRed",32,0,frandom(-3,3)-60,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotRed",32,0,frandom(-3,3)-30,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotRed",32,0,frandom(-3,3),CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotRed",32,0,frandom(-3,3)+30,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotRed",32,0,frandom(-3,3)+60,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotRed",32,0,frandom(-3,3)+90,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 EFG 6 Fast A_FaceTarget
+	SUI2 ABCD 4 Fast A_FaceTarget
+	SUI2 E 0 A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotViolet",32,0,frandom(-3,3)+90,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotViolet",32,0,frandom(-3,3)+60,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotViolet",32,0,frandom(-3,3)+30,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotViolet",32,0,frandom(-3,3),CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotViolet",32,0,frandom(-3,3)-30,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotViolet",32,0,frandom(-3,3)-60,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 E 6 Fast A_PlaySound("touhou/fire")
+	SUI2 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 0 A_CustomMissile("SuikaMainShotViolet",32,0,frandom(-3,3)-90,CMF_AIMDIRECTION,frandom(-3,3))
+	SUI2 EFG 12 Fast A_FaceTarget
+	SUIK A 0 A_Jump(32,"NapTime")
+	Goto See
+  Death:
+	SUI4 L 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	SUI4 L 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	SUI4 L 0 A_GiveInventory("BulletDeathTrigger",1)
+    SUI4 L 0 A_NoBlocking
+	SUI4 L 0 A_PlaySound("touhou/nuefire")
+    SUI4 L 2 A_SetTranslucent(0.9)
+    SUI4 L 2 A_SetTranslucent(0.8)
+    SUI4 L 2 A_SetTranslucent(0.7)
+    SUI4 L 2 A_SetTranslucent(0.6)
+    SUI4 L 2 A_SetTranslucent(0.5)
+    SUI4 L 2 A_SetTranslucent(0.4)
+    SUI4 L 2 A_SetTranslucent(0.3)
+    SUI4 L 2 A_SetTranslucent(0.2)
+    SUI4 L 2 A_SetTranslucent(0.1)
+    Stop
+  }
+}
+
+ACTOR ExSuikaDeepFogLabyrinth : ExSuika
+{
+  Tag "Suika Ibuki"
+  Gravity 0.25
+  Health 2000
+  DropItem "ExSuikaPandemonium"
+  +INVULNERABLE
+  +NOPAIN
+  MeleeRange 0
+  DamageFactor "TouhouHakureiNeedle", 1.2
+  DamageFactor "PlayerSpellcard", 1.0
+  States
+  {
+  Spawn:
+	SUIK A 0
+	SUIK A 4 A_SetTranslucent(0.1,0)
+    SUIK BCDEFGHIJKLMNOPQR 3 A_FadeIn(0.05)
+  Idle:
+	SUIK A 0 A_SetTranslucent(1.0,0)
+	SUIK ABCDEFGHIJKLMNOPQR 3 A_Look
+	Loop
+  See:
+	SUIK A 0 A_SetTranslucent(1.0,0)
+	SUI2 A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	SUI2 HIJK 6 A_FaceTarget
+	TNT1 A 0 Thing_ChangeTID(0,6110)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6110,1,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6110,80)
+	SUI2 A 0 ACS_Execute(602,0,51)
+	SUI2 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	SUI2 A 0 A_GiveInventory("SpellcardActive",1)
+	SUI2 LMLMLMLMLMLMLMLMMNN 3 A_FaceTarget
+	SUI2 A 0 A_UnSetInvulnerable
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	Goto Missile
+  Missile:
+	SUI2 PQRRRRRRSSSSSST 3 A_FaceTarget
+	TNT1 A 0 A_UnSetShootable
+  MissileLoop:
+	TNT1 A 0 A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 A_SpawnItemEx("MistSpawner",0,0,0,0,0,0,0,16)
+    TNT1 A 0 A_SpawnItemEx("TrailSmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SuikaFogBullet",frandom(10,80),frandom(-20,20),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,40))
+	TNT1 A 2 Fast A_Chase("","")
+    TNT1 A 0 A_SpawnItemEx("MistSpawner",0,0,0,0,0,0,0,16)
+    TNT1 A 0 A_SpawnItemEx("TrailSmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SuikaFogBullet",frandom(10,80),frandom(-20,20),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,40))
+	TNT1 A 2 Fast A_Chase("","")
+    TNT1 A 0 A_SpawnItemEx("MistSpawner",0,0,0,0,0,0,0,16)
+    TNT1 A 0 A_SpawnItemEx("TrailSmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SuikaFogBullet",frandom(10,80),frandom(-20,20),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,40))
+	TNT1 A 2 Fast A_Chase("","")
+    TNT1 A 0 A_SpawnItemEx("MistSpawner",0,0,0,0,0,0,0,16)
+    TNT1 A 0 A_SpawnItemEx("TrailSmoke", random(32, -32), random(32, -32), 0,0,0,0,0,128)
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SuikaFogBullet",frandom(10,80),frandom(-20,20),frandom(0,360),CMF_AIMDIRECTION,frandom(-20,40))
+	TNT1 A 2 Fast A_Chase("","")
+	TNT1 A 0 A_JumpIfInventory("EnemyCounter1",35,"LoopEnd")
+	Loop
+  LoopEnd:
+	SUI2 U 0 A_TakeInventory("EnemyCounter1",200)
+	SUI2 U 0 A_SetShootable
+	SUI2 U 0 ThrustThingZ(0,15,0,0)
+	SUI2 UVUV 3 A_FaceTarget
+	Goto JumpFly
+  JumpFly:
+	SUI2 UV 3 A_CheckFloor("JumpLand")
+	Loop
+  JumpLand:
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,22.5)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,45.0)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,67.5)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,90.0)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,112.5)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,135.0)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,157.5)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,180.0)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,202.5)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,225.0)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,247.5)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,270.0)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,292.5)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,315.0)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,337.5)
+	SUI2 W 0 A_CustomMissile("SuikaFogBubble",32,0,360.0)
+	SUI2 W 0 A_Stop
+	SUIK WXX 6 A_SpidRefire
+	Goto Missile
+  ChaseState:
+	SUIK A 0 A_Jump(32,"FastSee")
+	SUIK ABCDEFGHI 3 A_Chase
+	SUIK A 0 A_Jump(32,"FastSee")
+	SUIK JKLMNOPQR 3 A_Chase
+	Loop
+  Death:
+	SUI4 A 0 ACS_Execute(603,0)
+	SUI4 L 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	SUI4 L 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	SUI4 L 0 A_GiveInventory("BulletDeathTrigger",1)
+    SUI4 L 0 A_NoBlocking
+	SUI4 L 0 A_PlaySound("touhou/nuefire")
+    SUI4 LLLLLLLLLL 2 A_FadeOut(0.1)
+    Stop
+  }
+}
+
+ACTOR ExSuikaPandemonium : ExSuika
+{
+  Tag "Suika Ibuki"
+  Health 6000
+  DropItem "MapleLeafFan"
+  +INVULNERABLE
+  +NOPAIN
+  DamageFactor "TouhouHakureiNeedle", 1.2
+  DamageFactor "PlayerSpellcard", 1.0
+  States
+  {
+  Spawn:
+	SUIK A 0
+	SUIK A 4 A_SetTranslucent(0.1,0)
+    SUIK BCDEFGHIJKLMNOPQR 3 A_FadeIn(0.05)
+  Idle:
+	SUIK A 0 A_SetTranslucent(1.0,0)
+	SUIK ABCDEFGHIJKLMNOPQR 3 A_Look
+	Loop
+  See:
+	SUIK A 0 A_SetTranslucent(1.0,0)
+	SUI2 A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	SUI2 HIJK 6 A_FaceTarget
+	TNT1 A 0 Thing_ChangeTID(0,6112)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6112,0,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimerAlternative",0,6112,100)
+	SUI2 A 0 ACS_Execute(602,0,52)
+	SUI2 A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	SUI2 A 0 A_GiveInventory("SpellcardActive",1)
+	SUI2 LMLMLMLMLMLMLMLMMNN 3 A_FaceTarget
+	SUI2 A 0 A_UnSetInvulnerable
+	TNT1 A 0 A_ChangeFlag("NOPAIN",0)
+	Goto Missile
+  ChaseState:
+	SUIK A 0 A_Jump(32,"FastSee")
+	SUIK ABCDEFGHI 3 A_Chase
+	SUIK A 0 A_Jump(32,"FastSee")
+	SUIK JKLMNOPQR 3 A_Chase
+	Loop
+  Missile:
+	SUI2 PQRRRRRRSSSSSST 3 A_FaceTarget
+  MissileLunatic:
+	SUI2 A 0 A_SetAngle(angle+7)
+	SUI2 UV 2 Fast
+	SUI2 A 0 A_PlaySound("touhou/fire")
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,0)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,10)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,20)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,30)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,40)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,50)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,60)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,70)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,80)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,90)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,100)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,110)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,120)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,130)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,140)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,150)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,160)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,170)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,180)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,190)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,200)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,210)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,220)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,230)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,240)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,250)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,260)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,270)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,280)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,290)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,300)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,310)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,320)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,330)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,340)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumAimedBullet",32,0,350)
+	SUI2 AAA 0 A_CustomMissile("SuikaPandemoniumBigBulletBlue",32,0,frandom(-5,5),CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 AAA 0 A_CustomMissile("SuikaPandemoniumBigBulletBlue",32,0,frandom(115,125),CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 AAA 0 A_CustomMissile("SuikaPandemoniumBigBulletBlue",32,0,frandom(235,245),CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,0.0,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,22.5,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,45.0,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,67.5,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,90.0,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,112.5,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,135.0,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,157.5,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,180.0,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,202.5,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,225.0,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,247.5,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,270.0,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,292.5,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,315.0,CMF_AIMDIRECTION)
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,337.5,CMF_AIMDIRECTION)
+	SUI2 A 0 A_JumpIfInventory("BossTimerCheck60",1,"MissileLunatic2")
+	SUI2 A 0 A_JumpIfHealthLower(4800,"MissileLunatic2")
+	Goto MissileLunatic3
+  MissileLunatic2:
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,0.0,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,22.5,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,45.0,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,67.5,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,90.0,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,112.5,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,135.0,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,157.5,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,180.0,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,202.5,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,225.0,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,247.5,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,270.0,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,292.5,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,315.0,CMF_AIMDIRECTION,frandom(-10,10))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,337.5,CMF_AIMDIRECTION,frandom(-10,10))
+  MissileLunatic3:
+	SUI2 A 0 A_SetAngle(angle+7)
+	SUI2 UV 2 Fast
+	SUI2 A 0 A_JumpIfInventory("BossTimerCheck30",1,"MissileLunatic4")
+	SUI2 A 0 A_JumpIfHealthLower(3600,"MissileLunatic4")
+	Goto MissileLunatic
+  MissileLunatic4:
+	SUI2 A 0 A_PlaySound("touhou/fire")
+	SUI2 AAA 0 A_CustomMissile("SuikaPandemoniumBigBulletRed",32,0,frandom(-5,5),CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 AAA 0 A_CustomMissile("SuikaPandemoniumBigBulletRed",32,0,frandom(115,125),CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 AAA 0 A_CustomMissile("SuikaPandemoniumBigBulletRed",32,0,frandom(235,245),CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,0.0,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,22.5,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,45.0,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,67.5,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,90.0,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,112.5,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,135.0,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,157.5,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,180.0,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,202.5,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,225.0,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,247.5,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,270.0,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,292.5,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,315.0,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,337.5,CMF_AIMDIRECTION,frandom(-5,5))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,0.0,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,22.5,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,45.0,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,67.5,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,90.0,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,112.5,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,135.0,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,157.5,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,180.0,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,202.5,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,225.0,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,247.5,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,270.0,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,292.5,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,315.0,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet",32,0,337.5,CMF_AIMDIRECTION,frandom(-30,30))
+	SUI2 A 0 A_JumpIfInventory("BossTimerCheck20",1,"MissileLunatic5")
+	SUI2 A 0 A_JumpIfHealthLower(2400,"MissileLunatic5")
+	Goto MissileLunatic
+  MissileLunatic5:
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,0.0,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,22.5,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,45.0,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,67.5,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,90.0,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,112.5,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,135.0,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,157.5,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,180.0,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,202.5,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,225.0,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,247.5,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,270.0,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,292.5,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,315.0,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,337.5,CMF_AIMDIRECTION,frandom(-15,15))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,0.0,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,22.5,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,45.0,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,67.5,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,90.0,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,112.5,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,135.0,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,157.5,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,180.0,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,202.5,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,225.0,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,247.5,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,270.0,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,292.5,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,315.0,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_CustomMissile("SuikaPandemoniumSmallBullet2",32,0,337.5,CMF_AIMDIRECTION,frandom(-45,45))
+	SUI2 A 0 A_JumpIfInventory("BossTimerCheck10",1,"MissileLunatic6")
+	SUI2 A 0 A_JumpIfHealthLower(1200,"MissileLunatic6")
+	Goto MissileLunatic
+  MissileLunatic6:
+	SUI2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SuikaPandemoniumSmallBullet3",32,0,frandom(0,360),CMF_AIMDIRECTION,frandom(-30,90))
+	SUI2 A 0 A_SetAngle(frandom(0,360))
+	Goto MissileLunatic
+  Death:
+	SUI4 L 1 ACS_Execute(603,0)
+	SUI4 L 1 A_GiveInventory("BulletDeathTrigger",1)
+	SUI4 L 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	SUI4 L 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+    SUI4 LMN 20
+	SUI4 N 0 A_NoBlocking
+    SUI4 N 0 A_Scream
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 BRIGHT A_SpawnItemEx("TouhouFireWhite",Random(4,-4),Random(4,-4),Random(4,-4),Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+	TNT1 A 70
+    TNT1 A 1 ACS_Execute(131,0)
+    Stop
+  }
+}

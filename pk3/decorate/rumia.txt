@@ -1,0 +1,2403 @@
+ACTOR Rumia 31199
+{
+//$Category "Touhou Characters"
+  Tag "Rumia"
+  floatspeed 8
+  Speed 8
+  Fastspeed 12
+  MONSTER
+  Health 800
+  Radius 24
+  Height 64
+  Scale 0.7
+  Mass 4000
+  MinMissileChance 160
+  //MinMissileChance 3000 //original maker clearly did not understand how this works
+  //MeleeThreshold 35 //or how this works
+  //MeleeRange 65 //like at all
+  +NEVERRESPAWN
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  +BOSS
+  +NORADIUSDMG
+  +NOICEDEATH
+  +DONTMORPH
+  +DONTRIP
+  +AMBUSH
+  Painchance 10
+  Seesound ""
+  Painsound "touhou/pain"
+  Deathsound "touhou/nuefire"
+  Obituary "%o couldn't see through Rumia's darkness."
+  States
+  {
+  Spawn:
+	RMIA A 0
+	RMIA A 1 ACS_NamedExecute("BHI_BossStartAttack",0,1,1,false)
+	RMIA A 1 ACS_NamedExecute("BHI_BossStartTimer",0,1,35)
+  Idle:
+    RMIA ABCDEFG 7 A_Look
+    Loop
+  See:
+    RMIA F 2 A_Chase
+    Loop
+  ChaseState:
+    RMIA F 2 A_Chase
+    Loop
+  Pain:
+    RMIA M 10 A_Pain
+    Goto See
+  Melee:
+  Missile:
+    RMIA A 0 A_Jump(256, "AimedOrbs", "Circle", "GreenStream", "AimAndCircle", "GreenCircles", "AimYellow", "Laser")
+    Goto See
+  AimedOrbs:
+    RMIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"AimedOrbsEasy")
+    RMIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"AimedOrbsEasy")
+    RMIA A 0 A_JumpIfInTargetInventory("HardMode",1,"AimedOrbsHard")
+    RMIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"AimedOrbsHard")
+  AimedOrbsEasy:
+    RMIA I 2 A_FaceTarget
+	RMIA JK 4
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-0)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  AimedOrbsHard:
+    RMIA I 2 Fast A_FaceTarget
+	RMIA JK 4 Fast
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 Fast A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-1)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-1)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,1)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,1)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-1)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-1)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,1)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,1)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-3)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-3)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,3)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,3)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-1)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-1)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,1)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,1)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-3)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-3)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,3)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,3)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-1)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-1)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,1)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,1)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-4)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-4)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,4)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,4)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-4)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-4)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,4)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,4)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA KJ 4 Fast
+	RMIA I 2 Fast
+	Goto See
+  GreenStream:
+    RMIA I 2 Fast
+	RMIA JK 4 Fast
+	RMIA LLLLLLLLLLLLLLLL 2 Fast A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_JumpIfInventory("EasyMode",1,"EndGreenStream")
+	RMIA LLLL 2 Fast A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_JumpIfInventory("NormalMode",1,"EndGreenStream")
+	RMIA LLLL 2 Fast A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_JumpIfInventory("HardMode",1,"EndGreenStream")
+	RMIA LLLLLLLL 2 Fast A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+  EndGreenStream:
+	RMIA JK 4 Fast
+    RMIA I 2 Fast
+	Goto See
+  Circle:
+    RMIA I 2 Fast
+    RMIA JK 4 Fast
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-140)
+	RMIA L 7 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-140)
+	RMIA L 7 Fast A_CustomMissile("StrongRumiaBlueOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-140)
+	RMIA L 7 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-140)
+	RMIA L 7 Fast A_CustomMissile("StrongRumiaBlueOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-140)
+	RMIA L 7 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-140)
+	RMIA L 7 Fast A_CustomMissile("StrongRumiaBlueOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-140)
+	RMIA L 7 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-140)
+	RMIA L 7 Fast A_CustomMissile("StrongRumiaBlueOrb",32,0,-160)
+	RMIA KJ 4 Fast
+	RMIA I 2 Fast
+	goto See
+  AimAndCircle:
+    RMIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"AimAndCircleEasy")
+    RMIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"AimAndCircleNormal")
+    RMIA A 0 A_JumpIfInTargetInventory("HardMode",1,"AimAndCircleHard")
+    RMIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"AimAndCircleHard")
+  AimAndCircleEasy:
+    RMIA IJK 2
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+    RMIA JKI 2
+	Goto See
+  AimAndCircleNormal:
+    RMIA IJK 2
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	Goto AimAndCircleEnd
+  AimAndCircleHard:
+    RMIA IJK 2 Fast
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,2)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 5 Fast A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	Goto AimAndCircleEnd
+  AimAndCircleEnd:
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-140)
+	RMIA L 7 A_CustomMissile("WeakRumiaBlueOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-140)
+	RMIA L 5 A_CustomMissile("StrongRumiaBlueOrb",32,0,-160)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  GreenCircles:
+    RMIA I 2
+    RMIA JK 4
+	RMIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"GreenCirclesNormal")
+	RMIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"GreenCirclesNormal")
+	RMIA A 0 A_JumpIfInTargetInventory("HardMode",1,"GreenCirclesHard")
+	RMIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"GreenCirclesHard")
+  GreenCirclesNormal:
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-140)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-160)
+	RMIA L 14
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-140)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-160)
+	RMIA L 14
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-140)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-160)
+	RMIA L 14
+	RMIA KJ 4
+	RMIA I 2
+	goto See
+  GreenCirclesHard:
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-140)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-160)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-140)
+	RMIA L 14 Fast A_CustomMissile("StrongRumiaGreenOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-140)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-160)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-140)
+	RMIA L 14 Fast A_CustomMissile("StrongRumiaGreenOrb",32,0,-160)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-140)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-160)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,140)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,160)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-20)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-40)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-80)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-100)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-140)
+	RMIA L 14 Fast A_CustomMissile("StrongRumiaGreenOrb",32,0,-160)
+	RMIA KJ 4 Fast
+	RMIA I 2 Fast
+	goto See
+  AimYellow:
+	RMIA A 0 A_JumpIfInTargetInventory("HardMode",1,"AimYellowHard")
+	RMIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"AimYellowHard")
+  AimYellowNormal:
+    RMIA I 2
+    RMIA JK 4
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 13 A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 13 A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 13 A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 13 A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 13 A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  AimYellowHard:
+    RMIA I 2 Fast
+    RMIA JK 4 Fast
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,0)
+	RMIA L 13 Fast A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,0)
+	RMIA L 13 Fast A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,0)
+	RMIA L 13 Fast A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,0)
+	RMIA L 13 Fast A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,0)
+	RMIA L 13 Fast A_CustomMissile("WeakRumiaYellowOrb",32,0,0)
+	RMIA KJ 4 Fast
+	RMIA I 2 Fast
+	Goto See
+  Laser:
+    RMIA I 2
+    RMIA JK 2
+    RMIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"LaserEasy")
+    RMIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"LaserNormal")
+    RMIA A 0 A_JumpIfInTargetInventory("HardMode",1,"LaserHard")
+    RMIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"LaserLunatic")
+	RMIA L 0 A_FaceTarget
+	Goto LaserNormal
+  LaserLunatic:
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-10)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-10)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,10)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,10)
+  LaserHard:
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-5)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-5)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,5)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,5)
+  LaserNormal:
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+  LaserEasy:
+	RMIA L 0 A_FaceTarget
+	RMIA LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL 2 Fast A_CustomRailgun(0,0,"none","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"HarmlessLaserTrail",-8)
+	RMIA L 0 A_Playsound("touhou/laser",0,0.7)
+	RMIA L 0 A_CustomRailgun(50,0,"blue","white",RGF_SILENT|RGF_FULLBRIGHT,0,0,"BulletPuff",0,0,0,0,4.0,0,"BlueLaserTrail",-8)
+	RMIA L 35 Fast
+	RMIA KJ 4 Fast
+	RMIA I 2 Fast
+	Goto See
+  Death:
+	RMIA M 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	RMIA M 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	RMIA M 0 A_JumpIfInTargetInventory("EasyMode",1,"DeathEasy")
+	RMIA M 0 A_NoBlocking
+    RMIA M 0 A_Scream
+	RMIA M 0 A_GiveInventory("BulletDeathTrigger",1)
+	RMIA M 0 A_SpawnItemEx("RumiaNightBird",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TELEFRAG)
+	RMIA MMMMMMMMMM 1 A_FadeOut(0.1)
+    Stop
+  DeathEasy:
+	RMIA M 0 A_NoBlocking
+    RMIA M 0 A_Scream
+	RMIA M 0 A_GiveInventory("BulletDeathTrigger",1)
+	RMIA M 0 A_SpawnItemEx("RumiaNS2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TELEFRAG)
+	RMIA MMMMMMMMMM 1 A_FadeOut(0.1)
+    Stop
+  }
+}
+
+ACTOR HarmlessLaserTrail
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.8
+  XScale 0.05
+  YScale 0.05
+  +NoInteraction
+  +ClientSideOnly
+  States
+  {
+  Spawn:
+    WHTB AB 2 Bright A_FadeOut(0.2)
+    Loop
+  }
+}
+
+ACTOR BlueLaserTrail
+{
+  Radius 1
+  Height 1
+  RenderStyle Add
+  Alpha 0.9
+  XScale 0.4
+  YScale 0.4
+  +NoInteraction
+  +ClientSideOnly
+  States
+  {
+  Spawn:
+    BLBL AB 2 Bright A_FadeOut(0.05)
+    Loop
+  }
+}
+
+ACTOR RumiaNightBird : Rumia
+{
+  Tag "Rumia"
+  +INVULNERABLE
+  +NOPAIN
+  DropItem "RumiaNS2"
+  Health 800
+  States
+  {
+  Spawn:
+	RMIA A 0
+	RMIA A 15 A_SetTranslucent(0.1,0)
+	RMIA AAAAAAAAAA 3 A_FadeIn(0.1)
+  Idle:
+	RMIA A 3 A_Look
+	Loop
+  See:
+    RMIA A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	Goto Missile
+  Missile:
+    RMIA A 0 A_JumpIfInventory("SpellcardActive",1,"NightBirdAttack")
+	RMIA A 0 A_GiveInventory("SpellcardActive",1)
+	RMIA A 0 A_PlaySound("touhou/spellcard",0,1,0,ATTN_NONE)
+	TNT1 A 0 Thing_ChangeTID(0,6004)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6004,1,true)
+	TNT1 F 0 ACS_NamedExecute("BHI_BossStartTimer",0,6004,25)
+	RMIA A 0 ACS_Execute(602,0,1)
+	RMIA I 35
+    RMIA A 0 A_UnSetInvulnerable
+	RMIA A 0 A_ChangeFlag("NOPAIN",0)
+  NightBirdAttack:
+    RMIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"NightBirdAttackNormal")
+    RMIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"NightBirdAttackNormal")
+    RMIA A 0 A_JumpIfInTargetInventory("HardMode",1,"NightBirdAttackHard")
+    RMIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"NightBirdAttackHard")
+	Goto NightBirdAttackHard
+  NightBirdAttackNormal:
+    RMIA I 2
+    RMIA JK 4
+	RMIA L 0 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,48)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,36)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,-24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-48)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-36)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,48)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,36)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,-24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-48)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-36)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,48)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,36)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,-24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-48)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-36)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,48)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,36)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("StrongRumiaGreenOrb",32,0,-24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-48)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-36)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,24)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  NightBirdAttackHard:
+    RMIA I 2 Fast
+    RMIA JK 4 Fast
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,48)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,48)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,36)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,36)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,-24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-48)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-48)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-36)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-36)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,48)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,48)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,36)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,36)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,-24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-48)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-48)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-36)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-36)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,48)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,48)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,36)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,36)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,-24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-48)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-48)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-36)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-36)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,48)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,48)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,36)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,36)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,24)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,-24)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-48)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-48)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-36)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-36)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-24)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-24)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-12)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,-12)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,12)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,12)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,24)
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,24)
+	RMIA KJ 4 Fast
+	RMIA I 2 Fast
+	Goto See
+  Death:
+	RMIA M 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	RMIA M 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+    RMIA M 0 ACS_Execute(603,0)
+	RMIA M 0 A_GiveInventory("BulletDeathTrigger",1)
+	RMIA M 0 A_NoBlocking
+    RMIA M 0 A_Scream
+	RMIA MMMMMMMMMM 1 A_FadeOut(0.1)
+	Stop
+	}
+}
+
+ACTOR RumiaNS2 : Rumia
+{
+  Tag "Rumia"
+  +INVULNERABLE
+  +NOPAIN
+  Health 900
+  DropItem "RumiaDemarcation"
+  States
+  {
+  Spawn:
+	RMIA A 0
+	RMIA A 15 A_SetTranslucent(0.1,0)
+	RMIA AAAAAAAAAA 3 A_FadeIn(0.1)
+	RMIA A 0 A_UnSetInvulnerable
+	RMIA A 0 A_ChangeFlag("NOPAIN",0)
+  Idle:
+	RMIA A 3 A_Look
+	Loop
+  See:
+	TNT1 A 0 Thing_ChangeTID(0,6005)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6005,0,false)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6005,30)
+    RMIA F 2 A_Chase
+    Loop
+  Death:
+	RMIA M 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	RMIA M 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	RMIA M 0 A_NoBlocking
+    RMIA M 0 A_Scream
+	RMIA M 0 A_GiveInventory("BulletDeathTrigger",1)
+	RMIA MMMMMMMMMM 1 A_FadeOut(0.1)
+	Stop
+  }
+}
+
+ACTOR RumiaDemarcation : Rumia
+{
+  Tag "Rumia"
+  +INVULNERABLE
+  +NOPAIN
+  DeathSound "touhou/defeat"
+  DropItem "None"
+  Health 900
+  States
+  {
+  Spawn:
+	RMIA A 0
+	RMIA A 15 A_SetTranslucent(0.1,0)
+	RMIA AAAAAAAAAA 3 A_FadeIn(0.1)
+  Idle:
+	RMIA A 3 A_Look
+	Loop
+  See:
+    RMIA A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	Goto Missile
+  Missile:
+    RMIA A 0 A_JumpIfInventory("SpellcardActive",1,"DemarcationAttack")
+	RMIA A 0 A_GiveInventory("SpellcardActive",1)
+	RMIA A 0 A_PlaySound("touhou/spellcard",0,1,0,ATTN_NONE)
+	TNT1 A 0 Thing_ChangeTID(0,6006)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6006,0,true)
+	TNT1 F 0 ACS_NamedExecute("BHI_BossStartTimer",0,6006,25)
+	RMIA A 0 ACS_Execute(602,0,2)
+	RMIA I 35
+    RMIA A 0 A_UnSetInvulnerable
+	RMIA A 0 A_ChangeFlag("NOPAIN",0)
+  DemarcationAttack:
+    RMIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"DemarcationAttackEasy")
+    RMIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"DemarcationAttackEasy")
+    RMIA A 0 A_JumpIfInTargetInventory("HardMode",1,"DemarcationAttackHard")
+    RMIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"DemarcationAttackHard")
+	Goto DemarcationAttackHard
+  DemarcationAttackEasy:
+    RMIA I 2
+    RMIA JK 2
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,340)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,320)
+	RMIA L 28 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,340)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,340)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,320)
+	RMIA L 28 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,340)
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,340)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,90)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,320)
+	RMIA L 28 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,340)
+	RMIA L 9 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-32,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,32,0)
+	RMIA L 9 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,32,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-32,0)
+    RMIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"See")
+	RMIA L 9 A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-32,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,-8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaBlueOrb",30,32,0)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  DemarcationAttackHard:
+    RMIA I 2
+    RMIA JK 4
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,10)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,30)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,50)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,70)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,90)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,110)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,130)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,150)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,170)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,190)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,210)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,230)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,250)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,270)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,290)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,310)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,330)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,340)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb1",30,0,350)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,10)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,30)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,50)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,70)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,90)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,110)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,130)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,150)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,170)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,190)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,210)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,230)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,250)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,270)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,290)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,310)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,330)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,340)
+	RMIA L 0 A_CustomMissile("RumiaRedDemarcationOrb2",30,0,350)
+	RMIA LL 14 Fast A_FaceTarget
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,10)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,30)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,50)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,70)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,90)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,110)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,130)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,150)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,170)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,190)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,210)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,230)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,250)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,270)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,290)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,310)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,330)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,340)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb1",30,0,350)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,10)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,30)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,50)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,70)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,90)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,110)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,130)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,150)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,170)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,190)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,210)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,230)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,250)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,270)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,290)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,310)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,330)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,340)
+	RMIA L 0 A_CustomMissile("RumiaGreenDemarcationOrb2",30,0,350)
+	RMIA LL 14 Fast A_FaceTarget
+	RMIA L 0 A_FaceTarget
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,10)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,30)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,50)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,70)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,90)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,110)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,130)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,150)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,170)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,190)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,210)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,230)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,250)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,270)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,290)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,310)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,330)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,340)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb1",30,0,350)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,0)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,10)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,20)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,30)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,40)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,50)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,60)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,70)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,80)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,90)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,100)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,110)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,120)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,130)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,140)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,150)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,160)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,170)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,180)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,190)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,200)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,210)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,220)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,230)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,240)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,250)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,260)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,270)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,280)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,290)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,300)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,310)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,320)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,330)
+	RMIA L 0 A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,340)
+	RMIA L 28 Fast A_CustomMissile("RumiaBlueDemarcationOrb2",30,0,350)
+	RMIA L 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	RMIA L 9 Fast A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-32,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,32,0)
+	RMIA L 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	RMIA L 9 Fast A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,32,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-32,0)
+	RMIA L 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	RMIA L 9 Fast A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-32,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,32,0)
+	RMIA L 0 A_JumpIfInTargetInventory("UltraMode",1,1)
+	RMIA L 9 Fast A_FaceTarget
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,32,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",32,0,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-8,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-16,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-24,0)
+	RMIA L 1 A_CustomMissile("StrongRumiaOrb",30,-32,0)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  Death:
+	RMIA M 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	RMIA M 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	RMIA M 0 A_GiveInventory("BulletDeathTrigger",1)
+    RMIA A 0 ACS_Execute(603,0)
+    RMIA M 35
+	RMIA M 0 A_NoBlocking
+    RMIA M 0 A_Scream
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 BRIGHT A_SpawnItemEx("TouhouFireWhite",Random(4,-4),Random(4,-4),Random(4,-4),Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+	TNT1 A 175
+    TNT1 A 1 ACS_Execute(101,0)
+    Stop
+  }
+}
+
+ACTOR WeakRumiaOrb //Placeholder from original names, too lazy to replace
+{
+  Radius 4
+  Speed 12
+  fastspeed 18
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //+strifedamage //why would the original maker put +strifedamage on a weapon with fixed damage
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StrongRumiaOrb
+{
+  Radius 4
+  Speed 20
+  fastspeed 30
+  Height 8
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //+strifedamage //I mean seriously what the heck is this
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit2"
+  States
+  {
+  Spawn:
+    BBL2 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR WeakRumiaRedOrb : WeakRumiaOrb
+{
+  States
+  {
+  Spawn:
+    RBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StrongRumiaRedOrb : StrongRumiaOrb
+{
+  States
+  {
+  Spawn:
+    RBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR WeakRumiaGreenOrb : WeakRumiaOrb
+{
+  Radius 2
+  Height 4
+  States
+  {
+  Spawn:
+    GPEL A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    GPEL AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StrongRumiaGreenOrb : StrongRumiaOrb
+{
+  States
+  {
+  Spawn:
+    GBL2 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    GBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR WeakRumiaBlueOrb : WeakRumiaOrb
+{
+  Radius 2
+  Height 4
+  States
+  {
+  Spawn:
+    BPEL A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BPEL AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StrongRumiaBlueOrb : StrongRumiaOrb
+{
+  Radius 2
+  Height 4
+  States
+  {
+  Spawn:
+    BBL2 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR WeakRumiaYellowOrb : WeakRumiaOrb
+{
+  Radius 2
+  Height 4
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    YRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    YRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR StrongRumiaYellowOrb : StrongRumiaOrb
+{
+  Radius 2
+  Height 4
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    YRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    YRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR RumiaRedDemarcationOrb1 : WeakRumiaOrb
+{
+  Radius 3
+  Height 6
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    RRIC AAAA 4 Bright
+	RRIC AAAA 4 Bright A_ScaleVelocity(0.5)
+	RRIC A 0 Bright A_Stop
+	RRIC A 0 Bright A_SetAngle(angle+90)
+	RRIC AA 4 Bright ThrustThing(angle*256/360, 7, 0, 0)
+  LoopState:
+    RRIC A 1 Bright
+    Loop
+  Death:
+    RRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR RumiaRedDemarcationOrb2 : WeakRumiaOrb
+{
+  Radius 3
+  Height 6
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    RRIC AAAA 4 Bright
+	RRIC AAAA 4 Bright A_ScaleVelocity(0.5)
+	RRIC A 0 Bright A_Stop
+	RRIC A 0 Bright A_SetAngle(angle-90)
+	RRIC AA 4 Bright ThrustThing(angle*256/360, 7, 0, 0)
+  LoopState:
+    RRIC A 1 Bright
+    Loop
+  Death:
+    RRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR RumiaGreenDemarcationOrb1 : WeakRumiaOrb
+{
+  Radius 3
+  Height 6
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    GRIC AAAA 4 Bright
+	GRIC AAAA 4 Bright A_ScaleVelocity(0.5)
+	GRIC A 0 Bright A_Stop
+	GRIC A 0 Bright A_SetAngle(angle+90)
+	GRIC AA 4 Bright ThrustThing(angle*256/360, 7, 0, 0)
+  LoopState:
+    GRIC A 1 Bright
+    Loop
+  Death:
+    GRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR RumiaGreenDemarcationOrb2 : WeakRumiaOrb
+{
+  Radius 3
+  Height 6
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    GRIC AAAA 4 Bright
+	GRIC AAAA 4 Bright A_ScaleVelocity(0.5)
+	GRIC A 0 Bright A_Stop
+	GRIC A 0 Bright A_SetAngle(angle-90)
+	GRIC AA 4 Bright ThrustThing(angle*256/360, 7, 0, 0)
+  LoopState:
+    GRIC A 1 Bright
+    Loop
+  Death:
+    GRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR RumiaBlueDemarcationOrb1 : WeakRumiaOrb
+{
+  Radius 3
+  Height 6
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    BRIC AAAA 4 Bright
+	BRIC AAAA 4 Bright A_ScaleVelocity(0.5)
+	BRIC A 0 Bright A_Stop
+	BRIC A 0 Bright A_SetAngle(angle+90)
+	BRIC AA 4 Bright ThrustThing(angle*256/360, 7, 0, 0)
+  LoopState:
+    BRIC A 1 Bright
+    Loop
+  Death:
+    BRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR RumiaBlueDemarcationOrb2 : WeakRumiaOrb
+{
+  Radius 3
+  Height 6
+  Renderstyle Add
+  States
+  {
+  Spawn:
+    BRIC AAAA 4 Bright
+	BRIC AAAA 4 Bright A_ScaleVelocity(0.5)
+	BRIC A 0 Bright A_Stop
+	BRIC A 0 Bright A_SetAngle(angle-90)
+	BRIC AA 4 Bright ThrustThing(angle*256/360, 7, 0, 0)
+  LoopState:
+    BRIC A 1 Bright
+    Loop
+  Death:
+    BRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR RumiaMidBoss 31200
+{
+//$Category "Touhou Characters"
+  Tag "   "
+  floatspeed 4
+  Speed 4
+  fastspeed 8
+  MONSTER
+  Health 500
+  Radius 24
+  Height 64
+  Scale 0.8
+  Mass 4000
+  MinMissileChance 160
+  +NEVERRESPAWN
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  +BOSS
+  +BOSSDEATH
+  +AMBUSH
+  +DONTMORPH
+  Painchance 10
+  Obituary "%o couldn't see through Rumia's darkness."
+  States
+  {
+  Spawn:
+    RMIA ABCDEFG 7 A_Look
+    Loop
+  See:
+	TNT1 F 0 Thing_ChangeTID(0,6001)
+	TNT1 F 0 ACS_NamedExecute("BHI_BossStartAttack",0,6001,0,false)
+	TNT1 F 0 ACS_NamedExecute("BHI_BossStartTimer",0,6001,24)
+    RMIA F 2 A_Chase
+    Loop
+  Pain:
+    RMIA M 0 A_playsound("touhou/pain")
+    RMIA M 3
+    Goto See
+  Melee:
+  Missile:
+	RMIA A 0 A_FaceTarget
+    RMIA A 0 A_Jump(256, "Orbs1", "Orbs2", "Orbs1", "Orbs2", "Ring1", "Ring2", "Spam")
+    Goto See
+  Orbs1:
+    RMIA I 2
+	RMIA JK 4
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("StrongRumiaBlueOrb",32,0,180)
+	RMIA L 14 A_CustomMissile("StrongRumiaBlueOrb",32,0,-180)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("StrongRumiaYellowOrb",32,0,180)
+	RMIA L 14 A_CustomMissile("StrongRumiaYellowOrb",32,0,-180)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  Orbs2:
+    RMIA I 2
+	RMIA JK 4
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("StrongRumiaGreenOrb",32,0,180)
+	RMIA L 14 A_CustomMissile("StrongRumiaGreenOrb",32,0,-180)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("StrongRumiaRedOrb",32,0,180)
+	RMIA L 14 A_CustomMissile("StrongRumiaRedOrb",32,0,-180)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  Ring1:
+    RMIA I 2
+	RMIA JK 4
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,45)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,135)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,225)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,270)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,315)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,15)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,105)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,195)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,240)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,295)
+	RMIA L 5 A_CustomMissile("WeakRumiaGreenOrb",32,0,330)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,75)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,165)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,210)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,255)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,300)
+	RMIA L 5 A_CustomMissile("WeakRumiaBlueOrb",32,0,345)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,45)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,135)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,180)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,225)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,270)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,315)
+	RMIA L 5 A_CustomMissile("WeakRumiaYellowOrb",32,0,360)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  Ring2:
+    RMIA I 2
+	RMIA JK 4
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-45)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-135)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-180)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-225)
+	RMIA L 0 A_CustomMissile("WeakRumiaRedOrb",32,0,-270)
+	RMIA L 5 A_CustomMissile("WeakRumiaRedOrb",32,0,-315)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-15)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-105)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-195)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-240)
+	RMIA L 0 A_CustomMissile("WeakRumiaGreenOrb",32,0,-295)
+	RMIA L 5 A_CustomMissile("WeakRumiaGreenOrb",32,0,-330)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-75)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-165)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-210)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-255)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-300)
+	RMIA L 5 A_CustomMissile("WeakRumiaBlueOrb",32,0,-345)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-45)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-135)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-180)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-225)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-270)
+	RMIA L 0 A_CustomMissile("WeakRumiaYellowOrb",32,0,-315)
+	RMIA L 5 A_CustomMissile("WeakRumiaYellowOrb",32,0,-360)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  Spam:
+    RMIA I 2
+	RMIA JK 4
+	RMIA L 1 A_CustomMissile("WeakRumiaRedOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaYellowOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaRedOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaYellowOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaRedOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaYellowOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaRedOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaYellowOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaRedOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaYellowOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaRedOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaYellowOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaRedOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaGreenOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaBlueOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaYellowOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA L 1 A_CustomMissile("WeakRumiaOrb",32,0,Random(0,360),CMF_OFFSETPITCH,frandom(15,-15))
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  Death:
+	RMIA M 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	RMIA M 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	RMIA A 0 A_GiveInventory("BulletDeathTrigger",1)
+	RMIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"EndFight") //No Moonlight Ray on Easy Mode
+    RMIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"EndFight") //Or on Normal Mode
+    RMIA H 3
+    RMIA H 0 A_NoBlocking
+    RMIA H 1 A_PlaySound("touhou/nuefire")
+    RMIA H 1 A_SetTranslucent(0.90)
+    RMIA H 1 A_SetTranslucent(0.80)
+    RMIA H 1 A_SetTranslucent(0.70)
+    RMIA H 1 A_SetTranslucent(0.60)
+    RMIA H 1 A_SetTranslucent(0.50)
+    RMIA H 1 A_SetTranslucent(0.40)
+    RMIA H 1 A_SetTranslucent(0.30)
+    RMIA H 1 A_SetTranslucent(0.20)
+    RMIA H 1 A_SetTranslucent(0.10)
+	RMIA H 1 A_SetTranslucent(0)
+	RMIA H 0 A_SpawnItemEx("RumiaMoonlightRay",0,0,0,0,0,0,0,0)
+    Stop
+  EndFight:
+    RMIA H 3
+    RMIA A 0 ACS_Execute(4,0)
+    RMIA H 0 A_NoBlocking
+    RMIA H 1 A_PlaySound("touhou/nuefire")
+    RMIA H 1 A_SetTranslucent(0.90)
+    RMIA H 1 A_SetTranslucent(0.80)
+    RMIA H 1 A_SetTranslucent(0.70)
+    RMIA H 1 A_SetTranslucent(0.60)
+    RMIA H 1 A_SetTranslucent(0.50)
+    RMIA H 1 A_SetTranslucent(0.40)
+    RMIA H 1 A_SetTranslucent(0.30)
+    RMIA H 1 A_SetTranslucent(0.20)
+    RMIA H 1 A_SetTranslucent(0.10)
+	RMIA H 1 A_SetTranslucent(0)
+	Stop
+  }
+}
+
+ACTOR RumiaMoonlightRay
+{
+//$Category "Touhou Characters"
+  Tag "   "
+  floatspeed 4
+  Speed 4
+  fastspeed 8
+  MONSTER
+  Health 500
+  Radius 20
+  Height 62
+  Scale 0.8
+  Mass 4000
+  MinMissileChance 160
+  +INVULNERABLE
+  +NOPAIN
+  +NEVERRESPAWN
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  +BOSS
+  +BOSSDEATH
+  +AMBUSH
+  +DONTMORPH
+  Painchance 10
+  Obituary "%o couldn't see through Rumia's darkness."
+  States
+  {
+  Spawn:
+	RMIA A 0
+	RMIA A 15 A_SetTranslucent(0.1,0)
+	RMIA AAAAAAAAAA 3 A_FadeIn(0.1)
+  Idle:
+	RMIA A 3 A_Look
+	Loop
+  See:
+	RMIA A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+	RMIA A 0 A_GiveInventory("SpellcardActive",1)
+	RMIA A 0 A_PlaySound("touhou/spellcard",0,1,0,ATTN_NONE)
+	TNT1 F 0 Thing_ChangeTID(0,6002)
+	TNT1 F 0 ACS_NamedExecute("BHI_BossStartAttack",0,6002,0,true)
+	TNT1 F 0 ACS_NamedExecute("BHI_BossStartTimer",0,6002,22)
+	RMIA A 0 ACS_Execute(602,0,0)
+    Goto Missile
+  ChaseState:
+    RMIA F 2 A_Chase
+    Loop
+  Pain:
+    RMIA M 0 A_playsound("touhou/pain")
+    RMIA M 3
+    Goto See
+  Melee:
+  Missile:
+    RMIA A 0 A_UnSetInvulnerable
+	RMIA A 0 A_ChangeFlag("NOPAIN",0)
+    RMIA I 2
+	RMIA JK 4
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 14 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-180)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 14 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-180)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 14 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-180)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 14 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-180)
+	RMIA L 0 A_Playsound("touhou/fire",0,0.7)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,0)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-30)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-60)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-90)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-120)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,-150)
+	RMIA L 0 A_CustomMissile("WeakRumiaBlueOrb",32,0,180)
+	RMIA L 14 Fast A_CustomMissile("WeakRumiaBlueOrb",32,0,-180)
+	RMIA L 0 A_PlaySound("touhou/laser")
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,60)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-60)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,59)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-59)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,58)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-58)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,57)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-57)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,56)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-56)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,55)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-55)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,54)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-54)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,53)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-53)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,52)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-52)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,51)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-51)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,50)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-50)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,49)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-49)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,48)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-48)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,47)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-47)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,46)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-46)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,45)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-45)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,44)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-44)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,43)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-43)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,42)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-42)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,41)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-41)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,40)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-40)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,39)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-39)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,38)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-38)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,37)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-37)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,36)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-36)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,35)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-35)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,34)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-34)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,33)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-33)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,32)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-32)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,31)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-31)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,30)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-30)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,29)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-29)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,28)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-28)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,27)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-27)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,26)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-26)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,25)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-25)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,24)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-24)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,23)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-23)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,22)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-22)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,21)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-21)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,20)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-20)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,19)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-19)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,18)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-18)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,17)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-17)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,16)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-16)
+	RMIA L 0 A_CustomMissile("TouhouLaser1",30,0,15)
+	RMIA L 1 A_CustomMissile("TouhouLaser1",30,0,-15)
+	RMIA KJ 4
+	RMIA I 2
+	Goto See
+  Death:
+	RMIA M 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	RMIA M 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	RMIA A 0 ACS_Execute(603,0)
+    RMIA H 3
+	RMIA A 0 ACS_Execute(4,0)
+    RMIA H 0 A_NoBlocking
+    RMIA H 1 A_PlaySound("touhou/nuefire")
+    RMIA H 1 A_SetTranslucent(0.90)
+    RMIA H 1 A_SetTranslucent(0.80)
+    RMIA H 1 A_SetTranslucent(0.70)
+    RMIA H 1 A_SetTranslucent(0.60)
+    RMIA H 1 A_SetTranslucent(0.50)
+    RMIA H 1 A_SetTranslucent(0.40)
+    RMIA H 1 A_SetTranslucent(0.30)
+    RMIA H 1 A_SetTranslucent(0.20)
+    RMIA H 1 A_SetTranslucent(0.10)
+	RMIA H 1 A_SetTranslucent(0)
+    Stop
+  }
+}

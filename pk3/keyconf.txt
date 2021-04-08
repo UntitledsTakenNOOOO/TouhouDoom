@@ -1,0 +1,2 @@
+addslotdefault 8 "Hakkero Star Cannon"
+addslotdefault 8 "Hakurei Amulet Rifle"

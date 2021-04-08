@@ -1,0 +1,1537 @@
+ACTOR FairyMaid4 31171 //SERIOUS MODE ACTIVATED
+{
+//$Category "Touhou Characters"
+  Obituary "%o was hit by a fairy maid."
+  Speed 8
+  health 60
+  scale 0.8
+  MONSTER
+  Radius 16
+  Height 32
+  Mass 100
+  MinMissileChance 240
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +LOWGRAVITY
+  //+FLOAT
+  +NOBLOOD
+  +NOICEDEATH
+  species "SDM"
+  Painchance 128
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  DamageFactor "SDM",0
+  States
+  {
+  Spawn:
+    FARY AB 3 A_Look
+    Loop
+  See:
+    FARY AB 3 A_Chase
+	Loop
+  Pain:
+    FARY B 20
+	Goto See
+  Missile:
+    FARY A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    FARY A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    FARY A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    FARY A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY AAAAAA 0 bright A_CustomMissile("FairyMaidShot4",20,0,frandom(15,-15),CMF_OFFSETPITCH,frandom(3,-3))
+	FARY B 10 bright A_FaceTarget
+	Goto see
+  MissileNormal:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY AAAAAAAAAAAA 0 bright A_CustomMissile("FairyMaidShot4",20,0,frandom(30,-30),CMF_OFFSETPITCH,frandom(6,-6))
+	FARY B 10 bright A_FaceTarget
+	Goto see
+  MissileHard:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY AAAAAAAAAAAAAAAAAA 0 bright A_CustomMissile("FairyMaidShot4",20,0,frandom(45,-45),CMF_OFFSETPITCH,frandom(9,-9))
+	FARY B 10 bright A_FaceTarget
+	Goto see
+  MissileLunatic:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY AAAAAAAAAAAAAAAAAAAAAAAA 0 bright A_CustomMissile("FairyMaidShot4",20,0,frandom(60,-60),CMF_OFFSETPITCH,frandom(12,-12))
+	FARY B 10 bright A_FaceTarget
+	Goto see
+  Death:
+	FARY B 0 A_ScreamAndUnblock
+    FARY BBBBBBBBBB 2 A_FadeOut(0.1)
+    Stop
+  }
+}
+ACTOR FairyMaidShot4
+{
+  Radius 2
+  Height 4
+  Speed 10
+  FastSpeed 15
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	BRIC A 0 Bright
+	BRIC A 0 Bright A_ScaleVelocity(frandom(0.4,1.6))
+  LoopState:
+    BRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR FairyMaid5 31172
+{
+//$Category "Touhou Characters"
+  Obituary "%o was hit by a fairy maid."
+  Speed 8
+  health 70
+  scale 0.8
+  MONSTER
+  Radius 16
+  Height 32
+  Mass 200
+  MinMissileChance 240
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  +NOBLOOD
+  +NOICEDEATH
+  species "SDM"
+  Painchance 128
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  DamageFactor "SDM",0
+  States
+  {
+  Spawn:
+    FARY AB 3 A_Look
+    Loop
+  See:
+    FARY AB 3 A_Chase
+	Loop
+  Pain:
+    FARY B 20
+	Goto See
+  Missile:
+    FARY A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    FARY A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    FARY A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    FARY A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+	FARY A 0 A_Jump(128,"MissileE2","MissileE3")
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY AA 0 bright A_CustomMissile("FairyMaidShot5",20,0,frandom(15,-15),CMF_OFFSETPITCH,frandom(3,-3))
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileE2:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,0)
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileE3:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,0)
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileNormal:
+	FARY A 0 A_Jump(128,"MissileN2","MissileN3")
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY AAAA 0 bright A_CustomMissile("FairyMaidShot5",20,0,frandom(20,-20),CMF_OFFSETPITCH,frandom(4,-4))
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileN2:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,0)
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileN3:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,0)
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileHard:
+	FARY A 0 A_Jump(128,"MissileH2","MissileH3")
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY AAAAAA 0 bright A_CustomMissile("FairyMaidShot5",20,0,frandom(25,-25),CMF_OFFSETPITCH,frandom(5,-5))
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileH2:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,-30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,0)
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileH3:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,-30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,0)
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileLunatic:
+    FARY A 0 A_Jump(128,"MissileL2","MissileL3")
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY AAAAAAAA 0 bright A_CustomMissile("FairyMaidShot5",20,0,frandom(30,-30),CMF_OFFSETPITCH,frandom(6,-6))
+	FARY B 10 bright A_FaceTarget
+	Goto See
+  MissileL2:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,-30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,-20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,-10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot6",20,0,0)
+	FARY B 10 bright A_FaceTarget
+	Goto see
+  MissileL3:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,-30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,-20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,-10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot7",20,0,0)
+	FARY B 10 bright A_FaceTarget
+	Goto see
+  Death:
+	FARY B 0 A_ScreamAndUnblock
+    FARY BBBBBBBBBB 2 A_FadeOut(0.1)
+    Stop
+  }
+}
+ACTOR FairyMaidShot5 : FairyMaidShot4
+{
+  Scale 1.5
+  Radius 3
+  Height 6
+  States
+  {
+  Spawn:
+	BRIC A 0 Bright
+	BRIC A 0 Bright A_ScaleVelocity(frandom(0.4,1.6))
+  LoopState:
+    BRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR FairyMaidShot6 : FairyMaidShot1
+{
+  Radius 2
+  Height 4
+}
+ACTOR FairyMaidShot7 : FairyMaidShot1
+{
+  Radius 3
+  Height 6
+  Speed 10
+  FastSpeed 15
+  States
+  {
+  Spawn:
+    RRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR MinorSDMDevil3 31173
+{
+//$Category "Touhou Characters"
+  Speed 8
+  FastSpeed 10
+  MONSTER
+  Health 200
+  Radius 20
+  Height 62
+  Scale 0.5
+  Mass 10000
+  Species SDM
+  DamageFactor "SDM", 0
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +LOWGRAVITY
+  +DONTMORPH
+  +NOICEDEATH
+  MinMissileChance 240
+  Painchance 12
+  Painsound "touhou/pain"
+  Seesound ""
+  Deathsound "touhou/nuefire"
+  Obituary "%o was killed by a minor devil's magic."
+  States
+  {
+  Spawn:
+    GLDK AB 2
+    GLDK A 0 A_Look
+    Loop
+  See:
+    GLDK AB 2 A_Chase
+    Loop
+  Pain:
+    GLDK R 10 A_Pain
+    Goto See
+  Melee:
+  Missile:
+    GLDK N 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    GLDK N 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    GLDK N 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    GLDK N 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+  MissileEasy:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 13 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 13 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 13 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+	GLDK N 13 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 13 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 13 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 13 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileNormal:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 11 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 11 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 11 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 11 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 11 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 11 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 11 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileHard:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 9 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 9 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 9 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 9 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 9 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 9 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 9 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileLunatic:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-5,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,5,CMF_AIMDIRECTION)
+    GLDK N 7 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-5,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,5,CMF_AIMDIRECTION)
+    GLDK N 7 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-5,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,5,CMF_AIMDIRECTION)
+    GLDK N 7 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-5,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,5,CMF_AIMDIRECTION)
+    GLDK N 7 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-5,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,5,CMF_AIMDIRECTION)
+    GLDK N 7 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-5,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,5,CMF_AIMDIRECTION)
+    GLDK N 7 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-5,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,5,CMF_AIMDIRECTION)
+    GLDK N 7 A_FaceTarget
+    GLDK N 0 A_SetAngle(angle+(frandom(-30,30)))
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-5,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,-1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,0,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,1,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,2,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,3,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,4,CMF_AIMDIRECTION)
+    GLDK N 0 A_CustomMissile("MinorDevilWallShot",30,0,5,CMF_AIMDIRECTION)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  Death:
+    GLDK R 0 A_NoBlocking
+    GLDK R 0 A_Scream
+    GLDK RRRRRRRRRR 2 A_FadeOut(0.1)
+	Stop
+  }
+}
+ACTOR MinorDevilWallShot : FairyMaidShot1
+{
+	Speed 12
+	FastSpeed 24
+	Scale 1.0
+	Radius 4
+	Height 8
+	Damage (8)
+  States
+  {
+  Spawn:
+    BBL2 A 1 Bright
+    Loop
+  Death:
+    BBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR SDMDevil 31174
+{
+//$Category "Touhou Characters"
+  Speed 8
+  FastSpeed 10
+  MONSTER
+  Health 200
+  Radius 20
+  Height 62
+  Scale 0.6
+  Mass 10000
+  Species SDM
+  DamageFactor "SDM", 0
+  MinMissileChance 240
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +LOWGRAVITY
+  +DONTMORPH
+  +NOICEDEATH
+  Painchance 12
+  Painsound "touhou/pain"
+  Seesound ""
+  Deathsound "touhou/nuefire"
+  Obituary "%o was killed by a devil's magic."
+  States
+  {
+  Spawn:
+    GRKO AB 2
+    GRKO A 0 A_Look
+    Loop
+  See:
+    GRKO AB 2 A_Chase
+    Loop
+  Pain:
+    GRKO P 10 A_Pain
+    Goto See
+  Melee:
+  Missile:
+    GRKO N 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    GRKO N 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    GRKO N 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    GRKO N 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+  MissileEasy:
+    GRKO IJKLM 5 A_Facetarget
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot10",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot11",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot12",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot13",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot14",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot15",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot16",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot17",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot18",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot19",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot20",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot21",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot22",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot23",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot24",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot25",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot26",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot27",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot28",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot29",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot30",30,0,0)
+	GRKO NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileNormal:
+    GRKO IJKLM 5 A_Facetarget
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot10",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot11",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot12",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot13",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot14",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot15",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot16",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot17",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot18",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot19",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot20",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot21",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot22",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot23",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot24",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot25",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot26",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot27",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,45)
+    GRKO N 1 A_CustomMissile("SDMDevilShot28",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot29",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-30)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,60)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,30)
+    GRKO N 1 A_CustomMissile("SDMDevilShot30",30,0,0)
+	GRKO NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileHard:
+    GRKO IJKLM 5 A_Facetarget
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot10",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot11",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot12",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot13",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot14",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot15",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot16",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot17",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot18",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot19",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot20",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot21",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot22",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot23",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot24",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot25",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot26",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot27",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot28",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot29",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-22.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,67.5)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,45)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,22.5)
+    GRKO N 1 A_CustomMissile("SDMDevilShot30",30,0,0)
+	GRKO NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileLunatic:
+    GRKO IJKLM 5 A_Facetarget
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot10",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot10",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot11",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot11",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot12",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot12",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot13",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot13",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot14",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot14",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot15",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot15",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot16",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot16",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot17",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot17",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot18",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot18",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot19",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot19",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot20",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot20",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot21",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot21",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot22",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot22",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot23",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot23",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot24",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot24",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot25",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot25",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot26",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot26",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot27",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot27",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot28",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot28",30,0,0)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot29",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot29",30,0,0)
+    GRKO N 0 A_Playsound("touhou/fire",0,0.7)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,-18)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,90)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,72)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,54)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,36)
+    GRKO N 0 A_CustomMissile("SDMDevilShot30",30,0,18)
+    GRKO N 1 A_CustomMissile("SDMDevilShot30",30,0,0)
+	GRKO NMLKJI 5 A_FaceTarget
+    Goto See
+  Death:
+    GRKO P 0 A_NoBlocking
+    GRKO P 0 A_Scream
+    GRKO PPPPPPPPPP 3 A_FadeOut(0.1)
+	Stop
+  }
+}
+ACTOR SDMDevilShot10
+{
+  Speed 10
+  Radius 4
+  Height 8
+  damage (4)
+  Scale 1.0
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/fire"
+  States
+  {
+  Spawn:
+    BBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR SDMDevilShot11 : SDMDevilShot10 { Speed 11 }
+ACTOR SDMDevilShot12 : SDMDevilShot10 { Speed 12 }
+ACTOR SDMDevilShot13 : SDMDevilShot10 { Speed 13 }
+ACTOR SDMDevilShot14 : SDMDevilShot10 { Speed 14 }
+ACTOR SDMDevilShot15 : SDMDevilShot10 { Speed 15 }
+ACTOR SDMDevilShot16 : SDMDevilShot10 { Speed 16 }
+ACTOR SDMDevilShot17 : SDMDevilShot10 { Speed 17 }
+ACTOR SDMDevilShot18 : SDMDevilShot10 { Speed 18 }
+ACTOR SDMDevilShot19 : SDMDevilShot10 { Speed 19 }
+ACTOR SDMDevilShot20 : SDMDevilShot10 { Speed 20 }
+ACTOR SDMDevilShot21 : SDMDevilShot10 { Speed 21 }
+ACTOR SDMDevilShot22 : SDMDevilShot10 { Speed 22 }
+ACTOR SDMDevilShot23 : SDMDevilShot10 { Speed 23 }
+ACTOR SDMDevilShot24 : SDMDevilShot10 { Speed 24 }
+ACTOR SDMDevilShot25 : SDMDevilShot10 { Speed 25 }
+ACTOR SDMDevilShot26 : SDMDevilShot10 { Speed 26 }
+ACTOR SDMDevilShot27 : SDMDevilShot10 { Speed 27 }
+ACTOR SDMDevilShot28 : SDMDevilShot10 { Speed 28 }
+ACTOR SDMDevilShot29 : SDMDevilShot10 { Speed 29 }
+ACTOR SDMDevilShot30 : SDMDevilShot10 { Speed 30 }

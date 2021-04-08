@@ -1,0 +1,36 @@
+ACTOR KanakoDecoration 31302
+{
+//$Category "Touhou Decor"
+  Scale 0.7
+  Game Doom
+  Radius 24
+  Height 64
+  +NOGRAVITY
+  +SOLID
+  +FLOAT
+  +FLOATBOB
+  States
+  {
+  Spawn:
+    KANA AB 5
+	Loop
+  }
+}
+ACTOR SuwakoDecoration 31303
+{
+//$Category "Touhou Decor"
+  Scale 0.7
+  Game Doom
+  Radius 24
+  Height 64
+  +NOGRAVITY
+  +SOLID
+  +FLOAT
+  +FLOATBOB
+  States
+  {
+  Spawn:
+    SUWA AB 5
+	Loop
+  }
+}

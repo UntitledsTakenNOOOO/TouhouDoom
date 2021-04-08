@@ -1,0 +1,380 @@
+ACTOR MAP25BonusBossFlags : CustomInventory
+{
+  //Taken from DUMP 2
+  //The Flag list is mostly from LegenDoom, though.
+  //I wanted to do this sensibly via SetActorFlag
+  //But noooo, apparently that just straight-up doesn't work at all.
+  //So exactly what the hell is SetActorFlag actually doing, then?
+  -COUNTITEM
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.PickupMessage ""
+  Inventory.PickupSound ""
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Stop
+  Pickup:
+    TNT1 A 0 A_ChangeFlag("ALWAYSFAST", 1)
+    TNT1 A 0 A_ChangeFlag("LOOKALLAROUND", 1)
+    TNT1 A 0 A_ChangeFlag("QUICKTORETALIATE", 1)
+    //TNT1 A 0 A_ChangeFlag("NOINFIGHTING", 1)
+    TNT1 A 0 A_ChangeFlag("NOTARGET", 1)
+    TNT1 A 0 A_ChangeFlag("NOFEAR", 1)
+    TNT1 A 0 A_ChangeFlag("NOTIMEFREEZE", 1)
+    TNT1 A 0 A_ChangeFlag("SEEINVISIBLE", 1)
+    TNT1 A 0 A_ChangeFlag("DONTDRAIN", 1)
+    TNT1 A 0 A_ChangeFlag("NOBLOODDECALS", 1)
+    TNT1 A 0 A_ChangeFlag("NOICEDEATH", 1)
+    TNT1 A 0 A_ChangeFlag("DONTGIB", 1)
+    TNT1 A 0 A_ChangeFlag("BRIGHT", 1)
+    TNT1 A 0 A_ChangeFlag("FRIENDLY", 0)
+    Stop
+  }
+}
+
+actor DanmakuArachnophyte 31404
+{
+	//$Category "Danmaku Demons"
+    Health 6000
+    Radius 64
+    Height 100
+    Speed 6
+    PainChance 0
+    Mass 10000000
+    MONSTER 
+    +NOGRAVITY
+    +FLOATBOB
+    +FLOAT
+    SeeSound "spider/sight"
+    DeathSound "spider/death"
+    Obituary "%o was killed by an Arachnophyte."
+	DamageFactor "PlayerSpellcard", 0.1
+    States
+    {
+    Spawn:
+        APYT AB 4 A_Look
+        Loop
+    See:
+        APYT AABB 2 A_Chase
+        Loop
+	Missile:
+		APYT ABABA 4 Bright A_FaceTarget
+		APYT A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+		APYT A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+		APYT A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+		APYT A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+		Goto MissileLunatic
+	MissileEasy:
+		APYT A 0 A_Jump(128,"MissileEasy1","MissileEasy2")
+		APYT CCC 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-22.5,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		APYT C 4 Bright A_FaceTarget
+		APYT DDD 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-22.0,22.5),CMF_OFFSETPITCH,frandom(-4.5,4.5))
+		APYT D 4 Bright A_FaceTarget
+		APYT D 1 Bright A_SpidRefire
+		APYT A 0 A_Jump(16,"MissileEasy")
+		Goto MissileEasy+1
+	MissileEasy1:
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileEasy1")
+		TNT1 A 0 A_Jump(128,"MissileEasy")
+		Goto See
+	MissileEasy2:
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAA 0 A_CustomMissile("CyberOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileEasy2")
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileNormal:
+		APYT A 0 A_Jump(128,"MissileNormal1","MissileNormal2")
+		APYT CCCC 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-30.0,30.0),CMF_OFFSETPITCH,frandom(-6.0,6.0))
+		APYT C 4 Bright A_FaceTarget
+		APYT DDDD 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-30.0,30.0),CMF_OFFSETPITCH,frandom(-6.0,6.0))
+		APYT D 4 Bright A_FaceTarget
+		APYT D 1 Bright A_SpidRefire
+		APYT A 0 A_Jump(16,"MissileNormal")
+		Goto MissileNormal+1
+	MissileNormal1:
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileNormal1")
+		TNT1 A 0 A_Jump(128,"MissileNormal")
+		Goto See
+	MissileNormal2:
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileNormal2")
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileHard:
+		APYT A 0 A_Jump(128,"MissileHard1","MissileHard2","MissileHard3")
+		APYT CCCCC 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-37.5,37.5),CMF_OFFSETPITCH,frandom(-7.5,7.5))
+		APYT C 3 Bright A_FaceTarget
+		APYT DDDDD 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),frandom(-4,4),frandom(-37.5,37.5),CMF_OFFSETPITCH,frandom(-7.5,7.5))
+		APYT D 4 Bright A_FaceTarget
+		APYT D 1 Bright A_SpidRefire
+		TNT1 A 0 A_Jump(16,"MissileHard")
+		Goto MissileHard+1
+	MissileHard1:
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(85,"MissileHard1")
+		TNT1 A 0 A_Jump(128,"MissileHard")
+		Goto See
+	MissileHard2:
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(64,"MissileHard2")
+		TNT1 A 0 A_Jump(85,"MissileHard3")
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileHard3:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_Jump(64,"MissileHard3")
+		TNT1 A 0 A_Jump(85,"MissileHard2")
+		TNT1 A 0 A_Jump(128,"Missile")
+		Goto See
+	MissileLunatic:
+		APYT A 0 A_Jump(128,"MissileLunatic5","MissileLunatic6","MissileLunatic7","MissileLunatic8","MissileLunatic9")
+		APYT A 0 A_Jump(255,"MissileLunatic0","MissileLunatic1","MissileLunatic2","MissileLunatic3","MissileLunatic4")
+	MissileLunatic0:
+		APYT CCCCCC 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),0,frandom(-45.0,45.0),CMF_OFFSETPITCH,frandom(-9.0,9.0))
+		APYT C 3 Bright A_FaceTarget
+		APYT DDDDDD 0 A_CustomMissile("DanmakuSpiderPlasma",frandom(28,36),0,frandom(-45.0,45.0),CMF_OFFSETPITCH,frandom(-9.0,9.0))
+		APYT D 3 Bright A_FaceTarget
+		APYT D 0 Bright A_Jump(8,"MissileLunatic","Missile","See")
+		APYT D 0 Bright A_SpidRefire
+		Goto MissileLunatic0
+	MissileLunatic1:
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder11",32,0,0)
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder12",32,0,0)
+		APYT C 0 A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		APYT C 6 Bright A_FaceTarget
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder13",32,0,0)
+		APYT D 0 A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		APYT D 6 Bright A_FaceTarget
+		APYT D 0 Bright A_Jump(16,"MissileLunatic","Missile","See")
+		APYT D 0 Bright A_SpidRefire
+		Goto MissileLunatic1
+	MissileLunatic2:
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		REMI AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("CyberOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("CyberOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("CyberOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 4 Bright A_FaceTarget
+		APYT D 0 Bright A_Jump(32,"MissileLunatic","Missile","See")
+		APYT D 0 Bright A_SpidRefire
+		Goto MissileLunatic2
+	MissileLunatic3:
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge1",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium1",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall1",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 4 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 4 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge3",40,0,0,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium3",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall3",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 4 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		APYT D 0 Bright A_Jump(64,"MissileLunatic","Missile","See")
+		APYT D 0 Bright A_SpidRefire
+		Goto MissileLunatic3
+	MissileLunatic4:
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		APYT D 0 Bright A_Jump(128,"MissileLunatic","Missile","See")
+		APYT D 0 Bright A_SpidRefire
+		Goto MissileLunatic4
+	MissileLunatic5:
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge1",40,0,30,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium1",40,0,frandom(-40,-20),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall1",40,0,frandom(-50,-10),CMF_OFFSETPITCH,frandom(-20,20))
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge2",40,0,0,CMF_OFFSETPITCH)
+		REMI AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium2",40,0,frandom(-10,10),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall2",40,0,frandom(-20,20),CMF_OFFSETPITCH,frandom(-20,20))
+		TNT1 A 0 A_CustomMissile("SpiderOrbLarge3",40,0,30,CMF_OFFSETPITCH)
+		TNT1 AAAAAAAAAA 0 A_CustomMissile("SpiderOrbMedium3",40,0,frandom(20,40),CMF_OFFSETPITCH,frandom(-10,10))
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("SpiderOrbSmall3",40,0,frandom(10,50),CMF_OFFSETPITCH,frandom(-20,20))
+		APYT CD 6 Bright A_FaceTarget
+		Goto See
+	MissileLunatic6:
+		APYT A 0 A_PlaySound("spider/sight",0,1.0,0,ATTN_NONE)
+		APYT AAAAA 7 A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,-30)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,-30)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,30)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,30)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		APYT CD 5 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		Goto See
+	MissileLunatic7:
+		APYT A 0 A_PlaySound("spider/sight",0,1.0,0,ATTN_NONE)
+		APYT AAAAA 7 A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall1",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall2",40,0,0)
+		TNT1 A 0 A_CustomMissile("DanmakuCyberDeathBall3",40,0,0)
+		APYT CD 6 Bright A_FaceTarget
+		APYT ABABA 4 Bright A_FaceTarget
+		Goto See
+	MissileLunatic8:
+		APYT A 0 A_PlaySound("spider/sight",0,1.0,0,ATTN_NONE)
+		APYT AAAAA 7 A_FaceTarget
+		APYT C 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5))
+		APYT C 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-30.0,30.0))
+		APYT C 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5))
+		APYT C 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-30.0,30.0))
+		APYT C 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5))
+		APYT C 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-30.0,30.0))
+		APYT C 3 Bright A_SpidRefire
+		APYT D 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-22.5,22.5))
+		APYT D 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaRed",40,0,frandom(-45.0,45.0))
+		APYT D 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-22.5,22.5))
+		APYT D 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaBlue",40,0,frandom(-45.0,45.0))
+		APYT D 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-22.5,22.5))
+		APYT D 0 Bright A_CustomMissile("DanmakuCyberExpPlasmaGreen",40,0,frandom(-45.0,45.0))
+		APYT D 3 Bright A_SpidRefire
+		APYT D 0 Bright A_Jump(8,"MissileLunatic","Missile","See")
+		Goto MissileLunatic8+6
+	MissileLunatic9:
+		APYT A 0 A_PlaySound("spider/sight",0,1.0,0,ATTN_NONE)
+		APYT A 20 A_FaceTarget
+		APYT C 0 A_Playsound("touhou/laser",0,0.7)
+		APYT CCCDDD 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder21",32,0,0)
+		APYT A 20 A_FaceTarget
+		APYT C 0 A_Playsound("touhou/laser",0,0.7)
+		APYT CCCDDD 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder22",32,0,0)
+		APYT A 20 A_FaceTarget
+		APYT C 0 A_Playsound("touhou/laser",0,0.7)
+		APYT CCCDDD 2 Bright A_CustomMissile("DanmakuCyberPlasmaExploder23",32,0,0)
+		Goto See
+    Death:
+        APYT E 8
+        APYT F 8 A_Scream
+        APYT G 6
+        APYT H 6 A_Fall
+        APYT I 6
+        APYT J 6
+        Stop
+    }
+}

@@ -1,0 +1,80 @@
+ACTOR TechLanternBig 500
+{
+	Radius 10
+	Height 80
+	+SPAWNCEILING
+	+NOGRAVITY
+	+SOLID
+	States
+	{
+	Spawn:
+		HLMP ABCD 6 Light("BIGLANTERN")
+		Loop
+	}
+}
+
+ACTOR TechLanternSmall 501
+{
+	Radius 6
+	Height 45
+	+SPAWNCEILING
+	+NOGRAVITY
+	+SOLID
+	States
+	{
+	Spawn:
+		HLMP EFGH 6 Light("SMALLLANTERN")
+		Loop
+	}
+}
+
+ACTOR BlackCandleChandelier 502
+{
+	Radius 20
+	Height 55
+	+SPAWNCEILING
+	+NOGRAVITY
+	+SOLID
+	States
+	{
+	Spawn:
+		HLMP I -1 Light("BLACKCHANDELIER")
+		Stop
+	}
+}
+
+ACTOR DemonLamp 7004
+{
+  Mass 99999
+  Radius 20
+  Height 57
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  States
+  {
+  Spawn:
+     _DMC BCDE 3 Bright
+	 Loop
+  }
+}
+
+ACTOR DemonLampExt 7005
+{
+  Mass 99999
+  Radius 20
+  Height 57
+  +NODAMAGETHRUST
+  +DONTBLAST
+  +NOGRAVITY
+  +SPAWNCEILING
+  +SOLID
+  States
+  {
+  Spawn:
+     _DMC A -1
+	 Stop
+  }
+}

@@ -1,0 +1,2054 @@
+ACTOR FairyMaid1 31161 //Yeah, things get insane now
+{
+//$Category "Touhou Characters"
+  Obituary "%o was hit by a fairy maid."
+  Speed 8
+  health 20
+  scale 0.8
+  MONSTER
+  Radius 16
+  Height 32
+  Mass 200
+  MinMissileChance 240
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  +NOBLOOD
+  +NOICEDEATH
+  species "SDM"
+  Painchance 128
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  DamageFactor "SDM",0
+  States
+  {
+  Spawn:
+    FARY AB 3 A_Look
+    Loop
+  See:
+    FARY AB 3 A_Chase
+	Loop
+  Pain:
+    FARY B 20
+	Goto See
+  Missile:
+    FARY A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    FARY A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    FARY A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    FARY A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,0)
+	FARY A 10 bright A_FaceTarget
+	Goto see
+  MissileNormal:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-10)
+	FARY A 10 bright A_FaceTarget
+	Goto see
+  MissileHard:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-20)
+	FARY A 10 bright A_FaceTarget
+	Goto see
+  MissileLunatic:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-10)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-20)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-30)
+	FARY A 10 bright A_FaceTarget
+	Goto see
+  Death:
+	FARY B 0 A_GiveInventory("BulletDeathTrigger",1)
+	FARY B 0 A_ScreamAndUnblock
+    FARY BBBBBBBBBB 2 A_FadeOut(0.1)
+    Stop
+  }
+}
+ACTOR FairyMaid2 31162
+{
+//$Category "Touhou Characters"
+  Obituary "%o was hit by a fairy maid."
+  Speed 8
+  health 20
+  scale 0.8
+  MONSTER
+  Radius 16
+  Height 32
+  Mass 200
+  MinMissileChance 240
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  +NOBLOOD
+  +NOICEDEATH
+  species "SDM"
+  Painchance 128
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  DamageFactor "SDM",0
+  States
+  {
+  Spawn:
+    FARY AB 3 A_Look
+    Loop
+  See:
+    FARY AB 3 A_Chase
+	Loop
+  Pain:
+    FARY B 20
+	Goto See
+  Missile:
+    FARY A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    FARY A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    FARY A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    FARY A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,0)
+	FARY A 10 bright A_FaceTarget
+	Goto see
+  MissileNormal:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,0)
+	FARY A 10 bright A_FaceTarget
+	Goto see
+  MissileHard:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,-15)
+	FARY A 10 bright A_FaceTarget
+	Goto see
+  MissileLunatic:
+    FARY A 10 bright A_FaceTarget
+	FARY A 0 bright A_Playsound("touhou/fire",0,0.5)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot1",20,0,-30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot2",20,0,-30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,0)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,-15)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,30)
+	FARY A 0 bright A_CustomMissile("FairyMaidShot3",20,0,-30)
+	FARY A 10 bright A_FaceTarget
+	Goto see
+  Death:
+	FARY B 0 A_GiveInventory("BulletDeathTrigger",1)
+	FARY B 0 A_ScreamAndUnblock
+    FARY BBBBBBBBBB 2 A_FadeOut(0.1)
+    Stop
+  }
+}
+ACTOR FairyMaidShot1
+{
+  Radius 2
+  Speed 8
+  fastspeed 12
+  Height 4
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BRIC A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BRIC AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR FairyMaidShot2 : FairyMaidShot1
+{
+	Speed 12
+	FastSpeed 18
+}
+ACTOR FairyMaidShot3 : FairyMaidShot1
+{
+	Speed 16
+	FastSpeed 24
+}
+ACTOR FairyMaid3 31163
+{
+//$Category "Touhou Characters"
+  Obituary "%o was toasted by a fairy maid."
+  Speed 8
+  health 30
+  scale 0.8
+  MONSTER
+  Radius 16
+  Height 32
+  Mass 200
+  MinMissileChance 240
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +LOWGRAVITY
+  +NOBLOOD
+  +NOICEDEATH
+  species "SDM"
+  Painchance 64
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  DamageFactor "SDM",0
+  States
+  {
+  Spawn:
+    FARY AB 2 A_Look
+    Loop
+  See:
+    FARY AB 2 A_Chase
+	Loop
+  Pain:
+    FARY B 20
+	Goto See
+  Missile:
+    FARY A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    FARY A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    FARY A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    FARY A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+    FARY A 10 bright
+	FARY A 0 A_Playsound("touhou/fire",0,0.5)
+	FARY AA 5 bright A_SpawnItemEx("KoakumaShooterNormal",Random(-32,32),Random(-32,32),Random(0,32),0,0,0,0,0)
+	Goto see
+  MissileNormal:
+    FARY A 10 bright
+	FARY A 0 A_Playsound("touhou/fire",0,0.5)
+	FARY AAA 3 bright A_SpawnItemEx("KoakumaShooterNormal",Random(-32,32),Random(-32,32),Random(0,32),0,0,0,0,0)
+	Goto see
+  MissileHard:
+    FARY A 10 bright
+	FARY A 0 A_Playsound("touhou/fire",0,0.5)
+	FARY AAA 3 bright A_SpawnItemEx("KoakumaShooterHard",Random(-32,32),Random(-32,32),Random(0,32),0,0,0,0,0)
+	Goto see
+  MissileLunatic:
+    FARY A 10 bright
+	FARY A 0 A_Playsound("touhou/fire",0,0.5)
+	FARY AAA 3 bright A_SpawnItemEx("KoakumaShooterLunatic",Random(-32,32),Random(-32,32),Random(0,32),0,0,0,0,0)
+	Goto see
+  Death:
+	FARY B 0 A_ScreamAndUnblock
+    FARY BBBBBBBBBB 2 A_FadeOut(0.1)
+    Stop
+  }
+}
+
+ACTOR MinorSDMDevil1 31164
+{
+//$Category "Touhou Characters"
+  Speed 8
+  FastSpeed 10
+  MONSTER
+  Health 300
+  Radius 20
+  Height 62
+  Scale 0.5
+  Mass 10000
+  Species SDM
+  DamageFactor "SDM", 0
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +LOWGRAVITY
+  +DONTMORPH
+  +AMBUSH
+  +NOICEDEATH
+  MinMissileChance 240
+  Painchance 12
+  Seesound ""
+  Painsound "touhou/pain"
+  Deathsound "touhou/nuefire"
+  Obituary "%o was killed by a minor devil's magic."
+  States
+  {
+  Spawn:
+    GLDK AB 2
+    GLDK A 0 A_Look
+    Loop
+  See:
+    GLDK AB 2 A_Chase
+    Loop
+  Pain:
+    GLDK Q 10 A_Pain
+    Goto See
+  Melee:
+  Missile:
+    GLDK N 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    GLDK N 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    GLDK N 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    GLDK N 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+  MissileEasy:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,320)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,330)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,340)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,350)
+	GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,320)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,330)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,340)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,350)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileNormal:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,320)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,330)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,340)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,350)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,320)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,330)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,340)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,350)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileHard:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,320)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,330)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,340)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,350)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,320)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,330)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,340)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,350)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileLunatic:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,320)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,330)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,340)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,350)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,320)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,330)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,340)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,350)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  Death:
+	GLDK Q 0 A_GiveInventory("BulletDeathTrigger",1)
+    GLDK Q 0 A_ScreamAndUnblock
+    GLDK QQQQQQQQQQ 2 A_FadeOut(0.1)
+	Stop
+  }
+}
+ACTOR MinorSDMDevil2 31165
+{
+//$Category "Touhou Characters"
+  Speed 8
+  FastSpeed 10
+  MONSTER
+  Health 300
+  Radius 20
+  Height 62
+  Scale 0.5
+  Mass 10000
+  Species SDM
+  DamageFactor "SDM", 0
+  MinMissileChance 240
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +LOWGRAVITY
+  +DONTMORPH
+  +AMBUSH
+  +NOICEDEATH
+  Painchance 12
+  Seesound ""
+  Painsound "touhou/pain"
+  Deathsound "touhou/nuefire"
+  Obituary "%o was killed by a minor devil's magic."
+  States
+  {
+  Spawn:
+    GLDK AB 2
+    GLDK A 0 A_Look
+    Loop
+  See:
+    GLDK AB 2 A_Chase
+    Loop
+  Pain:
+    GLDK Q 10 A_Pain
+    Goto See
+  Melee:
+  Missile:
+    GLDK N 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    GLDK N 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    GLDK N 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    GLDK N 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+  MissileEasy:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-320)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-330)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-340)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-350)
+	GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-320)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-330)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-340)
+    GLDK N 13
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-350)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileNormal:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-320)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-330)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-340)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-350)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-320)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-330)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-340)
+    GLDK N 11
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-350)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileHard:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-320)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-330)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-340)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-350)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-320)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-330)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-340)
+    GLDK N 9
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-350)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  MissileLunatic:
+    GLDK IJKLM 5 A_Facetarget
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-320)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-330)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-340)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-350)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-320)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-0)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-40)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-80)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-120)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-160)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-200)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-240)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-280)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-320)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-330)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-10)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-50)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-90)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-130)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-170)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-210)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-250)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-290)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-330)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-340)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-20)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-60)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-100)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-140)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-180)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-220)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-260)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-300)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-340)
+    GLDK N 7
+    GLDK N 0 A_Playsound("touhou/fire",0,0.7)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot1",30,0,-350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot2",30,0,-350)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-30)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-70)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-110)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-150)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-190)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-230)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-270)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-310)
+    GLDK N 0 A_CustomMissile("FairyMaidShot3",30,0,-350)
+	GLDK NMLKJI 5 A_FaceTarget
+    Goto See
+  Death:
+	GLDK Q 0 A_GiveInventory("BulletDeathTrigger",1)
+    GLDK Q 0 A_ScreamAndUnblock
+    GLDK QQQQQQQQQQ 2 A_FadeOut(0.1)
+	Stop
+  }
+}
+ACTOR BookShooterGreen 31166
+{
+//$Category "Touhou Characters"
+  Obituary "%o was shot by a magical book sentry."
+  Speed 0 //Books can't move
+  health 80 //These have sprites now, so it's no longer free.
+  MONSTER
+  Radius 32
+  Height 64
+  Mass 2000000000
+  MinMissileChance 240
+  -SOLID
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  +NOBLOOD
+  +MISSILEMORE
+  +NOICEDEATH
+  species "SDM"
+  Painchance 255
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  DamageFactor "SDM",0
+  States
+  {
+  Spawn:
+	TNT1 A 1 A_Look
+	Loop
+  See:
+	BOK1 A 1 A_Chase
+	Loop
+  Missile:
+    TNT1 A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    TNT1 A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    TNT1 A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    TNT1 A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+	BOK1 A 20 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-60)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-20)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,20)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,60)
+	TNT1 A 0 DamageThing(20, 0)
+	Goto See
+  MissileNormal:
+	BOK1 A 20 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-60)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,60)
+	TNT1 A 0 DamageThing(16, 0)
+	Goto See
+  MissileHard:
+	BOK1 A 20 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-60)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,60)
+	TNT1 A 0 DamageThing(10, 0)
+	Goto See
+  MissileLunatic: //OH MAN
+	BOK1 A 20 A_FaceTarget
+    TNT1 A 0 A_JumpIfInTargetInventory("UltraMode",1,"MissileUltra")
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-60)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,60)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,-60)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,-50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,-40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,-30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,-20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,-10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,60)
+	TNT1 A 0 DamageThing(8, 0)
+	Goto See
+  MissileUltra: //OH MAN
+	BOK1 A 20 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-60)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,-20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,-10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall",30,0,50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen",30,0,60)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,-60)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,-50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,-40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,-30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,-20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,-10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,10)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,20)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,30)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,40)
+	TNT1 A 0 A_CustomMissile("BookShotGreenSmall2",30,0,50)
+	TNT1 A 0 A_CustomMissile("BookShotGreen2",30,0,60)
+	TNT1 A 0 DamageThing(4, 0)
+	Goto See
+  Die:
+	TNT1 A 0 A_Die
+  Death:
+	TNT1 A 1 A_ScreamAndUnblock //It's not solid but whatever
+	Stop
+  }
+}
+ACTOR BookShotGreen //yes, the buckshot pun is intended
+{
+  Radius 8
+  Speed 8
+  fastspeed 12
+  Height 15
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    GBL3 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    GBL3 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR BookShotGreenSmall : BookShotGreen
+{
+	Radius 5
+	Height 10
+  States
+  {
+  Spawn:
+    GBL1 A 1 Bright
+    Loop
+  Death:
+    GBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR BookShotGreen2 : BookShotGreen
+{
+	Speed 12
+	FastSpeed 18
+  States
+  {
+  Spawn:
+    GBL3 A 1 Bright
+    Loop
+  Death:
+    GBL3 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR BookShotGreenSmall2 : BookShotGreen
+{
+	Radius 5
+	Height 10
+	Speed 12
+	FastSpeed 18
+  States
+  {
+  Spawn:
+    GBL1 A 1 Bright
+    Loop
+  Death:
+    GBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR BookShooterBlue 31167
+{
+//$Category "Touhou Characters"
+  Obituary "%o was shot by a magical book sentry."
+  Speed 0 //Books can't move
+  health 120 //These have sprites now, so now they are hard to kill. Sorry!
+  MONSTER
+  Radius 32
+  Height 64
+  Mass 2000000000
+  MinMissileChance 240
+  -SOLID
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  +NOBLOOD
+  +MISSILEEVENMORE
+  +NOICEDEATH
+  species "SDM"
+  Painchance 255
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  DamageFactor "SDM",0
+  States
+  {
+  Spawn:
+	TNT1 A 1 A_Look
+	Loop
+  See:
+	BOK2 A 1 A_Chase
+	Loop
+  Missile:
+    TNT1 A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    TNT1 A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    TNT1 A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    TNT1 A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+	BOK2 A 15 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-90)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-45)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,45)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,90)
+	TNT1 A 0 DamageThing(20, 0)
+	Goto See
+  MissileNormal:
+	BOK2 A 15 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-90)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-60)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-30)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,30)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,60)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,90)
+	TNT1 A 0 DamageThing(15, 0)
+	Goto See
+  MissileHard:
+	BOK2 A 15 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-90.0)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-67.5)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-45.0)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-22.5)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,22.5)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,45.0)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,67.5)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,90.0)
+	TNT1 A 0 DamageThing(12, 0)
+	Goto See
+  MissileLunatic:
+    TNT1 A 0 A_JumpIfInTargetInventory("UltraMode",1,"MissileUltra")
+	BOK2 A 15 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-90)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-72)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-54)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-36)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-18)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,18)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,36)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,54)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,72)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,90)
+	TNT1 A 0 DamageThing(10, 0)
+	Goto See
+  MissileUltra:
+	BOK2 A 15 A_FaceTarget
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-90)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-72)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-54)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-36)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,-18)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,0)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,18)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,36)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,54)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,72)
+	TNT1 A 0 A_CustomMissile("BookShotBlue",30,0,90)
+	TNT1 A 0 DamageThing(6, 0)
+	Goto See
+  Die:
+	TNT1 A 0 A_Die
+  Death:
+	TNT1 A 1 A_ScreamAndUnblock //It's not solid but whatever
+	Stop
+  }
+}
+ACTOR BookShotBlue
+{
+  Radius 8
+  Speed 8
+  fastspeed 12
+  Height 15
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}

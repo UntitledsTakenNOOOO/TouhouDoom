@@ -1,0 +1,183 @@
+touhou/defeat           realdead
+touhou/spellcard        spelcard
+touhou/pain             tohopain
+touhou/fire             danmakuf
+touhou/hit              lildead
+touhou/hit2             orbpdeat
+touhou/cardget			cardget
+touhou/youdied			tohodeat
+touhou/charge			power1
+touhou/charge2			power2
+touhou/charge3			power3
+touhou/fairy/death      fairyded
+touhou/nuefire          nuefire //Sound is from touhou 12, which is where filename is from (though it was not exclusive to her, I think)
+touhou/fantasyseal      reimseal
+touhou/masterspark      yukasprk //touhou mythology: Yuka invented the master spark, not Marisa, which is the filename
+touhou/laser            lazer
+touhou/meiling/hit		remhit
+touhou/remi/bats		bats
+touhou/remi/poof		holy3
+touhou/remi/woosh		woosh3
+touhou/remi/dash		dashing
+touhou/remi/hit			remhit
+touhou/timeout1			timeout1
+touhou/timeout2			timeout2
+touhou/youmu/slash   	yomslash
+touhou/yuyu/bigmissile	bigmissi
+touhou/yuyu/weakspin	spin1
+touhou/yuyu/strongspin	spin2
+touhou/komachi/scythe	komscyth
+touhou/suika/hit		remhit
+touhou/utsuho/alarm		unyualar //touhou in-joke: Utusho is sometimes nicknamed Unyu.
+touhou/aya/tornado		bigmissi
+koishi/meleewarn		koasight //HEAVYWEIGHT BOXING CHAMPION
+koishi/meleehit			splblood //KOISHI M-F-ING KOMEIJI
+// Benellus
+benellus/greeting     BENEGRET // Taken from Painkiller
+benellus/fight        BENEFITE // Taken from Painkiller
+benellus/death1       BENEDTH1 // Taken from Painkiller
+benellus/death2       BENEDTH2 // Taken from Painkiller
+benellus/death3       BENEDTH3 // Taken from Painkiller
+benellus/death4       BENEDTH4 // Taken from Painkiller
+$random benellus/deathtaunt { dtaunt1 dtaunt2 dtaunt3 dtaunt4 dtaunt5 dtaunt6 dtaunt7 dtaunt8 dtaunt9 } // Taken from Painkiller
+dtaunt1               BENETNT1
+dtaunt2               BENETNT2
+dtaunt3               BENETNT3
+dtaunt4               BENETNT4
+dtaunt5               BENETNT5
+dtaunt6               BENETNT6
+dtaunt7               BENETNT7
+dtaunt8               BENETNT8
+dtaunt9               BENETNT9
+benellus/fire1        BENEFIRE // Taken from FEAR
+benellus/pump1        BENEPUMP // Taken from FEAR
+benellus/fire2        BENEFIR2 // Edited from Postal 2
+benellus/fire3        BENEFIR3 // Taken from Painkiller
+benellus/fire4        BENEFIR4 // Taken from Fallout: New Vegas
+benellus/pump2        BENEPMP2 // Taken from Lead 4 Dead 2
+$limit benellus/fire1 0
+$limit benellus/pump1 0
+$limit benellus/fire2 0
+$limit benellus/fire3 0
+$rolloff benellus/fire1 600 1800
+$rolloff benellus/pump1 600 1800
+$rolloff benellus/fire2 400 1600
+$rolloff benellus/fire3 600 1800
+touhou/marisa/spark		yukasprk
+touhou/reimu/seal		fantasys
+$random thunder/hit { thunder/hit1 thunder/hit2 } //For Iku
+thunder/hit1 THNDS01
+thunder/hit2 THNDS02
+Ambient/Rain	AMBRAIN
+touhou/iku/ballhit		ikuligh6
+touhou/iku/ballsummon	ikuligh2
+touhou/iku/dance		ikuligh3
+touhou/iku/zapper		ikuligh4
+touhou/iku/explosion	ikuligh5
+touhou/iku/lightning	ikusulig
+touhou/iku/ballloop		ikuloop
+$limit touhou/iku/BallSummon 0
+$limit touhou/iku/Zapper 0
+$volume touhou/iku/BallLoop 0.5
+$alias AmbientSound1		world/spark
+$ambient 1 AmbientSound1 point random 0.5 3.0 1.0
+
+Ambient/Rain	AMBRAIN
+
+tornado/see NA_TAUNT
+tornado/death NA_DEATH
+tornado/pain NA_PAIN_
+tornado/active NA_IDLE_
+
+monster/diasit dsdiasit
+monster/diapai dsdiapai
+monster/diadth dsdiadth
+monster/diaact dsdiaact
+weapons/firbfi dsfirbfi
+weapons/firmfi dsfirmfi
+weapons/firex4 dsfirex4
+weapons/diasht dsdiasht
+weapons/firex3 dsfirex3
+
+ClericFlameFire         dshellfi
+ClericFlameExplode      dshellex
+ClericFlameCircle       dsfirex5
+
+LordOfHeresy/sight DSLOHSIT
+LordOfHeresy/act DSLOHACT
+LordOfHeresy/death DSLOHDTH
+
+pyro/see BE-SEE
+pyro/idle BE-IDLE
+pyro/tele BE-TELE
+pyro/pain DE_PAIN_
+pyro/death BE-DEATH
+pyro/blast DP_ATTAC
+
+pyro/flame DSFLAMER
+pyro/explosion DSPIPEX1
+pyro/flamepoof DSHITW
+pyro/blastexplosion DSFRBXPL
+pyro/comet DSCMTLNC
+pyro/cometdeath DSCMTEXP
+pyro/bomb DSRDSHOT
+pyro/bombhit DSRDHIT
+
+//Suicidde Bomber
+suicide/scream dssuscrm
+suicide/sit dssusit
+
+monster/cubsit dscubsit
+weapons/bounc1 dsbounc1
+monster/cubfly dscubfly
+monster/cubdth dscubdth
+weapons/firsfi dsfirsfi
+weapons/maceex dsmaceex
+
+Daedabus/Sight		DAEDSIGH
+$Random Daedabus/Active	{ DAEDACT1 DAEDACT2 }
+DAEDACT1		DAEDACT1
+DAEDACT2		DAEDACT2
+Daedabus/Attack		DAEDATTK
+$Random Daedabus/pain	{ DAEDPAI1 DAEDPAI2 }
+DAEDPAI1		DAEDPAI1
+DAEDPAI2		DAEDPAI2
+Daedabus/Death 		DAEDDEAT
+
+superbaron/scream dssbsit
+superbaron/pain dssbpain
+superbaron/death dssbdth
+superbaron/act dssbact
+
+monster/brusit dsbrusit
+monster/brudth dsbrudth
+monster/bruwlk dsbruwlk
+monster/brufir dsbrufir
+weapons/hellex dshellex
+
+monster/annsit dsannsit
+monster/anndth dsanndth
+monster/anhoof dsanhoof
+weapons/hrlexp dshrlexp
+weapons/hrlfir dshrlfir
+
+power/pickup	PITEM
+power/pickup2	PITEM2
+
+$Limit power/pickup	0
+
+//From Final Doomer's JPCP guy. These sounds are cool.
+jpcpchaingun/fire1							JCHGFIR1
+jpcpchaingun/fire2							JCHGFIR2
+$random jpcpchaingun/fire { jpcpchaingun/fire1 jpcpchaingun/fire2 }
+$limit jpcpchaingun/fire		0
+jpcpplasmarifle/fire						JPLAFIRE
+$limit jpcpplasmarifle/fire 	0
+jpcpplasmarifle/hit							JPLAHIT
+$limit jpcpplasmarifle/hit 		0
+
+hakkero/plasma	PULSFIR		//From the Realm667 Pulse Machinegun
+hakkero/laser	DSICESHT	//From the Realm667 FreezeRifle
+
+touhou/bonus1	TH_BONUS
+touhou/bonus2	TH_BONU2

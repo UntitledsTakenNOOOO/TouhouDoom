@@ -1,0 +1,2527 @@
+TOUHOU DOOM: POST-MORTEM
+
+Holy hell, it's been three years. I started this project in 2016, as a proof of concept.
+
+And now here we are.
+
+If I do another Doom Mod (possible, but I'm definitely taking a break for now),
+I'll probably try to be a lot more open about things. I was going to stream
+the development of certain segments of this mod, but in the end I felt that
+I wanted to keep things under wraps. Certain features are best experienced blind.
+
+As a result, rather than publicly posting progress as it happened,
+I have instead detailed it within this large post-mortem.
+
+NOTE: As of V1.2, a few new things have been added. Notes on what was added during the 1.1-1.2 stretch are in there.
+If a note says "V1.2", it means somewhere in the 1.1-1.2 stretch, as I don't remember exactly what each version added.
+
+SPOILER ALERT, obviously. If you haven't beaten Touhou Doom, go do that first.
+
+This'll be split into three segments: Terminology, History, Map/Boss commentary.
+
+/////////////////////////
+// PART 0: TERMINOLOGY //
+/////////////////////////
+
+[ Danmaku and Touhou terminology ]
+
+Danmaku: literally 'curtain fire', it's used to describe large numbers of projectiles
+being thrown around in large patterns. Also called 'Bullet Hell'.
+
+Streaming: Dodging large numbers of bullets aimed directly at you with small tap-dodges.
+It's a very useful skill to learn, especially on higher difficulties.
+
+Spellcard: Bosses in Touhou often use very flashy named attacks. Generally speaking,
+spellcards have heavier patterns, and often utilize some form of gimmick, with some fights.
+
+Noncard: Boss phases that aren't spellcards.
+Often are generic, many bosses will have multiple noncard phases share the same attacks.
+
+Bomb: In most danmaku games, there's a 'Bomb' which is a tool that clears bullets,
+and typically makes you invincible for a short time. It's a tool to buy time if you're
+getting into trouble.
+
+EoSD: Embodiment of Scarlet Devil, the 6th Touhou game.
+PCB: Perfect Cherry Blossom, the 7th Touhou game
+SWR: Scarlet Weather Rhapsody, the 10.5th Touhou game. One of the fighting games.
+SA: Subterranean Animism, the 11th Touhou game.
+
+[ ZDoom and FPS terminology ]
+
+FPS: First-Person Shooter. A style of game where you play from the perspective of the
+player character, in 3D. Or psuedo 3D, depending on the era of the FPS in question.
+
+SSG: Super Shotgun. A powerful close-range weapon from Doom, and one of the most
+iconic FPS shotguns ever made. Generally all-around awesome weapon, but it lacks range.
+
+BFG: The Big F-ing Gun 9000. It's VERY powerful, and has a very weird way of dealing damage.
+
+Console: accessible with the ` or ~, it's a console you can input commands into.
+
+CVar: Console Variable. Something you can set in the console.
+
+Slaughtermap: A style of map which consists of killing HUGE hordes of demons,
+typically with the BFG 9000.
+
+[ Touhou Doom terminology ]
+
+Danmaku Weapons: The Hakurei Amulet Rifle and the Hakkero Star Cannon.
+These weapons are both based on shot types from the actual touhou games;
+they're very versatile. Most of them function at semi-long range.
+
+System Card: Basically a generic tool for buying time. Three exist:
+-Spirit Barrier: Also known as 'Bomb'. Clears bullets around you. Buys you some time.
+-Life Regenerator: Slowly regenerates health, up to 100.
+-Spell Amplifier: For 5 seconds, any other cards you cast will be amplified, except spirit barrier.
+
+Player Spellcard: Hey, bosses aren't the only ones that can use these!
+Each of these are unique. They are VERY flashy effects that generally do LOTS of damage.
+In general, unless the target is immune to bombs, this will eliminate the phase you use it on.
+As a result of their power, they are very rare, so save them for emergency use!
+
+touhou_doomweapons: A CVar that swaps out the Danmaku Weapons for conventional Doom weapons.
+touhou_nospellcards: A CVar that removes spellcards and replaces them with extra health pickups.
+
+/////////////////////
+// PART 1: HISTORY //
+/////////////////////
+
+===============================
+[ PART 1-0: How I got started ]
+===============================
+So, the actual long story behind the entire mod is kind of funny.
+
+I'm friends with another modder that I quite respect, who goes by 'TerminusEst13'.
+He's a good modder. He also livestreams on occasion. One of these streams was
+on a particular combination of mods - his DemonSteele (a great mod, you should
+check it out if you haven't already) combined with a mapset called "Touhou Doom".
+
+Now, this probably won't come as a shock: I'm a Touhou fan. So when I saw this,
+I knew I had to watch. And, it might not be a masterpiece, but hey, maybe it'll be good.
+
+It wasn't. It was...lacking in many, *many* aspects.
+
+So lacking was it, that after I watched it end, I knew for a fact that,
+despite not being the strongest modder in any respect, I could make something better.
+
+Not being one to simply sit around and complain, I hammered out a proof of concept:
+Cirno, the first Touhou Boss. She had phases, utilizing the system that is familiar
+to fans of the Touhou games: The Spellcard System.
+
+Once I had Cirno done (a few iterations of improving the fight later, of course),
+I decided that I had enough knowledge that I wanted to try remaking Touhou Doom.
+In its entirety. At least until eventually I got bored, or it got too hard to keep it up.
+
+I wasn't expecting to get as far as I did.
+
+======================================
+[ PART 1-1-1: The First Episode Demo ]
+======================================
+When I started Touhou Doom, I wasn't expecting to get terribly far. I wasn't planning
+to make a full project out of this. What I planned to do was replace the bosses of
+the original Touhou Doom with bosses that I poured slightly more effort into.
+
+That's how we got the first three bosses: Rumia, Cirno, and Meiling.
+
+I packed up these three bosses into replacing the original ones, and I released
+the "Demo" of Episode I, to an IRC channel that wasn't public.
+
+It had 4 maps: MAP01 to MAP04. None of the maps were mine.
+
+It wasn't my project at the time, so I couldn't make it public in good faith.
+Sure, I didn't like Dusted back then (he's gotten cooler since), but I didn't
+feel right calling his work mine.
+
+===============================================
+[ PART 1-1-2: The First Episode, Full Release ]
+===============================================
+So, having released the demo, I thought I'd just do the same thing for the rest of
+Episode I: replace the bosses, keep the maps. They weren't very good maps, but, well,
+I didn't know how to map at all, so it was better than a literal featureless STARTAN box.
+
+This plan was foiled by MAP05. In the original Touhou Doom, it's the Scarlet Devil Mansion.
+As in, all of it. It's the entire SDM, featuring three different bosses.
+
+This became a problem, because I needed space for Patchouli.
+Her patterns are far more complex than the first three bosses put together.
+Also, I needed more space to make a stage for her. I wanted to have *something*
+to fill the space before you met her.
+
+So, realizing I was kind of screwed, I decided to make a map.
+With some encouragement of TerminusEst13, as well as practice from DUMP 1 and DUMP 2
+(large collabs of newbie mappers, they're pretty neat, and the encouragement was nice),
+I made MAP05: Voile, the Magic Library. Oh, and I added Patchouli's fight at the end.
+
+After that, I realized I had strayed from the original path.
+This meant I had some free reign on what to do now. So I made my own stages for MAP06-MAP08.
+
+Then I made Sakuya, the process of which will be detailed later below.
+
+Then I made Remilia. That went well.
+
+Then I made Flandre, Which went, uh, less well. More on that in the boss section.
+
+===========================================
+[ PART 1-1-3: The First Episode, Bugfixes ]
+===========================================
+I handed the now finished Episode to my most valiant tester, dekw.
+
+He.
+
+Broke.
+
+EVERYTHING.
+
+By the time I had finished with all of the bugs he had found,
+I had NINE different versions of this first Episode to account for his shenanigans.
+Also fun fact: There's a varible in the ACS for MAP07 called "RemiliaAntiDekwTimer".
+
+He's good at what he does, and it meant that the Episode was surprisingly consistent.
+His feedback, while a pain, was very, very useful.
+
+I released Episode I on a mostly private Discord server. It was surprisingly well-liked.
+
+But with that, I took a break.
+
+========================
+[ PART 1-2: Episode II ]
+========================
+And then I came back. At this point, I realized something:
+I didn't know what to do with the second Episode.
+
+Episode I, for those unaware, follows Touhou 6: Embodiment of Scarlet Devil.
+The entire episode is purely bosses from that game.
+
+But I didn't have the resources to do this again. And, to be honest,
+I didn't really want to copy an entire game again for this purpose.
+
+So I came to brainstorm what I wanted to do. Originally, the plot was going to be that
+you get resurrected, and then you go to a bunch of places, then go underground.
+
+I then swapped the order and made the underground happen before the 'bunch of places' arc.
+
+Episode II went a lot faster, in comparison, because I think I knew what I was doing.
+
+Conceptually, I decided I wanted to make some new weapons. The issue with standard
+Doom weapons is that eventually the Plasma Rifle becomes the only thing you use on bosses.
+
+I didn't want this. I wanted to encourage you to switch a lot more.
+
+So I made shot types. All based on attacks from Marisa and Reimu in the actual series.
+
+Not that you'd know that if you're not a Touhou fan.
+
+The next thing was that I knew that, as much as I liked the Touhou side of things,
+I did want to do some more Doom-related stuff. I knew that, even though this was
+a Touhou-focused wad, there's no girl in Gensokyo demonic enough to warrant making
+her the plot device that opens the gates to Hell.
+
+So I invented the Danmaku Demons.
+
+Otherwise, there's not too much to say that won't be said in the boss commentary later.
+
+===========================
+[ PART 1-3-1: Episode III ]
+===========================
+This is where I gave up trying to follow the standard "6 stages + extra" structure.
+In a sense, this Episode is really kind of an extension of Episode II.
+
+Again, I don't have much to say that won't be covered in the boss and map commentary later.
+
+At this point, the mod had taken on enough of it's own identity that I decided that
+I should make a public ZDoom thread about it. If you're reading this, you probably
+know about this thread, since that thread is where the download link is located.
+
+===================================
+[ PART 1-3-2: Episode 3.5 to 3.66 ]
+===================================
+Touhou Doom was originally planned to be 4 episodes.
+
+There were a lot of little things I wanted to accomplish, but in the end of things,
+I decided not to worry about them until I was closer to finishing the project.
+
+Only one problem: I got to the end. Suddenly, all of the little things I had in my
+"do this later" list weren't on it, because that 'later' had become 'now'.
+
+So I went back to those things. Finished a bunch of them.
+
+Fininshed so many that, actually, Episode 1 to 3 was a lot better off.
+
+So I sectioned off those changes and made Episode 3.5 to 3.66.
+
+That's how we got MAP01. The new one.
+
+At this point, I took another month long break.
+
+I didn't want to face the reality of Episode IV.
+For the longest time, I always complained about being constrained by the Touhou canon.
+But as it turns out, having the freedom to make whatever you want is kind of terrifying.
+I seriously had no idea what to do.
+
+========================
+[ PART 1-4: Episode IV ]
+========================
+When I started Episode IV, I knew, to a certain extent, that it was going to be very
+different from the previous three Episodes, mostly owing to the fact that we left
+Gensokyo and have now entered actual Hell.
+
+As a result, it plays like, well, a normal set of Doom maps,
+except for the minor fact that they exclusively use Danmaku Demons.
+
+To reflect this change further, I decided that for the music, rather than using Touhou,
+I would use MAP21 to MAP26 to reference other danmaku games. I picked iconic shmups
+(and one non-shmup) that have semi-iconic to iconic songs, and used them as the stage
+music. Shmups have good soundtracks. I don't know why, they just do.
+
+The series referenced, if you don't know:
+Gradius, Raiden, Ikaruga, Mushihimesama, DoDonPachi, and Undertale
+
+As for the second half, well, I'll elaborate more on that below.
+
+The last Episode was delayed pretty massively not by any big particularly difficult thing,
+but by the mere fact that there's a lot of maps. As mentioned, I'm not a very good mapper.
+
+You'll see a lot more of what I mean in the map commentary below.
+
+There really isn't any inspirational story, any good lesson to learn here.
+It was just one map at a time, drawing the layout, adding some textures, that kinda stuff.
+
+Just focus on getting one thing done at a time. There's a reason this took 3 years.
+
+=========================
+[ PART 1-5: Extra Story ]
+=========================
+After finishing Episode IV, I came to the realization that, in fact,
+as crazy as the ending enough, it was missing something. It wasn't...Touhou enough.
+
+So I decided what we needed was more bosses and more Gensokyo.
+After all, the bosses are the iconic draw of this mod (IMHO, as the creator),
+and Gensokyo is the unique setting of the Touhou series.
+
+Eight bosses later, this final challenge was released.
+
+Then I sent it off to my testers, and wrote this Post-Mortem.
+
+==========================
+[ PART 1-6: Post Release ]
+==========================
+Notice how you're playing V1.23 and NOT V1.0?
+
+Yeah, there were bugs.
+
+A lot of bugs.
+
+A little lesson: Don't let the hype of releasing cloud your testing process. That's why we have V1.1.
+
+As for V1.2, that was less 'terrible bugs' (though there were a few of those) and more along the lines of
+"Okay I should've fixed that like a year or two ago, let's actually work on that thing from way back."
+
+More details will provided as they become relevant in PART II, a.k.a. almost all of the post mortem.
+
+////////////////////////////////
+// PART 2: MAP/BOSS BREAKDOWN //
+////////////////////////////////
+
++-----------+
+< EPISODE I >
++-----------+
+
+========================
+[ MAP01: Warp Facility ]
+Music:
+"Alien Jungle", Stuart "forty-two" Rynn 
+========================
+Despite being the first map, this was the last map finished that's not in Episode IV or V.
+
+The original version of this map was very barebones.
+As in, it was just a hallway with some enemies and an exit teleporter.
+It was left that way because I didn't care enough to make a better map.
+After all, it was just a lead-in for the real meat of the wad.
+
+I came back to make it better because I realized that if I made this a gameplay segment
+(a.k.a. a playable map), then it should at least try to be better than a single hallway.
+
+That was one reason, anyway. The other thing that making this map better allowed me to do
+was that I could highlight the differences in gameplay between typical Doom and Touhou.
+It goes from cramped passages against monsters with one attack direction (aimed at you),
+to, well, everything else. See: the next map.
+
+Making this was pretty hard. I didn't have experience in making tech base maps, and it shows.
+
+A neat thing about this was that making a better map allowed me to setup a neat twist later on.
+
+======================
+[ MAP02: A New World ]
+Music:
+"A Soul as Red as a Ground Cherry", from Touhou 6: Embodiment of Scarlet Devil
+----------------------
+In terms of when the map was made, this was the first map in the wad.
+
+The stage enemies are based off of EoSD stage 1. It's by far the most basic thing 
+in the mod; As what it's meant to teach you is how to do basic streaming - how to make
+small movements that dodge multiple bullets. Or maybe not, it's easy enough as is.
+
+The layout is taken directly from the original Touhou Doom.
+I updated some textures and decoration, and switched out the sky for a night theme.
+(To be specific: trees use a better texture, and are more detailed).
+
+V1.2 Update: I actually then did a second pass during post-release, detail wise -
+the forest looks a LOT more expansive than it used to be. If I did it right, then
+the forest should look a lot better in general.
+
+---------------
+[ BOSS: Rumia ]
+Music:
+"Apparitions Stalk the Night", from Touhou 6: Embodiment of Scarlet Devil
+---------------
+Rumia's kind of a neat boss in that she's the most 'Doom-like' boss of the bunch
+in the sense that most of her attacks are relatively normal 'shoot at target' attacks.
+
+"Night Bird", while a very basic and non-noteworthy card, is a good introduction
+to the spellcard system.
+
+"Demarcation" is then a second wake-up call to the fact that some patterns are
+fairly complex and can feature dodges that aren't as straightforward.
+
+You can get some pretty good SSG hits in if you're fast.
+
+All in all, a very good introductory boss.
+
+=====================
+[ MAP03: Misty Lake ]
+Music:
+"Lunate Elf", from Touhou 6: Embodiment of Scarlet Devil
+---------------------
+Second map, in creation date. Layout is also from on the original Touhou Doom.
+And again, I updated the trees and the sky - and also made the water solid, lol.
+
+Really, this is basically just a harder version of stage 1.
+
+You get a Rocket Launcher and Plasma Rifle here, but with limited ammo.
+It's to represent the power curve of your shot type in EoSD.
+
+Daiyousei really isn't anything notable. Her patterns are stream-based.
+
+V1.2 Update: Same as in the previous map, though the fog also helps mask my lack of detail.
+
+---------------
+[ BOSS: Cirno ]
+Music:
+"Beloved Tomboyish Girl", from Touhou 6: Embodiment of Scarlet Devil
+---------------
+In terms of creation date, Cirno was the first boss I ever made.
+
+Touhou Doom, as elaborated above, started as a "is a proper multi-phase fight possible?"
+concept test. Cirno was the test boss.
+
+Then that ended up working.
+
+The next thing was to implement patterns that very by difficulty.
+That was tedious, but it ended up working out for the better.
+
+The dialogue is wholesale ripped from EoSD.
+Mostly because the "English Beef" line makes no sense and I love it.
+
+If Rumia was to introduce the concepts of Danmaku, Cirno was to introduce the concept
+of having three spatial dimensions in the ZDoom engine. 
+
+Her first card, "Icicle Fall"/"Hailstorm", utilizes a lot of the third dimension, 
+though arguably it's pretty harmless and is more a visual effect.
+
+Otherwise, she ain't too bad. I generally save my Plasma Rifle for her last card,
+since it's hard to close distance there.
+
+=========================
+[ MAP04: Scarlet Border ]
+Music:
+"Shanghai Teahouse ~ Chinese Tea", from Touhou 6: Embodiment of Scarlet Devil
+-------------------------
+This is where things kick up a notch. If you haven't mastered streaming, you die now.
+
+The opener is the point that really kicks this into high gear. It's not hard, because
+every attack is aimed at you, meaning that you can dodge a giant 'line' of bullets...
+by tapping strafe left or strafe right precisely once.
+
+Of course, then you get to the next portion of the stage and I throw a bunch of
+more chaotically aimed stuff at you. It's not nearly as trivial as before.
+
+Midboss Meiling is notable in that she's the first midboss to have a spellcard.
+
+After that, you have the arena. It's pretty tricky, but really, it's nothing
+that should be terribly overwhelming if you get that far.
+
+V1.2: Although the more detailed forest thing applies here as well, this map got a more notable change:
+- when you get to Meiling's arena, the Scarlet Devil Mansion is actually visible behind the gateway.
+This looks a LOT better than it did previously, even though the Mansion is still pretty horribly un-detailed.
+
+----------------------
+[ BOSS: Hong Meiling ]
+Music:
+"Shanghai Alice of Meiji 17", from Touhou 6: Embodiment of Scarlet Devil
+----------------------
+Hong Meiling is a good deal harder than her predecessors.
+
+If you're on Hard or Lunatic, she has FOUR spellcards, as well as three noncards - 
+adding up to a total of 5/6/7/7 total phases on Easy/Normal/Hard/Lunatic.
+
+She was one of my demo bosses, and the most notable one, in my opinion.
+
+Originally, I was lazy and used rainbow-coloured bullets; however, when I released Episode IV
+(So this is V1.0), I was requested to use all of the individual colour bullets.
+That ended up being the right call; god, it looks so much nicer.
+
+===================================
+[ MAP05: Voile, The Magic Library ]
+Music:
+"Voile, that Magic Library", from Touhou 6: Embodiment of Scarlet Devil
+-----------------------------------
+This is the first truly original map. And it shows, man was I bad at mapping.
+Or at least texturing - I kind of like the Layout now.
+
+When I designed this map, I knew I had to make it grand - this was the library
+that was where the original EoSD really picked up.
+
+That's why I made it as hard as it was - the difficulty spike (and the protip
+warning you that you may want to turn the difficulty down) was entirely intentional.
+
+If you run through the map and wake everything up, it will get VERY chaotic in a hurry.
+Some amount of caution is highly advised.
+
+To start off, we have the initial bookshelves, with the fairy maids in between them.
+If you take it slowly, it introduces their gimmicks pretty well. Or you can take it fast,
+but you are taking a bigger risk by doing so.
+
+After the initial bookshelves, you have the open area. This looks impossible at first,
+but there is A: sufficient cover from the previous bookselves, and B: all of the flyers
+aim directly at you. While you don't want to stream it, you can easily dodge around the
+large mass of aimed bullets. Functionally, they're pretty harmless if you keep moving.
+Of course, the non-flyers make this harder. Take them out first, or else take cover.
+
+Koakuma isn't really anything to pay attention to.
+
+The post-Koakuma section was interesting. I knew I wanted to have a segment on the
+upper level, because it helps distinguish this from a totally generic stage, but
+in the end it made falling a very tedious affair, since you would have to go back
+and go around to the teleporter. That's why I added the teleporters that take you
+back to certain areas, to make backtracking slightly less tedious.
+
+Originally, the upper levels did not have any of the walkways across the bookshelves.
+I didn't realize this at first, but I'm actually a pretty good ZDoom engine parkour-er.
+So I added the ledges to give some more leniency to maneuvering on the upper level.
+
+This map ended up being a lot longer than I intended; some may argue it drags.
+It probably does.
+
+V1.2 Update: Originally, in the V1.0 release of Touhou Doom, the books were completely stupid.
+I wanted to make it annoying, but the invisible shooters thing ended up being too much.
+So I made the books visible, though a more durable to make up for it. To quote the original Post-Mortem:
+"While this is equally stupid, it's at least memorization stupid, instead of RNG stupid.
+Shoot the invisible books with either the SSG or the chaingun."
+
+In addition to this, I also added a bunch of decorative lamps. Looks better, but still not great.
+I think I need a better texture set to really make this map shine.
+-----------------------------
+[ BOSS: Patchouli Knowledge ]
+Music:
+"Locked Girl ~ The Girl's Secret Room", from Touhou 6: Embodiment of Scarlet Devil
+-----------------------------
+Patchouli was the first boss for which I can say it was truly difficult to implement her.
+
+Her patterns were a tier of complexity far beyond previous bosses, utilizing sweeping lasers,
+element-themed spellcards, and some very pretty weird patterns, such as Silver Dragon.
+
+And that's without getting into her main gimmick, which is that
+on each playthrough she will randomly select her spellcards.
+(She has 10 total, of which she will select 2/3/4/5 on Easy/Normal/Hard/Lunatic.)
+
+Most of them weren't too individually hard to implement, but it added up quickly.
+
+==================================================
+[ MAP06: An Elegant Servant for the Scarlet Moon ]
+Music:
+"The Maid and the Pocket Watch of Blood", from Touhou 6: Embodiment of Scarlet Devil
+--------------------------------------------------
+After the absurdity of designing MAP05, I realized that I didn't want the rest of the maps
+to be that large. Sure, the occasional large map was nice, but the library also drags longer
+than I personally would like. To each their own, I suppose, but the boss fights are arguably
+the main appeal of the wad.
+
+So this was invented as a counter-measure. It's the first 'musical' stage in Touhou Doom.
+
+The level is an autoscroller, essentially, at least for the first half.
+You can tell when enemies will appear if you memorize the music cues.
+
+Otherwise, it's a semi-recreation of EoSD stage 5.
+
+The devils that shoot the long 'strings' of bullets are pretty evil because they don't fire the 
+entire string at where they first aim it; meaning that if you move prematurely you still get hit.
+
+Midboss Sakuya isn't really terribly notable.
+
+The second half, while not an autoscroller, is quite crazy. There's no real tricks,
+I kind of just through a bunch of stuff semi-aimlessly. It shows.
+
+Once you're past that, all you've gotta do is take out some planned individual enemies.
+Nothing really too special.
+
+V1.2: Added some details to the walls of the large halls. Nothing big.
+-----------------------
+[ BOSS: Sakuya Izayoi ]
+Music:
+"Lunar Clock ~ Luna Dial", from Touhou 6: Embodiment of Scarlet Devil
+-----------------------
+One of the things I like about Episode I is that each boss is an introduction to a concept.
+Rumia is the introduction to danmaku.
+Cirno is the introduction to 3D visual effects.
+Meiling is the introduction to longer-length bosses.
+Patchouli is the introduction to much higher complexity patterns.
+Sakuya is the introduction to the fact that some bosses have particular...gimmicks.
+
+Heh.
+
+This gimmick.
+
+THIS gimmick.
+
+THIS FRICKIN' GIMMICK.
+
+As you may know, Sakuya has the ability to stop time. This manifests in all three
+of her spellcards (taken directly from EoSD), for which time literally stops, she
+throws a bunch of knives, and then unstops time.
+
+Getting this effect to work right was almost not worth it.
+Sakuya caused me SO much grief that it was honestly kind of funny.
+
+Problems that happened while I was making this boss include but are not limited to:
+-The Knives not freezing properly.
+-Sakuya not aiming them properly.
+-Sakuya walking into melee range and and surrounding you with knives.
+-Sakuya attacking WAY too much, resulting in spending the boss fight being stuck.
+-Sakuya not attacking enough, resulting in the fight being trivially easy.
+
+Yeah, it wasn't pretty. But it works now, and I'm so happy that it does.
+
+Admittedly the fight is still very RNG heavy. 
+I can beat it consistently, but often with different amounts of life left over.
+
+Even if the gimmick is pure evil.
+
+A possibly amusing fact: The reason why the pillars lower and the candelabras disappear
+is that my tester, dekw, abused the hell out of them to avoid basically all of the difficulty.
+I got rid of them to force players to learn Sakuya's patterns more legitimately.
+
+=====================================
+[ MAP07: Rain of Blood over Elysium ]
+Music:
+"The Young Descendant of Tepes", from Touhou 6: Embodiment of Scarlet Devil
+-------------------------------------
+Basically just a recreation of EoSD stage 6. Another musical autoscroller.
+
+In the Touhou series, most stage 6's are really just a space filler.
+
+Just a not very notable stage leading to the midboss and final boss.
+
+Midboss Sakuya's kind of lulzy. Welcome to random(0, 360): the spell card.
+
+V1.2 Update: See the previous map.
+-------------------------
+[ BOSS: Remilia Scarlet ]
+Music:
+"Septette for the Dead Princess", from Touhou 6: Embodiment of Scarlet Devil
+-------------------------
+Unlike the previous five bosses, Remilia isn't the introduction to anything.
+Remilia is the test that says "Show the game what you've learned."
+
+Unless you're on Easy. Then she decides that the test is unnecessary.
+
+If you're on Lunatic, good luck. Remilia is the first truly hard fight.
+You should know there's a soulsphere behind the throne. It's required on Lunatic.
+
+Unlike previous bosses, Remilia's first two cards aren't from EoSD.
+They're from Touhou 10.5: Scarlet Weather Rhapsody, a.k.a. one of the Touhou Fighting Games.
+
+Otherwise, she's the longest and hardest boss so far, eventually ending with
+what is arguably one of the hardest cards in the game: 'Red Magic', or 'Scarlet Gensokyo'.
+
+Another fun fact: Remilia lowers the outer regions of the arena if you hide behind there
+for too long. The variable that controls when she does this is called 'RemiliaAntiDekwTimer'.
+
+=========================
+[ MAP08: Eastern Lunatic ~ Sister of Scarlet ]
+Music:
+"The Centennial Festival for Magical Girls", from Touhou 6: Embodiment of Scarlet Devil
+-------------------------
+I mean, of course there's an extra stage.
+
+It was kind of fun making you go back the way you came, except with harder enemies.
+
+The whole stage is kind of throw-back-y to earlier stages, but it stands on its own as well.
+
+Midboss Patchouli is an introduction to Extra Stage midbosses:
+Namely that they are much crazier than your standard midboss.
+
+V1.2 Update: See the previous two maps. Also, there was a softlock - 
+if you played on easy mode and you had cutscenes enabled, you couldn't finish the episode.
+
+As it turns out, if you never test your cutscenes, you end up with cutscene bugs.
+-------------------------
+[ BOSS: Flandre Scarlet ]
+Music:
+"U.N. Owen Was Her?", from Touhou 6: Embodiment of Scarlet Devil
+-------------------------
+AAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRGGGGGGGHHHHHHH!!!!!!!!!!!!
+
+I did not have fun.
+
+Flandre's a cool fight, honestly.
+
+From Cranberry Trap's "oh god I'm surrounded" to Kagome Kagome's "oh god what is this"
+to Counter Clock's "what are these literal rotating laser wheels" to the actual friggin'
+"WAIT THERE'S A TIMEOUT CARD" moment.
+
+The fight has so many gimmicks that are weird and, nothing else in this game is like it.
+
+FOR GOOD REASON.
+
+Because good GOD coding Flandre was a giant flaming garbage fire and I hate EVERYTHING.
+
+Here's a quick list of EVERY SINGLE SPELL CARD (and she has TEN), and how 9/10 of them broke:
+Cranberry trap: First iteration kept spawning bullets out of bound.
+Lavaeteinn: Had a bug where the lasers could clip out of bounds, which lagged really badly.
+Four of a kind: This was the good one
+Kagome, Kagome: Many, MANY things, but to pick one: bullets did not despawn properly.
+Maze of Love: Flandre, in one iteration, fired stupidly fast, making this a literal wall.
+Starbow Break: This card looks cool, but past that it's kind of...lame.
+Catadioptric: WELCOME TO RNG LAND, POPULATION: ANYONE WHO GETS HERE
+Counter Clock: Oh my GOD so MANY things went wrong it's not even funny
+And Then There Were None?: It took me WAY too many attempts to get the 2nd half to work AT ALL.
+Ripples of 495 Years: Originally you could stand on top of top of Flandre to cheese this.
+
+Oh, and there's plenty more things that went totally wrong.
+
+I would elaborate more, but I think my BURNING RAGE is enough to inform you that it was ugly.
+
+The sheer pain of how hard this was to implement would be a 
+major factor in how I would script later Extra stages.
+
+=================================
+[ MAP09: Scarlet Devil Basement ]
+---------------------------------
+I knew, from an early draft, that I wanted to make this plot go demonic.
+
+This was the map of which to make that the introduction of the plot clear.
+
+It's another throwaway map, but it does the job.
+
+===========================
+EPISODE I OVERALL THOUGHTS:
+In general, this Episode was basically a tech demo for the boss spellcard system.
+It's the weakest Episode by far, but it does help you get into the swing of things.
+The V1.1 to V1.2 post-release stretch added a LOT of much-needed detail to this episode.
+It could still use more IMO, but at least it doesn't looks like 90s mapping anymore.
+===========================
+
++------------+
+< EPISODE II >
++------------+
+
+=======================
+[ MAP10: Hakugyokurou ]
+Music:
+"Night Sakura of Dead Spirits", from Touhou 13: Ten Desires
+-----------------------
+So this is how Episode II begins. Not with a forest, but with a giant staircase.
+
+Plot-wise, you died at the end of Episode I. So this is where you end up.
+(don't ask me how double dying works, if you're asking then you vastly overestimate the consistency of this plot.)
+
+Also plot-wise, this is our introduction to the boundary youkai.
+Originally, she was pretty annoying. I don't find her easy to write.
+
+To rectify this, I got dekw to re-write her character...to be even MORE annoying.
+Alas, canon characterization is more important to me than sanity.
+
+So NOW we have our introduction to the Danmaku Weapons, A.K.A. actual Touhou shot types.
+Also, we have introduction to player spellcards A.K.A. bombs. Use them wisely!
+
+If you don't want to use spellcards at all, input "touhou_nospellcards 1" in the console.
+
+If you'd rather use conventional weapons, input "touhou_doomweapons 1" in the console.
+As a warning, though, the game was balanced around the Danmaku Weapons.
+
+This map is kind of lame, I'll fully admit, but it's one of the most iconic structures
+in Touhou canon - the grand staircase of Hakugyokurou, the Netherworld.
+
+The stage enemies are based off of Ten Desires' stage 1.
+--------------------------
+[ BOSS: Youmu and Yuyuko ]
+Music:
+"Hiroari Shoots a Strange Bird ~ Till When?", from Touhou 7: Perfect Cherry Blossom
+"Bloom Nobly, Ink-Black Cherry Blossom ~ Border of Life", from Touhou 10.5: Scarlet Weather Rhapsody
+--------------------------
+Youmu and Yuyuko are the two bosses of Stage 1. You get a megasphere for both of them.
+
+So, being a stage 1 boss, both of these are an introduction to a concept.
+
+The first concept is that some bosses will move around a lot more than usual.
+The second concept is that Episode II will not wait as long to ramp up in difficulty.
+
+Otherwise, I just enjoyed being able to make two iconic bosses of the series.
+
+Plot-wise, I didn't plan on keeping you dead. You're needed in the world of the living.
+
+======================
+[ MAP11: Sanzu River ]
+Music:
+"Higan Retour ~ Riverside View", from Touhou 10.5: Scarlet Weather Rhapsody
+----------------------
+I hadn't referenced Touhou 9. I wanted to rectify that.
+
+Otherwise, there's not much notable about this stage. 
+It's the most generic thing I've made totally from scratch.
+-------------------------
+[ BOSS: Komachi Onozuka ]
+Music:
+"Higan Retour ~ Riverside View", from Touhou 9: Phantasmagoria of Flower View
+-------------------------
+Komachi was kind of a filler boss. Mostly added because, hey, you're crossing over the Sanzu.
+
+The living aren't supposed to be on this side of the river, so it's her duty to stop you.
+
+Her fight works well enough, though.
+
+Her anti-cheese mechanism is funny, though. Don't try to run away; face her like a BOSS.
+
+Fun fact: As of V1.2, dunking Komachi into the Sanzu River will actually defeat and eventually end her boss fight.
+===================================
+[ MAP12: Streets of a Former Hell ]
+Music:
+"Walking the Streets of a Former Hell", from Touhou 11: Subterranean Animism
+-----------------------------------
+The original Touhou Doom goes into the underground, so I figured,
+"Hey, I should use the resources I have laying around the archive."
+
+This was the first truly difficult stage to design, because the underground city of the Oni
+is not a simple single structure, unlike previous maps.
+
+In the end, it took a lot of slopes and 3d floors working together to produce a somewhat
+passable version of the style of architecture that I wanted to evoke. This engine is, uh,
+not really meant for curved surfaces, so I had to make do and try faking it.
+
+I consider this map semi-decent; there's more I could've done, but it does the job well.
+
+The stage itself is based off of (S)ubterranean (A)nimism's stage 1 and stage 3. 
+Hooray for sine wave fairies!
+---------------------
+[ BOSS: Suika Ibuki ]
+Music:
+"Oni's Island in the Fairyland ~ Missing Power", from Touhou 7.5: Immaterial and Missing Power
+---------------------
+The original Touhou Doom went all the way to reference SA, and then:
+A: Had no city, while *lampshading* the lack of city that should've been there, and
+B: Had no Yuugi.
+
+Alas, Yuugi having no easy options (her cards are all TERRIBLE to design AND I had no sprites),
+I settled on another high tier Oni: Suika Ibuki.
+
+At the time of implementing Suika, she had the highest number of frames of animation
+of any boss in Touhou Doom, and would not be outdone until Episode III came along.
+
+The hardest part in making this fight is something many players might not notice:
+If you try to run away from Suika, she'll disperse into very fast moving mist, 
+which will follow you throughout the city. Working the Path Nodes to make her
+capable of doing this took quite a while, and it's a pretty bad mess of ACS.
+
+Otherwise, I simply took three relatively easy to implement spellcards from her canon,
+and made them into spellcards for the fight.
+
+===============================
+[ MAP13: The Eye Nobody Loves ]
+Music:
+"Heartfelt Fancy", from Touhou 11: Subterranean Animism
+-------------------------------
+So now we REALLY turn into SA.
+
+This is ANOTHER musical autoscrolling stage, set up to be similar to SA stage 4.
+
+The fairies' amulet fans are a surprisingly complex pattern for a stage enemy.
+It can be quite surprising if you're used to stage enemies being incredibly generic.
+
+The Window textures are taken directly from SA. I can't believe how cool they look here,
+given we're in a completely different engine that's not designed for the FPS perspective.
+
+It's really silly. Despite how simple this map is geometrically, it feels like a good map,
+even though it's objectively a terrible map. It's literally just a few connected boxes.
+------------------------
+[ BOSS: Satori Komeiji ]
+Music:
+"Satori Maiden ~ 3rd eye", from Touhou 11: Subterranean Animism
+------------------------
+TIME FOR GIMMICK BOSS NUMBER 2!
+
+Granted, Satori's gimmick was a lot easier to implement than Sakuya's.
+
+Namely, because Satori's gimmick is that she just re-uses a bunch of cards from Episode I.
+
+So, with that aside, the three picks, and why I chose them:
+"Rainbow Wind Chime"
+	I chose this one because it's one of the first real dodge cards...
+	unless you cheesed it by abusing terrain in Meiling's fight.
+	If you DID do that, then you better learn to do it legit now.
+"Luna Clock" / "The World"
+	I chose this one because Sakuya's Time Freeze gimmick really needed to be used again.
+	Which is to say, most people, on seeing this, will go "NOOOO!", which is intentional.
+	Satori's trying to scare you, so this is a good pick for that purpose.
+"Curse of Vlad Tepes" / "Vampire Illusion"
+	I chose this one because Remilia's "I spawn bullets that then move after the fact"
+	is one of hell of gimmick that many players find quite hard. I wanted to copy
+	Remilia's last card, but that would've been too much to reference in this fight.
+
+Also, Satori informing the player that they have the wrong Hell is one of my favourite lines in the entire story.
+
+=================================
+[ MAP14: Hellfire of Times Past ]
+Music:
+"Lullaby of a Deserted Hell", from Touhou 11: Subterranean Animism
+---------------------------------
+Now THIS was a stage gimmick I was building up towards.
+
+Satori's comment about "the wrong Hell" was a really funny throwaway line,
+but it does lead nicely into this stage.
+
+The 'Danmaku Demons' were an interesting design problem, as I knew that generic demons
+wouldn't be, well, 'Touhou' enough for my tastes. I wanted something MORE.
+
+But at the same time, I knew that THESE danmaku demons would be re-used.
+
+What does that mean? It means they can't be generically forgettable,
+while they also need to feel 'Doom like', to avoid being totally pointless.
+
+With that in mind, I had a lot of fun designing these monsters.
+
+In terms of the actual map, this is the first map in the wad I'm truly happy with.
+Unlike other maps, that basically only stand in as an excuse for the fight that uses it,
+this map stands on its own relatively decently. I learned the tricks for detailing the
+map from the Doom wad Community Chest 4. It's a good wad and a great texture set.
+
+Only took 13 or 14 maps to get one that I don't think looks like garbage.
+Ah well, I've gotta start somewhere. I only get better by making more.
+
+I didn't really intend it to be this way, but I was surprised by how *hard* this map ended up being.
+It's probably the hardest stage in the game to survive, up until now. At least I find it to be.
+
+Then again, SA stage 5 was legitimately that bad, so I guess I shouldn't feel *too* bad about it.
+-----------------------------
+[ BOSS: Rin "Orin" Kaenbyou ]
+Music:
+"Corpse Voyage ~ Be of good cheer!", from Touhou 11: Subterranean Animism
+-----------------------------
+Everyone hated Orin in SA.
+
+So of course, what could I do but implement the most infuriating boss of all time?
+
+To be honest, Orin's a bit of a mixed bag. Some her stuff is cool gimmicks.
+
+Some of it is 'Blazing Wheel'. I'm sorry for that. Kind of.
+
+You take the good with the bad.
+
+============================
+[ MAP15: Dazzling Hellfire ]
+Music:
+"Hellfire Mantle", from Touhou 11: Subterranean Animism
+----------------------------
+Much like the final stage of Episode I, this is kind of generic filler.
+
+However, I decided to make it less generic by making it so monster infighting is common.
+It's one of the ways that Danmaku Demons differ from fairies.
+
+Or, to quote: "Protip: Unlike fairies, demons can infight."
+
+But really, this map is really just an arena for the boss, Utsuho.
+-----------------------
+[ BOSS: Utsuho Reiuji ]
+Music:
+"Solar Sect of Mystic Wisdom ~ Nuclear Fusion", from Touhou 11: Subterranean Animism
+-----------------------
+<!> WARNING <!> WARNING <!> WARNING <!>
+
+Utsuho is, from a gameplay perspective, honestly my least favourite final boss.
+
+She stands in dead contrast to many boss fight design principles I like.
+
+First of all, RNG's a pain in this fight. If Utsuho doesn't like your run, it's done.
+
+Second of all, there's a lot of oneshots; if you get hit with a sun, that's usually lethal.
+
+Third of all, there's a lot of "oh yeah you just die if you don't know this."
+While knowledge of patterns is important, Utsuho has a lot of "you die if you don't know this."
+Which I don't consider good design - you should be able to substitute pattern knowledge
+for pure reading-on-the-fly dodging skill.
+
+Then again, you can use your bombs. That's a thing you could do.
+
+However, I'll grant Utsuho this: She's a very *impressive* boss. The Visual Spectacle
+*almost* makes up for the gameplay flaws she does have, at least in my opinion as her designer.
+
+Still, she's the final boss, so some over-the-topness is to be expected.
+
+V1.2 Update: So it turns out if you use touhou_doomweapons in V1.0, I forgot to give you a rocket launcher.
+Not that it matters that much (you'll be using the Plasma Rifle on this map, mostly), but my mistake!
+
+<!> WARNING <!> WARNING <!> WARNING <!>
+
+=======================================
+[ MAP16: The Lovely Visitor From Hell ]
+Music:
+"Last Remote", from Touhou 11: Subterranean Animism
+---------------------------------------
+TIME FOR EXTRA STAGE NUMBER 2
+
+The enemies are based off of SA's extra, while the stages are based off of a few things:
+The Elevator ride is based of Touhou 12.3: Touhou Hisoutensoku, and then the outside
+area is kinda sorta based on Touhou 10: Mountain of Faith. The area with the waterfall
+is based on a really cool Touhou minecraft server which recreated Gensokyo on a 1:1 scale.
+
+I do kind of like the view of the mountain from the bottom. It looks really big.
+And it's supposed to look big. Maybe I should've added some clouds?
+------------------------
+[ BOSS: Koishi Komeiji ]
+Music:
+"Hartmann's Youkai Girl", from Touhou 11: Subterranean Animism
+------------------------
+Koishi's a bit higher up on the weirdness scale, as far as extra bosses go.
+
+Okay, her merit as a legitimate extra boss is not why I chose her.
+-----------------------------------
+[ BOSS: Koishi Hell: Doom Edition ]
+Music:
+"Hartmann's Youkai Girl", from Touhou 11: Subterranean Animism
+"At Doom's Gate", Doom's E1M1-->Wait, what?
+
+I mean, yeah, it's pretty silly that you'd interrupt my theme in the middle of the figh-*WHACK*
+
+Koishi, no speaking in the post-mortem. That's my job.
+-----------------------------------
+So I knew, starting Koishi's fight, that I was absolutely not going to legitmately
+implement the majority of her fight. So many cards are just that utterly impossible
+to recreate with the limitations of this engine.
+
+However, Koishi's a bit of a meme in the Touhou community, thanks to a series of custom
+danmaku scripts called "Koishi Hell", "Koishi Hell 2", and "Koishi Heck", which are
+hilarious meme-filled absurdity fests that are completely ridiculous.
+
+So I decided to make a decidedly non-canon fight.
+
+To explain the joke cards, since you may be out on these jokes:
+
+The melee attack:
+  In his first playthrough of the original Touhou Doom, TerminusEst13 cheesed the Koishi fight
+  via fully charging his melee attack to a completely absurd degree and killing Koishi close
+  to instantly. When the original updated, Koishi had a new attack. An instant, one-shot,
+  9999999 damage attack that immediately killed term through Demonsteele's invulnerability.
+  It's only used in melee. I kept the attack as is, because Koishi: Heavyweight Boxing Champion.
+
+Shivers Sign "Original Map Do Not Steal":
+  The original Touhou Doom stole a map from Free Doom. Straight up ripped it from the wad.
+  Later, when Sgt Shivers was screwing around, he replaced the stolen map...with E1M1.
+  I then ripped E1M1 again (replacing normal demons with danmaku ones), and put it here.
+
+Dekw Sign "This is why we can't have nice things"
+  Dekw, my most valiant tester, is very good at finding bugs. He's so good at doing it
+  that I keep having to remove things because he finds ways to break the game with them.
+  Things I had to do because of him include but are not limited to: removing decorative objects,
+  Putting invisible walls everywhere you're not supposed to go, limiting the time you can spend
+  around certain pillars, and making every arena in Episode 2 onwards as boring as possible.
+  To spite him I made a card that is a featureless box, throwing basic rings that you must
+  dodge through with no strategy; There's no exploiting your way out of this one.
+
+Yholl Sign "THEY HAD A_SETSCALE"
+  The original Touhou Doom was written for ZDoom 2.7.1, with a SINGLE use of A_SetScale.
+  Yes, exactly one. Except there were a lot of not-using-A_SetScale actors that *should*
+  have used A_SetScale. When he found out, he kinda sorta completely lost his mind.
+  This spellcard has a very simple visual effect that clearly...does not use A_SetScale.
+  Yep, I went out of my way to not use it on the obvious visual effect where it should be used!
+
+Untitled Sign "I didn't playtest this at all"
+  I'm not mean enough to just mock others. I'll include myself in the list of people
+  I'm making fun of. I have a bad habit of not fully playtesting my cards. I kind of make them
+  theoretically work; e.g. I make a card on Lunatic, I copy it for the other three difficulties,
+  make some blind bullet reductions, and yeah, it should all work. (NARRATOR: It didn't.)
+  I did playtest this one to make sure it didn't crash, but otherwise it's deliberately untested.
+
+Terminus Sign "Philosophy of a Hated Candelabra"
+  So, when TerminusEst13 streamed Touhou Doom, he did so with his mod, Demonsteele.
+  Demonsteele allows you to destroy decorative candelabras. In his playthrough,
+  he declared war on the candelabra and went out of his way in places to cut down
+  every single one. This card revolves hiding behind candelabras, so if you, in some
+  weird fringe case, cut them all down, you will be utterly screwing yourself over.
+
+"PRAISE BENELLUS"
+  I needed a last card, and a joke to follow it.
+  Credit goes to the DUMP 3 team for designing Benellus, the god of shotguns.
+  I simply ripped the patterns.
+
+Agitation "OH F***, SKELETONS"
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!
+
+============================
+EPISODE II OVERALL THOUGHTS:
+If Episode I was where I proved there was potential, Episode II is where
+I went all out on making this more-Touhou like. It's more polished, far
+less exploitable, and in general it just has more of an identity, having
+some very unique things such as the Touhou weapons, which add a lot more
+variety to the boss fights. The Plasma Rifle got old.
+
+V1.2: If you like custom weapons but also like spellcards, well now you can mix and match!
+Before 1.2, touhou_doomweapons was linked to touhou_nospellcards, so there was no way to use
+Doom Weapons AND use spellcards. I forget why I did this, so I decoupled the two settings. Have fun!
+============================
+
++-------------+
+< EPISODE III >
++-------------+
+
+============================================
+[ MAP17: Wind Blows on the Sacred Mountain ]
+Music:
+"The Primal Scene of Japan the Girl Saw", from Touhou 10: Mountain of Faith
+--------------------------------------------
+So now we enter Episode III.
+
+The stage is based off of MoF's stage 5. It's pretty basic, IMO.
+
+In general, I knew that, in the end, I was limited by a variety of factors,
+namely boss sprites, to what locations I could feasibly represent.
+
+By recognizing this fact, I could try to figure out a what locations I could visit
+in the limited possibility space I had. Who are 'notable' characters, really?
+
+The Moriya Shrine became the obvious choice, by that metric - it's a location
+in three different games (10, 11, and 12.3), so it's gotten some canon looks.
+
+It took me quite a while to make the shrine look at least vaguely the right shape.
+I hope it looks good enough so at least you can tell what it's supposed to be.
+
+Story-wise, I wasn't planning on having Yukari straight-up troll you, but
+dekw wrote that segment. It does feel Yukari-like, though it IS annoying.
+
+-----------------------
+[ BOSS: Sanae Kochiya ]
+Music:
+"Faith is for Transient People", from Touhou 10: Mountain of Faith
+-----------------------
+So, I elaborated on why I chose the Moriya Shrine.
+
+This begs the question: Which boss is the most notable *character* of that location?
+
+Sanae was a fairly obvious choice, by that metric - she's playable in four
+different main series games (12, 12.3, 13, and 15), and by the time I was
+at this point, I was confident I could implement at least some of her patterns.
+
+The hardest part of the fight, design wise, was the big star spellcards.
+I think the visual effect was worth it, though, despite how long it took to get there.
+
+Funnily enough, despite the visuals, Sanae basically hasn't changed at all since her original beta implementation.
+
+==================================
+[ MAP31: Skies Beyond the Clouds ]
+Music:
+"Skies Beyond the Clouds", from Touhou 10.5: Scarlet Weather Rhapsody
+----------------------------------
+FIGHTING GAMES REPRESENT!
+
+So I kind of knew I wanted a MAP31 and MAP32. I decided to go with a pair of bosses.
+
+Why? Because really, Touhou Doom's most iconic feature is the very flashy boss fights.
+
+However, to help distinguish these two, I took the characters from a fighting game.
+
+I personally like how the silhouette of the mountain in the darkness looks.
+It looks much bigger than it actually is.
+
+The map itself really isn't anything special. It's just a boss arena.
+-------------------
+[ BOSS: Iku Nagae ]
+Music:
+"Crimson in the Black Sea ~ Legendary Fish", from Touhou 10.5: Scarlet Weather Rhapsody
+-------------------
+Iku's one of the most visually impressive bosses. Thank Tormentor667 for that thunder effect,
+it really makes the fight stand out amongst others.
+
+Otherwise, Iku's nothing particularly special. She's just an alternative route;
+either you fight Iku and Tenshi or you fight Sanae. Either works.
+
+Well, okay, actually, you'll want to learn a route so you avoid having a lightning
+pillar spawn on top of you during Iku's first spell card. That would be bad.
+
+=============================================
+[ MAP32: Daughter of Heaven, Heart of Human ]
+Music:
+"Flawless Clothing of the Celestials", from Touhou 10.5: Scarlet Weather Rhapsody
+---------------------------------------------
+This arena was harder to design; Heaven was truly not meant for a Doom map.
+
+Otherwise, I think this is the first boss to be fought over two different arenas.
+-------------------------
+[ BOSS: Tenshi Hinanawi ]
+Music:
+"Catastrophe in Bhava-agra ~ Wonderful Heaven", from Touhou 10.5: Scarlet Weather Rhapsody
+"Bhava-agra As Seen Through a Child's Mind", from Touhou 10.5: Scarlet Weather Rhapsody
+-------------------------
+"Tenshi, why did Untitled let you get TWO themes?"
+
+Because SWR did.
+
+This fight wins the award of "closest fight to one of the fighting games".
+This is because Tenshi is mostly a fighting game only boss.
+
+Also, try not to fall off the arena. That happens if you aren't careful.
+
+I had a lot of fun designing the last card; though the instadeath lasers are a bit much.
+Don't stand in the path of the giant beam. It kills you. Use the sound cues to your advantage!
+
+While it was fun, designing the last card was also very hard; the giant laser originally
+came out MUCH faster. It was pretty much impossible to avoid if you weren't already in
+motion when she started charging it. I added the delay later, to make it more feasible,
+especially on lower difficulties (Lunatic's a special beast, to say the least).
+
+Which route will you choose? Sanae, or Iku + Tenshi?
+
+Well, Sanae's probably the easier route, so there's that.
+
+======================================
+[ MAP18: Soil that Holds Magic Power ]
+Music:
+"The Doll Maker of Bucuresti", from Touhou 7: Perfect Cherry Blossom
+--------------------------------------
+Back to the forest.
+
+To describe the map, the process was very simple: copy-paste trees. Copy-paste a LOT of trees.
+
+Then, way later, simplify the trees because you're causing too much lag. Ah well.
+
+As for the gameplay gimmick...
+
+Oh boy.
+
+I knew, that I wanted to have at least one segment where you saw Touhou enemies fight Demons.
+
+Then I realized that for the forest of magic we have Alice and Marisa and I could
+knock two birds out with one stone.
+
+The stage itself is based around the gimmick of Alice's Dolls and the Demons fighting each other.
+
+AND GETTING THIS TO WORK WAS PAIN.
+
+SO MUCH PAIN.
+
+As it turns out, monster AI is rather horrifically inflexible. Getting monsters to actually
+chaotically fight each other in the way I wanted them to was a giant pile of garbage
+and honestly it took me way too long to get it sorted out with WAY too many Thing_Hate calls.
+
+The effect was worth it, IMO - the chaotic nature of the forest as so many projectiles
+start getting flung about is very hectic, and I generally like the feel of it...
+
+...unless you decide to hide and let them fight. You can do that, too.
+--------------------------
+[ BOSS: Alice Margatroid ]
+Music:
+"Doll Judgment ~ The Girl Who Played with People's Shapes", from Touhou 7: Perfect Cherry Blossom
+--------------------------
+Oh, was this fun to design.
+
+Alice Margatroid's main gimmick was the whole 'summoning dolls' thing.
+
+I'm not terribly proud of this fight. Both of her spellcards were from the fighting games.
+
+However, really, Alice is just a midboss. The real fight is...
+-------------------------
+[ BOSS: Marisa Kirisame ]
+Music:
+"Love-Coloured Master Spark", from Touhou 8: Imperishable Night
+"Magus Night", from Touhou 12.8: Fairy Wars
+-------------------------
+Ahahahahahahaha.
+
+AHAHAHAHAHAHAHAHAHAHAHA.
+
+AAAAAAAAAAAHAHAHAHAHAHAHAHAHAHAHA!!!!!
+
+So, I kind of knew, starting from the beginning, that I wanted to do a fight with Marisa.
+
+I had this fight planned out from since I started Episode II. The only issue was, well,
+I didn't have the skills to implement it back then. That, and I liked having her fight
+be later in the actual game - Marisa, even if she was easier (she's not), is very...
+unique, shall we say. I definitely would want her to be a late fight.
+
+I really did not know which of her themes to use, as she has way too many:
+Touhou 2, 3, 4, 7.5, 8, 9, 10.5, 12.3, 12.8, 13.5, and 14.5.
+
+'Love-Colored Magic' is probably her most iconic theme, and it's remix,
+'Love-Coloured Master Spark' is a GREAT later rendition of it.
+However, 'Magus Night' more properly evokes the emotion of "OH GOD IT'S MARISA"
+that I wanted to go for, emotionally, as Marisa IS a main series playable character.
+
+So I went with both. 'Love-Coloured Master Spark' for the more 'normal' portion, and
+'Magus Night' for when she decides to be Marisa Kirisame.
+
+Marisa was probably the most fun I've ever had writing a character.
+Her motivation for fighting you is such a joke and I love it.
+
+Canonically, the Hakkero, which Marisa uses to power her giant laser, Master Spark,
+is one of a kind, and you have it in your hakkero gun. However, it really wouldn't
+be a Marisa fight without her firing a giant laser, so I wrote the 'backup Hakkero'
+joke. While this is a complete violation of canon, Marisa tends to violate known canon
+on a semi-regular basis in the actual series, so it's basically canon to violate canon.
+
+'Blazing Star', if you're on Hard or Lunatic, is the first non-extra timeout card,
+because of course Marisa would just have a timeout card in a non-extra fight.
+
+'Big Freaking Spark 9000' is the most ridiculous card I have ever made. I love it.
+There's absolutely no reason for this card to exist and that's why it has to exist.
+That last sentence basically is Marisa's general Modus Operandi.
+It was kind of a pain to design the card, but it was so worth it.
+
+When I saw the first person run into this card live, he died in exactly the way I wanted him to.
+It was so terrible, and yet, it was also so perfect.
+
+Everything about this fight really came together. I'm really happy with it.
+
+==============================
+[ MAP19: Legendary Dreamland ]
+Music:
+"Eternal Shrine Maiden", from Touhou Album: Dolls in Psuedo Paradise
+------------------------------
+The Hakurei Shrine.
+
+I knew we'd have to visit the Hakurei Shrine eventually.
+
+It's one of the most iconic locations of Gensokyo. Also, in addition to that,
+Reimu Hakurei is THE main playable character of the series, being playable
+in every single main danmaku game, and all of the fighting games as well.
+
+In the end, I was planning a quick fight where you fight off demons from the shrine.
+
+Then I realized this felt wrong, because Reimu is the hero of her own story.
+She's clean up her own shrine of all the demons.
+
+That's why there's no stage: Reimu already beat the stage for you.
+
+If you look, the trees are less detailed here than in other maps with trees.
+They used to be just as detailed, but the problem is that this map was very
+framerate intensive, and combined with Reimu's fight, this was a serious issue.
+Since there's no reason to focus on the trees once the fight starts, they got the axe.
+The Shrine itself keeps the detail because it's the iconic visual of the map.
+-----------------------
+[ BOSS: Reimu Hakurei ]
+Music:
+"Mystic Oriental Love Consultation", from Touhou 10.5: Scarlet Weather Rhapsody
+"Dichromatic Lotus Butterfly ~ Red and White", from Touhou Album: Dolls in Psuedo Paradise
+-----------------------
+So, originally, Reimu was going to be the end of Episode II boss.
+
+But two things prevented that: Like Marisa, I wasn't good enough to design her patterns when I first got there.
+
+And also like Marisa, I wanted her to be a later boss, because, well...
+
+This fight.
+
+THIS FIGHT.
+
+Reimu is possibly THE fight I am the most proud of, because of many, MANY different things.
+
+Let's start with the difficulty: Reimu is by FAR the hardest boss up until this point.
+At least on Lunatic. And, the more I think about it, the more she kind of had to be.
+
+Reimu Hakurei is the main playable character of the Touhou series.
+Giving her anything less than a brutal fight would feel wrong.
+
+I wanted to convey this fact: from your perspective Reimu is the boss of this level,
+but from Reimu's perspective, YOU are the boss of *her* level.
+
+She's the hero of her own story. She's not just another boss.
+
+She's a player. And she treats YOU like you're the boss.
+
+This brings us to the first aspect of the fight: The noncards.
+The noncards are very notable in that you will see the Hakurei Amulet AND Persuasion Needle
+attacks, from their original owner. She's attacking you with the kinds of attacks that are
+normally what the player uses. Because, in normal Touhou, the player IS Reimu.
+
+Also, Reimu can fly, canonically. Unlike other bosses, who don't really use this ability
+for engine-balance reasons (the ZDoom engine is not very good at going up or down), Reimu
+WILL often jump into the air, and continue shooting from there.
+
+Actually, the fact Reimu moves so much during her noncards is pretty notable, too.
+It's like she's trying to dodge your bullets. Because you know, you're the boss to her.
+
+The other side, of course, is the spellcards.
+
+The first two spellcards are semi-typical boss material.
+The third, not so much, as it's meant to be something more akin to a player spellcard.
+Which, if you've experimented with the spellcards, you'll know that it IS one.
+
+But then you get to her fourth card and it REALLY kicks into high gear.
+
+'Fantasy Seal -Concentrate-' is a hell of a card.
+I don't think anything else in the game homes in on you like it does.
+Because Reimu isn't trying to give you a fair fight. She wants you GONE,
+so she's a bit more direct about it.
+
+If you're on Hard or Lunatic, 'Fantasy Seal -Blink-' will be one hell of a trip.
+
+Admittedly her last card, 'Flying Mysterious Shrine Maiden', is much more boss-like.
+I guess it's tradition to end with something with more visual spectacle than player punch.
+
+I knew, after making Marisa, that I had to use two themes for this fight.
+"Mystic Oriental Love Consultation" is a very punchy theme that fits the energy of the first half.
+"Dichromatic Lotus Butterfly" was her extra boss theme in another game, so it's a thing here.
+
+As you could hopefully guess, this was very hard to design. In particular:
+-Balacing the homing attacks so they weren't undodgeable, but still threatening, was very hard.
+-Getting Reimu's aerial attacks to work right was hard.
+-Oh yeah, Reimu has an entirely separate set of animation for her aerial moves. Gotta rip those.
+-Actually, Reimu's frames in general. She broke the frame count record when I made her.
+-Evil Sealing Circle was hard because monsters don't like moving that much.
+-Fantasy Seal -Concentrate- was a nightmare to balance, because seekers, really.
+-Duplex Barrier took VERY long to figure out the A_Warp parameters to make the visual effect work.
+-Fantasy Seal -Blink- was a very complicated set of linedef setup to make the teleports work right.
+-And other things not mentioned here.
+
+The result, however, was absolutely worth it in my eyes.
+
+Reimu is the boss I am single-handedly the most proud of in the entire project.
+She really feels like the real character, even if that's unfortunate for you.
+As it was put by a friend of mine: "Reimu is, regrettably, still Reimu."
+
+That's why in the end, I decided to make the fight end with Reimu getting interrupted.
+Because it wouldn't feel right to actually beat her. She doesn't lose if she's serious.
+
+=================================
+[ MAP20: The Border of Gensokyo ]
+Music:
+"Charming Domination", from Touhou 7: Perfect Cherry Blossom
+"Charming Domination ~ Who Done It?", from Touhou 7: Perfect Cherry Blossom
+---------------------------------
+We're not done yet. Of COURSE there's an Extra Stage.
+
+Yukari's a bit of a wildcard in any scenario. 
+If you're annoyed at her by this point in the story, then I'll fully take responsibility...
+
+By admitting it was entirely intentional. In fact, I got dekw to help make her dialogue
+even LESS useful than it was in earlier iterations. Because that's Yukari Yakumo for you.
+
+I knew, that despite Yukari being plot relevant, that I wanted to save the reveal of
+what she truly is for this point of time, since most people playing this are probably
+more Doom players than Touhou players.
+
+As far as the Extra Stage itself goes, I decided to try something completely different.
+
+It's a pretty timing-faithful recreation of PCB's extra/phantasm stage.
+
+Right down to not being in first person anymore. It's a literal shmup stage.
+
+I was surprised by how difficult people found this. I personally think it's the easiest extra.
+But that might be because I played the Touhou games and thus know how you're supposed to do this.
+
+Ran Yakumo should really have some more frames. But alas, she's not playable in any game.
+-----------------------
+[ BOSS: Yukari Yakumo ]
+Music:
+"Night Falls ~ Evening Star", from Touhou 7.5: Immaterial and Missing Power
+"Necrofantasia", from Touhou Album: Magical Astronomy (originally from PCB)
+-----------------------
+"All I am giving you is the choice. Nothing more, and nothing less."
+
+Oddly enough, despite how much of an enigma Yukari's character is,
+her fight is arguably the most straight-forward Extra Boss there is.
+It's a pretty straightforward throwdown against ten different spellcards.
+
+Her first six noncards are referencial to both PCB and SWR.
+Her last two noncards are basically her using her gaps to randomly
+teleport in other attacks from across time and space, including both
+danmaku attacks of others AND demonic attacks, because lol gap magic.
+
+Out of her ten spellcards, nine of them are from PCB.
+
+Yukari was probably the most painless extra boss I've ever designed.
+
+Which is to say, still a massive pain that took forever, but there wasn't any extra
+"Oh my GOD this card is SO STUPID" moments that plagued Flandre.
+(and Koishi too, but it was intentional there.)
+
+'Border of Life and Death' is also one of my favourite spells in the entire project.
+If someone were to ask, "Describe Touhou Doom in one attack", it would be this card.
+
+I REALLY like her quote at the end of the fight, where she mentions that
+"I never said at any point you had a choice with consequences."
+
+Mostly because the counterpoint, "DAMMIT YUKARI!", is something of a fandom catchphrase.
+
+=============================
+EPISODE III OVERALL THOUGHTS:
+This might still be my favourite Episode out of the five.
+It's short, but, in general, everything felt relatively cohesive and very deliberate.
+It's the only episode to not really have any filler sections - everything has purpose.
+
+Then again, given it's only three maps + two secret bosses + extra, I guess it makes
+SOME sense that every single portion feels very more deliberately put together.
+
+The post-release patches barely changed anything, if at all, with this episode,
+aside from the decoupling of Touhou_DoomWeapons and Touhou_NoSpellcards.
+=============================
+
++------------+
+< EPISODE IV >
++------------+
+
+========================
+[ MAP21: Burning Heat! ]
+Music:
+"Burning Heat! (Full Option MIX)", from Beatmania IIDX,
+originally from Gradius II, as the stage 1 theme.
+------------------------
+So here we are.
+
+I knew, going into Episode IV, that I both needed and wanted to do something
+VERY different from previous maps. I mean, after all, we're not in Gensokyo anymore.
+
+I chose to reference other shmups because Touhou ain't the only shmup there.
+The first reference was Gradius, because while it's not a danmaku game, it's
+the first major shmup ever made. Not giving it a shout-out seems kind of wrong.
+
+The map name "Burning Heat!" refers to the soundtrack name.
+
+I don't really know where I came up with the gimmick for this stage. It just kinda happened.
+
+I guess it was a compromise; I wanted to go back to Doom Weapons, but I also didn't want 
+to just suddenly get rid of weapons that you were using for so much of the wad.
+
+So you're timed. It also means that you get to see more of the weapons at lower power,
+since most of Episode II and all of III you're at 400 power, which is the maximum.
+
+Of course, since your power is draining over the course of the level, this allowed me
+to introduce the level gimmick: Three main weapons (SSG, Chaingun, and Rocket Launcher)
+are only available by grabbing a skull key first (Blue, Red, and Yellow, respectively),
+which means the first thing you must do is use your limited time danmaku weapons to get
+the doom weapons so you can fight the rest of the level.
+
+This level ended up being surprisingly hard. The timed aspect is actually pretty brutal.
+
+My advice: The intended order of the keys is Blue (SSG), Red (Chaingun), then Yellow (RL)
+
+Fun fact: If you use touhou_doomweapons, which removes the danmaku weapons from play,
+the level gimmick is completely different. Instead of a timed use of danmaku weapons,
+you get a limited ammo Plasma Rifle.
+---------------------------------------
+SECRET CHALLENGE I 'The Reveal of Hell'
+---------------------------------------
+Welcome to the secret challenges!
+
+These are optional bonus challenges, though there IS a reward for beating them...?
+
+The entrance to this challenge is a reference to Hell Revealed. At the start of the level,
+before you enter the teleporter, shoot into the dark. Immediately. The wall behind you will
+lower. In that lowered section, there's a Shotgun, a Backpack, and an invisible switch.
+
+Press this switch to enter.
+
+The challenge explains what to do when you enter.
+
+The name's a reference to Hell Revealed, fairly obviously.
+----------------------------
+[ BOSS: Danmaku Cyberdemon ]
+Music:
+"Take Care!", from Gradius III. Boss theme.
+originally from Gradius II. Originally a boss theme.
+----------------------------
+So, referencing non-Touhou games meant that the bosses would be less phased.
+
+This is an example of such. In general I avoided using the Danmaku Cyberdemon because
+I knew I wanted to make it a boss in Episode IV. Any Doom player knows this is coming,
+but seeing it for the first time is really something.
+
+It's also not THAT short, due to having no plasma rifle or full power danmaku weapon.
+
+This boss ALSO comes with some minions; Dark Imps are the first custom danmaku demon.
+As in, first danmaku demon that is not based on a vanilla Doom monster.
+
+A generic boss, but it serves the purpose well. Hence why I chose a very short BGM.
+
+================================
+[ MAP22: Thunder and Lightning ]
+Music:
+"Flap Towards the Hope", from Raiden IV. Stage 3 theme.
+originally from Raiden II, where it was the stage 7 theme.
+--------------------------------
+This map was inspired by a few different Doom maps:
+-Valiant MAP22: 'Spiraling into Nether' and MAP23: 'Genocide Motor'
+-TUTNT's 'The Beginning and The End'
+Valiant's an excellent doom wad, you should check it out if you haven't already.
+TUTNT's a bit more controversial, but if nothing else it looks AMAZING.
+
+I decided to reference Raiden because it's also a pretty neat shmup series.
+Raiden's a very different kind of bullet hell, as it's more focused on fast 
+bullets than overly dense walls of bullets typical of the genre.
+
+Also, Raiden fangame 'Raiden X' was my first shmup ever,
+so it holds a special place in my heart.
+
+The Raiden series' music is cool. Hence why I used it.
+
+The name "Thunder and Lightning" comes from what the kanji used in 'Raiden' translate to.
+Despite the fact that Raiden is almost ALWAYS in standard latin alphabet characters.
+
+When I imported the lightning effects for Iku Nagae (MAP31), I ended up importing
+several different lightning colors, so I decided I should find a use for the others.
+
+This map is pretty attrition heavy. The initial megasphere has to survive all the way to halfway.
+At least on Lunatic. It's more forgiving on easier difficulties.
+
+I really didn't know what to do with this map for the longest time.
+I've always found drawing the map layout to be the hardest part of mapping.
+
+It can be annoying sometimes, but I also like the verticality of this map.
+
+In the end, the visual effect of the lightning helps carry the fact that, really, in the end,
+it's just a linear series of fights against Danmaku demons. I also introduce the rest of the
+custom monsters here: The Guardian Cube, and the Suicide Bomber, and two others.
+
+I actually designed this map AFTER I made MAP23.
+---------------------------------------
+SECRET CHALLENGE II 'Become The Hunted'
+---------------------------------------
+There's a switch in the lava very close to where you start.
+
+I wanted a challenge with Archviles. Lots of Archviles.
+
+The name is taken from the soundtrack of Plutonia 2's MAP11: Arch-Violence.
+------------------------------
+[ BOSS: Danmaku Daedabus X 5 ]
+Music:
+"Go to Blazes!", from Raiden IV
+originally from Raiden I. Boss Theme.
+------------------------------
+Not a terribly special fight, but it's an introduction to a new monster.
+
+Really nothing special.
+-----------------------------------
+[ BOSS: Danmaku Bruiser Demon X 3 ]
+Music:
+"Metal Storm", from Raiden IV
+originally from Raiden II. Boss theme.
+-----------------------------------
+This thing is a bit more special. The Bruiser Demon is a custom boss monster
+that's been featured in a few different wads. Since I knew I needed some custom
+monsters, I wanted to, in the vein of the vanilla danmaku demons, make custom
+danmaku demons that were based off known custom monsters. The bruiser demon was,
+in retrospect, a fairly obvious choice, because it's flashy as hell to start with,
+and I could REALLY go places with the thing. Which I did.
+
+Also, I really like Metal Storm. It's a cool theme.
+
+=======================================
+[ MAP23: Trial of the Masked Hawfinch ]
+Music:
+"Faith", from Ikaruga. Stage 3 theme.
+---------------------------------------
+There's a mouthful of a name.
+
+For those out of the loop, 'Ikaruga' is the name for the Japanese grosbeak, a species of bird.
+The Japanese grosbeak is, by another name, called the "Masked Hawfinch".
+
+Ikaruga is a very notable and pretty well known bullet hell game, so yeah.
+
+As for the Doom side, this map was inspired by three different maps:
+-Speed of Doom MAP27: Hais Temple
+-Deus Vult II's MAP12: Minas Morgul
+-And a third map I'll reveal later.
+Both of the first two are excellent wads, which is why I drew inspiration from them.
+
+I actually referenced Ikaruga itself through the map - the map is VERY visually distinct,
+with it being split down the middle into a red half and blue half. The map itself is, uh,
+not very detailed, but the unique Red/Blue aesthetic means that the more barebone detail
+level works FOR it rather than against it. It's one of the ways I got better at mapping:
+I learned to analyze my weaknesses and make scenarios where they aren't weaknesses.
+
+The big hallway fight is a reference to Deus Vult II's MAP12, as mentioned above.
+It's not really that hard. Just keep pumping rockets into the horde and eventually
+all of the monsters will die.
+
+The Archvile trap at the end of the hallway is one of my favourite moments in this map.
+The thing is, with vanilla monsters, this would be instant death - you can't dodge viles.
+But with danmaku demons, you can run backwards and survive - though, watch for resurrections.
+
+The layout itself is more Speed of Doom's MAP27, with the key split.
+
+As you could guess, you need to grab two keys: Red and Blue keys.
+After you grab the first one, the Cyberdemon appears in the center connecting room.
+I did this because I wanted to let the player know that the former boss monsters are
+now entirely fair game for me to use. In fact, there's two bruiser demons and a couple
+daedabi - monsters that were literally boss monsters one map ago! The second cyberdemon,
+of course, is easier than the first, owing to the fact that you have a plasma rifle. 
+There's also 20 lost souls accompanying it, referencing Doom's E2M8: Tower of Babel.
+
+This is one of my personal favourite maps from the Episode. It works really nicely.
+
+After activating both key switches, you'll get into a fight with 12 Danmaku Barons.
+If you know the third reference map, then you'll guess what the boss is.
+-----------------------------------------
+SECRET CHALLENGE III 'The Best Challenge'
+-----------------------------------------
+At the very start of the level, turn around. The wall behind you is a door. Open it.
+There's a teleporter inside the room behind you. Enter it to begin the challenge.
+
+This challenge (and the name) is a reference to a secret map from DUMP 3, called "The Best Map", by
+TerminusEst13. It's a bunch of zombiemen shooting at you while you go back and forth
+pressing switches. So that's what this is, but instead it's now danmaku zombiemen.
+---------------------------------------
+[ BOSS: Danmaku Spider Mastermind X 2 ]
+Music:
+"Butsutekkai", from Ikaruga. Boss theme.
+---------------------------------------
+The big enemy is approaching at full throttle.
+According to the data, it is known as "SPIDER MASTERMIND"
+NO REFUGE
+
+If the danmaku cyberdemon was a thing, of COURSE this will also be a thing.
+
+The third reference map was PSX Doom's Redemption Denied, where you fight 12 Barons,
+followed by fighting TWO Spider Masterminds at once. Replicating that here, you must
+fight two danmaku masterminds at once as their introduction. Except, unlike vanilla
+masterminds, these things don't infight. Have fun!
+
+The main reason I used the Masterminds in this map and not MAP22 is that they actually
+FIT in this map. Those things are giant and they get stuck EVERYWHERE. It's a pain, really.
+
+=====================
+[ MAP24: Levi Sense ]
+---------------------
+Choose, and choose wisely.
+
+Both of next maps are gimmick maps, so I decided to be nice and let the player
+decide which challenge to tackle. One of the things I did was that I made the
+path to each teleporter give a short preview of what the map behind it will be like.
+
+The Red teleporter gives you a chainsaw and berserk to take out some weaker demons.
+
+The Blue teleporter surrounds you with a trap that requires some quick reflexes to get out of.
+
+Both this map and the two maps they lead to are references to Mushihimesama, a legendarily 
+difficult shmup, and also where the name "Ultra" comes from in the difficulty select screen.
+
+The name is from Mushihimesama's OST. It's the boss theme, though it's not used in this map.
+--------------------------------------
+SECRET CHALLENGE IV 'Cybernetic Dream'
+--------------------------------------
+I didn't want to put secret challenge 4 in both maps, so it's here instead.
+
+To get to it, just walk backwards off the platform. There's a teleporter there.
+If you land on it, you get teleported to a chamber with 12 cyberdemons in it.
+
+This challenge is a reference to an old wad called cyberdreams, which is about
+dodging large numbers of cyberdemons at the player while killing them in ways
+that don't involve shooting them. It gets pretty crazy at times.
+
+'Cyberdreams' is also where the name comes from.
+
+This is the first challenge to truly require some luck to survive, though,
+you can come up with some strategies to make it a lot more consistent.
+If the AI's out for you, though, you ain't getting this.
+
+Thankfully, it's short, so repeated attempts don't take much time.
+
+=======================================
+[ MAP33: Walking on the Land of Flame ]
+Music:
+"Walking on the Land of Flame", Mushihimesama. Stage 3 theme.
+---------------------------------------
+"WHY IS THERE A TYSON MAP IN THIS?!" - most Doom wad veterans, probably.
+
+A number of doom wads like to have ONE obligatory map that revolves around punching things.
+
+I decided to make one. It's a simple series of fights, but getting close to danmaku demons
+is, uh, slightly difficult under most circumstances. It's pretty nuts, and I ended up toning
+this down several times. 75 monsters, and it might STILL be one of the hardest maps in the wad.
+Monster count is absolutely not everything here!
+
+Tip of advice: You do not need to clear out the monsters on the long black and white platform.
+For many (arguably most) players, killing the hell nobles is more trouble than it's worth.
+
+After getting past the tyson section, it then abruptly transitions to a high-tier weapons.
+You even get the BFG 9000, and then fight two cyberdemons at once, because yeah.
+-------------------------------
+[ BOSS: Danmaku Cybruiser X 4 ]
+Music:
+"Levi Sense", from Mushihimesama. Boss theme.
+-------------------------------
+Basically a weaker version of the Danmaku Cyberdemon.
+
+These things are very versatile monsters. They have a LOT of different attacks, and often enough
+these things get placed in groups of up to four, making them a pretty fearsome opponent if you
+aren't being careful, since you can find yourself taking a lot of damage if you get careless.
+
+Even with a BFG, these things have enough health that it's hard to kill them fast enough
+to avoid having to take cover. There's not a lot of space to dodge all four of them.
+
+========================================
+[ MAP34: Like a Night of Falling Stars ]
+Music:
+"Like a Night of Falling Stars", from Mushihimesama. Stage 4 theme.
+----------------------------------------
+"It was lazy design this time." - Untitled (a.k.a. me, the designer of Touhou Doom)
+
+I mentioned in Koishi's boss fight that the original Touhou Doom copied a map from Free Doom.
+
+This was my way of mocking it while also turning that joke into something very different.
+
+What do I mean? Well, this map is only *sort of* original. It's, of course, my map, but...
+It's my map from another project. The original map is called 'Dimensional Accelerator',
+and it's featured in the 3rd Doom Upstart Mapping Project, a.k.a. DUMP 3.
+I consider the original to be one of my best standard Doom maps I've ever made.
+Then again, I haven't made very many.
+
+The "It was lazy design this time" is making fun of my map quote from DUMP 3,
+which states: "Creative idea or lazy design? You decide!"
+
+Since I copied the map from DUMP 3, so obviously it was lazy design in this case.
+
+The Spider Mastermind in this map is the only solo mastermind in the entire wad.
+
+Of course, to add a twist to things, I made three major changes to the map.
+
+The first is that I replaced all the standard demons with danmaku demons.
+The second is that you get Touhou Weapons for this. Hakkero Fire is finally useful!
+The third is that the last fight is, well...
+-------------------------------
+[ BOSS: Danmaku Cybruiser X 4 ]
+Music:
+"Levi Sense", from Mushihimesama. Boss theme.
+-------------------------------
+Yep, it's the same boss monster.
+
+Only this time there's no BFG.
+
+Good luck.
+
+================================
+[ MAP25: A Most Blissful Death ]
+Music:
+"Taidou (Grieving Womb)", from DoDonPachi DaiOuJou. Stage 5 theme.
+--------------------------------
+The name comes from the translation of "DaiOuJou". A fitting name, I feel. Also, because
+I had to refernce DoDonPachi. It might be the most legendary Bullet Hell series of all time.
+DoDonPachi is arguably the reason that the genre of danmaku games even exists.
+
+This is inspired by the following Doom maps:
+-DTS-T MAP29: Seven
+-Scythe II MAP28: Nightmare
+-Deus Vult II MAP23: Hell's Vendetta
+-Survive in Hell MAP30: Crowning Glory
+-A few limit slaughtermaps from Stronghold
+
+If you look at the list of inspirations, four out of the five of those were slaughtermaps.
+That, combined with the initial monster count being well over a thousand, should tell you
+what kind of map you're about to play. It's a danmaku slaughtermap. And it is glorious.
+Besides, the BFG 9000 could really use a featured moment. It's an awesome weapon, and it 
+really should see at least ONE moment where it's the important weapon in your arsenal.
+
+The layout is pretty simple; you need six keys to progress; 2 blue, 2 red, and 2 yellow.
+
+The keycards are all based on boss fights:
+
+Yellow Keycard: 4 Cyberdemons
+	The cyberdemon, in ordinary circumstances, is a boss monster that is generally rare.
+	So when a wad throws multiple cyberdemons at once, it's a clear sign that, in fact,
+	you are in a slaughtermap. It's not too hard though.
+Blue Keycard: 4 Bruiser Demons + 4 Cybruisers
+	This is where the BFG can REALLY shine. The enemies spawn one at a time here, so
+	if you're fast, you can kill every enemy before the next one spawns.
+	This is the intended strategy, so good luck if you let them all spawn at once.
+Red Keycard: 4 Spider Masterminds
+	I didn't really have a plan for this one. I just knew I wanted a battle with
+	four spider masterminds, because of the previous two keycard fights.
+
+The skull keys are based on various slaughter fights.
+
+Yellow Skull: Chaingunners + Revenants + Pain Elementals, referencing DTS-T MAP29's 'Wrath'.
+	I like this one, because the normal versions of those monsters are incredibly
+	ANNOYING things that drive players nuts. However, the danmaku versions, while
+	throwing more firepower around, are not as annoying. They're consistent.
+Blue Skull: Based on Deus Vult II MAP23's blue skull key room.
+	Like most of the skull key fights, you'll want to switch from Rocket Launcher to BFG.
+	I don't have much to say about this, it's just a long teleporter trap that really
+	showcases a lot of the danmaku demons.
+Red Skull: Based on Stronghold's love of occasional mass suicide bomber waves.
+	I had to do it. I mean, I had to. I can't have screaming suicide bombers and then
+	not use them in a giant mass at least once. Here, I'll summarize the experience:
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!
+
+I really wanted a proper slaughtermap for the wad.
+
+The slaughter helps distract from the segments that aren't as detailed.
+----------------------------
+SECRET CHALLENGE V 'Kamilia'
+Music:
+"Toa (East Asia)", from DoDonPachi DaiOuJou. Stage 1 theme. Used for all secret challenges.
+----------------------------
+To access: At the very beginning of the map, enter the gate from the other side.
+
+This challenge is a reference to an entirely different genre of absurdly hardcore games:
+I Wanna Be The Guy Fangames. One of these, I Wanna Kill The Kamilia 3 (abbreviated to KK3),
+had secret challenges. That game is what inspired me to do these secret challenges.
+
+This is a giant reference to the infamous incredibly stupidly difficult Secret 5 from KK3.
+
+It's kind of absurd, really. I can only promise you that it IS actually possible on Lunatic.
+On average it takes me a couple dozen attempts before I get a successful run of it.
+
+Also, KK3 is why I used 'Toa' as the secret challenge theme. It used it there, too, so actually,
+KK3 veterans might suspect I was going to pull a Secret 5 even before seeing, well, Secret 5.
+
+However, this map is where you can discover the rewards for doing the secret challenges:
+When you start the map for real, the map opens with you getting ten system cards:
+Eight Spirit Barriers and Two Life Regenerators.
+
+However, for each secret challenge you complete, two of those system cards are replaced
+with full-blown powerful spellcards that wipe out tons of demons with one cast.
+
+Complete all five challenges? You get TEN different full-blown spellcards.
+
+You may need them, though:
+------------------
+[ BOSS: The Core ]
+Music:
+"Ouryuu (Yellow Stream)", from DoDonPachi DaiOuJou. Normal Final boss theme.
+------------------
+I knew, when I pulled that twist in MAP19, at the end of Reimu's fight, that eventually
+Reimu was going to come back. Only this time, she'd come back as a friend instead of a foe.
+
+If you thought enemy Reimu was crazy, you should meet ally Reimu. She's even more powerful.
+
+I really hate it when games allow a former enemy to be on the player's side...but then make 
+said former enemy WAY weaker than they were as an enemy. Reimu is a player character, dammit!
+
+So I made her VERY powerful. The only reason why she can't solo the fight is that it's, well...
+
+The Core is an Icon of Sin fight. That means that it spawns monsters infinitely until you kill it.
+In this iteration, it spawns monsters VERY fast. Especially on Lunatic mode. However, Reimu will 
+kill those monsters pretty fast as well. It gets very chaotic because of the nature of this.
+
+The 5 switches ensure that the player has to move around a fair bit. Reimu won't hit those for you.
+
+After activating the switches, the core is left vulnerable. It's technically not a monster,
+so Reimu will never target it for you. You gotta do that yourself. However, it's exposed
+to the open, which means you can BFG it in melee range to kill it fairly quickly.
+
+What happens next depends on how many secret challenges you've completed:
+2 or less: The map ends here.
+3 or more:
+------------------------------
+[ BOSS: Danmaku Arachnophyte ]
+Music:
+"Death Label 95-97-02", by (mostly Touhou) doujin circle COOL&CREATE.
+Original tracks are from Donpachi, Dodonpachi, and Dondonpachi Daioujou. All Boss themes.
+------------------------------
+Approach the target and attack. Your mission starts now!
+
+This thing is a flying version of the danmaku spider mastermind.
+
+Except it has some deadlier attacks, and can't be interrupted mid-attack at all.
+
+Also, this variant is scripted to Teleport, with the frequency increasing 
+depending on how much health it has left. Oh, and it's much more aggressive, 
+moving faster and attacking near-constantly, because why the hell not. It's a bonus boss.
+
+What happens after this boss depends on how many secret challenges you've completed:
+3: The map ends here.
+4 or more:
+------------------------------
+[ BOSS: Danmaku Annihilator* ]
+*: There are two of them if you have completed all 5 challenges.
+------------------------------
+The Danmaku Cyberdemon needed a second arm cannon.
+
+"No, it didn't!", you might say.
+
+You'd be right, in a sane world.
+
+This is not a sane world.
+
+=====================================
+[ MAP26: Truth of the Warp Facility ]
+Music:
+"Here we are!", Undertale.
+"Core", Undertale.
+-------------------------------------
+And now for something completely different. Again.
+
+Quote from the MAP01 description:
+"The other thing was that making the map better allowed me to setup a neat twist later on."
+
+This was the later twist. MAP26's twist was to replay this map all over again, but...
+
+The Fairy specimens would refuse their capture. The demons don't stand a chance.
+
+Designing this map was very hard, because it represented the first time that I needed
+to scale back and make something more typically Doom-like: A Tech-base level. Unfortunately,
+I have no experience in making techbases, and I think it unfortunately shows. With that in mind,
+the more you map, the better you get at mapping, so any aspiring map makers reading this:
+Don't give up! Keep trying, and you'll make something fun.
+
+This map is interesting in that it really shows why so many maps in Touhou Doom are
+made to be incredibly wide-open; this map is a lot of tight corridors found, in, well,
+more actually typical Doom wads. But the fairies are Danmaku enemies through and through -
+thus the contrast, as you have to dodge very dense attacks with VERY little room.
+
+As a result, it's arguably one of the hardest maps in the wad.
+
+And that's just getting started. Halfway through, you get the Danmaku Weapons back.
+
+The 2nd half is where things get crazy. I didn't even pretend to be fair about this.
+The fight immediately after the music change is designed to be near unwinnable.
+You really should just run away from it, because you'll just get yourself killed otherwise.
+
+If you want to UV-Max this (er, Lunatic Max), good luck, you WILL need it.
+Or have unbelievably good tactics for dealing with the fairies. Either works.
+
+Because it's time to fight another Danmaku boss.
+-------------
+[ BOSS: ??? ]
+Music:
+"Battle Against a True Hero!", Undertale
+-------------
+This song was the reason I chose to reference Undertale. It's basically already a Touhou song.
+In addition to that, the map IS actually a large underground lab, like the True lab from Undertale.
+But mostly, it was this song.
+
+The boss in question is basically "What if Patchouli's Gimmick met Satori's gimmick?"
+The boss will randomly pick the first two cards out of a bag of sixteen different cards;
+eight from Episode II, and another eight from Episode III. 
+
+There's a 100% that you've seen the cards before. No optional ones were included.
+
+Of course, that's the spellcards. The boss has noncards, too. Unfortunately for you,
+said noncards are a reference to Scythe II's evil marines. Welcome to Danmaku Deathmatch.
+
+This lasts until you beat the second card; the boss then reveals itself more truly.
+
+The third spellcard is a random pick from one of four patterns.
+The fourth spellcard is also a random pick from one of four patterns.
+
+If you are on any difficulty aside from Easy, the last card is a timeout.
+Unlike the others, it is not a random pick from one of multiple patterns.
+
+Designing this boss was an interesting experience, because it was the first truly original
+Boss I had made for Touhou Doom. I had to really think about what I wanted to accomplish with
+this boss slot, especially given it's the second last true boss, before the final boss fight.
+
+It was honestly quite challenging. I had a lot of issues balancing this thing.
+Ah, well, such is the nature of RNG; it can be a real pain sometimes.
+
+V1.2 Update: So originally the first two cards were picked from a bag of fourteen cards:
+two from Episode I, six from Episode II, and another six from Episode III. But I realized that
+Satori already re-collected Episode I cards, so the gimmick would be less effective.
+So, as of now, the first card is a recollection of a card from Episode II,
+and now the second card is a recollection of a card from Episode III.
+
+=========================================
+[ MAP27: Western Apocalypse in the East ]
+-----------------------------------------
+Just when I thought MAP18 and MAP25 were crazy. We've seen nothing yet.
+
+In the end, I knew that I wanted to make an All-out Gensokyo VS. Hell showdown.
+
+And then I went ahead and did exactly that. Sort of.
+
+So, originally I wanted all five segments of MAP27 to be one map.
+
+However, it inevitably became unplayably laggy, even on my personal computer,
+(which is very strong by community standards), so that wasn't going to happen.
+------------------------------------------
+[ MAP27A: Western Apocalypse in the East ]
+Music:
+"Septette for the Dead Princess", from Touhou 10.5: Scarlet Weather Rhapsody.
+------------------------------------------
+Welcome back to the Scarlet Devil Mansion!
+
+Helping you clear out the mess are former bosses Patchouli, Sakuya, and Remilia.
+
+Much like with Reimu, I wanted to show off that they aren't just bosses.
+As a result, they're still pretty lethal. And they can use spellcards.
+Hey, at least Sakuya doesn't freeze time when she's your ally.
+
+While the monster density is very high, your allies kill very fast.
+
+And so do you, to be honest.
+
+Oh, and there's a Danmaku Annihilator. It shouldn't be an issue.
+------------------------------------------
+[ MAP27B: Western Apocalypse in the East ]
+Music:
+"Faith is for Transient People", from Touhou 10: Mountain of Faith
+------------------------------------------
+And now we're back to the Moriya Shrine.
+
+Aiding you at this location is Sanae, Iku, and Tenshi.
+
+Weirdly enough, when you think about it, if you've only played through Episode III once,
+then either one or two of the bosses here are characters you haven't seen before.
+Which is kind of neat, IMO, it really notes that most characters aren't villains.
+Even if Tenshi is helping you out more out pure boredom than benevolence.
+
+The scene where all of the Cacodemons fly up from below the clouds was a scene I had planned
+from a long time ago. I knew, when I was working on the concept of the Gensokyo VS. Hell map,
+that I really wanted to have this visual effect of seeing the cacodemons suddenly fly up from
+all around the mountain. It's pretty crazy.
+
+Amongst the flyers is a Danmaku Arachnophyte. Kill it to proceed.
+------------------------------------------
+[ MAP27C: Western Apocalypse in the East ]
+Music:
+"Magus Night", from Touhou 12.8: Fairy Wars
+------------------------------------------
+Forest of Magic, round two. Only this time there's way more demons...
+
+And way more powerful allies. Youmu, Yuyuko, Alice, and Marisa all join in the fun.
+
+Alice continually summons more dolls, and Marisa packs kind of absurd firepower.
+Master Spark is no joke. Also, fun fact: If you stand directly in the path of
+Marisa's giant laser when it fires, that actually kills you, even though you're
+mostly immune to ally fire of all sorts.
+
+The forest is a very large map, which is why I through a LOT more monsters here.
+MAP25 is absolutely put to shame by this. I throw, what, twenty cyberdemons here?
+It's absolutely nuts. Kill them all to proceed.
+------------------------------------------
+[ MAP27D: Western Apocalypse in the East ]
+Music:
+"Mystic Oriental Love Consultation", from Touhou 10.5: Scarlet Weather Rhapsody
+------------------------------------------
+And now, we finally loop back around to the Hakurei Shrine. Because of course we do.
+
+The Hakurei Shrine battle has Suika, and, of course, Reimu, for your allies.
+
+To iterate again on how powerful ally Reimu is: It takes concentrated hell nobles,
+and some advanced ones at that, to keep her from slaughtering them all trivially.
+Also, fun fact: This is the only map to use Danmaku Belphegors...which are literally
+just recolored Barons. They aren't anything special at all.
+
+The segment where every previous ally character comes back is completely free.
+Which is good, because I'm not convinced that runs at a playable framerate most people.
+
+This was going to be much crazier, but framerate drops were sadly common, so
+I took out a lot of monsters from this to make it barely playable for people.
+
+And after that, the final invasion has been foiled very spectacularly.
+-------------------------
+[ MAP27 General Remarks ]
+-------------------------
+In general, this was one of the easier maps (well, 5 maps) to make,
+but mostly for the obvious reason that I got to reuse a LOT of map geometry.
+
+======================================
+[ MAP28: The One who Opens the Gates ]
+Music:
+"Into Backdoor", from Touhou 16: Into Backdoor
+--------------------------------------
+Whoa, back into shmup land.
+
+I kind of wanted a throwaway stage akin to the first two Episodes, but at the same time,
+I didn't want the last proper stage segment to be completely forgettable. So I decided
+to bring back a gimmick some people may have missed from Episode III; namely because said
+gimmick was an extra stage exclusive. The stage is thankfully short, though, so if you
+don't like it, you only have to survive a minute or so.
+
+Abstract space maps are fun because you don't have to detail as much for it to look nice.
+
+With that out of the way:
+------------------------
+[ BOSS: Mephistopheles ]
+Music:
+"Unknown X ~ Unfound Adventure", from Touhou 12.3: Touhou Hisoutensoku
+"X, the Floating Objects in the Sky", from Touhou 12.3: Touhou Hisoutensoku
+------------------------
+So here we are, at the final boss. Man, was this one HELL of a journey (sorry).
+
+Mephistopheles has actually been in another project, formerly of mine: SamsaraHold.
+Though, his boss fight there is VERY different. Also, the project is very different.
+
+Like Reimu, I wanted his nonspells to depict something atypical of a Touhou-style boss.
+However, unlike Reimu, who's trying to be a player character, Mephistopheles is trying
+to be a VERY advanced Doom monster. So his abilities are ones typical of custom doom bosses:
+Teleportation and summoning large numbers of monsters. While also having extra danmaku.
+The whole 'teleporting' schtick was basically entirely from SamsaraHold, though in here
+it's arguably much more deadly. No running away from Mephistopheles.
+
+So, if you aren't really into Touhou, you might not know this, but Touhou spellcards are
+generally VERY versed into various forms of mythology. Most of it is East Asian mythology,
+but if you look most spellcard lists on the Touhou wiki (en.touhouwiki.net), you'll see a
+LOT of footnotes on spellcards, because there's a lot of references to be made.
+
+The thematic being based on the Four horsemen of the apocalypse was planned for a while.
+I knew, because I was going to make my own boss for this, I wanted to reference some actual
+mythology instead of just doing abstract fire based spells. I had a lot of fun designing this.
+
+His first four spellcards are based on the four horsemen of the apocalypse.
+The Fifth and Sixth are a mix of all four of them, but in different ways.
+
+The fight is also somewhat a reference to Touhou 12.3's Sanae vs. Suwako story battle.
+Namely, in that it ends with a timed segment where you have between 60 and 90 seconds
+(90/80/70/60 seconds on Easy/Normal/Hard/Lunatic) to defeat it. It even uses the same music.
+If you fail, then you die because the arena smashes into the ground with you still on it.
+
+We're almost done here...
+
+=================================
+[ MAP29: Decisive Determination ]
+---------------------------------
+Title is a reference to Ketsui, another legendary shmup by CAVE, who
+also made Mushihimesama and DoDonPachi. That company is a legend to shmup fans.
+
+I knew that I wanted THIS extra boss to be very different from previous bosses.
+Mostly because all four extra bosses all occupy their own style.
+They're unique, and I actually like keeping it that way.
+
+I spent a month, I think, stuck on this one map, because I knew what I wanted to do:
+Make a "Nine layers of Hell" themed boss. Since an Extra boss needs 10 spellcards, that's
+90% of the fight there if I could design it that way. And it was, but designing it was hard.
+------------------------
+[ BOSS: Mephistopheles ]
+Music:
+"Pandemonic Planet", from Touhou 15: Legacy of Lunatic Kindgom
+------------------------
+Touhou 15's OST needed more love. It's good.
+
+Extra Mephistopheles is based off the Pyrodemon, another known custom monster.
+He's a bit hotter this time around than he was the last fight.
+
+This boss in unique in that the arena is part of the fight itself,
+for every single segment of the fight. This is very intentional,
+as the first nine spellcards are all refences to Dante's inferno
+and the nine layers of Hell involved. It's seriously crazy that I finished this.
+
+Limbo is a bit weird, but I wanted to depict the 'being lost' as best I could,
+while still making an arena you'd have to fight Mephistopheles in.
+
+Lust is lulzy, but I wanted to depict the endless storm of which souls are blown around in.
+
+Gluttony, similarly, though DTS-T MAP29 helped come up with the gimmick for the gameplay:
+BOMB, BOMB LIKE THERE'S NO TOMORROW!!!!!
+
+The spell category 'Death Circle' (as opposed to fourth circle) is a common Japanese joke.
+Because 'shi' is the pronounciation for both 'four' and 'death'. Even though this mod is not,
+in fact, in Japanese, in any way, shape, or form, and probably never will be.
+
+Greed is also somewhat referencial to DTS-T's greed segment, where the pickups kill you.
+The killer megasphere is a reference to a Touhou fan project called "Unreasonable Mechanism",
+which had a evil killer seeking 1-up. This megasphere's out for your blood, so run away!
+
+Anger, also known as Wrath, was pretty easy: just a chaotic slaughter mess.
+Revenants are loud, so they're good. So are suicide bombers. Add Archviles for flavour.
+----------------------------------
+[ MAP29A: Decisive Determination ]
+[ BOSS: Mephistopheles ]
+Music:
+"Hidden Star in All Seasons", from Touhou 16: Hidden Star in Four Seasons
+----------------------------------
+Touhou 16's OST also needed more love. I really like it.
+
+I ended up having to ALSO split MAP29 because it did not like my framerate.
+I don't really know why, I always would just start lagging when I got to Heresy.
+
+Heresy within Dis: This one isn't a Dante's inferno reference as much as it's me
+ripping E3M8 directly from the original Doom, as the city of Dis was the sixth circle.
+Then I referenced Hell Revealed 2 and made you fight four masterminds instead of one.
+Because of course I did that. I really stopped being nice a while ago.
+
+The 7th and 8th circles were by FAR the hardest things to design.
+Violence is a pretty typical chaotic slaughtermap, but otherwise, it's just...
+kind of lacking? There's really nothing that sets that circle apart.
+
+Malebolge, the 8th circle, and Hell of the fraudulent, suffers from the opposite problem:
+It's gimmick is way too overbearing, and it's VERY non-intuitive. Really, who thinks to
+jump down into the dark, lethal looking pit? Especially since most pits in my maps are, uh,
+instantly lethal. Though, I guess the pits being occupied with spectres helps make that clearer.
+In general, I tried arguably too hard to make the circle actually have the design of Malebolge,
+with the trenches and the demons inside of them. You can get out of the trenches, of course.
+
+Cocytus, the 9th circle, and the circle of traitors, is, like always, a timeout card.
+I wanted to depict Treason by having your allies come back to haunt you. You can kill them.
+And you should, because the card can get very messy very quickly if you don't handle it right.
+
+I knew that I wanted to have the ice shatter when Mephistopheles re-appeared for the finale.
+I actually looked up online what it looks like when ice cracks from a sharp impact to make
+the patterns that open up look more authentic, because I'm a nerd in very weird ways, apparently.
+The last card is a re-make of another from Touhou 15, called "A Pristine Danmaku Hell".
+I renamed it to "INFERNO!", which is the name of Doom's Episode 3. It's a pretty basic
+read-and-dodge-everything card, with no real tricks. Hopefully you have enough health left.
+Or enough spellcards. Either one works.
+
+Now, remember the secret challenge thing from MAP21 to MAP25? That comes back again.
+If you've collected all five, something weird happens: The last teleporter, rather than 
+ending the level, takes you to another room, with a blue and red teleporter.
+
+There's one more optional fight. Take the red teleporter to face...
+--------------
+[ BOSS: DOOM ]
+Music:
+"No Remorse", from Ketsui. True Final Boss theme.
+--------------
+...Your DOOM!
+
+(I am not sorry.)
+
+It's common in non-Touhou Danmaku games to have a stupidly difficult secret final boss
+if you have met some obscene set of requirements up until that point of the game.
+
+Ketsui's true final boss, DOOM, requires you beat the entire first loop of the game
+with no bombs and no deaths. It's hilarious, really.
+
+So, I decided that, because it's literally named DOOM, I had to implement it,
+hidden behind a similarly ridiculous mechanic that makes it impossible to see it.
+
+DOOM's last phase is completely a joke. You better have enough bombs.
+You ain't dodging it legit. I can't dodge it, and I implemented the pattern!
+
+Literally, this boss is ripped, attack for attack, from Ketsui.
+And yes, it was one of those ridiculous true final bosses, from
+what was already one of the hardest danmaku games ever made.
+
+============================
+EPISODE IV OVERALL THOUGHTS:
+On a mapping front, this is probably objectively the best Episode in the wad.
+On a Touhou front, this is probably objectively the worst Episode in the wad.
+It's so completely different from its predecessors that I was half-tempted to
+just end Touhou Doom at Episode III. But I decided to finish it anyway.
+
+Besides, if you were disappointed that there wasn't enough Touhou in the end...
+============================
+
++------------------------+
+< EPISODE V: EXTRA STORY >
++------------------------+
+
+--------------------------------------------
+[ MAP30: Extra Story: Hakurei Shrine Party ]
+--------------------------------------------
+...Then you've got this thing.
+
+The map itself is nothing special.
+It's just the same Hakurei Shrine you've seen three times before.
+
+But I decided I wanted to make some more Touhou-themed bosses.
+
+Some more extra-difficult Touhou themed bosses.
+
+Why? Because I had fun making them. I made them mostly for myself,
+so they may be slightly completely unreasonably difficult.
+
+V1.2: So you don't get essentially infinite bombs anymore unless you're on Easy Mode.
+--------------------------
+[ BOSS: Yuyuko Saigyouji ]
+Music:
+"Bloom Nobly, Ink-Black Cherry Blossom ~ Border of Life", from Touhou 10.5: Scarlet Weather Rhapsody
+--------------------------
+First boss. Yuyuko's pretty easy, but she's way harder than most Stage 1 bosses.
+Consider this your warning as for how the rest of the map will go. It does not get easier.
+
+I felt kind of bad about the MAP10 fight in that Yuyuko really didn't get much feature there.
+So I semi-corrected that by featuring two spellcards from her Final Boss battle from Touhou 7.
+
+She's the first boss because she likes to show up before the plot actually starts properly.
+---------------------
+[ BOSS: Suika Ibuki ]
+Music:
+"Oni's Island in the Fairyland ~ Missing Power", from Touhou 7.5: Immaterial and Missing Power
+---------------------
+Really, this is just a shorter but crazier version of her normal fight.
+
+It's mostly here because Suika starts the plot.
+-----------------------
+[ BOSS: Sanae Kochiya ]
+Music:
+"Faith is for Transient People", from Touhou 10: Mountain of Faith
+-----------------------
+Sanae's fight from Episode III was mostly a remake of spells from her Touhou 10 fight.
+
+This is mostly a remake of spells from her Touhou 11 fight. Where she's the Extra Stage Midboss.
+
+'Nine Syllable Stabs', her first card, was originally way worse. I toned it down significantly.
+It's still hard to read, sometimes. It can be lethal due to the nature of the beams.
+-----------------------
+[ BOSS: Sakuya Izayoi ]
+Music:
+"Flowering Night", from Touhou 10.5: Scarlet Weather Rhapsody
+-----------------------
+So a little fun fact: If you spend enough time not dealing with a problem that
+you dealt with earlier, you can forget how hard the problem was the first time.
+
+Because, no, the time freeze gimmicks were not really that much easier this time around.
+
+I just was more used to it, but even still, Sakuya is annoying as all Hell in implementation.
+
+I chose Sakuya as a returning boss mostly because the time freeze gimmicks have a LOT of
+different gimmicks you can accomplish with them. You can get very creative.
+It's pretty wild, and I like both of the new time stop cards.
+-----------------------
+[ BOSS: Youmu Konpaku ]
+Music:
+"Hiroari Shoots a Strange Bird ~ Till When?", from Touhou 7: Perfect Cherry Blossom
+-----------------------
+Wanna know who got shafted even harder than Yuyuko did? Youmu Konpaku.
+She went from Stage 5 boss to stage 1 midboss. I knew that I wanted to rectify this.
+
+This is the first seriously hard fight in the extra story, both to play AND to design.
+
+The notable gimmick is that Youmu slows down time before attacks.
+
+This engine is not good at that, so instead I chose to just simultaneously
+slow the player down and slow Youmu's bullets down, while making the screen go greyscale.
+It's a pretty effective visual gimmick.
+
+Youmu really showed me how far I've come since I started. Back when I did Episode II,
+I wouldn't have been able to think up a solution for Youmu's gimmick at all.
+
+And then I implemented her fight in like, two days. It was crazy.
+
+It gets harder, though...
+-----------------------
+[ BOSS: Yukari Yakumo ]
+Music:
+"Night Falls ~ Evening Star", from Touhou 7.5: Immaterial and Missing Power
+-----------------------
+Here we go again.
+
+Yukari *already* being an extra boss meant that I didn't really do that much for her.
+3/4 cards are basically reused from her Extra Stage boss fight, one of them upgraded.
+
+'Chen and Ran Yakumo' was kind of funny, throwing out both at once with little warning.
+Despite how it looks, there is a strategy to it - you do have to have faith in being able
+to dodge both of them when you can't see one, because often they'll be on opposite sides.
+
+'Yakumo's Nest' is basically super nine syllable stabs.
+I still have many difficulties with it, and it feels quite hard to me,
+though admittedly I don't die that often to it. Or to Yukari in general.
+
+Knowing the patterns (because I designed them) often helps me dodge them better,
+so I'm not sure I'm an unbiased source when I say I don't die often to these cards.
+-------------------------
+[ BOSS: Marisa Kirisame ]
+Music:
+"Magus Night", from Touhou 12.8: Fairy Wars
+-------------------------
+Oh god, it's her again.
+
+OH GOD, IT'S HER AGAIN.
+
+I mean, of frickin' course we fight Marisa a second time. Only it's even MORE ridiculous!
+
+Fun fact: only one spellcard in this fight is from Touhou canon.
+
+Her first card, 'Andromeda', is making fun of 'Milky Way'. It's faster. A lot faster.
+
+Her second card, 'Galactic Cannibalism', is basically two different patterns at once, 
+hence the name. It's a very simple spellcard, but it manages to be surprisingly difficult.
+I had fun designing that one.
+
+Her third card, 'Double Spark', is where things get comedic. Why limit yourself to one
+backup Hakkero at once? What's better than one master spark? How about TWO?
+Weirdly enough, despite the simplicity, this might be the hardest card in the fight.
+It's very easy to get caught off guard and walk into another spark you didn't know she had
+aimed in that position, since only one of the sparks is aimed directly at you.
+
+Then we jump off the deep end with 'Chaingun Spark', which looks crazy, but you can circle it.
+Don't EVER stop moving against it, though - Marisa fires it every single second you're in line of sight.
+
+'Super Shotgun Spark' self-destructs, which finally closes that joke about 'stability issues'
+that she makes in MAP27C. Which is good, because 20 master sparks at once is kind of silly.
+I kind of wanted to make Marisa have one last attack after you've beaten her, but instead
+I made the opposite: Her last attack prematurely self destructs and ends the fight early.
+
+However, despite everything, even Marisa gets the hell outta dodge when...
+-----------------------
+[ BOSS: Reimu Hakurei ]
+Music:
+"Dream Express ~ Red and White", from Touhou Fangame Concealed the Conclusion.
+It is remixed from:
+"Dream Express", from Touhou 5: Mystic Square
+"Witching Dream", from Touhou 4: Lotus Land Story
+"Dichromatic Lotus Butterfly ~ Red and White", from Touhou Album Dolls in Pseudo Paradise,
+which itself is a remix of:
+"Dichromatic Lotus Butterfly ~ Ancients", from Seihou.
+-----------------------
+...Reimu shows up.
+
+The reason I chose a fan theme for this fight because:
+	A: It's an awesome remix. It's from a seriously amazing fangame.
+	B: It's the theme for an even-harder-than-extra Reimu from that game.
+	C: Using this remix allows me to reference multiple themes at once.
+	D: It's an awesome remix.
+
+As for the fight itself...
+
+Remember how you didn't actually beat Reimu in MAP19?
+
+She's back. And she's even harder this time.
+
+Her noncards are basically the same, so that was easy.
+Four of her cards are simply re-hashes of cards from her first fight, so those were easy.
+The other four, in order:
+
+'Exorcism'/'Disaster-Repelling Prayer' was pretty fast to create. It's simple, but it's elegant.
+
+'Divine Spirit Orbs': This was not simple or elegant. Worth the effort though, it's pretty.
+
+'Fantasy Seal -Circle': Why limit yourself to /one/ variant of Fantasy Seal at once?
+
+'Hakurei Gravity Release Barrier': People in Touhou can canonically fly. I knew, for quite a while,
+that I wanted a flight based spellcard. Hence the creation of this spellcard.
+
+'Fantasy Nature': YOU ARE ALREADY DEA-Oh wait, it's not that version of the spellcard.
+This card took A LOT of thinking like a programmer. There's a lot of jump trickery to avoid
+absurd amount of unnecessary states. It was clever. I really like the visual effect;
+admittedly it looks a lot scarier than it actually is. Make sure you keep moving.
+
+'The Universe': From the same fangame that the theme used in this fight is from.
+Welcome to what is probably the densest card in the entire game. It's pure amulet spam,
+going from just red to eventually covering seven different colours.
+
+The last spellcard is a complete joke. It's Reimu realizing that as a player, she can do
+what you, as the player, should do at this point: BOMB SPAM.
+
+Literally, it's Reimu bomb-spamming because she realizes you're beating her.
+
+Survive this last Hell of a card, and you win!
+=============================
+EXTRA STORY OVERALL THOUGHTS:
+This was fun. I did this mostly for myself, and it shows.
+=============================
+
+///////////////
+// AFTERWORD //
+///////////////
+
+Wow, this Post-Mortem is over 19K words. No wonder this took so long to finish.
+
+I think that the post-mortem being this long is important, though.
+Because a lot of projects do drop out of the blue after years of waiting.
+The thing is, those years aren't meaningless. It takes time for projects like this to happen.
+
+I do not want people thinking that what I have done is magic. Well, in-story magic, sure,
+but what I do not possess is magical wizard skills that allowed me to make this project.
+Just some DECORATE, ACS, GZDoom Builder, and an absolutely stubborn refusal to give up.
+
+The important thing about this Post-Mortem, above all, is to realize that
+a LOT of effort goes into making these things. Years, in some cases.
+
+Touhou Doom was as much a experimental learning experience as it was a polished project.
+
+SPECIAL THANKS TO:
+-dekw, my most valiant tester, and frequent annoyance in bugfixing
+-TerminusEst13, super cool dude who was very inspirational to me
+-the Touhou fandom for being insane in ways that were also inspirational to me
+-ZUN, for making the Touhou project
+-id software, for making Doom
+-And to you, who has read all the way to the bottom of this Post-Mortem.

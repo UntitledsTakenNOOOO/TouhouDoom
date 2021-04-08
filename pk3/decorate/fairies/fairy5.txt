@@ -1,0 +1,382 @@
+//NOPE
+//Okay this is actually the last set, used in MAP28
+ACTOR Fairy34A 31409
+{
+//$Category "Touhou Characters"
+  floatspeed 8
+  Speed 8
+  fastspeed 10
+  MONSTER
+  Health 10
+  Radius 31
+  Height 64
+  Scale 1
+  MinMissileChance 170
+  Mass 200
+  MeleeRange 64
+  Species Fairy
+  +DONTHURTSPECIES
+  +FLOORCLIP
+  +DONTFALL
+  +NOICEDEATH
+  +MISSILEMORE
+  +MISSILEEVENMORE
+  +FORCEXYBILLBOARD
+  Painchance 170
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  Obituary "%o got wrecked by a fairy."
+  HitObituary "%o got wrecked by a fairy."
+  DamageFactor "TouhouHakureiHomingAmulet", 0.5
+  DamageFactor "TouhouHakkeroLaser", 0.75
+  States
+  {
+  Spawn:
+    FAR4 ABCD 2 A_Look
+    Loop
+  See:
+    "####" ABCD 2 A_Chase
+    Loop
+  Pain:
+    "####" E 3 A_Pain
+    Goto See
+  Missile:
+	"####" A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+	"####" A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+	"####" A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+	"####" A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+	"####" AB 4 A_FaceTarget
+	"####" A 0 A_Playsound("touhou/fire",0,0.5,0,ATTN_NONE)
+	"####" AAAAAAAA 0 A_CustomMissile("Fairy34Bullet2",10,0,random(0,360))
+	"####" CD 4
+	Goto See
+  MissileNormal:
+	"####" AB 4 A_FaceTarget
+	"####" A 0 A_Playsound("touhou/fire",0,0.5,0,ATTN_NONE)
+	"####" AAAAAAAAAAAAAAAA 0 A_CustomMissile("Fairy34Bullet2",10,0,random(0,360))
+	"####" CD 4
+	Goto See
+  MissileHard:
+	"####" AB 4 A_FaceTarget
+	"####" A 0 A_Playsound("touhou/fire",0,0.5,0,ATTN_NONE)
+	"####" AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("Fairy34Bullet2",10,0,random(0,360))
+	"####" CD 4
+	Goto See
+  MissileLunatic:
+	"####" AB 4 A_FaceTarget
+	"####" A 0 A_Playsound("touhou/fire",0,0.5,0,ATTN_NONE)
+	"####" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile("Fairy34Bullet2",10,0,random(0,360))
+	"####" CD 4
+	Goto See
+  Death:
+	"####" A 0 A_JumpIfInTargetInventory("EasyMode",1,"DeathEasy")
+	"####" A 0 A_JumpIfInTargetInventory("NormalMode",1,"DeathNormal")
+	"####" A 0 A_JumpIfInTargetInventory("HardMode",1,"DeathHard")
+	"####" A 0 A_JumpIfInTargetInventory("LunaticMode",1,"DeathLunatic")
+	Goto DeathNormal
+  DeathEasy:
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,0)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,60)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,120)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,180)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,240)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,300)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,0)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,60)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,120)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,180)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,240)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,300)
+	Goto DeathFinish
+  DeathNormal:
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,0)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,30)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,60)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,90)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,120)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,150)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,180)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,210)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,240)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,270)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,300)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,330)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,0)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,30)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,60)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,90)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,120)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,150)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,180)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,210)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,240)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,270)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,300)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,330)
+	Goto DeathFinish
+  DeathHard:
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,0)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,20)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,40)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,60)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,80)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,100)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,120)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,140)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,160)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,180)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,200)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,220)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,240)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,260)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,280)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,300)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,320)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,340)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,0)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,20)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,40)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,60)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,80)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,100)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,120)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,140)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,160)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,180)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,200)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,220)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,240)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,260)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,280)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,300)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,320)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,340)
+	Goto DeathFinish
+  DeathLunatic:
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,0)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,15)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,30)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,45)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,60)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,75)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,90)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,105)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,120)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,135)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,150)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,165)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,180)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,195)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,210)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,225)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,240)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,255)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,270)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,285)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,300)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,315)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,330)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,345)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,0)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,15)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,30)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,45)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,60)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,75)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,90)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,105)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,120)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,135)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,150)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,165)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,180)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,195)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,210)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,225)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,240)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,255)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,270)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,285)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,300)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,315)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,330)
+	"####" A 0 A_CustomMissile("Fairy34Bullet1",10,0,345)
+	Goto DeathFinish
+  DeathFinish:
+    "####" E 3
+    "####" E 1 A_ScreamAndUnblock
+    "####" E 1 A_SetTranslucent(0.90)
+    "####" E 1 A_SetTranslucent(0.80)
+    "####" E 1 A_SetTranslucent(0.70)
+    "####" E 1 A_SetTranslucent(0.60)
+    "####" E 1 A_SetTranslucent(0.50)
+    "####" E 1 A_SetTranslucent(0.40)
+    "####" E 1 A_SetTranslucent(0.30)
+    "####" E 1 A_SetTranslucent(0.20)
+    "####" E 1 A_SetTranslucent(0.10)
+	"####" E 1 A_SetTranslucent(0)
+    Stop
+  }
+}
+ACTOR Fairy34Bullet1 : OrinNS3Bullet
+{
+	Scale 2.0
+}
+ACTOR Fairy34Bullet2 : ZombieFairyBullet
+{
+	Scale 2.0
+}
+ACTOR Fairy34B : Fairy34A 31410
+{
+//$Category "Touhou Characters"
+  States
+  {
+  Spawn:
+    FAR5 ABCD 3 A_Look
+    Loop
+  }
+}
+ACTOR Fairy34C : Fairy34A 31411
+{
+//$Category "Touhou Characters"
+  States
+  {
+  Spawn:
+    FAR7 ABCD 3 A_Look
+    Loop
+  }
+}
+ACTOR Fairy34D : Fairy34A 31412
+{
+//$Category "Touhou Characters"
+  States
+  {
+  Spawn:
+    FAR8 ABCD 3 A_Look
+    Loop
+  }
+}
+ACTOR Fairy35 31413
+{
+//$Category "Touhou Characters"
+  floatspeed 8
+  Speed 8
+  fastspeed 10
+  MONSTER
+  Health 500
+  Radius 72
+  Height 72
+  MinMissileChance 85
+  Scale 1.25
+  Mass 200
+  MeleeRange 64
+  Species Fairy
+  +DONTHURTSPECIES
+  +FLOORCLIP
+  +DONTFALL
+  +NOICEDEATH
+  +FORCEXYBILLBOARD
+  Painchance 10
+  Painsound "touhou/pain"
+  Deathsound "touhou/fairy/death"
+  Obituary "%o got wrecked by a fairy."
+  HitObituary "%o got wrecked by a fairy."
+  DamageFactor "TouhouHakureiHomingAmulet", 0.75
+  DamageFactor "TouhouHakkeroLaser", 0.85
+  var int user_angle;
+  States
+  {
+  Spawn:
+    FAR6 ABCD 3 A_Look
+    Loop
+  See:
+    FAR6 ABCD 3 A_Chase
+    Loop
+  Pain:
+    FAR6 E 3 A_Pain
+    Goto See
+  Missile:
+	"####" A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+	"####" A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+	"####" A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+	"####" A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileNormal
+  MissileEasy:
+	"####" A 0 A_Playsound("touhou/fire",0,0.5,0,ATTN_NONE)
+    FAR6 ABCD 4 A_Wander
+	FAR6 A 0 A_SetUserVar("user_angle",random(0,20))
+  MissileEasyLoop:
+	FAR6 A 0 A_JumpIf(user_angle >= 360, "MissileEasy")
+	FAR6 A 0 A_CustomMissile("Fairy35Shot",20,0,user_angle,CMF_AIMDIRECTION)
+	FAR6 A 0 A_SetUserVar("user_angle",user_angle+12)
+    Loop
+  MissileNormal:
+	"####" A 0 A_Playsound("touhou/fire",0,0.5,0,ATTN_NONE)
+    FAR6 ABCD 4 A_Wander
+	FAR6 A 0 A_SetUserVar("user_angle",random(0,10))
+  MissileNormalLoop:
+	FAR6 A 0 A_JumpIf(user_angle >= 360, "MissileNormal")
+	FAR6 A 0 A_CustomMissile("Fairy35Shot",20,0,user_angle,CMF_AIMDIRECTION)
+	FAR6 A 0 A_SetUserVar("user_angle",user_angle+6)
+    Loop
+  MissileHard:
+	"####" A 0 A_Playsound("touhou/fire",0,0.5,0,ATTN_NONE)
+    FAR6 ABCD 3 A_Wander
+	FAR6 A 0 A_SetUserVar("user_angle",random(0,10))
+  MissileHardLoop:
+	FAR6 A 0 A_JumpIf(user_angle >= 360, "MissileHard")
+	FAR6 A 0 A_CustomMissile("Fairy35Shot",20,0,user_angle,CMF_AIMDIRECTION)
+	FAR6 A 0 A_SetUserVar("user_angle",user_angle+6)
+    Loop
+  MissileLunatic:
+	"####" A 0 A_Playsound("touhou/fire",0,0.5,0,ATTN_NONE)
+    FAR6 ABCD 2 A_Wander
+	FAR6 A 0 A_SetUserVar("user_angle",random(0,10))
+  MissileHardLoop:
+	FAR6 A 0 A_JumpIf(user_angle >= 360, "MissileHard")
+	FAR6 A 0 A_CustomMissile("Fairy35Shot",20,0,user_angle,CMF_AIMDIRECTION)
+	FAR6 A 0 A_SetUserVar("user_angle",user_angle+6)
+    Loop
+  Death:
+    FAR6 E 3
+	FAR6 E 1 A_ScreamAndUnblock
+    FAR6 E 1 A_SetTranslucent(0.90)
+    FAR6 E 1 A_SetTranslucent(0.80)
+    FAR6 E 1 A_SetTranslucent(0.70)
+    FAR6 E 1 A_SetTranslucent(0.60)
+    FAR6 E 1 A_SetTranslucent(0.50)
+    FAR6 E 1 A_SetTranslucent(0.40)
+    FAR6 E 1 A_SetTranslucent(0.30)
+    FAR6 E 1 A_SetTranslucent(0.20)
+    FAR6 E 1 A_SetTranslucent(0.10)
+	FAR6 E 1 A_SetTranslucent(0)
+    Stop
+  }
+}
+ACTOR Fairy35Shot
+{
+  Radius 2
+  Speed 10
+  fastspeed 15
+  Height 4
+  damage (20)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  DeathSound "touhou/hit"
+  XScale 3.0
+  YScale 2.0
+  States
+  {
+  Spawn:
+    RKUN A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RKUN ABCDEF 2 Bright
+    Stop
+  }
+}

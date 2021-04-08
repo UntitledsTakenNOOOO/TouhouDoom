@@ -1,0 +1,3657 @@
+ACTOR Orin 31229 //I'm sorry
+{ //I'm not actually sorry at all
+//$Category "Touhou Characters"
+  Tag "Rin Kaenbyou"
+  floatspeed 8
+  Speed 8
+  fastspeed 16
+  MONSTER
+  Health 2000
+  Radius 24
+  Height 64
+  Scale 0.7
+  MinMissileChance 160 //Originally 3000
+  Mass 10000 //Originally 1000
+  //MeleeThreshold 35 //This code is
+  //MeleeRange 65 //A traffic accident from hell
+  Species Fairy //Needed to stop infighting
+  +DONTHURTSPECIES
+  +LOOKALLAROUND
+  +FLOORCLIP
+  +BOSS
+  +MISSILEMORE
+  +NEVERRESPAWN
+  +DONTMORPH
+  +DONTRIP
+  +NORADIUSDMG
+  +AMBUSH
+  +NOICEDEATH
+  Painchance 2
+  Seesound ""
+  Painsound "touhou/pain"
+  Deathsound "touhou/defeat"
+  DamageFactor "Orin", 0
+  DropItem "OrinZombieFairy"
+  Obituary "Orin took %o's corpse to Hell's incinerator."
+  States
+  {
+  Spawn:
+	ORIN A 0
+    ORIN A 1 ACS_NamedExecute("BHI_BossStartAttack",0,22,3,false)
+	ORIN A 1 ACS_NamedExecute("BHI_BossStartTimer",0,22,50)
+	ORIN A 1 A_Look
+  Idle:
+    ORIN BCDEFA 3 A_Look
+    Loop
+  See:
+    ORIN ABCDEF 3 A_Chase
+    Loop
+  Pain:
+    ORIN G 2 A_Pain
+	ORIN HIHG 2
+    Goto See
+  Melee:
+  Missile:
+    ORIA A 0 A_FaceTarget
+    ORIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ORIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ORIA A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ORIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+    Goto MissileNormal
+  MissileEasy:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,20)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,40)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,80)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,100)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,140)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,160)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,200)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,220)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,260)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,280)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,320)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,340)
+	ORIA E 12 A_FaceTarget
+    ORIA DDDCCCBBBAAA 2 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+	ORIN AABBCCDDEEFF 2 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+    ORIA AAABBBCCCDDD 2 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,20)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,40)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,80)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,100)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,140)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,160)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,200)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,220)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,260)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,280)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,320)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,340)
+	ORIA E 18 A_FaceTarget
+    ORIN ABCDEF 3 A_Wander
+	Goto See
+  MissileNormal:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,15)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,30)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,45)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,75)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,90)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,105)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,135)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,150)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,165)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,195)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,210)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,225)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,255)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,270)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,285)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,315)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,330)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,345)
+	ORIA E 12 A_FaceTarget
+    ORIA DDDCCCBBBAAA 2 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+	ORIN AABBCCDDEEFF 2 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+    ORIA AAABBBCCCDDD 2 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,15)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,30)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,45)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,75)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,90)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,105)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,135)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,150)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,165)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,195)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,210)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,225)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,255)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,270)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,285)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,315)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,330)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,345)
+	ORIA E 18 A_FaceTarget
+    ORIN ABCDEF 3 A_Wander
+	Goto See
+  MissileHard:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,12)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,24)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,36)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,48)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,84)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,96)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,108)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,132)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,156)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,168)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,192)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,204)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,228)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,252)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,264)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,276)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,312)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,324)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,336)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,348)
+	ORIA E 12 A_FaceTarget
+    ORIA DDDDDDCCCCCCBBBBBBAAAAAA 1 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+	ORIN AAAABBBBCCCCDDDDEEEEFFFF 1 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+    ORIA AAAAAABBBBBBCCCCCCDDDDDD 1 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,12)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,24)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,36)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,48)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,84)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,96)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,108)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,132)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,156)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,168)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,192)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,204)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,228)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,252)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,264)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,276)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,312)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,324)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,336)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,348)
+	ORIA E 18 A_FaceTarget
+    ORIN ABCDEF 3 A_Wander
+	Goto See
+  MissileLunatic:
+    ORIA ABCD 6 Fast A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,10)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,20)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,30)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,40)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,50)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,70)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,80)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,90)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,100)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,110)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,130)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,140)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,150)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,160)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,170)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,190)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,200)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,210)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,220)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,230)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,250)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,260)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,270)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,280)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,290)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,310)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,320)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,330)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,340)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerBlue",32,0,350)
+	ORIA E 12 Fast A_FaceTarget
+    ORIA DDDDDDCCCCCCBBBBBBAAAAAA 1 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+	ORIN AAAABBBBCCCCDDDDEEEEFFFF 1 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+    ORIA AAAAAABBBBBBCCCCCCDDDDDD 1 A_CustomMissile("OrinNS1SmallBullet",frandom(16,48),frandom(-10,10),frandom(0,360),CMF_AIMDIRECTION,frandom(-10,10))
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,10)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,20)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,30)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,40)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,50)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,70)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,80)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,90)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,100)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,110)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,130)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,140)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,150)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,160)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,170)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,190)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,200)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,210)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,220)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,230)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,250)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,260)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,270)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,280)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,290)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,310)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,320)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,330)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,340)
+	ORIA E 0 A_CustomMissile("OrinNS1BulletSpawnerGreen",32,0,350)
+	ORIA E 18 Fast A_FaceTarget
+    ORIN ABCDEF 3 Fast A_Wander
+	Goto See
+  Death:
+	ORIN G 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	ORIN G 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	ORIN G 0 A_GiveInventory("BulletDeathTrigger",1)
+    ORIN G 0 A_NoBlocking
+	ORIN G 0 A_PlaySound("touhou/nuefire")
+    ORIN GGGGGGGGG 2 A_FadeOut(0.1)
+	Stop
+  }
+}
+ACTOR OrinNS1SmallBullet
+{
+  Radius 2
+  Speed 10
+  fastspeed 20
+  Height 4
+  damage (10)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  //RenderStyle Add //REALLY don't want this
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BBLD A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBLD AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR OrinNS1BulletSpawnerBlue
+{
+  Radius 64
+  Speed 48
+  fastspeed 40
+  Height 64
+  damage (0)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  RenderStyle Add
+  var int user_dist;
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 4)
+    TNT1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 1 Bright A_CustomMissile("OrinNS1SpawnedBulletBlue",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+	TNT1 A 0 Bright A_Warp(AAPTR_DEFAULT, 0, user_dist, 0, 0, 0)
+    Loop
+  Death:
+    TNT1 A 1 Bright
+    Stop
+  }
+}
+ACTOR OrinNS1SpawnedBulletBlue
+{
+  Radius 3
+  Speed 0
+  fastspeed 0
+  Height 6
+  damage (10)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  //RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    CRYS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS A 0 Bright ThrustThing(angle*256/360, 3, 0, 0)
+    CRYS AAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS A 0 Bright ThrustThing(angle*256/360, 3, 0, 0)
+    CRYS AAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS A 0 Bright ThrustThing(angle*256/360, 3, 0, 0)
+    CRYS AAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS B 0 Bright ThrustThing(angle*256/360, 3, 0, 0)
+    CRYS AAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS A 0 Bright ThrustThing(angle*256/360, 3, 0, 0)
+    CRYS AAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS A 0 Bright ThrustThing(angle*256/360, 3, 0, 0)
+    CRYS AAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS A 0 Bright ThrustThing(angle*256/360, 3, 0, 0)
+    CRYS AAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    CRYS A 0 Bright ThrustThing(angle*256/360, 3, 0, 0)
+    CRYS AAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+  LoopState:
+    CRYS A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Death:
+    CRYE ABCDEF 2 Bright
+    Stop
+  }
+}
+ACTOR OrinNS1BulletSpawnerGreen
+{
+  Radius 64
+  Speed 48
+  fastspeed 40
+  Height 64
+  damage (0)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  RenderStyle Add
+  var int user_dist;
+  States
+  {
+  Spawn:
+	TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist - 4)
+    TNT1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_FaceTarget
+	TNT1 A 1 Bright A_CustomMissile("OrinNS1SpawnedBulletGreen",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER)
+	TNT1 A 0 Bright A_Warp(AAPTR_DEFAULT, 0, user_dist, 0, 0, 0)
+    Loop
+  Death:
+    TNT1 A 1 Bright
+    Stop
+  }
+}
+ACTOR OrinNS1SpawnedBulletGreen : OrinNS1SpawnedBulletBlue
+{
+	Translation "192:207=112:123","240:247=120:127"
+}
+
+ACTOR OrinZombieFairy : Orin
+{
+  +INVULNERABLE
+  +NOPAIN
+  DropItem "OrinNS2"
+  var int user_angle;
+  States
+  {
+  Spawn:
+    ORIN A 0
+	ORIN A 0 A_SetTranslucent(0.1)
+    ORIN ABCDEF 3 A_FadeIn(0.15)
+  Idle:
+    ORIN ABCDEF 3 A_Look
+    Loop
+  See:
+	ORIA A 0 A_SetTranslucent(1.0,0)
+	ORIA A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+    ORIA ABCD 5 A_Facetarget
+	TNT1 A 0 Thing_ChangeTID(0,6117)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6117,3,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6117,60)
+	ORIA A 0 ACS_Execute(602,0,57)
+	ORIA A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	ORIA A 0 A_GiveInventory("SpellcardActive",1)
+	ORIA EEEEEEEEEEEEEEEEEEEE 0 A_SpawnItemEx("ZombieFairy",random(-64,64),random(-256,256),random(0,64),0,0,0,0,SXF_SETMASTER,0)
+    ORIA E 35 A_Facetarget
+    ORIA DCBA 5 A_Facetarget
+	ORIA A 0 A_UnSetInvulnerable
+	ORIA A 0 A_ChangeFlag("NOPAIN",0)
+	Goto Missile
+  ChaseState:
+    ORIN ABCDEF 3 A_Chase
+    Loop
+  Melee:
+  Missile:
+    ORIA FGHIJK 4 A_Facetarget
+    ORIN A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ORIN A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ORIN A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ORIN A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileHard
+  MissileEasy:
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinZombieFairyBullet",32,0,frandom(-4,4)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 2 A_SetUserVar("user_angle", user_angle + random(5,9))
+	Loop
+  MissileNormal:
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinZombieFairyBullet",32,0,frandom(-4,4)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 1 A_SetUserVar("user_angle", user_angle + random(2,5))
+	Loop
+  MissileHard:
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinZombieFairyBullet",32,0,frandom(-4,4)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 0 A_CustomMissile("OrinZombieFairyBullet",32,0,frandom(176,184)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 1 A_SetUserVar("user_angle", user_angle + random(2,5))
+	Loop
+  MissileLunatic:
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinZombieFairyBullet",32,0,frandom(-4,4)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 0 A_CustomMissile("OrinZombieFairyBullet",32,0,frandom(116,124)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 0 A_CustomMissile("OrinZombieFairyBullet",32,0,frandom(236,244)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 1 A_SetUserVar("user_angle", user_angle + random(2,5))
+	Loop
+  Death:
+	ORIN G 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	ORIN G 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	ORIN G 0 ACS_Execute(603,0)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren //Get rid of dead zombie fairies
+	ORIN G 0 A_GiveInventory("BulletDeathTrigger",1)
+    ORIN G 0 A_NoBlocking
+	ORIN G 0 A_PlaySound("touhou/nuefire")
+    ORIN G 2 A_FadeOut(0.1)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren
+    ORIN G 2 A_FadeOut(0.1)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren
+    ORIN G 2 A_FadeOut(0.1)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren
+    ORIN G 2 A_FadeOut(0.1)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren
+    ORIN G 2 A_FadeOut(0.1)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren
+    ORIN G 2 A_FadeOut(0.1)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren
+    ORIN G 2 A_FadeOut(0.1)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren
+    ORIN G 2 A_FadeOut(0.1)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren
+    ORIN G 2 A_FadeOut(0.1)
+	Stop
+  }
+}
+ACTOR OrinZombieFairyBullet
+{
+  Radius 4
+  Speed 10
+  fastspeed 15
+  Height 8
+  damage (10)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BBL1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL1 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR ZombieFairy
+{
+//$Category "Touhou Characters"
+  floatspeed 8
+  Speed 8
+  fastspeed 10
+  MONSTER
+  Health 30
+  Radius 15
+  Height 25
+  Scale 1
+  MinMissileChance 224
+  Mass 200
+  MeleeRange 64
+  Species Fairy
+  +DONTHURTSPECIES
+  +INVULNERABLE
+  +NOPAIN
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  Painchance 192
+  Painsound "touhou/pain"
+  DeathSound "touhou/fairy/death"
+  Obituary "%o got wrecked by a zombie fairy."
+  HitObituary "%o got wrecked by a zombie fairy."
+  States
+  {
+  Spawn:
+    ZFAR EEEEEEEEEEEEEEEEEEEE 1 A_SetTranslucent(0.20)
+	ZFAR EEEEEEEEEEEEEEEEEEEE 7 A_SpawnItemEx("ZombieFairyTrail",0,0,0,frandom(0,1),frandom(0,1),frandom(0,3),0,0)
+	ZFAR EEEEEEEEEEEEEEEEEEEE 0 A_SpawnItemEx("ZombieFairyTrail",0,0,0,frandom(0,1),frandom(0,1),frandom(0,3),0,0)
+    ZFAR E 1 A_SetTranslucent(0.30)
+    ZFAR E 1 A_SetTranslucent(0.40)
+    ZFAR E 1 A_SetTranslucent(0.50)
+    ZFAR E 1 A_SetTranslucent(0.60)
+    ZFAR E 1 A_SetTranslucent(0.70)
+    ZFAR E 1 A_SetTranslucent(0.80)
+    ZFAR E 1 A_SetTranslucent(0.90)
+	Goto See
+  Idle:
+    ZFAR E 0 A_SetTranslucent(1.0)
+	ZFAR A 0 A_UnSetInvulnerable
+	ZFAR A 0 A_ChangeFlag("NOPAIN",0)
+    ZFAR ABCD 3 A_Look
+    Loop
+  See:
+    ZFAR E 0 A_SetTranslucent(1.0)
+	ZFAR A 0 A_UnSetInvulnerable
+	ZFAR A 0 A_ChangeFlag("NOPAIN",0)
+    ZFAR ABCD 3 A_Chase
+    Loop
+  Pain:
+    ZFAR E 3 A_Pain
+    Goto See
+  Melee:
+    ZFAR A 3
+    ZFAR B 2 A_CustomMeleeAttack(10,"touhou/hit","none")
+	ZFAR C 2
+	Goto See
+  Missile:
+    ZFAR A 0 A_FaceTarget
+    ZFAR A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ZFAR A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ZFAR A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ZFAR A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto See
+  MissileEasy:
+	ZFAR ABCD 3 A_Chase
+	ZFAR ABCD 0 A_CustomMissile("ZombieFairyBullet",frandom(0,20),frandom(-5,5),frandom(0,360),CMF_OFFSETPITCH,frandom(-10,10))
+	ZFAR ABCD 3 A_Chase
+	Goto See
+  MissileNormal:
+	ZFAR ABCD 3 A_Chase
+	ZFAR ABCDABCD 0 A_CustomMissile("ZombieFairyBullet",frandom(0,20),frandom(-5,5),frandom(0,360),CMF_OFFSETPITCH,frandom(-10,10))
+	ZFAR ABCD 3 A_Chase
+	Goto See
+  MissileHard:
+	ZFAR ABCD 3 A_Chase
+	ZFAR ABCDABCDABCD 0 A_CustomMissile("ZombieFairyBullet",frandom(0,20),frandom(-5,5),frandom(0,360),CMF_OFFSETPITCH,frandom(-10,10))
+	ZFAR ABCD 3 A_Chase
+	Goto See
+  MissileLunatic:
+	ZFAR ABCD 3 A_Chase
+	ZFAR ABCDABCDABCDABCD 0 A_CustomMissile("ZombieFairyBullet",frandom(0,20),frandom(-5,5),frandom(0,360),CMF_OFFSETPITCH,frandom(-10,10))
+	ZFAR ABCD 3 A_Chase
+	Goto See
+  Death:
+    ZFAR E 3
+    ZFAR A 0 A_JumpIfInTargetInventory("HardMode",1,8)
+	ZFAR A 0 A_JumpIfInTargetInventory("NormalMode",1,13)
+	ZFAR A 0 A_JumpIfInTargetInventory("EasyMode",1,18)
+	ZFAR EEEEEE 0 A_CustomMissile("ZombieFairyBullet",frandom(0,20),frandom(-5,5),frandom(0,360),CMF_OFFSETPITCH,frandom(-20,20))
+    ZFAR EEEEEE 0 A_CustomMissile("ZombieFairyBullet",frandom(0,20),frandom(-5,5),frandom(0,360),CMF_OFFSETPITCH,frandom(-20,20))
+    ZFAR EEEEEE 0 A_CustomMissile("ZombieFairyBullet",frandom(0,20),frandom(-5,5),frandom(0,360),CMF_OFFSETPITCH,frandom(-20,20))
+	ZFAR EEEEEE 0 A_CustomMissile("ZombieFairyBullet",frandom(0,20),frandom(-5,5),frandom(0,360),CMF_OFFSETPITCH,frandom(-20,20))
+	ZFAR E 1 A_ScreamAndUnblock
+    ZFAR E 1 A_SetTranslucent(0.90)
+    ZFAR E 1 A_SetTranslucent(0.80)
+    ZFAR E 1 A_SetTranslucent(0.70)
+    ZFAR E 1 A_SetTranslucent(0.60)
+    ZFAR E 1 A_SetTranslucent(0.50)
+    ZFAR E 1 A_SetTranslucent(0.40)
+    ZFAR E 1 A_SetTranslucent(0.30)
+    ZFAR E 1 A_SetTranslucent(0.20)
+	ZFAR EEEEEEEEEEEEEEE 7 A_SpawnItemEx("ZombieFairyTrail",0,0,15,frandom(0,1),frandom(0,1),frandom(0,3),frandom(0,360),0)
+	ZFAR E -1 Thing_Raise(0)
+    Stop
+  Raise:
+	ZFAR EEEEEEEEEEEEEEEEEEEE 0 A_SpawnItemEx("ZombieFairyTrail",0,0,15,frandom(0,3),frandom(0,3),frandom(0,9),frandom(0,360),0)
+    ZFAR E 1 A_SetTranslucent(0.30)
+    ZFAR E 1 A_SetTranslucent(0.40)
+    ZFAR E 1 A_SetTranslucent(0.50)
+    ZFAR E 1 A_SetTranslucent(0.60)
+    ZFAR E 1 A_SetTranslucent(0.70)
+    ZFAR E 1 A_SetTranslucent(0.80)
+    ZFAR E 1 A_SetTranslucent(0.90)
+	Goto See
+  Death.PermaDeath:
+    ZFAR E 3
+	ZFAR E 1 A_ScreamAndUnblock
+    ZFAR E 1 A_SetTranslucent(0.90)
+    ZFAR E 1 A_SetTranslucent(0.80)
+    ZFAR E 1 A_SetTranslucent(0.70)
+    ZFAR E 1 A_SetTranslucent(0.60)
+    ZFAR E 1 A_SetTranslucent(0.50)
+    ZFAR E 1 A_SetTranslucent(0.40)
+    ZFAR E 1 A_SetTranslucent(0.30)
+    ZFAR E 1 A_SetTranslucent(0.20)
+    ZFAR E 1 A_SetTranslucent(0.10)
+    ZFAR E 1 A_SetTranslucent(0)
+    Stop
+  }
+}
+ACTOR ZombieFairyBullet
+{
+  Radius 2
+  Speed 10
+  fastspeed 20
+  Height 4
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	BPEL A 1 Bright 
+	BPEL A 1 Bright A_ScaleVelocity(frandom(0.5,1.5))
+  LoopState:
+    BPEL A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BPEL AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR ZombieFairyTrail : KomachiAirSpiritTrail
+{
+  States
+  {
+  Spawn:
+    WBL4 AAAAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR OrinNS2 : Orin
+{
+  DropItem "OrinBlazingWheel"
+  PainChance 1
+  States
+  {
+  Spawn:
+    ORIN A 0
+	ORIN A 0 A_SetTranslucent(0.1)
+    ORIN ABCDEF 3 A_FadeIn(0.15)
+  Idle:
+	ORIN A 1 Thing_ChangeTID(0,6118)
+	ORIN A 1 ACS_NamedExecute("BHI_BossStartAttack",0,6118,2,false)
+	ORIN A 1 ACS_NamedExecute("BHI_BossStartTimer",0,6118,35)
+    ORIN BCDEF 3 A_Look
+    Loop
+  See:
+	TNT1 A 0 Thing_ChangeTID(0,6118)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6118,2,false)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6118,35)
+    ORIN ABCDEF 3 A_Chase
+    Loop
+  Melee:
+  Missile:
+    ORIA A 0 A_FaceTarget
+    ORIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ORIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ORIA A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ORIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+    Goto MissileNormal
+  MissileEasy:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,20)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,40)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,80)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,100)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,140)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,160)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,200)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,220)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,260)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,280)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,320)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,340)
+	ORIA EE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA A 0 A_PlaySound("touhou/fire",0,1.0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,288)
+	ORIA EEE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,20)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,40)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,80)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,100)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,140)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,160)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,200)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,220)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,260)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,280)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,320)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,340)
+	ORIA EE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA A 0 A_PlaySound("touhou/fire",0,1.0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,288)
+	ORIA EEE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	Goto See
+  MissileNormal:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,15)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,30)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,45)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,75)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,90)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,105)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,135)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,150)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,165)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,195)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,210)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,225)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,255)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,270)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,285)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,315)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,330)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,345)
+	ORIA EE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA A 0 A_PlaySound("touhou/fire",0,1.0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,288)
+	ORIA EEE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,15)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,30)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,45)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,75)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,90)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,105)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,135)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,150)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,165)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,195)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,210)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,225)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,255)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,270)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,285)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,315)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,330)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,345)
+	ORIA EE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA A 0 A_PlaySound("touhou/fire",0,1.0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,288)
+	ORIA EEE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	Goto See
+  MissileHard:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,12)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,24)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,36)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,48)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,84)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,96)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,108)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,132)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,156)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,168)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,192)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,204)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,228)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,252)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,264)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,276)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,312)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,324)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,336)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,348)
+	ORIA EE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA A 0 A_PlaySound("touhou/fire",0,1.0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,288)
+	ORIA EEE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,12)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,24)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,36)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,48)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,84)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,96)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,108)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,132)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,156)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,168)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,192)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,204)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,228)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,252)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,264)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,276)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,312)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,324)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,336)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,348)
+	ORIA EE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	ORIA A 0 A_PlaySound("touhou/fire",0,1.0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,288)
+	ORIA EEE 6 A_FaceTarget
+	ORIA DCBAABCD 6 A_FaceTarget
+	Goto See
+  MissileLunatic:
+    ORIA ABCD 6 Fast A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,10)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,20)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,30)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,40)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,50)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,70)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,80)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,90)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,100)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,110)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,130)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,140)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,150)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,160)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,170)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,190)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,200)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,210)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,220)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,230)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,250)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,260)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,270)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,280)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,290)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,310)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,320)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,330)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,340)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerBlue",32,0,350)
+	ORIA EE 6 Fast A_FaceTarget
+	ORIA DCBAABCD 6 Fast A_FaceTarget
+	ORIA A 0 A_PlaySound("touhou/fire",0,1.0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,288)
+	ORIA EEE 6 Fast A_FaceTarget
+	ORIA DCBAABCD 6 Fast A_FaceTarget
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,10)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,20)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,30)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,40)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,50)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,60)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,70)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,80)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,90)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,100)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,110)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,120)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,130)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,140)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,150)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,160)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,170)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,180)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,190)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,200)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,210)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,220)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,230)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,240)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,250)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,260)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,270)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,280)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,290)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,300)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,310)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,320)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,330)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,340)
+	ORIA E 0 A_CustomMissile("OrinNS2BulletSpawnerGreen",32,0,350)
+	ORIA EE 6 Fast A_FaceTarget
+	ORIA DCBAABCD 6 Fast A_FaceTarget
+	ORIA A 0 A_PlaySound("touhou/fire",0,1.0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",32,0,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-20,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet2",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet3",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet4",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet5",30,-40,288)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,0)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,72)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,144)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,216)
+	ORIA E 0 A_CustomMissile("OrinNS2AimedBullet6",30,-40,288)
+	ORIA EEE 6 Fast A_FaceTarget
+	ORIA DCBAABCD 6 Fast A_FaceTarget
+	Goto See
+  Death:
+	ORIN G 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	ORIN G 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	ORIN G 0 A_GiveInventory("BulletDeathTrigger",1)
+    ORIN G 0 A_NoBlocking
+	ORIN G 0 A_PlaySound("touhou/nuefire")
+    ORIN GGGGGGGGG 2 A_FadeOut(0.1)
+	Stop
+  DeathExplode:
+    ORIN GHI 15
+	ORIN I 0 A_ScreamAndUnblock
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 BRIGHT A_SpawnItemEx("TouhouFire",Random(4,-4),Random(4,-4),Random(4,-4),Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+	TNT1 A 175
+    TNT1 A 1 ACS_Execute(115,0)
+    Stop
+  }
+}
+ACTOR OrinNS2BulletSpawnerBlue : OrinNS1BulletSpawnerBlue
+{
+	Speed 48
+	FastSpeed 40
+}
+ACTOR OrinNS2BulletSpawnerGreen : OrinNS1BulletSpawnerGreen
+{
+	Speed 48
+	FastSpeed 40
+}
+ACTOR OrinNS2AimedBullet
+{
+  Radius 4
+  Speed 20
+  fastspeed 40
+  Height 8
+  damage (10)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  RenderStyle Add
+  SeeSound "touhou/fairy/death"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BBL2 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR OrinNS2AimedBullet2 : OrinNS2AimedBullet
+{
+	Speed 19
+	FastSpeed 38
+}
+ACTOR OrinNS2AimedBullet3 : OrinNS2AimedBullet
+{
+	Speed 18
+	FastSpeed 36
+}
+ACTOR OrinNS2AimedBullet4 : OrinNS2AimedBullet
+{
+	Speed 17
+	FastSpeed 34
+}
+ACTOR OrinNS2AimedBullet5 : OrinNS2AimedBullet
+{
+	Speed 16
+	FastSpeed 32
+}
+ACTOR OrinNS2AimedBullet6 : OrinNS2AimedBullet
+{
+	Speed 15
+	FastSpeed 30
+}
+
+ACTOR OrinBlazingWheel : Orin
+{
+  Health 2200
+  +INVULNERABLE
+  +NOPAIN
+  DropItem "OrinNS3"
+  PainChance 1
+  var int user_switch;
+  States
+  {
+  Spawn:
+    ORIN A 0
+	ORIN A 0 A_SetTranslucent(0.1)
+    ORIN ABCDEF 3 A_FadeIn(0.15)
+  Idle:
+    ORIN ABCDEF 3 A_Look
+    Loop
+  See:
+	ORIA A 0 A_SetTranslucent(1.0,0)
+	ORIA A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+    ORIA ABCD 5 A_Facetarget
+	TNT1 A 0 Thing_ChangeTID(0,6119)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6119,2,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6119,35)
+	ORIA A 0 ACS_Execute(602,0,58)
+	ORIA A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	ORIA A 0 A_GiveInventory("SpellcardActive",1)
+    ORIA E 35 A_Facetarget
+    ORIA DCBA 5 A_Facetarget
+	ORIA A 0 A_UnSetInvulnerable
+	ORIA A 0 A_ChangeFlag("NOPAIN",0)
+	Goto Missile
+  ChaseState:
+    ORIN ABCDEF 3 A_Chase
+    Loop
+  Melee:
+  Missile:
+    ORIA FGHIJK 4 A_Facetarget
+    ORIN A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ORIN A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ORIN A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ORIN A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileHard
+  MissileEasy:
+	ORIA L 0 A_SetUserVar("user_switch", user_switch + 1)
+	ORIA L 0 A_JumpIf(user_switch==18,"SwitchDirectionEasy")
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,0,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,30,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,60,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,90,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,120,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,150,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,180,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,210,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,240,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,270,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,300,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,330,CMF_AIMDIRECTION)
+	ORIA L 2 A_SetAngle(angle+1.666667)
+	ORIA L 0 A_CheckSight("See")
+	Loop
+  SwitchDirectionEasy:
+	ORIA L 0 A_SetUserVar("user_switch", user_switch - 1)
+	ORIA L 0 A_JumpIf(user_switch==0,"MissileEasy")
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,0,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,30,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,60,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,90,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,120,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,150,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,180,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,210,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,240,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,270,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,300,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,330,CMF_AIMDIRECTION)
+	ORIA L 1 A_SetAngle(angle-1.666667)
+	ORIA L 0 A_CheckSight("See")
+	Loop
+  MissileNormal:
+	ORIA L 0 A_SetUserVar("user_switch", user_switch + 1)
+	ORIA L 0 A_JumpIf(user_switch==15,"SwitchDirectionNormal")
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,0,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,20,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,40,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,60,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,80,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,100,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,120,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,140,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,160,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,180,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,200,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,220,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,240,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,260,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,280,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,300,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,320,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,340,CMF_AIMDIRECTION)
+	ORIA L 2 A_SetAngle(angle+1.333333)
+	ORIA L 0 A_CheckSight("See")
+	Loop
+  SwitchDirectionNormal:
+	ORIA L 0 A_SetUserVar("user_switch", user_switch - 1)
+	ORIA L 0 A_JumpIf(user_switch==0,"MissileNormal")
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,0,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,20,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,40,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,60,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,80,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,100,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,120,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,140,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,160,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,180,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,200,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,220,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,240,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,260,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,280,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,300,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,320,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,340,CMF_AIMDIRECTION)
+	ORIA L 2 A_SetAngle(angle-1.333333)
+	ORIA L 0 A_CheckSight("See")
+	Loop
+  MissileHard:
+	ORIA L 0 A_SetUserVar("user_switch", user_switch + 1)
+	ORIA L 0 A_JumpIf(user_switch==12,"SwitchDirectionHard")
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,0,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,15,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,30,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,45,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,60,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,75,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,90,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,105,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,120,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,135,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,150,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,165,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,180,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,195,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,210,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,225,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,240,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,255,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,270,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,285,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,300,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,315,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,330,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,345,CMF_AIMDIRECTION)
+	ORIA L 2 A_SetAngle(angle+1.25)
+	ORIA L 0 A_CheckSight("See")
+	Loop
+  SwitchDirectionHard:
+	ORIA L 0 A_SetUserVar("user_switch", user_switch - 1)
+	ORIA L 0 A_JumpIf(user_switch==0,"MissileHard")
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,0,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,15,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,30,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,45,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,60,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,75,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,90,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,105,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,120,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,135,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,150,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,165,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,180,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,195,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,210,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,225,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,240,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,255,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,270,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,285,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,300,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,315,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,330,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,345,CMF_AIMDIRECTION)
+	ORIA L 1 A_SetAngle(angle-1.25)
+	ORIA L 0 A_CheckSight("See")
+	Loop
+  MissileLunatic:
+	ORIA L 0 A_SetUserVar("user_switch", user_switch + 1)
+	ORIA L 0 A_JumpIf(user_switch==9,"SwitchDirectionLunatic")
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,0,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,12,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,24,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,36,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,48,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,60,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,72,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,84,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,96,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,108,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,120,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,132,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,144,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,156,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,168,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,180,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,192,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,204,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,216,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,228,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,240,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,252,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,264,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,276,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,288,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,300,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,312,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,324,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,336,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletRed",32,0,348,CMF_AIMDIRECTION)
+	ORIA L 2 A_SetAngle(angle+1.333333)
+	ORIA L 0 A_CheckSight("See")
+	Loop
+  SwitchDirectionLunatic:
+	ORIA L 0 A_SetUserVar("user_switch", user_switch - 1)
+	ORIA L 0 A_JumpIf(user_switch==0,"MissileLunatic")
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,0,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,12,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,24,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,36,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,48,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,60,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,72,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,84,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,96,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,108,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,120,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,132,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,144,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,156,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,168,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,180,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,192,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,204,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,216,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,228,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,240,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,252,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,264,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,276,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,288,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,300,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,312,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,324,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,336,CMF_AIMDIRECTION)
+	ORIA L 0 A_CustomMissile("OrinBlazingWheelBulletBlue",32,0,348,CMF_AIMDIRECTION)
+	ORIA L 2 A_SetAngle(angle-1.333333)
+	ORIA L 0 A_CheckSight("See")
+	Loop
+  Death:
+	ORIN G 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	ORIN G 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	ORIN G 0 ACS_Execute(603,0)
+	ORIN G 0 A_GiveInventory("BulletDeathTrigger",1)
+    ORIN G 0 A_NoBlocking
+	ORIN G 0 A_PlaySound("touhou/nuefire")
+    ORIN GGGGGGGGG 2 A_FadeOut(0.1)
+	Stop
+  }
+}
+ACTOR OrinBlazingWheelBulletRed
+{
+  Radius 4
+  Speed 15
+  fastspeed 30
+  Height 8
+  damage (10)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  RenderStyle Add
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    RBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR OrinBlazingWheelBulletBlue
+{
+  Radius 4
+  Speed 15
+  fastspeed 30
+  Height 8
+  damage (10)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  RenderStyle Add
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR OrinNS3 : Orin
+{
+  DropItem "OrinAtonement"
+  PainChance 0
+  States
+  {
+  Spawn:
+    ORIN A 0
+	ORIN A 0 A_SetTranslucent(0.1)
+    ORIN ABCDEF 3 A_FadeIn(0.15)
+  Idle:
+	ORIN A 1 Thing_ChangeTID(0,6120)
+	ORIN A 1 ACS_NamedExecute("BHI_BossStartAttack",0,6120,1,false)
+	ORIN A 1 ACS_NamedExecute("BHI_BossStartTimer",0,6120,50)
+    ORIN BCDEF 3 A_Look
+    Loop
+  See:
+	TNT1 A 0 Thing_ChangeTID(0,6120)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6120,1,false)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6120,50)
+    ORIN ABCDEF 3 A_Chase
+    Loop
+  Melee:
+  Missile:
+    ORIA A 0 A_FaceTarget
+    ORIA A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ORIA A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ORIA A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ORIA A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+    Goto MissileNormal
+  MissileEasy:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,72)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,144)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,216)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,288)
+	ORIA EEEEEEDCBA 6 A_FaceTarget
+	Goto See
+  MissileNormal:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,51.428571)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,102.857142)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,154.285714)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,205.714285)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,257.142857)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,308.571428)
+	ORIA EEEEEEDCBA 6 A_FaceTarget
+	Goto See
+  MissileHard:
+    ORIA ABCD 6 A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,32.727272)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,65.454545)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,98.181818)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,130.909090)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,163.636363)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,196.363636)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,229.090909)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,261.818181)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,294.545454)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,327.272727)
+	ORIA EEEEEEDCBA 6 A_FaceTarget
+	Goto See
+  MissileLunatic:
+    ORIA ABCD 6 Fast A_Facetarget
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,0)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,27.692307)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,55.384615)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,83.076923)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,110.769230)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,138.461538)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,166.153846)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,193.846153)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,221.538461)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,249.230769)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,276.923076)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,304.615384)
+	ORIA E 0 A_CustomMissile("OrinNS3BulletSpawner",32,0,332.307692)
+	ORIA EEEEEEDCBA 6 Fast A_FaceTarget
+	Goto See
+  }
+}
+ACTOR OrinNS3Bullet
+{
+  Radius 4
+  Speed 15
+  fastspeed 25
+  Height 8
+  damage (10)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BBL2 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL2 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR OrinNS3BulletSpawner
+{
+  Radius 4
+  Speed 4
+  fastspeed 8
+  Height 8
+  damage (0)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    TNT1 AAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,51.428571,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,102.857142,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,154.285714,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,205.714285,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,257.142857,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,308.571428,CMF_AIMDIRECTION)
+    TNT1 AAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,51.428571,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,102.857142,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,154.285714,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,205.714285,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,257.142857,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,308.571428,CMF_AIMDIRECTION)
+    TNT1 AAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,51.428571,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,102.857142,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,154.285714,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,205.714285,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,257.142857,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,308.571428,CMF_AIMDIRECTION)
+    TNT1 AAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,51.428571,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,102.857142,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,154.285714,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,205.714285,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,257.142857,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,308.571428,CMF_AIMDIRECTION)
+    TNT1 AAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,51.428571,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,102.857142,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,154.285714,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,205.714285,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,257.142857,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,308.571428,CMF_AIMDIRECTION)
+    TNT1 AAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,51.428571,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,102.857142,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,154.285714,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,205.714285,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,257.142857,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,308.571428,CMF_AIMDIRECTION)
+    TNT1 AAAAAAAAAAAAAA 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,0,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,51.428571,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,102.857142,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,154.285714,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,205.714285,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,257.142857,CMF_AIMDIRECTION)
+	TNT1 A 0 Bright A_CustomMissile("OrinNS3Bullet",0,0,308.571428,CMF_AIMDIRECTION)
+    Stop
+  Death:
+    TNT1 A 1 Bright
+    Stop
+  }
+}
+
+ACTOR OrinAtonement : Orin
+{
+  Health 2300
+  +INVULNERABLE
+  +NOPAIN
+  DropItem "OrinSmallDemonsRevival"
+  var int user_angle;
+  PainChance 0
+  States
+  {
+  Spawn:
+    ORIN A 0
+	ORIN A 0 A_SetTranslucent(0.1)
+    ORIN ABCDEF 3 A_FadeIn(0.15)
+  Idle:
+    ORIN ABCDEF 3 A_Look
+    Loop
+  See:
+	ORIA A 0 A_SetTranslucent(1.0,0)
+	ORIA A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+    ORIA ABCD 5 A_Facetarget
+	TNT1 A 0 Thing_ChangeTID(0,6121)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6121,1,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6121,50)
+	ORIA A 0 ACS_Execute(602,0,59)
+	ORIA A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	ORIA A 0 A_GiveInventory("SpellcardActive",1)
+	ORIA E 35 A_Facetarget
+    ORIA DCBA 5 A_Facetarget
+	ORIA A 0 A_UnSetInvulnerable
+	ORIA A 0 A_ChangeFlag("NOPAIN",0)
+	Goto Missile
+  ChaseState:
+    ORIN ABCDEF 3 A_Chase
+    Loop
+  Melee:
+  Missile:
+    ORIA FGHI 4 Fast A_Facetarget
+    ORIN A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ORIN A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ORIN A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ORIN A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileHard
+  MissileEasy:
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal1",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal2",32,0,0)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-90)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-30)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,30)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,90)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal5",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal6",32,0,0)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-90)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,90)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGF 4 A_Facetarget
+	Goto See
+  MissileNormal:
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal1",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal2",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal3",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal4",32,0,0)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-90)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-54)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-18)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,18)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,54)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,90)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal5",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal6",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal7",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerNormal8",32,0,0)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-90)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-45)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,45)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,90)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGF 4 A_Facetarget
+	Goto See
+  MissileHard:
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard1",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard2",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard3",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard4",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard5",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard6",32,0,0)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-91)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-65)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-39)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-13)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,13)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,39)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,65)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,91)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard1",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard2",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard5",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard6",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard7",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard8",32,0,0)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGFFGHI 4 A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-90)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-60)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-30)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,30)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,60)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,60)
+	ORIA L 24 A_FaceTarget
+    ORIA IHGF 4 A_Facetarget
+	Goto See
+  MissileLunatic:
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard1",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard2",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard3",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard4",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard5",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard6",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard7",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard8",32,0,0)
+	ORIA L 24 Fast A_FaceTarget
+    ORIA IHGFFGHI 4 Fast A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-90)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-70)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-50)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-30)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-10)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,10)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,30)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,50)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,70)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,90)
+	ORIA L 24 Fast A_FaceTarget
+    ORIA IHGFFGHI 4 Fast A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard1",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard2",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard3",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard4",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard5",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard6",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard7",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementBulletSpawnerHard8",32,0,0)
+	ORIA L 24 Fast A_FaceTarget
+    ORIA IHGFFGHI 4 Fast A_Facetarget
+	ORIA L 0 A_Playsound("touhou/fire",0,1.0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-96)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-72)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-48)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,-24)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,0)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,24)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,48)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,72)
+	ORIA L 0 A_CustomMissile("OrinAtonementGhostWheel",32,0,96)
+	ORIA L 24 Fast A_FaceTarget
+    ORIA IHGF 4 Fast A_Facetarget
+	Goto See
+  Death:
+	ORIN G 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	ORIN G 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	ORIN G 0 ACS_Execute(603,0)
+	ORIN G 0 A_GiveInventory("BulletDeathTrigger",1)
+	ORIN G 0 A_NoBlocking
+	ORIN G 0 A_PlaySound("touhou/nuefire")
+	ORIN GGGGGGGGG 2 A_FadeOut(0.1)
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerNormal1
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 0)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerNormal2
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 180)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerNormal3
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 90)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerNormal4
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 270)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerNormal5
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 0)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerNormal6
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 180)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerNormal7
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 90)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerNormal8
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 270)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletViolet",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerHard1
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 0)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerHard2
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 180)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerHard3
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 90)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerHard4
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 270)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle + 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerHard5
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 0)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerHard6
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 180)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerHard7
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 90)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletSpawnerHard8
+{
+  RenderStyle "Add"
+  +MISSILE
+  +NOINTERACTION
+
+  var int user_dist;
+  var int user_height;
+  var int user_angle;
+
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 A 0 Bright A_SetUserVar("user_angle", 270)
+  LoopState:
+	TNT1 A 0 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	TNT1 A 0 Bright A_JumpIfInventory("EnemyCounter1",64,"Death")
+	TNT1 A 0 Bright A_GiveInventory("EnemyCounter1",1)
+    TNT1 A 0 Bright A_PlaySound("touhou/fire",0,0.7,0,ATTN_NORM)
+	TNT1 A 0 Bright A_FaceTarget
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_CustomMissile("OrinAtonementBulletRed",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER,0)
+    TNT1 A 0 Bright A_SetUserVar("user_angle", user_angle - 33)
+    TNT1 A 1 Bright A_Warp(AAPTR_TARGET, user_dist, 0, user_height, user_angle, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+    TNT1 A 0 Bright A_SetUserVar("user_dist", user_dist + 1)
+    TNT1 A 0 Bright A_SetUserVar("user_height", user_height + 1)
+    Loop
+  Death:
+	TNT1 A 1
+	Stop
+  }
+}
+ACTOR OrinAtonementBulletViolet 
+{
+  Radius 2
+  Speed 6
+  fastspeed 9
+  Height 4
+  damage (10)
+  Projectile
+  +FORCEXYBILLBOARD
+  //RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  Translation "192:207=[255,0,255]:[128,0,128]","240:247=[128,0,128]:[64,0,64]"
+  States
+  {
+  Spawn:
+    CRYS A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    CRYE ABCDEF 2 Bright
+    Stop
+  }
+}
+ACTOR OrinAtonementBulletRed : OrinAtonementBulletViolet
+{
+	Translation "192:207=[255,0,0]:[128,0,0]","240:247=[128,0,0]:[64,0,0]"
+}
+ACTOR OrinAtonementGhostWheel
+{
+  Radius 32
+  Speed 4
+  fastspeed 8
+  Height 64
+  damage (4)
+  Scale 0.2
+  Projectile
+  +FORCEXYBILLBOARD
+  +RIPPER
+  RenderStyle Add
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 Bright A_SpawnItemEx("OrinAtonementGhostWheelOrbitBall", 32, 0, 0, 0, 0, 0, 0, 0)
+	TNT1 A 0 Bright A_SpawnItemEx("OrinAtonementGhostWheelOrbitBall", -32, 0, 0, 0, 0, 0, 0, 0)
+	TNT1 A 0 Bright A_SpawnItemEx("OrinAtonementGhostWheelOrbitBall", 0, 32, 0, 0, 0, 0, 0, 0)
+	TNT1 A 0 Bright A_SpawnItemEx("OrinAtonementGhostWheelOrbitBall", 0, -32, 0, 0, 0, 0, 0, 0)
+	TNT1 A 0 Bright A_SetAngle(angle+15)
+    TNT1 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+	Loop
+  Death:
+    TNT1 A 1 Bright
+    Stop
+  }
+}
+ACTOR OrinAtonementGhostWheelOrbitBall : KomachiAirSpiritTrail
+{
+  States
+  {
+  Spawn:
+    WBL4 AAAAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+
+ACTOR OrinSmallDemonsRevival : Orin
+{
+  Health 3000
+  +INVULNERABLE
+  +NOPAIN
+  //DropItem "RedTheNightlessCastle"
+  DropItem "None"
+  PainChance 3
+  var int user_angle;
+  States
+  {
+  Spawn:
+    ORIN A 0
+	ORIN A 0 A_SetTranslucent(0.1)
+    ORIN ABCDEF 3 A_FadeIn(0.15)
+  Idle:
+    ORIN ABCDEF 3 A_Look
+    Loop
+  See:
+	ORIA A 0 A_SetTranslucent(1.0,0)
+	ORIA A 0 A_JumpIfInventory("SpellcardActive",1,"ChaseState")
+    ORIA ABCD 5 A_Facetarget
+	TNT1 A 0 Thing_ChangeTID(0,6122)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartAttack",0,6122,0,true)
+	TNT1 A 0 ACS_NamedExecute("BHI_BossStartTimer",0,6122,60)
+	ORIA A 0 ACS_Execute(602,0,60)
+	ORIA A 0 A_PlaySound("touhou/spellcard",0,1.0,0,ATTN_NONE)
+	ORIA A 0 A_GiveInventory("SpellcardActive",1)
+	ORIA EEEEEEEE 0 A_SpawnItemEx("SmallDemonsRevivalFairy",random(-512,512),random(-256,-192),random(0,64),0,0,0,0,SXF_SETMASTER,0)
+	ORIA EEEEEEEE 0 A_SpawnItemEx("SmallDemonsRevivalFairy",random(-512,512),random(192,256),random(0,64),0,0,0,0,SXF_SETMASTER,0)
+    ORIA E 35 A_Facetarget
+    ORIA DCBA 5 A_Facetarget
+	ORIA A 0 A_UnSetInvulnerable
+	ORIA A 0 A_ChangeFlag("NOPAIN",0)
+	Goto Missile
+  ChaseState:
+    ORIN ABCDEF 3 A_Chase
+    Loop
+  Melee:
+  Missile:
+    ORIA FGHIJK 4 A_Facetarget
+    ORIN A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ORIN A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ORIN A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ORIN A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto MissileLunatic
+  MissileEasy:
+	ORIA L 1 A_FaceTarget
+	Loop
+  MissileNormal:
+	ORIA L 1 A_FaceTarget
+	Loop
+  MissileHard:
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinSmallDemonsRevivalBullet",32,0,frandom(-6,6)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 0 A_CustomMissile("OrinSmallDemonsRevivalBullet",32,0,frandom(174,186)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 1 A_SetUserVar("user_angle", user_angle + 1)
+	Loop
+  MissileLunatic:
+	ORIA L 0 A_Playsound("touhou/fire",0,0.7)
+	ORIA L 0 A_CustomMissile("OrinSmallDemonsRevivalBullet",32,0,frandom(-6,6)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 0 A_CustomMissile("OrinSmallDemonsRevivalBullet",32,0,frandom(174,186)+user_angle, CMF_OFFSETPITCH, frandom(-3,3))
+	ORIA L 1 A_SetUserVar("user_angle", user_angle + 1)
+	Loop
+  Death:
+	ORIN G 1 ACS_NamedTerminate("BHI_BossStartAttack",0)
+	ORIN G 1 ACS_NamedExecute("BHI_BossStopAttack",0)
+	ORIN G 1 ACS_Execute(603,0)
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren //Get rid of dead zombie fairies
+	ORIN G 0 A_GiveInventory("BulletDeathTrigger",1)
+    ORIN G 15
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren //Get rid of dead zombie fairies
+    ORIN H 15
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren //Get rid of dead zombie fairies
+    ORIN I 15
+	ORIN G 0 A_KillChildren("PermaDeath")
+	ORIN G 0 A_RemoveChildren //Get rid of dead zombie fairies
+	ORIN I 0 A_ScreamAndUnblock
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 BRIGHT A_SpawnItemEx("TouhouFire",Random(4,-4),Random(4,-4),Random(4,-4),Random(8,-8),Random(8,-8),Random(8,-8),Random(0,360),0,0)
+	TNT1 A 175
+    TNT1 A 1 ACS_Execute(115,0)
+    Stop
+  }
+}
+
+ACTOR SmallDemonsRevivalFairy
+{
+//$Category "Touhou Characters"
+  floatspeed 8
+  Speed 8
+  fastspeed 10
+  MONSTER
+  Health 30
+  Radius 15
+  Height 25
+  Scale 1
+  MinMissileChance 224
+  Mass 200
+  MeleeRange 64
+  Species Fairy
+  +INVULNERABLE
+  +NOPAIN
+  +DONTHURTSPECIES
+  +FLOORCLIP
+  +DONTFALL
+  +NOGRAVITY
+  +FLOAT
+  Painchance 192
+  Painsound "touhou/pain"
+  DeathSound "touhou/fairy/death"
+  Obituary "%o got wrecked by a zombie demon fairy."
+  HitObituary "%o got wrecked by a zombie demon fairy."
+  States
+  {
+  Spawn:
+    ZFAR EEEEEEEEEEEEEEEEEEEE 1 A_SetTranslucent(0.20)
+	ZFAR EEEEEEEEEEEEEEEEEEEE 7 A_SpawnItemEx("ZombieFairyTrail",0,0,0,frandom(0,1),frandom(0,1),frandom(0,3),0,0)
+	ZFAR EEEEEEEEEEEEEEEEEEEE 0 A_SpawnItemEx("ZombieFairyTrail",0,0,0,frandom(0,1),frandom(0,1),frandom(0,3),0,0)
+    ZFAR E 1 A_SetTranslucent(0.30)
+    ZFAR E 1 A_SetTranslucent(0.40)
+    ZFAR E 1 A_SetTranslucent(0.50)
+    ZFAR E 1 A_SetTranslucent(0.60)
+    ZFAR E 1 A_SetTranslucent(0.70)
+    ZFAR E 1 A_SetTranslucent(0.80)
+    ZFAR E 1 A_SetTranslucent(0.90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,270)
+	Goto Idle
+  Idle:
+    ZFAR E 0 A_SetTranslucent(1.0)
+	ZFAR A 0 A_UnSetInvulnerable
+	ZFAR A 0 A_ChangeFlag("NOPAIN",0)
+    ZFAR ABCD 3 A_Look
+    Loop
+  See:
+    ZFAR E 0 A_SetTranslucent(1.0)
+	ZFAR A 0 A_UnSetInvulnerable
+	ZFAR A 0 A_ChangeFlag("NOPAIN",0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+    Goto Missile
+  Pain:
+    ZFAR E 3 A_Pain
+    Goto See
+  Melee:
+    ZFAR A 3
+    ZFAR B 2 A_CustomMeleeAttack(10,"touhou/hit","none")
+	ZFAR C 2
+	Goto See
+  Missile:
+    ZFAR A 0 A_FaceTarget
+    ZFAR A 0 A_JumpIfInTargetInventory("EasyMode",1,"MissileEasy")
+    ZFAR A 0 A_JumpIfInTargetInventory("NormalMode",1,"MissileNormal")
+    ZFAR A 0 A_JumpIfInTargetInventory("HardMode",1,"MissileHard")
+    ZFAR A 0 A_JumpIfInTargetInventory("LunaticMode",1,"MissileLunatic")
+	Goto See
+  MissileEasy:
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,270)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	Goto See
+  MissileNormal:
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,60)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,120)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,240)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,300)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	Goto See
+  MissileHard:
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,40)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,80)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,120)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,160)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,200)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,240)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,280)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,320)
+	ZFAR ABCDABCDABCD 3 A_Chase("","")
+	Goto See
+  MissileLunatic:
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,270)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,270)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,270)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,270)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletBlue",10,0,270)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,270)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,270)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBulletRed",10,0,270)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,40)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,80)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,120)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,160)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,200)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,240)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,280)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,320)
+	ZFAR ABCDABCDABCD 3 Fast A_Chase("","")
+	Goto See
+  Death:
+    ZFAR E 3
+    ZFAR A 0 A_JumpIfInTargetInventory("EasyMode",1,"DeathEasy")
+    ZFAR A 0 A_JumpIfInTargetInventory("NormalMode",1,"DeathNormal")
+    ZFAR A 0 A_JumpIfInTargetInventory("HardMode",1,"DeathHard")
+    ZFAR A 0 A_JumpIfInTargetInventory("LunaticMode",1,"DeathHard")
+    Goto DeathNormal
+  DeathEasy:
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,90)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,270)
+	Goto DeathEnd
+  DeathNormal:
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,60)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,120)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,180)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,240)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,300)
+	Goto DeathEnd
+  DeathHard:
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,0)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,40)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,80)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,120)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,160)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,200)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,240)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,280)
+	ZFAR E 0 A_CustomMissile("SmallDemonsRevivalFairyBubble",10,0,320)
+	Goto DeathEnd
+  DeathEnd:
+	ZFAR E 1 A_ScreamAndUnblock
+    ZFAR E 1 A_SetTranslucent(0.90)
+    ZFAR E 1 A_SetTranslucent(0.80)
+    ZFAR E 1 A_SetTranslucent(0.70)
+    ZFAR E 1 A_SetTranslucent(0.60)
+    ZFAR E 1 A_SetTranslucent(0.50)
+    ZFAR E 1 A_SetTranslucent(0.40)
+    ZFAR E 1 A_SetTranslucent(0.30)
+    ZFAR E 1 A_SetTranslucent(0.20)
+	ZFAR EEEEEEEEEEEEEEE 7 A_SpawnItemEx("ZombieFairyTrail",0,0,15,frandom(0,1),frandom(0,1),frandom(0,3),frandom(0,360),0)
+	ZFAR E -1 Thing_Raise(0)
+    Stop
+  Raise:
+	ZFAR EEEEEEEEEEEEEEEEEEEE 0 A_SpawnItemEx("ZombieFairyTrail",0,0,15,frandom(0,3),frandom(0,3),frandom(0,9),frandom(0,360),0)
+    ZFAR E 1 A_SetTranslucent(0.30)
+    ZFAR E 1 A_SetTranslucent(0.40)
+    ZFAR E 1 A_SetTranslucent(0.50)
+    ZFAR E 1 A_SetTranslucent(0.60)
+    ZFAR E 1 A_SetTranslucent(0.70)
+    ZFAR E 1 A_SetTranslucent(0.80)
+    ZFAR E 1 A_SetTranslucent(0.90)
+	Goto See
+  Death.PermaDeath:
+    ZFAR E 3
+	ZFAR E 1 A_ScreamAndUnblock
+    ZFAR E 1 A_SetTranslucent(0.90)
+    ZFAR E 1 A_SetTranslucent(0.80)
+    ZFAR E 1 A_SetTranslucent(0.70)
+    ZFAR E 1 A_SetTranslucent(0.60)
+    ZFAR E 1 A_SetTranslucent(0.50)
+    ZFAR E 1 A_SetTranslucent(0.40)
+    ZFAR E 1 A_SetTranslucent(0.30)
+    ZFAR E 1 A_SetTranslucent(0.20)
+    ZFAR E 1 A_SetTranslucent(0.10)
+    ZFAR E 1 A_SetTranslucent(0)
+    Stop
+  }
+}
+ACTOR OrinSmallDemonsRevivalBullet
+{
+  Radius 2
+  Speed 10
+  fastspeed 20
+  Height 4
+  damage (10)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +FORCEXYBILLBOARD
+  //RenderStyle Add //REALLY don't want this
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+	TNT1 A 0
+	TNT1 A 0 Bright A_ScaleVelocity(frandom(0.5,1.5))
+  LoopState:
+    VBLD A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    VBLD AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR SmallDemonsRevivalFairyBulletBlue
+{
+  Radius 4
+  Speed 10
+  fastspeed 20
+  Height 8
+  damage (8)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    BBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    BBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR SmallDemonsRevivalFairyBulletRed
+{
+  Radius 4
+  Speed 10
+  fastspeed 20
+  Height 8
+  damage (8)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    RBL4 A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBL4 AAAAAAAAAA 1 Bright A_FadeOut
+    Stop
+  }
+}
+ACTOR SmallDemonsRevivalFairyBubble
+{
+  Radius 8
+  Speed 10
+  fastspeed 20
+  Height 16
+  damage (16)
+  Projectile
+  -ACTIVATEIMPACT
+  -ACTIVATEPCROSS
+  +FORCEXYBILLBOARD
+  RenderStyle Add
+  SeeSound "touhou/fire"
+  DeathSound "touhou/hit"
+  States
+  {
+  Spawn:
+    RBUB A 1 Bright A_JumpIfInTargetInventory("BulletDeathTrigger",1,"Death")
+    Loop
+  Death:
+    RBUB AAAAAAAAAA 2 Bright A_FadeOut
+    Stop
+  }
+}
