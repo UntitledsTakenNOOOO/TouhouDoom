@@ -8,6 +8,10 @@ So instead I'll say this: Another modder made a Touhou-themed Doom wad. I didn't
 
 So here it is: The Final Release of Touhou Doom. Have fun!
 
+Originally, this wasn't on GitHub, because I kept most of the development secret - read the postmortem.txt to see the development process for this thing.
+
+However, for archival purposes (and for purposes of having the code around somewhere more permanently), I have decided to host the code here, so others can see the project.
+
 Spriting is kind of crap because most of it's from the original Touhou Doom, and the rest of it's from Touhou Fighting Games, which were originally 2D.
 
 IN THIS PROJECT, YOU WILL FIND:
